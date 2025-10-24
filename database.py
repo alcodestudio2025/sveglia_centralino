@@ -21,6 +21,8 @@ class DatabaseManager:
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 room_number TEXT UNIQUE NOT NULL,
                 status TEXT DEFAULT 'available',
+                color TEXT DEFAULT '#FFFFFF',
+                label TEXT DEFAULT '',
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             )
         ''')
@@ -130,6 +132,38 @@ class DatabaseManager:
             "UPDATE rooms SET status = ? WHERE room_number = ?",
             (status, room_number)
         )
+        conn.commit()
+        conn.close()
+    
+    def add_room(self, room_number, status='available', color='#FFFFFF', label=''):
+        """Aggiunge una nuova camera"""
+        conn = self.get_connection()
+        cursor = conn.cursor()
+        cursor.execute(
+            "INSERT INTO rooms (room_number, status, color, label) VALUES (?, ?, ?, ?)",
+            (room_number, status, color, label)
+        )
+        conn.commit()
+        room_id = cursor.lastrowid
+        conn.close()
+        return room_id
+    
+    def update_room(self, room_id, room_number, status, color, label):
+        """Aggiorna una camera esistente"""
+        conn = self.get_connection()
+        cursor = conn.cursor()
+        cursor.execute(
+            "UPDATE rooms SET room_number = ?, status = ?, color = ?, label = ? WHERE id = ?",
+            (room_number, status, color, label, room_id)
+        )
+        conn.commit()
+        conn.close()
+    
+    def delete_room(self, room_id):
+        """Elimina una camera"""
+        conn = self.get_connection()
+        cursor = conn.cursor()
+        cursor.execute("DELETE FROM rooms WHERE id = ?", (room_id,))
         conn.commit()
         conn.close()
     

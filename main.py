@@ -12,6 +12,12 @@ from database import DatabaseManager
 from settings import SettingsWindow
 from pbx_connection import PBXConnection, PBXManager
 from alarm_manager import AlarmManager
+from room_manager import RoomManagerWindow
+from audio_manager import AudioManagerWindow
+from log_viewer import LogViewerWindow
+from system_monitor import SystemMonitorWindow
+from backup_manager import BackupManagerWindow
+from logger import get_logger
 
 class SvegliaCentralinoApp:
     def __init__(self, root):
@@ -25,6 +31,9 @@ class SvegliaCentralinoApp:
         # Inizializza gestione PBX e sveglie
         self.pbx = PBXManager()
         self.alarm_manager = AlarmManager(self.db, self.pbx)
+        
+        # Inizializza logger
+        self.logger = get_logger('main')
         
         # Crea cartelle necessarie
         create_directories()
@@ -44,6 +53,7 @@ class SvegliaCentralinoApp:
         
         # Avvia il gestore sveglie
         self.alarm_manager.start()
+        self.logger.info("Gestore sveglie avviato")
         
         # Testa la connessione PBX all'avvio
         self.test_pbx_on_startup()
@@ -99,7 +109,10 @@ class SvegliaCentralinoApp:
         manage_menu.add_separator()
         manage_menu.add_command(label="Gestisci Camere", command=self.manage_rooms)
         manage_menu.add_command(label="Gestisci Messaggi Audio", command=self.manage_audio)
+        manage_menu.add_separator()
         manage_menu.add_command(label="Visualizza Log", command=self.view_logs)
+        manage_menu.add_command(label="Monitor di Sistema", command=self.open_system_monitor)
+        manage_menu.add_command(label="Backup e Ripristino", command=self.open_backup_manager)
         
         # Menu Aiuto
         help_menu = tk.Menu(menubar, tearoff=0)
@@ -212,15 +225,33 @@ class SvegliaCentralinoApp:
     
     def manage_rooms(self):
         """Apre la gestione delle camere"""
-        messagebox.showinfo("Gestione Camere", "Funzione di gestione camere in implementazione")
+        RoomManagerWindow(self.root, self.db, self.on_rooms_updated)
+    
+    def on_rooms_updated(self):
+        """Callback quando le camere vengono aggiornate"""
+        self.load_rooms()
+        self.status_var.set("Lista camere aggiornata")
     
     def manage_audio(self):
         """Apre la gestione dei messaggi audio"""
-        messagebox.showinfo("Gestione Audio", "Funzione di gestione messaggi audio in implementazione")
+        AudioManagerWindow(self.root, self.db, self.on_audio_updated)
+    
+    def on_audio_updated(self):
+        """Callback quando i messaggi audio vengono aggiornati"""
+        self.load_audio_messages()
+        self.status_var.set("Lista messaggi audio aggiornata")
     
     def view_logs(self):
         """Visualizza i log del sistema"""
-        messagebox.showinfo("Visualizza Log", "Funzione di visualizzazione log in implementazione")
+        LogViewerWindow(self.root)
+    
+    def open_system_monitor(self):
+        """Apre il monitor di sistema"""
+        SystemMonitorWindow(self.root, self.db, self.alarm_manager)
+    
+    def open_backup_manager(self):
+        """Apre il gestore di backup"""
+        BackupManagerWindow(self.root, self.db)
     
     def show_about(self):
         """Mostra informazioni sull'applicazione"""
