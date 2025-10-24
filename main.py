@@ -1,6 +1,6 @@
 """
 Sistema di Gestione Sveglie per Hotel
-Applicazione principale con interfaccia grafica
+Applicazione principale con interfaccia grafica semplificata
 """
 import tkinter as tk
 from tkinter import ttk, messagebox, filedialog
@@ -9,6 +9,7 @@ import threading
 import os
 from config import create_directories, PBX_CONFIG, AUDIO_CONFIG
 from database import DatabaseManager
+from settings import SettingsWindow
 
 class SvegliaCentralinoApp:
     def __init__(self, root):
@@ -36,7 +37,7 @@ class SvegliaCentralinoApp:
         self.load_alarms()
     
     def create_widgets(self):
-        """Crea l'interfaccia grafica principale"""
+        """Crea l'interfaccia grafica principale semplificata"""
         # Frame principale
         main_frame = ttk.Frame(self.root, padding="10")
         main_frame.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
@@ -46,122 +47,226 @@ class SvegliaCentralinoApp:
         self.root.rowconfigure(0, weight=1)
         main_frame.columnconfigure(1, weight=1)
         
+        # Barra del menu
+        self.create_menu_bar()
+        
         # Titolo
         title_label = ttk.Label(main_frame, text="Sistema Gestione Sveglie Hotel", 
                                font=("Arial", 16, "bold"))
-        title_label.grid(row=0, column=0, columnspan=3, pady=(0, 20))
+        title_label.grid(row=0, column=0, columnspan=2, pady=(0, 20))
         
-        # Sezione 1: Impostazione sveglia
+        # Sezione 1: Impostazione sveglia (semplificata)
         self.create_alarm_section(main_frame, row=1)
         
-        # Sezione 2: Lista sveglie attive
-        self.create_alarms_list_section(main_frame, row=2)
-        
-        # Sezione 3: Gestione messaggi audio
-        self.create_audio_section(main_frame, row=3)
+        # Sezione 2: Report sveglie attive con possibilità di modifica
+        self.create_alarms_report_section(main_frame, row=2)
         
         # Status bar
         self.status_var = tk.StringVar()
         self.status_var.set("Sistema pronto")
         status_bar = ttk.Label(main_frame, textvariable=self.status_var, 
                               relief=tk.SUNKEN, anchor=tk.W)
-        status_bar.grid(row=4, column=0, columnspan=3, sticky=(tk.W, tk.E), pady=(20, 0))
+        status_bar.grid(row=3, column=0, columnspan=2, sticky=(tk.W, tk.E), pady=(20, 0))
+    
+    def create_menu_bar(self):
+        """Crea la barra del menu"""
+        menubar = tk.Menu(self.root)
+        self.root.config(menu=menubar)
+        
+        # Menu File
+        file_menu = tk.Menu(menubar, tearoff=0)
+        menubar.add_cascade(label="File", menu=file_menu)
+        file_menu.add_command(label="Impostazioni", command=self.open_settings)
+        file_menu.add_separator()
+        file_menu.add_command(label="Esci", command=self.root.quit)
+        
+        # Menu Gestione
+        manage_menu = tk.Menu(menubar, tearoff=0)
+        menubar.add_cascade(label="Gestione", menu=manage_menu)
+        manage_menu.add_command(label="Gestisci Camere", command=self.manage_rooms)
+        manage_menu.add_command(label="Gestisci Messaggi Audio", command=self.manage_audio)
+        manage_menu.add_command(label="Visualizza Log", command=self.view_logs)
+        
+        # Menu Aiuto
+        help_menu = tk.Menu(menubar, tearoff=0)
+        menubar.add_cascade(label="Aiuto", menu=help_menu)
+        help_menu.add_command(label="Informazioni", command=self.show_about)
     
     def create_alarm_section(self, parent, row):
-        """Crea la sezione per impostare nuove sveglie"""
+        """Crea la sezione semplificata per impostare nuove sveglie"""
         # Frame per impostazione sveglia
-        alarm_frame = ttk.LabelFrame(parent, text="Imposta Nuova Sveglia", padding="10")
-        alarm_frame.grid(row=row, column=0, columnspan=3, sticky=(tk.W, tk.E), pady=(0, 10))
+        alarm_frame = ttk.LabelFrame(parent, text="Imposta Nuova Sveglia", padding="15")
+        alarm_frame.grid(row=row, column=0, columnspan=2, sticky=(tk.W, tk.E), pady=(0, 15))
         alarm_frame.columnconfigure(1, weight=1)
         
-        # Camera
-        ttk.Label(alarm_frame, text="Camera:").grid(row=0, column=0, sticky=tk.W, padx=(0, 10))
-        self.room_combo = ttk.Combobox(alarm_frame, textvariable=self.selected_room, 
-                                      state="readonly", width=15)
-        self.room_combo.grid(row=0, column=1, sticky=(tk.W, tk.E), padx=(0, 10))
+        # Prima riga: Camera, Data, Ora
+        row1_frame = ttk.Frame(alarm_frame)
+        row1_frame.grid(row=0, column=0, columnspan=2, sticky=(tk.W, tk.E), pady=(0, 10))
+        row1_frame.columnconfigure(1, weight=1)
+        row1_frame.columnconfigure(3, weight=1)
         
-        # Data e ora
-        ttk.Label(alarm_frame, text="Data:").grid(row=0, column=2, sticky=tk.W, padx=(20, 10))
-        self.date_entry = ttk.Entry(alarm_frame, width=12)
-        self.date_entry.grid(row=0, column=3, padx=(0, 10))
+        # Camera
+        ttk.Label(row1_frame, text="Camera:").grid(row=0, column=0, sticky=tk.W, padx=(0, 10))
+        self.room_combo = ttk.Combobox(row1_frame, textvariable=self.selected_room, 
+                                      state="readonly", width=15)
+        self.room_combo.grid(row=0, column=1, sticky=(tk.W, tk.E), padx=(0, 20))
+        
+        # Data
+        ttk.Label(row1_frame, text="Data:").grid(row=0, column=2, sticky=tk.W, padx=(0, 10))
+        self.date_entry = ttk.Entry(row1_frame, width=12)
+        self.date_entry.grid(row=0, column=3, sticky=(tk.W, tk.E), padx=(0, 20))
         self.date_entry.insert(0, datetime.date.today().strftime("%Y-%m-%d"))
         
-        ttk.Label(alarm_frame, text="Ora:").grid(row=0, column=4, sticky=tk.W, padx=(0, 10))
-        self.time_entry = ttk.Entry(alarm_frame, width=8)
-        self.time_entry.grid(row=0, column=5, padx=(0, 10))
+        # Ora
+        ttk.Label(row1_frame, text="Ora:").grid(row=0, column=4, sticky=tk.W, padx=(0, 10))
+        self.time_entry = ttk.Entry(row1_frame, width=8)
+        self.time_entry.grid(row=0, column=5, sticky=tk.W)
         self.time_entry.insert(0, "08:00")
         
+        # Seconda riga: Messaggio audio e pulsanti
+        row2_frame = ttk.Frame(alarm_frame)
+        row2_frame.grid(row=1, column=0, columnspan=2, sticky=(tk.W, tk.E))
+        row2_frame.columnconfigure(1, weight=1)
+        
         # Messaggio audio
-        ttk.Label(alarm_frame, text="Messaggio:").grid(row=1, column=0, sticky=tk.W, padx=(0, 10), pady=(10, 0))
-        self.audio_combo = ttk.Combobox(alarm_frame, textvariable=self.selected_audio, 
-                                       state="readonly", width=30)
-        self.audio_combo.grid(row=1, column=1, columnspan=2, sticky=(tk.W, tk.E), 
-                             padx=(0, 10), pady=(10, 0))
+        ttk.Label(row2_frame, text="Messaggio:").grid(row=0, column=0, sticky=tk.W, padx=(0, 10))
+        self.audio_combo = ttk.Combobox(row2_frame, textvariable=self.selected_audio, 
+                                       state="readonly", width=40)
+        self.audio_combo.grid(row=0, column=1, sticky=(tk.W, tk.E), padx=(0, 20))
         
         # Pulsanti
-        ttk.Button(alarm_frame, text="Imposta Sveglia", 
-                  command=self.set_alarm).grid(row=1, column=3, padx=(10, 0), pady=(10, 0))
-        ttk.Button(alarm_frame, text="Test Audio", 
-                  command=self.test_audio).grid(row=1, column=4, padx=(10, 0), pady=(10, 0))
+        ttk.Button(row2_frame, text="Imposta Sveglia", 
+                  command=self.set_alarm).grid(row=0, column=2, padx=(0, 10))
+        ttk.Button(row2_frame, text="Test Audio", 
+                  command=self.test_audio).grid(row=0, column=3)
     
-    def create_alarms_list_section(self, parent, row):
-        """Crea la sezione per visualizzare le sveglie attive"""
-        # Frame per lista sveglie
-        alarms_frame = ttk.LabelFrame(parent, text="Sveglie Attive", padding="10")
-        alarms_frame.grid(row=row, column=0, columnspan=3, sticky=(tk.W, tk.E, tk.N, tk.S), pady=(0, 10))
-        alarms_frame.columnconfigure(0, weight=1)
-        alarms_frame.rowconfigure(1, weight=1)
+    def create_alarms_report_section(self, parent, row):
+        """Crea la sezione report sveglie con possibilità di modifica"""
+        # Frame per report sveglie
+        report_frame = ttk.LabelFrame(parent, text="Report Sveglie Attive e Posticipate", padding="15")
+        report_frame.grid(row=row, column=0, columnspan=2, sticky=(tk.W, tk.E, tk.N, tk.S), pady=(0, 10))
+        report_frame.columnconfigure(0, weight=1)
+        report_frame.rowconfigure(1, weight=1)
         
         # Pulsanti di controllo
-        controls_frame = ttk.Frame(alarms_frame)
-        controls_frame.grid(row=0, column=0, sticky=(tk.W, tk.E), pady=(0, 10))
+        controls_frame = ttk.Frame(report_frame)
+        controls_frame.grid(row=0, column=0, sticky=(tk.W, tk.E), pady=(0, 15))
         
         ttk.Button(controls_frame, text="Aggiorna", 
                   command=self.load_alarms).pack(side=tk.LEFT, padx=(0, 10))
+        ttk.Button(controls_frame, text="Modifica Selezionata", 
+                  command=self.edit_selected_alarm).pack(side=tk.LEFT, padx=(0, 10))
         ttk.Button(controls_frame, text="Elimina Selezionata", 
                   command=self.delete_selected_alarm).pack(side=tk.LEFT, padx=(0, 10))
+        ttk.Button(controls_frame, text="Posticipa Selezionata", 
+                  command=self.snooze_selected_alarm).pack(side=tk.LEFT, padx=(0, 10))
         
-        # Lista sveglie
-        columns = ("Camera", "Data", "Ora", "Messaggio", "Status")
-        self.alarms_tree = ttk.Treeview(alarms_frame, columns=columns, show="headings", height=8)
+        # Lista sveglie con colonne estese
+        columns = ("ID", "Camera", "Data", "Ora", "Messaggio", "Status", "Rinvii")
+        self.alarms_tree = ttk.Treeview(report_frame, columns=columns, show="headings", height=12)
+        
+        # Configurazione colonne
+        column_widths = {"ID": 50, "Camera": 80, "Data": 100, "Ora": 80, 
+                        "Messaggio": 200, "Status": 100, "Rinvii": 60}
         
         for col in columns:
             self.alarms_tree.heading(col, text=col)
-            self.alarms_tree.column(col, width=120)
+            self.alarms_tree.column(col, width=column_widths.get(col, 120))
         
         # Scrollbar per la lista
-        scrollbar = ttk.Scrollbar(alarms_frame, orient=tk.VERTICAL, command=self.alarms_tree.yview)
+        scrollbar = ttk.Scrollbar(report_frame, orient=tk.VERTICAL, command=self.alarms_tree.yview)
         self.alarms_tree.configure(yscrollcommand=scrollbar.set)
         
         self.alarms_tree.grid(row=1, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
         scrollbar.grid(row=1, column=1, sticky=(tk.N, tk.S))
+        
+        # Bind per doppio click per modifica rapida
+        self.alarms_tree.bind("<Double-1>", self.on_alarm_double_click)
     
-    def create_audio_section(self, parent, row):
-        """Crea la sezione per gestire i messaggi audio"""
-        # Frame per messaggi audio
-        audio_frame = ttk.LabelFrame(parent, text="Gestione Messaggi Audio", padding="10")
-        audio_frame.grid(row=row, column=0, columnspan=3, sticky=(tk.W, tk.E), pady=(0, 10))
-        audio_frame.columnconfigure(1, weight=1)
+    # Metodi per il menu
+    def open_settings(self):
+        """Apre la finestra delle impostazioni"""
+        SettingsWindow(self.root, self.on_settings_saved)
+    
+    def on_settings_saved(self, settings):
+        """Callback quando le impostazioni vengono salvate"""
+        self.status_var.set("Impostazioni aggiornate")
+        # Ricarica i dati se necessario
+        self.load_rooms()
+        self.load_audio_messages()
+        self.load_alarms()
+    
+    def manage_rooms(self):
+        """Apre la gestione delle camere"""
+        messagebox.showinfo("Gestione Camere", "Funzione di gestione camere in implementazione")
+    
+    def manage_audio(self):
+        """Apre la gestione dei messaggi audio"""
+        messagebox.showinfo("Gestione Audio", "Funzione di gestione messaggi audio in implementazione")
+    
+    def view_logs(self):
+        """Visualizza i log del sistema"""
+        messagebox.showinfo("Visualizza Log", "Funzione di visualizzazione log in implementazione")
+    
+    def show_about(self):
+        """Mostra informazioni sull'applicazione"""
+        about_text = """Sistema di Gestione Sveglie per Hotel
+Versione 1.0 Beta
+
+Sviluppato per la gestione centralizzata delle sveglie
+in hotel con centralino PBX.
+
+Funzionalità:
+- Impostazione sveglie per camere
+- Gestione messaggi audio personalizzati
+- Sistema di rinvio automatico
+- Report e monitoraggio sveglie
+- Integrazione SSH con centralino PBX"""
         
-        # Pulsanti per gestione audio
-        ttk.Button(audio_frame, text="Carica File Audio", 
-                  command=self.load_audio_file).grid(row=0, column=0, padx=(0, 10))
-        ttk.Button(audio_frame, text="Elimina Messaggio", 
-                  command=self.delete_audio_message).grid(row=0, column=1, padx=(0, 10))
+        messagebox.showinfo("Informazioni", about_text)
+    
+    # Metodi per la gestione delle sveglie
+    def on_alarm_double_click(self, event):
+        """Gestisce il doppio click su una sveglia per modifica rapida"""
+        self.edit_selected_alarm()
+    
+    def edit_selected_alarm(self):
+        """Modifica la sveglia selezionata"""
+        selection = self.alarms_tree.selection()
+        if not selection:
+            messagebox.showwarning("Attenzione", "Seleziona una sveglia da modificare")
+            return
         
-        # Lista messaggi audio
-        audio_list_frame = ttk.Frame(audio_frame)
-        audio_list_frame.grid(row=1, column=0, columnspan=3, sticky=(tk.W, tk.E), pady=(10, 0))
-        audio_list_frame.columnconfigure(0, weight=1)
+        item = self.alarms_tree.item(selection[0])
+        alarm_id = item['values'][0]
         
-        columns = ("Nome", "File", "Durata", "Categoria")
-        self.audio_tree = ttk.Treeview(audio_list_frame, columns=columns, show="headings", height=4)
+        # Apri finestra di modifica
+        self.open_alarm_edit_dialog(alarm_id)
+    
+    def open_alarm_edit_dialog(self, alarm_id):
+        """Apre la finestra di modifica sveglia"""
+        # Per ora mostra un messaggio - implementeremo la finestra di modifica
+        messagebox.showinfo("Modifica Sveglia", f"Modifica sveglia ID: {alarm_id}\n\nFunzione in implementazione")
+    
+    def snooze_selected_alarm(self):
+        """Posticipa la sveglia selezionata"""
+        selection = self.alarms_tree.selection()
+        if not selection:
+            messagebox.showwarning("Attenzione", "Seleziona una sveglia da posticipare")
+            return
         
-        for col in columns:
-            self.audio_tree.heading(col, text=col)
-            self.audio_tree.column(col, width=150)
+        item = self.alarms_tree.item(selection[0])
+        alarm_id = item['values'][0]
+        room = item['values'][1]
         
-        self.audio_tree.grid(row=0, column=0, sticky=(tk.W, tk.E))
+        # Apri finestra di selezione rinvio
+        self.open_snooze_dialog(alarm_id, room)
+    
+    def open_snooze_dialog(self, alarm_id, room):
+        """Apre la finestra per selezionare il rinvio"""
+        # Per ora mostra un messaggio - implementeremo la finestra di rinvio
+        messagebox.showinfo("Posticipa Sveglia", f"Posticipa sveglia camera {room} (ID: {alarm_id})\n\nFunzione in implementazione")
+    
     
     def load_rooms(self):
         """Carica le camere disponibili"""
@@ -184,8 +289,9 @@ class SvegliaCentralinoApp:
             self.audio_tree.insert("", "end", values=(msg[1], msg[2], duration, msg[4]))
     
     def load_alarms(self):
-        """Carica le sveglie attive"""
-        alarms = self.db.get_alarms('scheduled')
+        """Carica le sveglie attive e posticipate"""
+        # Carica sveglie programmate e posticipate
+        alarms = self.db.get_alarms()
         self.alarms_tree.delete(*self.alarms_tree.get_children())
         
         for alarm in alarms:
@@ -202,9 +308,30 @@ class SvegliaCentralinoApp:
                         audio_name = msg[1]
                         break
             
-            self.alarms_tree.insert("", "end", values=(
-                alarm[1], date_str, time_str, audio_name, alarm[4]
+            # Determina il colore in base allo status
+            status = alarm[4]
+            snooze_count = alarm[5] if len(alarm) > 5 else 0
+            
+            # Inserisci nella lista con ID visibile
+            item_id = self.alarms_tree.insert("", "end", values=(
+                alarm[0],  # ID
+                alarm[1],  # Camera
+                date_str,  # Data
+                time_str,  # Ora
+                audio_name,  # Messaggio
+                status,    # Status
+                snooze_count  # Rinvii
             ))
+            
+            # Colora le righe in base allo status
+            if status == "completed":
+                self.alarms_tree.set(item_id, "Status", "Completata")
+            elif status == "cancelled":
+                self.alarms_tree.set(item_id, "Status", "Cancellata")
+            elif status == "snoozed":
+                self.alarms_tree.set(item_id, "Status", "Posticipata")
+            else:
+                self.alarms_tree.set(item_id, "Status", "Programmata")
     
     def set_alarm(self):
         """Imposta una nuova sveglia"""
@@ -257,56 +384,6 @@ class SvegliaCentralinoApp:
         # Per ora mostra solo un messaggio - implementeremo la riproduzione audio dopo
         messagebox.showinfo("Test Audio", f"Riproduzione del messaggio: {audio_name}\n\n(Implementazione audio in corso)")
     
-    def load_audio_file(self):
-        """Carica un nuovo file audio"""
-        file_path = filedialog.askopenfilename(
-            title="Seleziona file audio",
-            filetypes=[
-                ("File Audio", "*.mp3 *.wav *.ogg"),
-                ("MP3", "*.mp3"),
-                ("WAV", "*.wav"),
-                ("OGG", "*.ogg"),
-                ("Tutti i file", "*.*")
-            ]
-        )
-        
-        if file_path:
-            # Ottieni nome file senza estensione
-            filename = os.path.basename(file_path)
-            name = os.path.splitext(filename)[0]
-            
-            # Copia file nella cartella audio
-            audio_folder = AUDIO_CONFIG['audio_folder']
-            dest_path = os.path.join(audio_folder, filename)
-            
-            try:
-                import shutil
-                shutil.copy2(file_path, dest_path)
-                
-                # Aggiungi al database
-                self.db.add_audio_message(name, dest_path, category='standard')
-                
-                messagebox.showinfo("Successo", f"File audio caricato: {name}")
-                self.load_audio_messages()
-                self.status_var.set(f"File audio caricato: {name}")
-                
-            except Exception as e:
-                messagebox.showerror("Errore", f"Errore nel caricamento del file: {e}")
-    
-    def delete_audio_message(self):
-        """Elimina un messaggio audio selezionato"""
-        selection = self.audio_tree.selection()
-        if not selection:
-            messagebox.showwarning("Attenzione", "Seleziona un messaggio da eliminare")
-            return
-        
-        item = self.audio_tree.item(selection[0])
-        message_name = item['values'][0]
-        
-        if messagebox.askyesno("Conferma", f"Eliminare il messaggio '{message_name}'?"):
-            # TODO: Implementare eliminazione dal database e file system
-            messagebox.showinfo("Info", "Funzione di eliminazione in implementazione")
-    
     def delete_selected_alarm(self):
         """Elimina la sveglia selezionata"""
         selection = self.alarms_tree.selection()
@@ -315,13 +392,20 @@ class SvegliaCentralinoApp:
             return
         
         item = self.alarms_tree.item(selection[0])
-        room = item['values'][0]
-        date = item['values'][1]
-        time = item['values'][2]
+        alarm_id = item['values'][0]
+        room = item['values'][1]
+        date = item['values'][2]
+        time = item['values'][3]
         
         if messagebox.askyesno("Conferma", f"Eliminare la sveglia per camera {room} del {date} alle {time}?"):
-            # TODO: Implementare eliminazione dal database
-            messagebox.showinfo("Info", "Funzione di eliminazione in implementazione")
+            try:
+                # Aggiorna status a cancelled nel database
+                self.db.update_alarm_status(alarm_id, "cancelled")
+                messagebox.showinfo("Successo", "Sveglia eliminata correttamente")
+                self.load_alarms()
+                self.status_var.set(f"Sveglia eliminata: Camera {room}")
+            except Exception as e:
+                messagebox.showerror("Errore", f"Errore nell'eliminazione: {e}")
 
 def main():
     """Funzione principale"""
