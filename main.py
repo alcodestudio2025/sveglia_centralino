@@ -10,6 +10,8 @@ import os
 from config import create_directories, PBX_CONFIG, AUDIO_CONFIG
 from database import DatabaseManager
 from settings import SettingsWindow
+from pbx_connection import PBXConnection, PBXManager
+from alarm_manager import AlarmManager
 
 class SvegliaCentralinoApp:
     def __init__(self, root):
@@ -19,6 +21,10 @@ class SvegliaCentralinoApp:
         
         # Inizializza database
         self.db = DatabaseManager()
+        
+        # Inizializza gestione PBX e sveglie
+        self.pbx = PBXManager()
+        self.alarm_manager = AlarmManager(self.db, self.pbx)
         
         # Crea cartelle necessarie
         create_directories()
@@ -35,6 +41,12 @@ class SvegliaCentralinoApp:
         self.load_rooms()
         self.load_audio_messages()
         self.load_alarms()
+        
+        # Avvia il gestore sveglie
+        self.alarm_manager.start()
+        
+        # Testa la connessione PBX all'avvio
+        self.test_pbx_on_startup()
     
     def create_widgets(self):
         """Crea l'interfaccia grafica principale semplificata"""
@@ -83,6 +95,8 @@ class SvegliaCentralinoApp:
         # Menu Gestione
         manage_menu = tk.Menu(menubar, tearoff=0)
         menubar.add_cascade(label="Gestione", menu=manage_menu)
+        manage_menu.add_command(label="Test Connessione PBX", command=self.test_pbx_connection)
+        manage_menu.add_separator()
         manage_menu.add_command(label="Gestisci Camere", command=self.manage_rooms)
         manage_menu.add_command(label="Gestisci Messaggi Audio", command=self.manage_audio)
         manage_menu.add_command(label="Visualizza Log", command=self.view_logs)
@@ -264,8 +278,80 @@ Funzionalità:
     
     def open_snooze_dialog(self, alarm_id, room):
         """Apre la finestra per selezionare il rinvio"""
-        # Per ora mostra un messaggio - implementeremo la finestra di rinvio
-        messagebox.showinfo("Posticipa Sveglia", f"Posticipa sveglia camera {room} (ID: {alarm_id})\n\nFunzione in implementazione")
+        # Crea finestra di dialogo per selezione rinvio
+        snooze_window = tk.Toplevel(self.root)
+        snooze_window.title("Posticipa Sveglia")
+        snooze_window.geometry("300x200")
+        snooze_window.resizable(False, False)
+        
+        # Centra la finestra
+        snooze_window.transient(self.root)
+        snooze_window.grab_set()
+        
+        # Frame principale
+        main_frame = ttk.Frame(snooze_window, padding="20")
+        main_frame.pack(fill=tk.BOTH, expand=True)
+        
+        # Titolo
+        ttk.Label(main_frame, text=f"Posticipa Sveglia Camera {room}", 
+                 font=("Arial", 12, "bold")).pack(pady=(0, 20))
+        
+        # Opzioni di rinvio
+        snooze_var = tk.IntVar(value=5)
+        
+        ttk.Radiobutton(main_frame, text="5 minuti", variable=snooze_var, value=5).pack(anchor=tk.W, pady=2)
+        ttk.Radiobutton(main_frame, text="10 minuti", variable=snooze_var, value=10).pack(anchor=tk.W, pady=2)
+        ttk.Radiobutton(main_frame, text="15 minuti", variable=snooze_var, value=15).pack(anchor=tk.W, pady=2)
+        ttk.Radiobutton(main_frame, text="30 minuti", variable=snooze_var, value=30).pack(anchor=tk.W, pady=2)
+        
+        # Pulsanti
+        buttons_frame = ttk.Frame(main_frame)
+        buttons_frame.pack(fill=tk.X, pady=(20, 0))
+        
+        def apply_snooze():
+            minutes = snooze_var.get()
+            success, message = self.alarm_manager.snooze_alarm(alarm_id, minutes)
+            
+            if success:
+                messagebox.showinfo("Successo", message)
+                self.load_alarms()
+                self.status_var.set(f"Sveglia posticipata di {minutes} minuti")
+            else:
+                messagebox.showerror("Errore", message)
+            
+            snooze_window.destroy()
+        
+        ttk.Button(buttons_frame, text="Applica", command=apply_snooze).pack(side=tk.RIGHT, padx=(5, 0))
+        ttk.Button(buttons_frame, text="Annulla", command=snooze_window.destroy).pack(side=tk.RIGHT)
+    
+    def test_pbx_on_startup(self):
+        """Testa la connessione PBX all'avvio dell'applicazione"""
+        def test_connection():
+            success, message = self.alarm_manager.test_pbx_connection()
+            if success:
+                self.status_var.set("Connessione PBX: OK")
+            else:
+                self.status_var.set(f"Connessione PBX: ERRORE - {message}")
+                messagebox.showwarning("Connessione PBX", 
+                                     f"Impossibile connettersi al centralino PBX:\n{message}\n\n"
+                                     f"Verifica le impostazioni di connessione.")
+        
+        # Esegue il test in un thread separato per non bloccare l'UI
+        threading.Thread(target=test_connection, daemon=True).start()
+    
+    def test_pbx_connection(self):
+        """Testa la connessione PBX manualmente"""
+        def test_connection():
+            success, message = self.alarm_manager.test_pbx_connection()
+            if success:
+                messagebox.showinfo("Test Connessione", "Connessione PBX riuscita!")
+                self.status_var.set("Connessione PBX: OK")
+            else:
+                messagebox.showerror("Test Connessione", f"Errore connessione PBX:\n{message}")
+                self.status_var.set(f"Connessione PBX: ERRORE")
+        
+        # Esegue il test in un thread separato
+        threading.Thread(target=test_connection, daemon=True).start()
     
     
     def load_rooms(self):
@@ -405,6 +491,13 @@ def main():
     """Funzione principale"""
     root = tk.Tk()
     app = SvegliaCentralinoApp(root)
+    
+    # Gestisce la chiusura dell'applicazione
+    def on_closing():
+        app.alarm_manager.stop()
+        root.destroy()
+    
+    root.protocol("WM_DELETE_WINDOW", on_closing)
     root.mainloop()
 
 if __name__ == "__main__":
