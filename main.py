@@ -281,12 +281,6 @@ Funzionalità:
         messages = self.db.get_audio_messages()
         message_names = [msg[1] for msg in messages]
         self.audio_combo['values'] = message_names
-        
-        # Aggiorna anche la lista
-        self.audio_tree.delete(*self.audio_tree.get_children())
-        for msg in messages:
-            duration = f"{msg[3]:.1f}s" if msg[3] else "N/A"
-            self.audio_tree.insert("", "end", values=(msg[1], msg[2], duration, msg[4]))
     
     def load_alarms(self):
         """Carica le sveglie attive e posticipate"""
