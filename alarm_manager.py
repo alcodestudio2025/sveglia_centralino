@@ -24,12 +24,17 @@ class AlarmManager:
     def start(self):
         """Avvia il gestore delle sveglie"""
         if self.running:
+            self.logger.warning("Gestore già avviato, skip")
             return
         
         self.running = True
+        self.logger.info("Creazione thread alarm_loop...")
         self.alarm_thread = threading.Thread(target=self._alarm_loop, daemon=True)
         self.alarm_thread.start()
-        self.logger.info("Gestore sveglie avviato")
+        
+        # Verifica che il thread sia partito
+        time.sleep(0.1)  # Breve pausa per permettere al thread di inizializzare
+        self.logger.info("Gestore sveglie avviato - Thread alive: {}".format(self.alarm_thread.is_alive()))
     
     def stop(self):
         """Ferma il gestore delle sveglie"""
