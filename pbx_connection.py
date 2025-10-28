@@ -317,9 +317,10 @@ exten => i,n,Hangup()
             
             # 3. Comando Originate verso il context wakeup-service
             # Passa l'audio tramite variabile di canale WAKEUP_AUDIO
+            # NOTA: Usa 'extension' (completo) non 'exten' (abbreviato)
             command = (
                 f"asterisk -rx 'channel originate Local/{phone_extension}@{context}/n "
-                f"exten s@wakeup-service "
+                f"extension s@wakeup-service "
                 f"variable WAKEUP_AUDIO={audio_name} "
                 f"callerid \"{wake_callerid} <{wake_extension}>\"'"
             )
