@@ -588,9 +588,9 @@ class SettingsWindow:
                 test_command = "echo 'PBX_TEST_CONNECTION'"
                 logger.info(f"Comando: {test_command}")
                 
-                cmd_success, output, error = pbx.execute_command(test_command)
+                output, error = pbx.execute_command(test_command)
                 
-                if not cmd_success:
+                if error:
                     logger.error(f"Comando fallito: {error}")
                     pbx.disconnect()
                     self.show_test_result(False, f"❌ Test Comando Fallito\n\n{error}\n\nConnessione SSH OK ma comando non eseguito.")
@@ -606,10 +606,10 @@ class SettingsWindow:
                 asterisk_command = "asterisk -rx 'core show version'"
                 logger.info(f"Comando: {asterisk_command}")
                 
-                ast_success, ast_output, ast_error = pbx.execute_command(asterisk_command)
+                ast_output, ast_error = pbx.execute_command(asterisk_command)
                 
                 asterisk_available = False
-                if ast_success and 'Asterisk' in ast_output:
+                if ast_output and 'Asterisk' in ast_output:
                     logger.info(f"✓ Asterisk disponibile")
                     logger.info(f"Versione: {ast_output[:100]}")
                     asterisk_available = True
