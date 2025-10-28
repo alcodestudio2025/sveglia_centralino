@@ -109,7 +109,9 @@ def build_executable():
         '--hidden-import=paramiko',
         '--hidden-import=psutil',
         '--hidden-import=sqlite3',
+        '--hidden-import=pygame',
         '--collect-all=tkinter',
+        '--collect-all=pygame',
         '--noconsole',
         'main.py'
     ]
