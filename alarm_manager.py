@@ -295,22 +295,13 @@ class AlarmManager:
             (success, dtmf_digit): Success e tasto premuto
         """
         try:
-            self.logger.info(f"="*60)
+            self.logger.info(f="="*60)
             self.logger.info(f"SVEGLIA CON SNOOZE - Camera {room_number} - Interno {phone_extension} - Lingua: {language.upper()}")
             self.logger.info(f"="*60)
             
-            # 1. Effettua la chiamata con CallerID personalizzato
-            success, message = self.pbx.pbx.make_call(phone_extension)
-            
-            if not success:
-                self.logger.error(f"Errore chiamata: {message}")
-                return False, None
-            
-            self.logger.info(f"✓ Chiamata avviata a {phone_extension}")
-            time.sleep(3)  # Attende risposta
-            
-            # 2. Riproduce messaggio principale con opzioni DTMF
-            self.logger.info(f"Riproduzione messaggio sveglia con opzioni snooze...")
+            # 1. Chiamata + riproduzione audio + DTMF in UN SOLO comando
+            # NON chiamare make_call separatamente!
+            self.logger.info(f"Avvio chiamata con audio e rilevamento DTMF...")
             success, dtmf_digit = self.pbx.pbx.play_audio_with_dtmf(
                 phone_extension,
                 wake_audio_path,

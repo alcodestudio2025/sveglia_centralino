@@ -103,16 +103,16 @@ class PBXConnection:
             wake_callerid = self.config.get('wake_callerid', 'Servizio Sveglie')
             context = self.config.get('context', 'from-internal')
             
-            # Comando Asterisk con CallerID personalizzato
-            # Formato: channel originate Local/DEST@context extension DEST@context
-            # Con variabile: Set(CALLERID(all)=NAME <NUMBER>)
+            # Comando Asterisk con CallerID come variabile di canale
+            # Usa syntax: Local/ext@context/n per no optimization
             command = (
-                f"asterisk -rx 'channel originate Local/{phone_extension}@{context} "
-                f"application Set \"CALLERID(all)={wake_callerid} <{wake_extension}>\" "
-                f"extension {phone_extension}@{context}'"
+                f"asterisk -rx 'channel originate Local/{phone_extension}@{context}/n "
+                f"exten {phone_extension}@{context} "
+                f"callerid \"{wake_callerid} <{wake_extension}>\"'"
             )
             
             self.logger.info(f"Chiamata a {phone_extension} come '{wake_callerid} <{wake_extension}>'")
+            self.logger.debug(f"Comando: {command}")
             output, error = self.execute_command(command)
             
             if error:
@@ -145,7 +145,7 @@ class PBXConnection:
     
     def play_audio_with_dtmf(self, phone_extension, audio_file_path, timeout=30):
         """
-        Riproduce audio e attende input DTMF dall'utente con CallerID personalizzato
+        Chiama e riproduce audio con rilevamento DTMF in UNA SOLA chiamata
         
         Args:
             phone_extension: Interno telefonico
@@ -161,38 +161,38 @@ class PBXConnection:
             wake_callerid = self.config.get('wake_callerid', 'Servizio Sveglie')
             context = self.config.get('context', 'from-internal')
             
-            # Costruisce comando Asterisk per riproduzione + lettura DTMF
-            # Read(variable,filename,max_digits,option,timeout)
-            # Asterisk ha bisogno solo del nome file senza percorso e estensione
+            # Prepara nome file audio (solo nome senza path/estensione)
             import os
             audio_filename = os.path.basename(audio_file_path)
             audio_name = audio_filename.replace('.wav', '').replace('.mp3', '').replace('.ogg', '')
             
-            # Comando con CallerID personalizzato
+            # Comando originate che chiama e subito esegue Read
+            # IMPORTANTE: UNA SOLA chiamata che riproduce audio + attende DTMF
             command = (
-                f"asterisk -rx 'channel originate Local/{phone_extension}@{context}/"
-                f"n exten {phone_extension}@{context} "
-                f"application Read dtmf_input,{audio_name},1,n,{timeout} "
+                f"asterisk -rx 'channel originate Local/{phone_extension}@{context}/n "
+                f"application Read \"dtmf_var,{audio_name},1,n,{timeout}\" "
                 f"callerid \"{wake_callerid} <{wake_extension}>\"'"
             )
             
-            self.logger.info(f"Riproduzione audio con DTMF per {phone_extension}: {audio_file_path}")
-            self.logger.debug(f"Comando DTMF: {command}")
+            self.logger.info(f"Chiamata + audio DTMF a {phone_extension}: {audio_name}")
+            self.logger.debug(f"Comando: {command}")
             
             output, error = self.execute_command(command)
             
             if error:
+                self.logger.error(f"Errore comando: {error}")
                 return False, None
             
+            self.logger.debug(f"Output comando: {output[:200]}")
+            
             # Estrae il digit premuto dall'output
-            # Output tipico: "DTMF digit pressed: 1"
             dtmf_digit = self._extract_dtmf_from_output(output)
             
             if dtmf_digit:
-                self.logger.info(f"DTMF ricevuto da {phone_extension}: {dtmf_digit}")
+                self.logger.info(f"✓ DTMF ricevuto da {phone_extension}: {dtmf_digit}")
                 return True, dtmf_digit
             else:
-                self.logger.warning(f"Nessun DTMF ricevuto da {phone_extension} (timeout)")
+                self.logger.warning(f"✗ Nessun DTMF ricevuto da {phone_extension} (timeout o no input)")
                 return True, None  # Successo ma nessun input
             
         except Exception as e:
