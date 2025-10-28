@@ -252,6 +252,9 @@ class PBXConnection:
         lines = output.split('\n')
         
         self.logger.info(f"Parsing SIP output ({len(lines)} righe)...")
+        self.logger.debug("Prime 10 righe output SIP:")
+        for i, line in enumerate(lines[:10]):
+            self.logger.debug(f"  Riga {i}: {line[:100]}")
         
         for line in lines:
             # Formato tipico: 101/101    D  A  5060  OK (15 ms)
@@ -273,6 +276,8 @@ class PBXConnection:
                     status = 'offline'
                     if 'OK' in line or 'Reachable' in line:
                         status = 'online'
+                    elif 'UNKNOWN' in line or 'Unspecified' in line or '(unspecified)' in line:
+                        status = 'offline'
                     elif 'Unreachable' in line or 'UNREACHABLE' in line:
                         status = 'offline'
                     elif 'Unmonitored' in line:
@@ -287,14 +292,24 @@ class PBXConnection:
                         except:
                             pass
                     
-                    peers.append({
+                    peer_data = {
                         'extension': peer_name,
                         'status': status,
                         'latency': latency,
                         'type': 'SIP'
-                    })
+                    }
+                    peers.append(peer_data)
+                    
+                    # Log solo primi 5 e ultimi 5 per non spammare
+                    if len(peers) <= 5 or len(peers) % 20 == 0:
+                        self.logger.debug(f"  Parsed: {peer_name} -> {status} (latency: {latency}ms)")
         
-        self.logger.info(f"Trovati {len(peers)} interni SIP")
+        # Summary dettagliato
+        online_count = sum(1 for p in peers if p['status'] == 'online')
+        offline_count = sum(1 for p in peers if p['status'] == 'offline')
+        unmonitored_count = sum(1 for p in peers if p['status'] == 'unmonitored')
+        
+        self.logger.info(f"Trovati {len(peers)} interni SIP: {online_count} online, {offline_count} offline, {unmonitored_count} unmonitored")
         return peers
     
     def _parse_pjsip_output(self, output):

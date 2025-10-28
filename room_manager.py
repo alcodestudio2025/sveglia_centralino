@@ -332,14 +332,16 @@ class RoomManagerWindow:
         try:
             rooms = self.db.get_rooms()
             for room in rooms:
-                # Estrae i dati
+                # Estrae i dati (ordine corretto dal database)
+                # 0=id, 1=room_number, 2=phone_extension, 3=description, 
+                # 4=status, 5=color, 6=label, 7=created_at
                 room_id = room[0]
                 room_number = room[1]
-                phone_extension = room[2] if len(room) > 2 else ""
-                description = room[3] if len(room) > 3 else ""
-                status = room[4] if len(room) > 4 else "available"
-                color = room[5] if len(room) > 5 else "#FFFFFF"
-                label = room[6] if len(room) > 6 else ""
+                phone_extension = room[2] if len(room) > 2 and room[2] else ""
+                description = room[3] if len(room) > 3 and room[3] else ""
+                status = room[4] if len(room) > 4 and room[4] else "available"
+                color = room[5] if len(room) > 5 and room[5] else "#FFFFFF"
+                label = room[6] if len(room) > 6 and room[6] else ""
                 created_date = room[7].split(' ')[0] if len(room) > 7 and room[7] else "N/A"
                 
                 # Determina stato PBX
