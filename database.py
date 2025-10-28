@@ -265,6 +265,15 @@ class DatabaseManager:
         conn.close()
         return messages
     
+    def get_audio_message_by_name(self, name):
+        """Ottiene un messaggio audio per nome"""
+        conn = self.get_connection()
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM audio_messages WHERE name = ?", (name,))
+        message = cursor.fetchone()
+        conn.close()
+        return message
+    
     def add_alarm(self, room_number, alarm_time, audio_message_id=None):
         """Aggiunge una sveglia"""
         conn = self.get_connection()

@@ -585,8 +585,31 @@ Funzionalità:
             messagebox.showwarning("Attenzione", "Seleziona un messaggio audio")
             return
         
-        # Per ora mostra solo un messaggio - implementeremo la riproduzione audio dopo
-        messagebox.showinfo("Test Audio", f"Riproduzione del messaggio: {audio_name}\n\n(Implementazione audio in corso)")
+        # Recupera il file audio dal database
+        audio = self.db.get_audio_message_by_name(audio_name)
+        if not audio:
+            messagebox.showerror("Errore", f"Messaggio audio '{audio_name}' non trovato")
+            return
+        
+        audio_path = audio[3]  # file_path
+        
+        if not os.path.exists(audio_path):
+            messagebox.showerror("Errore", f"File audio non trovato:\n{audio_path}")
+            return
+        
+        # Riproduce l'audio
+        from audio_player import get_audio_player
+        player = get_audio_player()
+        
+        success, message = player.play(audio_path)
+        
+        if success:
+            messagebox.showinfo("Riproduzione Audio", 
+                              f"▶️ Riproduzione in corso:\n{audio_name}\n\n"
+                              f"File: {os.path.basename(audio_path)}\n"
+                              f"Volume: {int(player.get_volume() * 100)}%")
+        else:
+            messagebox.showerror("Errore Audio", f"Errore nella riproduzione:\n{message}")
     
     def delete_selected_alarm(self):
         """Elimina la sveglia selezionata"""

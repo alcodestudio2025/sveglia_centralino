@@ -286,13 +286,47 @@ class AudioManagerWindow:
             messagebox.showwarning("Attenzione", "Seleziona un messaggio audio da riprodurre")
             return
         
-        # Per ora mostra un messaggio - implementeremo la riproduzione audio dopo
         selected_item = self.audio_tree.focus()
-        if selected_item:
-            values = self.audio_tree.item(selected_item, 'values')
+        if not selected_item:
+            return
+        
+        values = self.audio_tree.item(selected_item, 'values')
+        audio_name = values[1]
+        audio_file = values[2]
+        
+        # Costruisce il percorso completo
+        audio_path = os.path.join(AUDIO_CONFIG['storage_path'], audio_file)
+        
+        if not os.path.exists(audio_path):
+            messagebox.showerror("Errore", f"File audio non trovato:\n{audio_path}")
+            return
+        
+        # Riproduce l'audio
+        from audio_player import get_audio_player
+        player = get_audio_player()
+        
+        success, message = player.play(audio_path)
+        
+        if success:
+            # Mostra informazioni durante la riproduzione
+            duration = values[3]
+            category = values[4]
+            language = values[5]
+            action = values[6]
+            
             messagebox.showinfo("Riproduzione Audio", 
-                              f"Riproduzione del messaggio: {values[1]}\n\n"
-                              f"(Implementazione riproduzione audio in corso)")
+                              f"▶️ Riproduzione in corso:\n\n"
+                              f"Nome: {audio_name}\n"
+                              f"Durata: {duration}\n"
+                              f"Categoria: {category}\n"
+                              f"Lingua: {language}\n"
+                              f"Azione: {action}\n\n"
+                              f"Volume: {int(player.get_volume() * 100)}%")
+            
+            self.logger.info(f"Riproduzione audio: {audio_name}")
+        else:
+            messagebox.showerror("Errore Audio", f"Errore nella riproduzione:\n{message}")
+            self.logger.error(f"Errore riproduzione audio: {message}")
     
     def delete_selected_audio(self):
         """Elimina il messaggio audio selezionato"""
