@@ -6,6 +6,7 @@ import time
 import logging
 from datetime import datetime
 from config import PBX_CONFIG
+from logger import get_logger
 
 class PBXConnection:
     def __init__(self, config=None):
@@ -15,7 +16,7 @@ class PBXConnection:
         self.last_connection_time = None
         
         # Setup logging
-        self.logger = logging.getLogger(__name__)
+        self.logger = get_logger('pbx_connection')
     
     def connect(self):
         """Stabilisce la connessione SSH al centralino PBX"""

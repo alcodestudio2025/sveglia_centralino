@@ -7,6 +7,7 @@ from database import DatabaseManager
 from pbx_connection import PBXConnection
 import threading
 import logging
+from logger import get_logger
 
 class RoomManagerWindow:
     def __init__(self, parent, db_manager, pbx_manager=None, on_save_callback=None):
@@ -14,7 +15,10 @@ class RoomManagerWindow:
         self.db = db_manager
         self.pbx_manager = pbx_manager
         self.on_save_callback = on_save_callback
-        self.logger = logging.getLogger(__name__)
+        self.logger = get_logger('room_manager')
+        self.logger.info("="*60)
+        self.logger.info("APERTURA GESTIONE CAMERE HOTEL - INTEGRAZIONE PBX")
+        self.logger.info("="*60)
         
         # Crea la finestra
         self.window = tk.Toplevel(parent)
