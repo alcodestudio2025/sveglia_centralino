@@ -176,8 +176,11 @@ exten => _X.,n,Answer()
 exten => _X.,n,Wait(1)
 exten => _X.,n,Set(TIMEOUT(digit)=5)
 exten => _X.,n,Set(TIMEOUT(response)=30)
-; Riconverti "-" in "/" per audio principale
-exten => _X.,n,Set(AUDIO_FILE=${STRREPLACE(AUDIO_EXTEN,-,/)})
+; Riconverti SOLO il PRIMO "-" in "/" (custom-audio diventa custom/audio)
+; Usa CUT per dividere e ricomporre
+exten => _X.,n,Set(AUDIO_DIR=${CUT(AUDIO_EXTEN,-,1)})
+exten => _X.,n,Set(AUDIO_NAME=${CUT(AUDIO_EXTEN,-,2-)})
+exten => _X.,n,Set(AUDIO_FILE=${AUDIO_DIR}/${AUDIO_NAME})
 exten => _X.,n,NoOp(Playing: ${AUDIO_FILE})
 exten => _X.,n,Background(${AUDIO_FILE})
 exten => _X.,n,WaitExten(30)
