@@ -323,13 +323,8 @@ class AlarmManager:
                 confirm_audio = self._get_audio_by_action('snooze_confirm', language, '10')
                 
             else:
-                # Nessun snooze - sveglia completata
-                self.logger.info(f"Nessuno snooze richiesto - Sveglia completata")
-                goodbye_audio = self._get_audio_by_action('goodbye', language)
-                if goodbye_audio:
-                    self.pbx.pbx.play_audio(phone_extension, goodbye_audio)
-                    time.sleep(2)
-                
+                # Nessun snooze - cliente ha chiuso/non ha premuto nulla
+                self.logger.info(f"Nessuno snooze richiesto - Cliente ha chiuso o timeout")
                 self.db.update_alarm_status(alarm_id, "completed")
                 return True, None
             
