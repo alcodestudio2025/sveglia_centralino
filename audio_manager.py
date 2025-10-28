@@ -295,7 +295,7 @@ class AudioManagerWindow:
         audio_file = values[2]
         
         # Costruisce il percorso completo
-        audio_path = os.path.join(AUDIO_CONFIG['storage_path'], audio_file)
+        audio_path = os.path.join(AUDIO_CONFIG['audio_folder'], audio_file)
         
         if not os.path.exists(audio_path):
             messagebox.showerror("Errore", f"File audio non trovato:\n{audio_path}")
