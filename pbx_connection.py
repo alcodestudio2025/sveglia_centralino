@@ -152,22 +152,27 @@ class PBXConnection:
             self.logger.info("Setup context wakeup-service nel dialplan...")
             
             # Context dedicato per sveglie con DTMF
-            # NOTA: L'audio viene passato tramite variabile WAKEUP_AUDIO
+            # NOTA: L'audio viene passato come extension (wakeup-service/<nome_file>)
             context_config = """
 [wakeup-service]
 ; Context per gestione sveglie con DTMF
-; Variabile richiesta: WAKEUP_AUDIO = path file audio
+; Chiamata: Local/130@from-internal extension <nome_file>@wakeup-service
 
-exten => s,1,NoOp(=== SVEGLIA CON SNOOZE ===)
-exten => s,n,NoOp(Audio file: ${WAKEUP_AUDIO})
-exten => s,n,Answer()
-exten => s,n,Wait(1)
-exten => s,n,Set(TIMEOUT(digit)=5)
-exten => s,n,Set(TIMEOUT(response)=30)
-exten => s,n,Background(${WAKEUP_AUDIO})
-exten => s,n,WaitExten(30)
-exten => s,n,NoOp(Nessun input DTMF - chiusura)
-exten => s,n,Hangup()
+; Extension dinamica: riceve nome file come ${EXTEN}
+; Il nome arriva con "-" al posto di "/" (es: custom-wakeup)
+exten => _X.,1,NoOp(=== SVEGLIA CON SNOOZE ===)
+exten => _X.,n,NoOp(Audio extension: ${EXTEN})
+exten => _X.,n,Answer()
+exten => _X.,n,Wait(1)
+exten => _X.,n,Set(TIMEOUT(digit)=5)
+exten => _X.,n,Set(TIMEOUT(response)=30)
+; Riconverti "-" in "/" per path corretto
+exten => _X.,n,Set(AUDIO_FILE=${STRREPLACE(EXTEN,-,/)})
+exten => _X.,n,NoOp(Audio file path: ${AUDIO_FILE})
+exten => _X.,n,Background(${AUDIO_FILE})
+exten => _X.,n,WaitExten(30)
+exten => _X.,n,NoOp(Nessun input DTMF - chiusura)
+exten => _X.,n,Hangup()
 
 ; DTMF 1 - Snooze 5 minuti
 exten => 1,1,NoOp(DTMF 1 ricevuto - Snooze 5 min)
@@ -316,12 +321,15 @@ exten => i,n,Hangup()
             call_id = f"{phone_extension}_{int(time.time())}"
             
             # 3. Comando Originate verso il context wakeup-service
-            # Passa l'audio tramite variabile di canale WAKEUP_AUDIO
-            # NOTA: Usa 'setvar' invece di 'variable' per compatibilità
+            # Passa il nome file direttamente come extension
+            # Es: extension custom/wakeup@wakeup-service
+            # Il context riceverà "custom/wakeup" in ${EXTEN}
+            # NOTA: Sostituiamo "/" con "-" per compatibilità extension pattern
+            audio_exten = audio_name.replace('/', '-')
+            
             command = (
                 f"asterisk -rx \"channel originate Local/{phone_extension}@{context}/n "
-                f"extension s@wakeup-service "
-                f"setvar WAKEUP_AUDIO={audio_name} "
+                f"extension {audio_exten}@wakeup-service "
                 f"callerid '{wake_callerid} <{wake_extension}>'\" "
             )
             
