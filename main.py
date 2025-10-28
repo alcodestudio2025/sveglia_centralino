@@ -41,7 +41,7 @@ class SvegliaCentralinoApp:
         # Variabili per l'interfaccia
         self.selected_room = tk.StringVar()
         self.alarm_time = tk.StringVar()
-        self.selected_audio = tk.StringVar()
+        self.selected_language = tk.StringVar(value="it")  # Lingua invece di messaggio audio
         
         # Crea l'interfaccia
         self.create_widgets()
@@ -156,10 +156,11 @@ class SvegliaCentralinoApp:
         row2_frame.columnconfigure(1, weight=1)
         
         # Messaggio audio
-        ttk.Label(row2_frame, text="Messaggio:").grid(row=0, column=0, sticky=tk.W, padx=(0, 10))
-        self.audio_combo = ttk.Combobox(row2_frame, textvariable=self.selected_audio, 
-                                       state="readonly", width=40)
-        self.audio_combo.grid(row=0, column=1, sticky=(tk.W, tk.E), padx=(0, 20))
+        ttk.Label(row2_frame, text="Lingua:").grid(row=0, column=0, sticky=tk.W, padx=(0, 10))
+        self.language_combo = ttk.Combobox(row2_frame, textvariable=self.selected_language, 
+                                          values=["it", "en", "fr", "de", "es"],
+                                          state="readonly", width=15)
+        self.language_combo.grid(row=0, column=1, sticky=tk.W, padx=(0, 20))
         
         # Pulsanti
         ttk.Button(row2_frame, text="Imposta Sveglia", 
@@ -486,12 +487,6 @@ Funzionalità:
         if room_numbers:
             self.room_combo.set(room_numbers[0])
     
-    def load_audio_messages(self):
-        """Carica i messaggi audio"""
-        messages = self.db.get_audio_messages()
-        message_names = [msg[1] for msg in messages]
-        self.audio_combo['values'] = message_names
-    
     def load_alarms(self):
         """Carica le sveglie attive e posticipate"""
         # Carica sveglie programmate e posticipate
@@ -543,7 +538,7 @@ Funzionalità:
             room = self.selected_room.get()
             date_str = self.date_entry.get()
             time_str = self.time_entry.get()
-            audio_name = self.selected_audio.get()
+            language = self.selected_language.get()
             
             if not room or not date_str or not time_str:
                 messagebox.showerror("Errore", "Compila tutti i campi obbligatori")
@@ -557,19 +552,29 @@ Funzionalità:
                 messagebox.showerror("Errore", "La sveglia deve essere programmata nel futuro")
                 return
             
-            # Ottieni ID del messaggio audio selezionato
+            # Cerca messaggio audio "wake_up" nella lingua selezionata
             audio_id = None
-            if audio_name:
-                messages = self.db.get_audio_messages()
-                for msg in messages:
-                    if msg[1] == audio_name:
-                        audio_id = msg[0]
-                        break
+            messages = self.db.get_audio_messages()
+            for msg in messages:
+                # msg = (id, name, file_path, duration, category, language, action_type, created_at)
+                msg_language = msg[5] if len(msg) > 5 else 'it'
+                msg_action = msg[6] if len(msg) > 6 else None
+                
+                if msg_language.lower() == language.lower() and msg_action == 'wake_up':
+                    audio_id = msg[0]
+                    self.logger.info(f"Audio wake_up trovato: {msg[1]} (ID: {audio_id}, Lingua: {language})")
+                    break
+            
+            if not audio_id:
+                messagebox.showwarning("Attenzione", 
+                                     f"Nessun messaggio sveglia trovato per la lingua '{language.upper()}'.\n"
+                                     f"Sveglia creata senza audio.")
             
             # Aggiungi sveglia al database
             alarm_id = self.db.add_alarm(room, alarm_datetime.isoformat(), audio_id)
             
-            messagebox.showinfo("Successo", f"Sveglia impostata per camera {room} alle {time_str}")
+            lang_info = f" ({language.upper()})" if audio_id else " (senza audio)"
+            messagebox.showinfo("Successo", f"Sveglia impostata per camera {room} alle {time_str}{lang_info}")
             self.load_alarms()
             self.status_var.set(f"Sveglia aggiunta: Camera {room} - {alarm_datetime.strftime('%d/%m/%Y %H:%M')}")
             
@@ -579,19 +584,30 @@ Funzionalità:
             messagebox.showerror("Errore", f"Errore nell'impostazione della sveglia: {e}")
     
     def test_audio(self):
-        """Testa la riproduzione del messaggio audio selezionato"""
-        audio_name = self.selected_audio.get()
-        if not audio_name:
-            messagebox.showwarning("Attenzione", "Seleziona un messaggio audio")
-            return
+        """Testa la riproduzione del messaggio audio nella lingua selezionata"""
+        language = self.selected_language.get()
         
-        # Recupera il file audio dal database
-        audio = self.db.get_audio_message_by_name(audio_name)
+        # Cerca messaggio audio "wake_up" nella lingua selezionata
+        messages = self.db.get_audio_messages()
+        audio = None
+        for msg in messages:
+            msg_language = msg[5] if len(msg) > 5 else 'it'
+            msg_action = msg[6] if len(msg) > 6 else None
+            
+            if msg_language.lower() == language.lower() and msg_action == 'wake_up':
+                audio = msg
+                break
+        
         if not audio:
-            messagebox.showerror("Errore", f"Messaggio audio '{audio_name}' non trovato")
+            messagebox.showerror("Errore", 
+                               f"Nessun messaggio sveglia trovato per la lingua '{language.upper()}'.\n\n"
+                               f"Carica un file audio con:\n"
+                               f"- Tipo Azione: Messaggio Sveglia\n"
+                               f"- Lingua: {language.upper()}")
             return
         
-        audio_path = audio[3]  # file_path
+        audio_name = audio[1]
+        audio_path = audio[2]  # file_path
         
         if not os.path.exists(audio_path):
             messagebox.showerror("Errore", f"File audio non trovato:\n{audio_path}")
@@ -601,15 +617,16 @@ Funzionalità:
         from audio_player import get_audio_player
         player = get_audio_player()
         
-        success, message = player.play(audio_path)
+        success, msg = player.play(audio_path)
         
         if success:
             messagebox.showinfo("Riproduzione Audio", 
                               f"▶️ Riproduzione in corso:\n{audio_name}\n\n"
+                              f"Lingua: {language.upper()}\n"
                               f"File: {os.path.basename(audio_path)}\n"
                               f"Volume: {int(player.get_volume() * 100)}%")
         else:
-            messagebox.showerror("Errore Audio", f"Errore nella riproduzione:\n{message}")
+            messagebox.showerror("Errore Audio", f"Errore nella riproduzione:\n{msg}")
     
     def delete_selected_alarm(self):
         """Elimina la sveglia selezionata"""
