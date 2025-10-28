@@ -161,9 +161,15 @@ class SettingsWindow:
         ttk.Label(fields_frame, text="(Di solito: from-internal)", 
                  font=("Arial", 8), foreground="gray").grid(row=9, column=2, sticky=tk.W, padx=(5, 0))
         
-        # Pulsante test connessione
-        ttk.Button(fields_frame, text="Test Connessione", 
-                  command=self.test_pbx_connection).grid(row=10, column=0, columnspan=2, pady=20)
+        # Pulsanti
+        buttons_frame = ttk.Frame(fields_frame)
+        buttons_frame.grid(row=10, column=0, columnspan=3, pady=20)
+        
+        ttk.Button(buttons_frame, text="Test Connessione", 
+                  command=self.test_pbx_connection).pack(side=tk.LEFT, padx=5)
+        
+        ttk.Button(buttons_frame, text="Configura Context DTMF", 
+                  command=self.setup_dtmf_context).pack(side=tk.LEFT, padx=5)
         
         fields_frame.columnconfigure(1, weight=1)
     
@@ -554,6 +560,66 @@ class SettingsWindow:
         """Ripristina le impostazioni di default"""
         if messagebox.askyesno("Conferma", "Ripristinare tutte le impostazioni ai valori di default?"):
             self.load_current_settings()
+    
+    def setup_dtmf_context(self):
+        """Configura il context wakeup-service sul PBX per gestire DTMF"""
+        import threading
+        from pbx_connection import PBXConnection
+        
+        result = messagebox.askyesno(
+            "Configurazione Context DTMF",
+            "Questa operazione creerà il context 'wakeup-service'\n"
+            "nel dialplan di Asterisk per gestire lo snooze con DTMF.\n\n"
+            "Il context verrà salvato in:\n"
+            "/etc/asterisk/extensions_custom.conf\n\n"
+            "Continuare?",
+            icon='question'
+        )
+        
+        if not result:
+            return
+        
+        def setup_thread():
+            try:
+                self.update_status("Configurazione context DTMF in corso...")
+                
+                # Crea connessione PBX
+                pbx_config = {
+                    'host': self.pbx_host.get().strip(),
+                    'port': int(self.pbx_port.get().strip()) if self.pbx_port.get().strip() else 22,
+                    'username': self.pbx_username.get().strip(),
+                    'password': self.pbx_password.get().strip(),
+                    'timeout': int(self.pbx_timeout.get().strip()) if self.pbx_timeout.get().strip() else 10
+                }
+                
+                pbx = PBXConnection(config=pbx_config)
+                
+                # Setup context
+                success, message = pbx.setup_wakeup_context()
+                
+                if success:
+                    messagebox.showinfo(
+                        "Setup Completato",
+                        "✅ Context 'wakeup-service' configurato con successo!\n\n"
+                        "Il dialplan è stato aggiornato e caricato.\n\n"
+                        "Ora le sveglie potranno rilevare l'input DTMF\n"
+                        "per lo snooze (1 = 5min, 2 = 10min)."
+                    )
+                else:
+                    messagebox.showerror(
+                        "Errore Setup",
+                        f"Errore nella configurazione del context:\n\n{message}\n\n"
+                        "Verifica i log per dettagli."
+                    )
+                
+                self.update_status("")
+                pbx.disconnect()
+                
+            except Exception as e:
+                messagebox.showerror("Errore", f"Errore durante il setup:\n{e}")
+                self.update_status("")
+        
+        threading.Thread(target=setup_thread, daemon=True).start()
     
     def test_pbx_connection(self):
         """Testa la connessione al centralino PBX con logging dettagliato"""

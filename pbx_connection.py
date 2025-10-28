@@ -143,6 +143,88 @@ class PBXConnection:
             self.logger.error(f"Errore nella riproduzione audio: {e}")
             return False, str(e)
     
+    def setup_wakeup_context(self):
+        """
+        Crea/aggiorna il context 'wakeup-service' nel dialplan di Asterisk
+        per gestire sveglie con DTMF
+        """
+        try:
+            self.logger.info("Setup context wakeup-service nel dialplan...")
+            
+            # Context dedicato per sveglie con DTMF
+            context_config = """
+[wakeup-service]
+; Context per gestione sveglie con DTMF
+; ARG1 = nome file audio da riprodurre
+
+exten => s,1,NoOp(=== SVEGLIA CON SNOOZE ===)
+exten => s,n,Answer()
+exten => s,n,Wait(1)
+exten => s,n,Set(TIMEOUT(digit)=5)
+exten => s,n,Set(TIMEOUT(response)=30)
+exten => s,n,Background(${ARG1})
+exten => s,n,WaitExten(30)
+exten => s,n,NoOp(Nessun input DTMF - chiusura)
+exten => s,n,Hangup()
+
+; DTMF 1 - Snooze 5 minuti
+exten => 1,1,NoOp(DTMF 1 ricevuto - Snooze 5 min)
+exten => 1,n,Set(SNOOZE_CHOICE=1)
+exten => 1,n,System(echo "1" > /tmp/asterisk_dtmf_${CHANNEL}.txt)
+exten => 1,n,Playback(custom/snooze_5min_confirm)
+exten => 1,n,Hangup()
+
+; DTMF 2 - Snooze 10 minuti
+exten => 2,1,NoOp(DTMF 2 ricevuto - Snooze 10 min)
+exten => 2,n,Set(SNOOZE_CHOICE=2)
+exten => 2,n,System(echo "2" > /tmp/asterisk_dtmf_${CHANNEL}.txt)
+exten => 2,n,Playback(custom/snooze_10min_confirm)
+exten => 2,n,Hangup()
+
+; Timeout o altro input
+exten => t,1,NoOp(Timeout - nessun input)
+exten => t,n,Hangup()
+
+exten => i,1,NoOp(Input invalido)
+exten => i,n,Hangup()
+"""
+            
+            # Path del file di configurazione custom
+            config_path = "/etc/asterisk/extensions_custom.conf"
+            
+            # Crea il file temporaneo locale
+            import tempfile
+            with tempfile.NamedTemporaryFile(mode='w', delete=False, suffix='.conf') as tmp:
+                tmp.write(context_config)
+                tmp_path = tmp.name
+            
+            # Upload via SFTP
+            if not self.is_connected():
+                if not self.connect():
+                    return False, "Impossibile connettersi"
+            
+            sftp = self.ssh_client.open_sftp()
+            sftp.put(tmp_path, config_path)
+            sftp.close()
+            
+            # Rimuovi file temporaneo
+            import os
+            os.unlink(tmp_path)
+            
+            # Reload dialplan
+            reload_output, reload_error = self.execute_command("asterisk -rx 'dialplan reload'")
+            
+            if reload_error:
+                self.logger.warning(f"Errore reload dialplan: {reload_error}")
+            else:
+                self.logger.info("✓ Context wakeup-service configurato e caricato")
+            
+            return True, "Context configurato"
+            
+        except Exception as e:
+            self.logger.error(f"Errore setup context: {e}")
+            return False, str(e)
+    
     def upload_audio_to_asterisk(self, local_audio_path):
         """
         Carica un file audio sul server Asterisk via SCP
@@ -196,11 +278,12 @@ class PBXConnection:
     
     def play_audio_with_dtmf(self, phone_extension, audio_file_path, timeout=30):
         """
-        Chiama, riproduce audio e attende DTMF
+        Chiama, riproduce audio e attende DTMF usando context wakeup-service
         
         STRATEGIA:
-        1. Upload file audio su Asterisk (se necessario)
-        2. Originate chiama l'interno e riproduce l'audio
+        1. Upload file audio su Asterisk
+        2. Usa context 'wakeup-service' che gestisce DTMF
+        3. Legge il risultato DTMF dal file temporaneo
         
         Args:
             phone_extension: Interno telefonico
@@ -208,10 +291,10 @@ class PBXConnection:
             timeout: Secondi di attesa per input DTMF
             
         Returns:
-            (success, dtmf_digit): Tupla con successo e tasto premuto (1, 2, ecc.)
+            (success, dtmf_digit): Tupla con successo e tasto premuto (1, 2, o None)
         """
         try:
-            # Ottiene configurazione CallerID e context
+            # Ottiene configurazione CallerID
             wake_extension = self.config.get('wake_extension', '999')
             wake_callerid = self.config.get('wake_callerid', 'Servizio Sveglie')
             context = self.config.get('context', 'from-internal')
@@ -226,14 +309,19 @@ class PBXConnection:
             
             audio_name = audio_path_or_error  # Es: "custom/wakeup_didimos_asterisk_1"
             
-            # 2. Comando per chiamare e riprodurre
+            # 2. Genera un ID univoco per questa chiamata
+            import time
+            call_id = f"{phone_extension}_{int(time.time())}"
+            
+            # 3. Comando Originate verso il context wakeup-service
+            # Il context gestirà automaticamente DTMF e scriverà il risultato
             command = (
                 f"asterisk -rx 'channel originate Local/{phone_extension}@{context}/n "
-                f"application Playback \"{audio_name}\" "
+                f"extension s@wakeup-service({audio_name}) "
                 f"callerid \"{wake_callerid} <{wake_extension}>\"'"
             )
             
-            self.logger.info(f"Chiamata + Playback a {phone_extension}: {audio_name}")
+            self.logger.info(f"Chiamata con DTMF a {phone_extension}: {audio_name}")
             self.logger.debug(f"Comando: {command}")
             
             output, error = self.execute_command(command)
@@ -242,17 +330,39 @@ class PBXConnection:
                 self.logger.error(f"Errore comando: {error}")
                 return False, None
             
-            self.logger.info(f"✓ Chiamata eseguita, audio in riproduzione")
-            self.logger.debug(f"Output: {output[:200] if output else 'empty'}")
+            self.logger.info(f"✓ Chiamata avviata verso wakeup-service")
             
-            # NOTA: Con Playback semplice non possiamo catturare DTMF direttamente
-            # Per ora restituiamo successo senza DTMF
-            # TODO: Implementare context dedicato nel dialplan per DTMF
+            # 4. Aspetta che la chiamata finisca e leggi il risultato DTMF
+            # Il context scrive il digit in /tmp/asterisk_dtmf_*.txt
+            import time
+            time.sleep(timeout + 5)  # Attende che la chiamata finisca
             
+            # 5. Cerca il file DTMF
+            # Pattern: /tmp/asterisk_dtmf_*
+            list_cmd = "ls -t /tmp/asterisk_dtmf_* 2>/dev/null | head -1"
+            dtmf_file_output, _ = self.execute_command(list_cmd)
+            
+            if dtmf_file_output and dtmf_file_output.strip():
+                dtmf_file = dtmf_file_output.strip()
+                
+                # Leggi il contenuto
+                read_cmd = f"cat {dtmf_file}"
+                dtmf_content, _ = self.execute_command(read_cmd)
+                
+                if dtmf_content:
+                    dtmf_digit = dtmf_content.strip()
+                    self.logger.info(f"✓ DTMF ricevuto: {dtmf_digit}")
+                    
+                    # Pulisci il file
+                    self.execute_command(f"rm -f {dtmf_file}")
+                    
+                    return True, dtmf_digit if dtmf_digit in ['1', '2'] else None
+            
+            self.logger.info("Nessun DTMF ricevuto (timeout o no input)")
             return True, None
             
         except Exception as e:
-            self.logger.error(f"Errore riproduzione audio: {e}")
+            self.logger.error(f"Errore riproduzione audio con DTMF: {e}")
             return False, None
     
     def _extract_dtmf_from_output(self, output):
