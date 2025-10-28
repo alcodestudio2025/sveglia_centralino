@@ -34,8 +34,9 @@ class AlarmManager:
     def stop(self):
         """Ferma il gestore delle sveglie"""
         self.running = False
-        if self.alarm_thread:
-            self.alarm_thread.join(timeout=5)
+        if self.alarm_thread and self.alarm_thread.is_alive():
+            # Timeout ridotto per chiusura rapida (daemon thread)
+            self.alarm_thread.join(timeout=0.5)
         self.logger.info("Gestore sveglie fermato")
     
     def _alarm_loop(self):
@@ -44,10 +45,19 @@ class AlarmManager:
             try:
                 self._check_pending_alarms()
                 self._cleanup_completed_calls()
-                time.sleep(self.check_interval)
+                
+                # Sleep a blocchi per rispondere rapidamente alla chiusura
+                for _ in range(int(self.check_interval)):
+                    if not self.running:
+                        break
+                    time.sleep(1)
             except Exception as e:
                 self.logger.error(f"Errore nel loop sveglie: {e}")
-                time.sleep(10)  # Attesa più lunga in caso di errore
+                # Attesa più lunga in caso di errore, ma interrompibile
+                for _ in range(10):
+                    if not self.running:
+                        break
+                    time.sleep(1)
     
     def _check_pending_alarms(self):
         """Controlla le sveglie in attesa"""

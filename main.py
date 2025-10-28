@@ -643,22 +643,30 @@ def main():
     def on_closing():
         """Chiusura pulita dell'applicazione"""
         try:
-            # Ferma il gestore sveglie
-            app.alarm_manager.stop()
+            # Log chiusura
+            app.logger.info("Chiusura applicazione in corso...")
             
-            # Chiudi audio player
+            # Chiudi audio player PRIMA (più veloce)
             try:
                 from audio_player import get_audio_player
                 player = get_audio_player()
                 player.cleanup()
-            except:
-                pass
+            except Exception as e:
+                app.logger.warning(f"Errore cleanup audio: {e}")
             
-            # Chiudi finestra
-            root.destroy()
+            # Ferma il gestore sveglie
+            try:
+                app.alarm_manager.stop()
+            except Exception as e:
+                app.logger.warning(f"Errore stop alarm manager: {e}")
+            
+            # Chiudi finestra immediatamente
+            app.logger.info("Applicazione chiusa")
+            root.quit()  # quit() invece di destroy() per uscita più veloce
+            
         except Exception as e:
             print(f"Errore durante chiusura: {e}")
-            root.destroy()
+            root.quit()
     
     root.protocol("WM_DELETE_WINDOW", on_closing)
     root.mainloop()

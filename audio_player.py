@@ -121,10 +121,17 @@ class AudioPlayer:
         """Pulisce le risorse audio"""
         if self.initialized:
             try:
-                pygame.mixer.music.stop()
+                # Ferma immediatamente la riproduzione
+                if pygame.mixer.music.get_busy():
+                    pygame.mixer.music.stop()
+                    pygame.mixer.music.unload()
+                
+                # Chiudi mixer
                 pygame.mixer.quit()
+                self.initialized = False
                 self.logger.info("Audio player chiuso")
-            except:
+            except Exception as e:
+                self.logger.warning(f"Errore durante cleanup audio: {e}")
                 pass
 
 # Istanza globale per riuso
