@@ -160,33 +160,29 @@ class PBXConnection:
 ; Chiamata: Local/130@from-internal extension <nome_file>@wakeup-service
 ; Il CALL_ID identifica i file temporanei con i path degli audio di conferma
 
-; Extension dinamica: riceve nome file come ${EXTEN}
-; Formato: audio|callid (es: custom-wakeup|130_123)
-; I path degli audio snooze sono in file: /tmp/snooze_5_audio_CALLID.txt e /tmp/snooze_10_audio_CALLID.txt
-; Pattern _. matcha QUALSIASI stringa (lettere, numeri, simboli)
-exten => _.,1,NoOp(=== SVEGLIA CON SNOOZE ===)
-exten => _.,n,NoOp(Extension: ${EXTEN})
-; Estrai audio e call_id dall'extension
-exten => _.,n,Set(AUDIO_EXTEN=${CUT(EXTEN,|,1)})
-exten => _.,n,Set(CALL_ID=${CUT(EXTEN,|,2)})
-exten => _.,n,NoOp(Audio: ${AUDIO_EXTEN})
-exten => _.,n,NoOp(Call ID: ${CALL_ID})
-; Leggi i path degli audio snooze dai file temporanei
-exten => _.,n,Set(__SNOOZE_5_AUDIO=${FILE(/tmp/snooze_5_audio_${CALL_ID}.txt,0,9999)})
-exten => _.,n,Set(__SNOOZE_10_AUDIO=${FILE(/tmp/snooze_10_audio_${CALL_ID}.txt,0,9999)})
-exten => _.,n,NoOp(Snooze 5min: ${SNOOZE_5_AUDIO})
-exten => _.,n,NoOp(Snooze 10min: ${SNOOZE_10_AUDIO})
-exten => _.,n,Answer()
-exten => _.,n,Wait(1)
-exten => _.,n,Set(TIMEOUT(digit)=5)
-exten => _.,n,Set(TIMEOUT(response)=30)
+; Extension dinamica: SOLO call_id numerico (es: 1234)
+; Tutti i path audio sono in file: /tmp/w_CALLID.txt, /tmp/s5_CALLID.txt, /tmp/s10_CALLID.txt
+; Pattern _X. matcha stringhe numeriche
+exten => _X.,1,NoOp(=== SVEGLIA ID: ${EXTEN} ===)
+exten => _X.,n,Set(CALL_ID=${EXTEN})
+; Leggi TUTTI i path dai file temporanei
+exten => _X.,n,Set(AUDIO_EXTEN=${FILE(/tmp/w_${CALL_ID}.txt,0,9999)})
+exten => _X.,n,Set(__SNOOZE_5_AUDIO=${FILE(/tmp/s5_${CALL_ID}.txt,0,9999)})
+exten => _X.,n,Set(__SNOOZE_10_AUDIO=${FILE(/tmp/s10_${CALL_ID}.txt,0,9999)})
+exten => _X.,n,NoOp(Wake-up: ${AUDIO_EXTEN})
+exten => _X.,n,NoOp(Snooze 5: ${SNOOZE_5_AUDIO})
+exten => _X.,n,NoOp(Snooze 10: ${SNOOZE_10_AUDIO})
+exten => _X.,n,Answer()
+exten => _X.,n,Wait(1)
+exten => _X.,n,Set(TIMEOUT(digit)=5)
+exten => _X.,n,Set(TIMEOUT(response)=30)
 ; Riconverti "-" in "/" per audio principale
-exten => _.,n,Set(AUDIO_FILE=${STRREPLACE(AUDIO_EXTEN,-,/)})
-exten => _.,n,NoOp(Audio file path: ${AUDIO_FILE})
-exten => _.,n,Background(${AUDIO_FILE})
-exten => _.,n,WaitExten(30)
-exten => _.,n,NoOp(Nessun input DTMF - chiusura)
-exten => _.,n,Hangup()
+exten => _X.,n,Set(AUDIO_FILE=${STRREPLACE(AUDIO_EXTEN,-,/)})
+exten => _X.,n,NoOp(Playing: ${AUDIO_FILE})
+exten => _X.,n,Background(${AUDIO_FILE})
+exten => _X.,n,WaitExten(30)
+exten => _X.,n,NoOp(Nessun DTMF - hangup)
+exten => _X.,n,Hangup()
 
 ; DTMF 1 - Snooze 5 minuti + Riproduce conferma
 exten => 1,1,NoOp(DTMF 1 ricevuto - Snooze 5 min)
@@ -367,44 +363,46 @@ exten => i,n,Hangup()
                     snooze_10_path = path_10
                     self.logger.info(f"✓ Conferma 10min: {snooze_10_path}")
             
-            # 3. Genera un ID univoco per questa chiamata
+            # 3. Genera un ID univoco BREVE per questa chiamata
             import time
-            call_id = f"{phone_extension}_{int(time.time())}"
+            import random
+            call_id = f"{random.randint(1000,9999)}"  # ID breve a 4 cifre
             
-            # 4. STRATEGIA FINALE: Usa variabili di canale globali (__VAR)
-            # Extension contiene solo audio e call_id per evitare troncamento
-            audio_exten = audio_name.replace('/', '-')
+            # 4. Nome audio brevissimo (solo basename senza path)
+            audio_basename = os.path.basename(audio_name)
             
             self.logger.info(f"Audio paths da passare ad Asterisk:")
+            self.logger.info(f"  Wake-up: {audio_name}")
             self.logger.info(f"  Snooze 5min: {snooze_5_path}")
             self.logger.info(f"  Snooze 10min: {snooze_10_path}")
+            self.logger.info(f"  Call ID: {call_id}")
             
-            # 5. Extension più corta: solo audio|callid
-            audio_exten_with_id = f"{audio_exten}|{call_id}"
-            
-            # 6. Passa snooze paths come variabili globali
-            # Escape degli slash per bash
-            snooze_5_escaped = snooze_5_path.replace('/', '\\/') if snooze_5_path else ""
-            snooze_10_escaped = snooze_10_path.replace('/', '\\/') if snooze_10_path else ""
-            
-            # Torna ad usare file temporanei - è l'unico modo affidabile
-            # Crea file temporanei su Asterisk con i path degli audio
+            # 5. Crea file temporanei su Asterisk con i path degli audio
+            # Usa ID brevissimo per nomi file
             try:
                 if snooze_5_path:
-                    cmd_5 = f"echo -n '{snooze_5_path}' > /tmp/snooze_5_audio_{call_id}.txt"
+                    cmd_5 = f"echo -n '{snooze_5_path}' > /tmp/s5_{call_id}.txt"
                     self.execute_command(cmd_5)
-                    self.logger.info(f"File snooze 5min creato: /tmp/snooze_5_audio_{call_id}.txt")
+                    self.logger.info(f"✓ File snooze 5: /tmp/s5_{call_id}.txt")
                 
                 if snooze_10_path:
-                    cmd_10 = f"echo -n '{snooze_10_path}' > /tmp/snooze_10_audio_{call_id}.txt"
+                    cmd_10 = f"echo -n '{snooze_10_path}' > /tmp/s10_{call_id}.txt"
                     self.execute_command(cmd_10)
-                    self.logger.info(f"File snooze 10min creato: /tmp/snooze_10_audio_{call_id}.txt")
+                    self.logger.info(f"✓ File snooze 10: /tmp/s10_{call_id}.txt")
+                
+                # Scrivi anche il path dell'audio principale
+                audio_path_asterisk = audio_name.replace('/', '-')
+                cmd_audio = f"echo -n '{audio_path_asterisk}' > /tmp/w_{call_id}.txt"
+                self.execute_command(cmd_audio)
+                self.logger.info(f"✓ File wake-up: /tmp/w_{call_id}.txt")
+                
             except Exception as e:
                 self.logger.error(f"Errore creazione file temporanei: {e}")
             
+            # 6. Extension brevissima: solo call_id
             command = (
                 f"asterisk -rx \"channel originate Local/{phone_extension}@{context}/n "
-                f"extension {audio_exten_with_id}@wakeup-service "
+                f"extension {call_id}@wakeup-service "
                 f"callerid '{wake_callerid} <{wake_extension}>'\" "
             )
             
@@ -443,17 +441,17 @@ exten => i,n,Hangup()
                     # Pulisci il file DTMF
                     self.execute_command(f"rm -f {dtmf_file}")
                     
-                    # Pulisci file audio paths
-                    self.execute_command(f"rm -f /tmp/snooze_5_audio_{call_id}.txt")
-                    self.execute_command(f"rm -f /tmp/snooze_10_audio_{call_id}.txt")
+                    # Pulisci file audio paths (nomi brevi)
+                    self.execute_command(f"rm -f /tmp/w_{call_id}.txt /tmp/s5_{call_id}.txt /tmp/s10_{call_id}.txt")
+                    self.logger.info(f"✓ File temporanei puliti per ID {call_id}")
                     
                     return True, dtmf_digit if dtmf_digit in ['1', '2'] else None
             
             self.logger.info("Nessun DTMF ricevuto (timeout o no input)")
             
             # Pulisci file audio paths anche in caso di timeout
-            self.execute_command(f"rm -f /tmp/snooze_5_audio_{call_id}.txt")
-            self.execute_command(f"rm -f /tmp/snooze_10_audio_{call_id}.txt")
+            self.execute_command(f"rm -f /tmp/w_{call_id}.txt /tmp/s5_{call_id}.txt /tmp/s10_{call_id}.txt")
+            self.logger.info(f"✓ File temporanei puliti per ID {call_id}")
             
             return True, None
             
