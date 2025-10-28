@@ -159,20 +159,21 @@ class PBXConnection:
 ; Chiamata: Local/130@from-internal extension <nome_file>@wakeup-service
 
 ; Extension dinamica: riceve nome file come ${EXTEN}
-; Il nome arriva con "-" al posto di "/" (es: custom-wakeup)
-exten => _X.,1,NoOp(=== SVEGLIA CON SNOOZE ===)
-exten => _X.,n,NoOp(Audio extension: ${EXTEN})
-exten => _X.,n,Answer()
-exten => _X.,n,Wait(1)
-exten => _X.,n,Set(TIMEOUT(digit)=5)
-exten => _X.,n,Set(TIMEOUT(response)=30)
+; Il nome arriva con "-" al posto di "/" (es: custom-wakeup_didimos_asterisk_1)
+; Pattern _. matcha QUALSIASI stringa (lettere, numeri, simboli)
+exten => _.,1,NoOp(=== SVEGLIA CON SNOOZE ===)
+exten => _.,n,NoOp(Audio extension: ${EXTEN})
+exten => _.,n,Answer()
+exten => _.,n,Wait(1)
+exten => _.,n,Set(TIMEOUT(digit)=5)
+exten => _.,n,Set(TIMEOUT(response)=30)
 ; Riconverti "-" in "/" per path corretto
-exten => _X.,n,Set(AUDIO_FILE=${STRREPLACE(EXTEN,-,/)})
-exten => _X.,n,NoOp(Audio file path: ${AUDIO_FILE})
-exten => _X.,n,Background(${AUDIO_FILE})
-exten => _X.,n,WaitExten(30)
-exten => _X.,n,NoOp(Nessun input DTMF - chiusura)
-exten => _X.,n,Hangup()
+exten => _.,n,Set(AUDIO_FILE=${STRREPLACE(EXTEN,-,/)})
+exten => _.,n,NoOp(Audio file path: ${AUDIO_FILE})
+exten => _.,n,Background(${AUDIO_FILE})
+exten => _.,n,WaitExten(30)
+exten => _.,n,NoOp(Nessun input DTMF - chiusura)
+exten => _.,n,Hangup()
 
 ; DTMF 1 - Snooze 5 minuti
 exten => 1,1,NoOp(DTMF 1 ricevuto - Snooze 5 min)
