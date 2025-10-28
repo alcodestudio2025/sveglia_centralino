@@ -219,6 +219,146 @@ class PBXConnection:
         except Exception as e:
             self.logger.error(f"Errore nel recupero info sistema: {e}")
             return None, str(e)
+    
+    def get_sip_peers(self):
+        """Ottiene la lista degli interni SIP/PJSIP configurati con il loro stato"""
+        try:
+            self.logger.info("Lettura interni dal centralino...")
+            
+            # Prova prima con SIP
+            command = "asterisk -rx 'sip show peers'"
+            output, error = self.execute_command(command)
+            
+            if error or not output or 'Unable to connect' in output:
+                # Prova con PJSIP (Asterisk 12+)
+                self.logger.info("SIP non disponibile, provo con PJSIP...")
+                command = "asterisk -rx 'pjsip show endpoints'"
+                output, error = self.execute_command(command)
+                
+                if error or not output:
+                    return None, "Impossibile leggere gli interni dal centralino"
+                
+                return self._parse_pjsip_output(output), None
+            
+            return self._parse_sip_output(output), None
+            
+        except Exception as e:
+            self.logger.error(f"Errore nella lettura interni: {e}")
+            return None, str(e)
+    
+    def _parse_sip_output(self, output):
+        """Parsa l'output di 'sip show peers'"""
+        peers = []
+        lines = output.split('\n')
+        
+        self.logger.info(f"Parsing SIP output ({len(lines)} righe)...")
+        
+        for line in lines:
+            # Formato tipico: 101/101    D  A  5060  OK (15 ms)
+            # o: 101/101    (Unmonitored)
+            line = line.strip()
+            if not line or line.startswith('Name') or line.startswith('===') or 'sip peers' in line.lower():
+                continue
+            
+            parts = line.split()
+            if len(parts) >= 1:
+                # Estrae il numero interno
+                peer_name = parts[0].split('/')[0].strip()
+                
+                # Verifica se è un numero (interno telefonico)
+                if peer_name.isdigit() or peer_name.startswith('SIP/'):
+                    peer_name = peer_name.replace('SIP/', '')
+                    
+                    # Determina lo stato (online/offline)
+                    status = 'offline'
+                    if 'OK' in line or 'Reachable' in line:
+                        status = 'online'
+                    elif 'Unreachable' in line or 'UNREACHABLE' in line:
+                        status = 'offline'
+                    elif 'Unmonitored' in line:
+                        status = 'unmonitored'
+                    
+                    # Estrae latency se disponibile
+                    latency = None
+                    if '(' in line and 'ms' in line:
+                        try:
+                            latency_str = line[line.find('(')+1:line.find('ms')].strip()
+                            latency = int(latency_str)
+                        except:
+                            pass
+                    
+                    peers.append({
+                        'extension': peer_name,
+                        'status': status,
+                        'latency': latency,
+                        'type': 'SIP'
+                    })
+        
+        self.logger.info(f"Trovati {len(peers)} interni SIP")
+        return peers
+    
+    def _parse_pjsip_output(self, output):
+        """Parsa l'output di 'pjsip show endpoints'"""
+        peers = []
+        lines = output.split('\n')
+        
+        self.logger.info(f"Parsing PJSIP output ({len(lines)} righe)...")
+        
+        for line in lines:
+            # Formato tipico: 101    Yes    No   Avail   10.0.0.15  5060
+            line = line.strip()
+            if not line or line.startswith('Endpoint') or line.startswith('===') or 'Objects found' in line:
+                continue
+            
+            parts = line.split()
+            if len(parts) >= 1:
+                peer_name = parts[0].strip()
+                
+                # Verifica se è un numero (interno telefonico)
+                if peer_name.isdigit():
+                    # Determina lo stato
+                    status = 'offline'
+                    if 'Avail' in line or 'Online' in line:
+                        status = 'online'
+                    elif 'Unavail' in line or 'Offline' in line:
+                        status = 'offline'
+                    
+                    peers.append({
+                        'extension': peer_name,
+                        'status': status,
+                        'latency': None,
+                        'type': 'PJSIP'
+                    })
+        
+        self.logger.info(f"Trovati {len(peers)} interni PJSIP")
+        return peers
+    
+    def get_extension_status(self, extension):
+        """Ottiene lo stato di un singolo interno"""
+        try:
+            # Prova SIP
+            command = f"asterisk -rx 'sip show peer {extension}'"
+            output, error = self.execute_command(command)
+            
+            if error or 'not found' in output.lower():
+                # Prova PJSIP
+                command = f"asterisk -rx 'pjsip show endpoint {extension}'"
+                output, error = self.execute_command(command)
+                
+                if error:
+                    return 'unknown', None
+            
+            # Analizza output per determinare stato
+            if 'OK' in output or 'Reachable' in output or 'Avail' in output:
+                return 'online', None
+            elif 'Unreachable' in output or 'Unavail' in output:
+                return 'offline', None
+            else:
+                return 'unknown', None
+                
+        except Exception as e:
+            self.logger.error(f"Errore nel controllo stato interno {extension}: {e}")
+            return 'error', str(e)
 
 class PBXManager:
     """Manager per la gestione delle operazioni PBX"""
