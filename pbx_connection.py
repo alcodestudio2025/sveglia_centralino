@@ -143,13 +143,64 @@ class PBXConnection:
             self.logger.error(f"Errore nella riproduzione audio: {e}")
             return False, str(e)
     
+    def upload_audio_to_asterisk(self, local_audio_path):
+        """
+        Carica un file audio sul server Asterisk via SCP
+        
+        Args:
+            local_audio_path: Path locale del file audio
+            
+        Returns:
+            (success, remote_path): Successo e path remoto
+        """
+        try:
+            import os
+            
+            # Directory standard di Asterisk per audio custom
+            remote_dir = "/var/lib/asterisk/sounds/custom/"
+            
+            # Nome file
+            audio_filename = os.path.basename(local_audio_path)
+            remote_path = os.path.join(remote_dir, audio_filename)
+            
+            self.logger.info(f"Upload audio {audio_filename} su Asterisk...")
+            
+            # Verifica che il file locale esista
+            if not os.path.exists(local_audio_path):
+                return False, f"File locale non trovato: {local_audio_path}"
+            
+            # Crea directory custom se non esiste
+            mkdir_command = f"mkdir -p {remote_dir}"
+            self.execute_command(mkdir_command)
+            
+            # Upload via SCP usando lo stesso client SSH
+            # NOTA: paramiko supporta SCP via sftp
+            if not self.is_connected():
+                if not self.connect():
+                    return False, "Impossibile connettersi al server"
+            
+            # Usa SFTP per il trasferimento
+            sftp = self.ssh_client.open_sftp()
+            sftp.put(local_audio_path, remote_path)
+            sftp.close()
+            
+            self.logger.info(f"✓ Audio caricato: {remote_path}")
+            
+            # Restituisce il nome file senza estensione (per Asterisk)
+            audio_name = audio_filename.replace('.wav', '').replace('.mp3', '').replace('.ogg', '')
+            return True, f"custom/{audio_name}"
+            
+        except Exception as e:
+            self.logger.error(f"Errore upload audio: {e}")
+            return False, str(e)
+    
     def play_audio_with_dtmf(self, phone_extension, audio_file_path, timeout=30):
         """
         Chiama, riproduce audio e attende DTMF
         
         STRATEGIA:
-        1. Originate chiama l'interno e lo connette a un'applicazione AGI/Playback
-        2. L'applicazione riproduce l'audio e attende DTMF
+        1. Upload file audio su Asterisk (se necessario)
+        2. Originate chiama l'interno e riproduce l'audio
         
         Args:
             phone_extension: Interno telefonico
@@ -165,20 +216,17 @@ class PBXConnection:
             wake_callerid = self.config.get('wake_callerid', 'Servizio Sveglie')
             context = self.config.get('context', 'from-internal')
             
-            # Prepara nome file audio (solo nome senza path/estensione)
-            import os
-            audio_filename = os.path.basename(audio_file_path)
-            audio_name = audio_filename.replace('.wav', '').replace('.mp3', '').replace('.ogg', '')
+            # 1. Upload audio su Asterisk
+            self.logger.info(f"Upload audio su Asterisk: {audio_file_path}")
+            success, audio_path_or_error = self.upload_audio_to_asterisk(audio_file_path)
             
-            # SOLUZIONE: Usa Playback con Background per DTMF
-            # Background() riproduce E attende DTMF contemporaneamente!
-            # Poi WaitExten() aspetta l'input
+            if not success:
+                self.logger.error(f"Errore upload: {audio_path_or_error}")
+                return False, None
             
-            # Creiamo una sequenza di applicazioni separate da &
-            # 1. Answer - risponde
-            # 2. Background - riproduce e attende DTMF
-            # 3. WaitExten - aspetta input
+            audio_name = audio_path_or_error  # Es: "custom/wakeup_didimos_asterisk_1"
             
+            # 2. Comando per chiamare e riprodurre
             command = (
                 f"asterisk -rx 'channel originate Local/{phone_extension}@{context}/n "
                 f"application Playback \"{audio_name}\" "
