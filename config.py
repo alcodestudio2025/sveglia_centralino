@@ -13,7 +13,10 @@ PBX_CONFIG = {
     'username': 'admin',       # Credenziali SSH - da configurare
     'password': 'password',    # Password SSH - da configurare
     'timeout': 10,
-    'test_on_startup': True   # Test automatico all'avvio
+    'test_on_startup': True,   # Test automatico all'avvio
+    'wake_extension': '999',   # Interno virtuale per servizio sveglie
+    'wake_callerid': 'Servizio Sveglie',  # Nome da mostrare sul display
+    'context': 'from-internal'  # Context Asterisk (di solito from-internal per FreePBX)
 }
 
 # File per salvare le configurazioni utente

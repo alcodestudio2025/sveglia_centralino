@@ -39,6 +39,9 @@ class SettingsWindow:
         self.pbx_username = tk.StringVar()
         self.pbx_password = tk.StringVar()
         self.pbx_timeout = tk.StringVar()
+        self.wake_extension = tk.StringVar()
+        self.wake_callerid = tk.StringVar()
+        self.pbx_context = tk.StringVar()
         
         # Mail Settings
         self.mail_enabled = tk.BooleanVar()
@@ -133,9 +136,34 @@ class SettingsWindow:
         ttk.Label(fields_frame, text="Timeout (secondi):").grid(row=4, column=0, sticky=tk.W, pady=5)
         ttk.Entry(fields_frame, textvariable=self.pbx_timeout, width=10).grid(row=4, column=1, sticky=tk.W, pady=5, padx=(10, 0))
         
+        # Separatore
+        ttk.Separator(fields_frame, orient='horizontal').grid(row=5, column=0, columnspan=2, sticky=(tk.W, tk.E), pady=15)
+        
+        # Sezione CallerID Sveglie
+        ttk.Label(fields_frame, text="Configurazione CallerID Sveglie:", 
+                 font=("Arial", 10, "bold")).grid(row=6, column=0, columnspan=2, sticky=tk.W, pady=(5, 10))
+        
+        # Interno virtuale sveglie
+        ttk.Label(fields_frame, text="Interno Virtuale Sveglie:").grid(row=7, column=0, sticky=tk.W, pady=5)
+        ttk.Entry(fields_frame, textvariable=self.wake_extension, width=10).grid(row=7, column=1, sticky=tk.W, pady=5, padx=(10, 0))
+        ttk.Label(fields_frame, text="(Es: 999 - appare sul display)", 
+                 font=("Arial", 8), foreground="gray").grid(row=7, column=2, sticky=tk.W, padx=(5, 0))
+        
+        # Nome CallerID
+        ttk.Label(fields_frame, text="Nome CallerID:").grid(row=8, column=0, sticky=tk.W, pady=5)
+        ttk.Entry(fields_frame, textvariable=self.wake_callerid, width=30).grid(row=8, column=1, sticky=(tk.W, tk.E), pady=5, padx=(10, 0))
+        ttk.Label(fields_frame, text="(Es: Servizio Sveglie)", 
+                 font=("Arial", 8), foreground="gray").grid(row=8, column=2, sticky=tk.W, padx=(5, 0))
+        
+        # Context Asterisk
+        ttk.Label(fields_frame, text="Context Asterisk:").grid(row=9, column=0, sticky=tk.W, pady=5)
+        ttk.Entry(fields_frame, textvariable=self.pbx_context, width=30).grid(row=9, column=1, sticky=(tk.W, tk.E), pady=5, padx=(10, 0))
+        ttk.Label(fields_frame, text="(Di solito: from-internal)", 
+                 font=("Arial", 8), foreground="gray").grid(row=9, column=2, sticky=tk.W, padx=(5, 0))
+        
         # Pulsante test connessione
         ttk.Button(fields_frame, text="Test Connessione", 
-                  command=self.test_pbx_connection).grid(row=5, column=0, columnspan=2, pady=20)
+                  command=self.test_pbx_connection).grid(row=10, column=0, columnspan=2, pady=20)
         
         fields_frame.columnconfigure(1, weight=1)
     
@@ -432,6 +460,9 @@ class SettingsWindow:
         self.pbx_username.set(self.settings["pbx"]["username"])
         self.pbx_password.set(self.settings["pbx"]["password"])
         self.pbx_timeout.set(str(self.settings["pbx"]["timeout"]))
+        self.wake_extension.set(self.settings["pbx"].get("wake_extension", "999"))
+        self.wake_callerid.set(self.settings["pbx"].get("wake_callerid", "Servizio Sveglie"))
+        self.pbx_context.set(self.settings["pbx"].get("context", "from-internal"))
         
         # Mail Settings
         self.mail_enabled.set(self.settings["mail"]["enabled"])
@@ -471,6 +502,9 @@ class SettingsWindow:
             self.settings["pbx"]["username"] = self.pbx_username.get()
             self.settings["pbx"]["password"] = self.pbx_password.get()
             self.settings["pbx"]["timeout"] = int(self.pbx_timeout.get())
+            self.settings["pbx"]["wake_extension"] = self.wake_extension.get()
+            self.settings["pbx"]["wake_callerid"] = self.wake_callerid.get()
+            self.settings["pbx"]["context"] = self.pbx_context.get()
             
             # Salva su file usando la funzione di config
             from config import save_user_config, PBX_CONFIG

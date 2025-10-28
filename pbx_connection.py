@@ -96,12 +96,23 @@ class PBXConnection:
             return None, str(e)
     
     def make_call(self, phone_extension, audio_file_path=None):
-        """Effettua una chiamata all'interno telefonico specificato"""
+        """Effettua una chiamata all'interno telefonico specificato con CallerID personalizzato"""
         try:
-            # Comando per effettuare la chiamata (da adattare al centralino specifico)
-            # Esempio per centralini basati su Asterisk
-            command = f"asterisk -rx 'originate Local/{phone_extension}@internal extension {phone_extension}@internal'"
+            # Ottiene configurazione CallerID per sveglie
+            wake_extension = self.config.get('wake_extension', '999')
+            wake_callerid = self.config.get('wake_callerid', 'Servizio Sveglie')
+            context = self.config.get('context', 'from-internal')
             
+            # Comando Asterisk con CallerID personalizzato
+            # Formato: channel originate Local/DEST@context extension DEST@context
+            # Con variabile: Set(CALLERID(all)=NAME <NUMBER>)
+            command = (
+                f"asterisk -rx 'channel originate Local/{phone_extension}@{context} "
+                f"application Set \"CALLERID(all)={wake_callerid} <{wake_extension}>\" "
+                f"extension {phone_extension}@{context}'"
+            )
+            
+            self.logger.info(f"Chiamata a {phone_extension} come '{wake_callerid} <{wake_extension}>'")
             output, error = self.execute_command(command)
             
             if error:
@@ -134,7 +145,7 @@ class PBXConnection:
     
     def play_audio_with_dtmf(self, phone_extension, audio_file_path, timeout=30):
         """
-        Riproduce audio e attende input DTMF dall'utente
+        Riproduce audio e attende input DTMF dall'utente con CallerID personalizzato
         
         Args:
             phone_extension: Interno telefonico
@@ -145,6 +156,11 @@ class PBXConnection:
             (success, dtmf_digit): Tupla con successo e tasto premuto (1, 2, ecc.)
         """
         try:
+            # Ottiene configurazione CallerID e context
+            wake_extension = self.config.get('wake_extension', '999')
+            wake_callerid = self.config.get('wake_callerid', 'Servizio Sveglie')
+            context = self.config.get('context', 'from-internal')
+            
             # Costruisce comando Asterisk per riproduzione + lettura DTMF
             # Read(variable,filename,max_digits,option,timeout)
             # Asterisk ha bisogno solo del nome file senza percorso e estensione
@@ -152,9 +168,12 @@ class PBXConnection:
             audio_filename = os.path.basename(audio_file_path)
             audio_name = audio_filename.replace('.wav', '').replace('.mp3', '').replace('.ogg', '')
             
+            # Comando con CallerID personalizzato
             command = (
-                f"asterisk -rx 'channel originate Local/{phone_extension}@internal "
-                f"application Read dtmf_input,{audio_name},1,n,{timeout}'"
+                f"asterisk -rx 'channel originate Local/{phone_extension}@{context}/"
+                f"n exten {phone_extension}@{context} "
+                f"application Read dtmf_input,{audio_name},1,n,{timeout} "
+                f"callerid \"{wake_callerid} <{wake_extension}>\"'"
             )
             
             self.logger.info(f"Riproduzione audio con DTMF per {phone_extension}: {audio_file_path}")

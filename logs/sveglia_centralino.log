@@ -28,3 +28,1051 @@
 2025-10-28 11:10:42,550 - sveglia_centralino.main - INFO - test_connection:375 - Username: root
 2025-10-28 11:10:42,733 - sveglia_centralino.main - INFO - test_connection:381 - ✓ Connessione PBX all'avvio: SUCCESSO
 2025-10-28 11:10:42,733 - sveglia_centralino.main - INFO - test_connection:382 - ============================================================
+2025-10-28 11:16:47,095 - sveglia_centralino.main - INFO - __init__:56 - Gestore sveglie avviato
+2025-10-28 11:16:47,095 - sveglia_centralino.main - INFO - test_connection:371 - ============================================================
+2025-10-28 11:16:47,095 - sveglia_centralino.main - INFO - test_connection:372 - TEST CONNESSIONE PBX ALL'AVVIO
+2025-10-28 11:16:47,095 - sveglia_centralino.main - INFO - test_connection:373 - ============================================================
+2025-10-28 11:16:47,095 - sveglia_centralino.main - INFO - test_connection:374 - Host: 192.168.10.15:22
+2025-10-28 11:16:47,095 - sveglia_centralino.main - INFO - test_connection:375 - Username: root
+2025-10-28 11:16:47,332 - sveglia_centralino.main - INFO - test_connection:381 - ✓ Connessione PBX all'avvio: SUCCESSO
+2025-10-28 11:16:47,332 - sveglia_centralino.main - INFO - test_connection:382 - ============================================================
+2025-10-28 11:31:57,925 - sveglia_centralino.main - INFO - __init__:56 - Gestore sveglie avviato
+2025-10-28 11:31:57,926 - sveglia_centralino.main - INFO - test_connection:371 - ============================================================
+2025-10-28 11:31:57,926 - sveglia_centralino.main - INFO - test_connection:372 - TEST CONNESSIONE PBX ALL'AVVIO
+2025-10-28 11:31:57,926 - sveglia_centralino.main - INFO - test_connection:373 - ============================================================
+2025-10-28 11:31:57,926 - sveglia_centralino.main - INFO - test_connection:374 - Host: 192.168.10.15:22
+2025-10-28 11:31:57,926 - sveglia_centralino.main - INFO - test_connection:375 - Username: root
+2025-10-28 11:31:58,129 - sveglia_centralino.main - INFO - test_connection:381 - ✓ Connessione PBX all'avvio: SUCCESSO
+2025-10-28 11:31:58,129 - sveglia_centralino.main - INFO - test_connection:382 - ============================================================
+2025-10-28 11:35:28,480 - sveglia_centralino.main - INFO - __init__:56 - Gestore sveglie avviato
+2025-10-28 11:35:28,480 - sveglia_centralino.main - INFO - test_connection:371 - ============================================================
+2025-10-28 11:35:28,480 - sveglia_centralino.main - INFO - test_connection:372 - TEST CONNESSIONE PBX ALL'AVVIO
+2025-10-28 11:35:28,481 - sveglia_centralino.main - INFO - test_connection:373 - ============================================================
+2025-10-28 11:35:28,481 - sveglia_centralino.main - INFO - test_connection:374 - Host: 192.168.10.15:22
+2025-10-28 11:35:28,481 - sveglia_centralino.main - INFO - test_connection:375 - Username: root
+2025-10-28 11:35:28,725 - sveglia_centralino.main - INFO - test_connection:381 - ✓ Connessione PBX all'avvio: SUCCESSO
+2025-10-28 11:35:28,725 - sveglia_centralino.main - INFO - test_connection:382 - ============================================================
+2025-10-28 11:38:07,279 - sveglia_centralino.main - INFO - __init__:56 - Gestore sveglie avviato
+2025-10-28 11:38:07,280 - sveglia_centralino.main - INFO - test_connection:371 - ============================================================
+2025-10-28 11:38:07,280 - sveglia_centralino.main - INFO - test_connection:372 - TEST CONNESSIONE PBX ALL'AVVIO
+2025-10-28 11:38:07,280 - sveglia_centralino.main - INFO - test_connection:373 - ============================================================
+2025-10-28 11:38:07,280 - sveglia_centralino.main - INFO - test_connection:374 - Host: 192.168.10.15:22
+2025-10-28 11:38:07,281 - sveglia_centralino.main - INFO - test_connection:375 - Username: root
+2025-10-28 11:38:07,483 - sveglia_centralino.main - INFO - test_connection:381 - ✓ Connessione PBX all'avvio: SUCCESSO
+2025-10-28 11:38:07,483 - sveglia_centralino.main - INFO - test_connection:382 - ============================================================
+2025-10-28 12:02:22,653 - sveglia_centralino.main - INFO - __init__:56 - Gestore sveglie avviato
+2025-10-28 12:02:22,653 - sveglia_centralino.main - INFO - test_connection:371 - ============================================================
+2025-10-28 12:02:22,653 - sveglia_centralino.main - INFO - test_connection:372 - TEST CONNESSIONE PBX ALL'AVVIO
+2025-10-28 12:02:22,653 - sveglia_centralino.main - INFO - test_connection:373 - ============================================================
+2025-10-28 12:02:22,653 - sveglia_centralino.main - INFO - test_connection:374 - Host: 192.168.10.15:22
+2025-10-28 12:02:22,653 - sveglia_centralino.main - INFO - test_connection:375 - Username: root
+2025-10-28 12:02:22,858 - sveglia_centralino.main - INFO - test_connection:381 - ✓ Connessione PBX all'avvio: SUCCESSO
+2025-10-28 12:02:22,858 - sveglia_centralino.main - INFO - test_connection:382 - ============================================================
+2025-10-28 12:07:01,664 - sveglia_centralino.main - INFO - __init__:56 - Gestore sveglie avviato
+2025-10-28 12:07:01,665 - sveglia_centralino.main - INFO - test_connection:371 - ============================================================
+2025-10-28 12:07:01,665 - sveglia_centralino.main - INFO - test_connection:372 - TEST CONNESSIONE PBX ALL'AVVIO
+2025-10-28 12:07:01,668 - sveglia_centralino.main - INFO - test_connection:373 - ============================================================
+2025-10-28 12:07:01,668 - sveglia_centralino.main - INFO - test_connection:374 - Host: 192.168.10.15:22
+2025-10-28 12:07:01,668 - sveglia_centralino.main - INFO - test_connection:375 - Username: root
+2025-10-28 12:07:01,747 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 12:07:01,866 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: echo 'PBX Connection Test'
+2025-10-28 12:07:01,866 - sveglia_centralino.pbx_connection - INFO - test_connection:186 - Test connessione PBX completato con successo
+2025-10-28 12:07:01,866 - sveglia_centralino.pbx_connection - INFO - disconnect:56 - Connessione SSH chiusa
+2025-10-28 12:07:01,873 - sveglia_centralino.main - INFO - test_connection:381 - ✓ Connessione PBX all'avvio: SUCCESSO
+2025-10-28 12:07:01,873 - sveglia_centralino.main - INFO - test_connection:382 - ============================================================
+2025-10-28 12:07:07,379 - sveglia_centralino.room_manager - INFO - __init__:19 - ============================================================
+2025-10-28 12:07:07,379 - sveglia_centralino.room_manager - INFO - __init__:20 - APERTURA GESTIONE CAMERE HOTEL - INTEGRAZIONE PBX
+2025-10-28 12:07:07,379 - sveglia_centralino.room_manager - INFO - __init__:21 - ============================================================
+2025-10-28 12:07:07,623 - sveglia_centralino.room_manager - INFO - load_rooms:450 - Caricamento camere... Cache PBX: 0 interni
+2025-10-28 12:07:07,624 - sveglia_centralino.room_manager - WARNING - load_rooms:492 -   ✗ Interno available NON trovato in cache!
+2025-10-28 12:07:09,626 - sveglia_centralino.room_manager - INFO - do_refresh:377 - Refresh stato interni PBX...
+2025-10-28 12:07:09,626 - sveglia_centralino.pbx_connection - INFO - get_sip_peers:227 - Lettura interni dal centralino...
+2025-10-28 12:07:09,731 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 12:07:09,795 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: asterisk -rx 'sip show peers'
+2025-10-28 12:07:09,795 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:255 - Parsing SIP output (112 righe)...
+2025-10-28 12:07:09,795 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:256 - Prime 5 righe output SIP:
+2025-10-28 12:07:09,796 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 0: Name/username             Host                                    Dyn Forcerport
+2025-10-28 12:07:09,796 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 1: 103                       (Unspecified)                            D  Yes       
+2025-10-28 12:07:09,796 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 2: 111/111                   5.98.202.136                             D  Yes       
+2025-10-28 12:07:09,796 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 3: 114/114                   192.168.10.151                           D  Yes       
+2025-10-28 12:07:09,796 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 4: 115/115                   192.168.10.127                           D  Yes       
+2025-10-28 12:07:09,796 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 103 -> offline (latency: Nonems)
+2025-10-28 12:07:09,796 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 111 -> online (latency: 29ms)
+2025-10-28 12:07:09,796 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 114 -> online (latency: 5ms)
+2025-10-28 12:07:09,797 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:313 - Trovati 90 interni SIP: 24 online, 66 offline, 0 unmonitored
+2025-10-28 12:07:09,797 - sveglia_centralino.room_manager - INFO - do_refresh:402 - Cache popolata con 90 interni: 24 online, 66 offline
+2025-10-28 12:07:09,797 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[103] = {'status': 'offline', 'latency': None, 'type': 'SIP'}
+2025-10-28 12:07:09,797 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[111] = {'status': 'online', 'latency': 29, 'type': 'SIP'}
+2025-10-28 12:07:09,797 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[114] = {'status': 'online', 'latency': 5, 'type': 'SIP'}
+2025-10-28 12:07:09,838 - sveglia_centralino.room_manager - INFO - load_rooms:450 - Caricamento camere... Cache PBX: 90 interni
+2025-10-28 12:07:09,838 - sveglia_centralino.room_manager - INFO - load_rooms:454 -   Campione cache: [('103', {'status': 'offline', 'latency': None, 'type': 'SIP'}), ('111', {'status': 'online', 'latency': 29, 'type': 'SIP'}), ('114', {'status': 'online', 'latency': 5, 'type': 'SIP'})]
+2025-10-28 12:07:09,840 - sveglia_centralino.room_manager - WARNING - load_rooms:492 -   ✗ Interno available NON trovato in cache!
+2025-10-28 12:07:12,842 - sveglia_centralino.room_manager - INFO - do_clean_import:232 - Pulizia database camere...
+2025-10-28 12:07:12,845 - sveglia_centralino.room_manager - INFO - do_clean_import:241 - Tutte le camere eliminate
+2025-10-28 12:07:12,854 - sveglia_centralino.pbx_connection - INFO - get_sip_peers:227 - Lettura interni dal centralino...
+2025-10-28 12:07:12,924 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 12:07:12,998 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: asterisk -rx 'sip show peers'
+2025-10-28 12:07:13,000 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:255 - Parsing SIP output (112 righe)...
+2025-10-28 12:07:13,001 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:256 - Prime 5 righe output SIP:
+2025-10-28 12:07:13,001 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 0: Name/username             Host                                    Dyn Forcerport
+2025-10-28 12:07:13,001 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 1: 103                       (Unspecified)                            D  Yes       
+2025-10-28 12:07:13,002 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 2: 111/111                   5.98.202.136                             D  Yes       
+2025-10-28 12:07:13,002 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 3: 114/114                   192.168.10.151                           D  Yes       
+2025-10-28 12:07:13,002 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 4: 115/115                   192.168.10.127                           D  Yes       
+2025-10-28 12:07:13,002 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 103 -> offline (latency: Nonems)
+2025-10-28 12:07:13,002 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 111 -> online (latency: 29ms)
+2025-10-28 12:07:13,002 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 114 -> online (latency: 5ms)
+2025-10-28 12:07:13,003 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:313 - Trovati 90 interni SIP: 24 online, 66 offline, 0 unmonitored
+2025-10-28 12:07:13,003 - sveglia_centralino.room_manager - INFO - do_clean_import:256 - Trovati 90 interni sul PBX
+2025-10-28 12:07:13,058 - sveglia_centralino.room_manager - INFO - do_clean_import:278 - Importati 20/90...
+2025-10-28 12:07:13,109 - sveglia_centralino.room_manager - INFO - do_clean_import:278 - Importati 40/90...
+2025-10-28 12:07:13,164 - sveglia_centralino.room_manager - INFO - do_clean_import:278 - Importati 60/90...
+2025-10-28 12:07:13,217 - sveglia_centralino.room_manager - INFO - do_clean_import:278 - Importati 80/90...
+2025-10-28 12:07:13,242 - sveglia_centralino.room_manager - INFO - do_clean_import:280 - Import completato: 90 interni importati
+2025-10-28 12:07:13,243 - sveglia_centralino.room_manager - INFO - do_refresh:377 - Refresh stato interni PBX...
+2025-10-28 12:07:13,243 - sveglia_centralino.pbx_connection - INFO - get_sip_peers:227 - Lettura interni dal centralino...
+2025-10-28 12:07:13,315 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 12:07:13,388 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: asterisk -rx 'sip show peers'
+2025-10-28 12:07:13,388 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:255 - Parsing SIP output (112 righe)...
+2025-10-28 12:07:13,388 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:256 - Prime 5 righe output SIP:
+2025-10-28 12:07:13,388 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 0: Name/username             Host                                    Dyn Forcerport
+2025-10-28 12:07:13,388 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 1: 103                       (Unspecified)                            D  Yes       
+2025-10-28 12:07:13,388 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 2: 111/111                   5.98.202.136                             D  Yes       
+2025-10-28 12:07:13,388 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 3: 114/114                   192.168.10.151                           D  Yes       
+2025-10-28 12:07:13,388 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 4: 115/115                   192.168.10.127                           D  Yes       
+2025-10-28 12:07:13,388 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 103 -> offline (latency: Nonems)
+2025-10-28 12:07:13,388 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 111 -> online (latency: 29ms)
+2025-10-28 12:07:13,388 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 114 -> online (latency: 5ms)
+2025-10-28 12:07:13,389 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:313 - Trovati 90 interni SIP: 24 online, 66 offline, 0 unmonitored
+2025-10-28 12:07:13,389 - sveglia_centralino.room_manager - INFO - do_refresh:402 - Cache popolata con 90 interni: 24 online, 66 offline
+2025-10-28 12:07:13,389 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[103] = {'status': 'offline', 'latency': None, 'type': 'SIP'}
+2025-10-28 12:07:13,389 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[111] = {'status': 'online', 'latency': 29, 'type': 'SIP'}
+2025-10-28 12:07:13,389 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[114] = {'status': 'online', 'latency': 5, 'type': 'SIP'}
+2025-10-28 12:07:14,131 - sveglia_centralino.room_manager - INFO - load_rooms:450 - Caricamento camere... Cache PBX: 90 interni
+2025-10-28 12:07:14,131 - sveglia_centralino.room_manager - INFO - load_rooms:454 -   Campione cache: [('103', {'status': 'offline', 'latency': None, 'type': 'SIP'}), ('111', {'status': 'online', 'latency': 29, 'type': 'SIP'}), ('114', {'status': 'online', 'latency': 5, 'type': 'SIP'})]
+2025-10-28 12:07:14,135 - sveglia_centralino.room_manager - WARNING - load_rooms:492 -   ✗ Interno available NON trovato in cache!
+2025-10-28 12:07:37,631 - sveglia_centralino.room_manager - INFO - do_refresh:377 - Refresh stato interni PBX...
+2025-10-28 12:07:37,631 - sveglia_centralino.pbx_connection - INFO - get_sip_peers:227 - Lettura interni dal centralino...
+2025-10-28 12:07:37,737 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 12:07:37,808 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: asterisk -rx 'sip show peers'
+2025-10-28 12:07:37,808 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:255 - Parsing SIP output (112 righe)...
+2025-10-28 12:07:37,808 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:256 - Prime 5 righe output SIP:
+2025-10-28 12:07:37,808 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 0: Name/username             Host                                    Dyn Forcerport
+2025-10-28 12:07:37,809 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 1: 103                       (Unspecified)                            D  Yes       
+2025-10-28 12:07:37,809 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 2: 111/111                   5.98.202.136                             D  Yes       
+2025-10-28 12:07:37,809 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 3: 114/114                   192.168.10.151                           D  Yes       
+2025-10-28 12:07:37,809 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 4: 115/115                   192.168.10.127                           D  Yes       
+2025-10-28 12:07:37,809 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 103 -> offline (latency: Nonems)
+2025-10-28 12:07:37,809 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 111 -> online (latency: 29ms)
+2025-10-28 12:07:37,809 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 114 -> online (latency: 4ms)
+2025-10-28 12:07:37,809 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:313 - Trovati 90 interni SIP: 24 online, 66 offline, 0 unmonitored
+2025-10-28 12:07:37,809 - sveglia_centralino.room_manager - INFO - do_refresh:402 - Cache popolata con 90 interni: 24 online, 66 offline
+2025-10-28 12:07:37,810 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[103] = {'status': 'offline', 'latency': None, 'type': 'SIP'}
+2025-10-28 12:07:37,810 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[111] = {'status': 'online', 'latency': 29, 'type': 'SIP'}
+2025-10-28 12:07:37,810 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[114] = {'status': 'online', 'latency': 4, 'type': 'SIP'}
+2025-10-28 12:07:38,478 - sveglia_centralino.room_manager - INFO - load_rooms:450 - Caricamento camere... Cache PBX: 90 interni
+2025-10-28 12:07:38,478 - sveglia_centralino.room_manager - INFO - load_rooms:454 -   Campione cache: [('103', {'status': 'offline', 'latency': None, 'type': 'SIP'}), ('111', {'status': 'online', 'latency': 29, 'type': 'SIP'}), ('114', {'status': 'online', 'latency': 4, 'type': 'SIP'})]
+2025-10-28 12:07:38,479 - sveglia_centralino.room_manager - WARNING - load_rooms:492 -   ✗ Interno available NON trovato in cache!
+2025-10-28 12:09:10,500 - sveglia_centralino.main - INFO - __init__:56 - Gestore sveglie avviato
+2025-10-28 12:09:10,500 - sveglia_centralino.main - INFO - test_connection:371 - ============================================================
+2025-10-28 12:09:10,501 - sveglia_centralino.main - INFO - test_connection:372 - TEST CONNESSIONE PBX ALL'AVVIO
+2025-10-28 12:09:10,501 - sveglia_centralino.main - INFO - test_connection:373 - ============================================================
+2025-10-28 12:09:10,501 - sveglia_centralino.main - INFO - test_connection:374 - Host: 192.168.10.15:22
+2025-10-28 12:09:10,501 - sveglia_centralino.main - INFO - test_connection:375 - Username: root
+2025-10-28 12:09:10,620 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 12:09:10,730 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: echo 'PBX Connection Test'
+2025-10-28 12:09:10,730 - sveglia_centralino.pbx_connection - INFO - test_connection:186 - Test connessione PBX completato con successo
+2025-10-28 12:09:10,730 - sveglia_centralino.pbx_connection - INFO - disconnect:56 - Connessione SSH chiusa
+2025-10-28 12:09:10,741 - sveglia_centralino.main - INFO - test_connection:381 - ✓ Connessione PBX all'avvio: SUCCESSO
+2025-10-28 12:09:10,741 - sveglia_centralino.main - INFO - test_connection:382 - ============================================================
+2025-10-28 12:09:14,314 - sveglia_centralino.room_manager - INFO - __init__:19 - ============================================================
+2025-10-28 12:09:14,314 - sveglia_centralino.room_manager - INFO - __init__:20 - APERTURA GESTIONE CAMERE HOTEL - INTEGRAZIONE PBX
+2025-10-28 12:09:14,314 - sveglia_centralino.room_manager - INFO - __init__:21 - ============================================================
+2025-10-28 12:09:14,546 - sveglia_centralino.room_manager - INFO - load_rooms:450 - Caricamento camere... Cache PBX: 0 interni
+2025-10-28 12:09:14,546 - sveglia_centralino.room_manager - INFO - load_rooms:460 -   Prima camera dal DB (RAW): (411, '103', 'available', '2025-10-28 11:07:13', '103', 'Interno 103 (SIP)', '#FFFFFF', 'Importato da PBX')
+2025-10-28 12:09:14,546 - sveglia_centralino.room_manager - INFO - load_rooms:477 -   Prima camera PARSED: num=103, ext=available, desc=2025-10-28 11:07:13
+2025-10-28 12:09:14,546 - sveglia_centralino.room_manager - WARNING - load_rooms:501 -   ✗ Interno available NON trovato in cache!
+2025-10-28 12:09:16,552 - sveglia_centralino.room_manager - INFO - do_refresh:377 - Refresh stato interni PBX...
+2025-10-28 12:09:16,552 - sveglia_centralino.pbx_connection - INFO - get_sip_peers:227 - Lettura interni dal centralino...
+2025-10-28 12:09:16,616 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 12:09:16,702 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: asterisk -rx 'sip show peers'
+2025-10-28 12:09:16,702 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:255 - Parsing SIP output (112 righe)...
+2025-10-28 12:09:16,702 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:256 - Prime 5 righe output SIP:
+2025-10-28 12:09:16,702 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 0: Name/username             Host                                    Dyn Forcerport
+2025-10-28 12:09:16,702 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 1: 103                       (Unspecified)                            D  Yes       
+2025-10-28 12:09:16,702 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 2: 111/111                   5.98.202.136                             D  Yes       
+2025-10-28 12:09:16,702 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 3: 114/114                   192.168.10.151                           D  Yes       
+2025-10-28 12:09:16,702 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 4: 115/115                   192.168.10.127                           D  Yes       
+2025-10-28 12:09:16,702 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 103 -> offline (latency: Nonems)
+2025-10-28 12:09:16,702 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 111 -> online (latency: 29ms)
+2025-10-28 12:09:16,702 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 114 -> online (latency: 4ms)
+2025-10-28 12:09:16,702 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:313 - Trovati 90 interni SIP: 24 online, 66 offline, 0 unmonitored
+2025-10-28 12:09:16,702 - sveglia_centralino.room_manager - INFO - do_refresh:402 - Cache popolata con 90 interni: 24 online, 66 offline
+2025-10-28 12:09:16,702 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[103] = {'status': 'offline', 'latency': None, 'type': 'SIP'}
+2025-10-28 12:09:16,702 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[111] = {'status': 'online', 'latency': 29, 'type': 'SIP'}
+2025-10-28 12:09:16,702 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[114] = {'status': 'online', 'latency': 4, 'type': 'SIP'}
+2025-10-28 12:09:17,108 - sveglia_centralino.room_manager - INFO - load_rooms:450 - Caricamento camere... Cache PBX: 90 interni
+2025-10-28 12:09:17,108 - sveglia_centralino.room_manager - INFO - load_rooms:454 -   Campione cache: [('103', {'status': 'offline', 'latency': None, 'type': 'SIP'}), ('111', {'status': 'online', 'latency': 29, 'type': 'SIP'}), ('114', {'status': 'online', 'latency': 4, 'type': 'SIP'})]
+2025-10-28 12:09:17,108 - sveglia_centralino.room_manager - INFO - load_rooms:460 -   Prima camera dal DB (RAW): (411, '103', 'available', '2025-10-28 11:07:13', '103', 'Interno 103 (SIP)', '#FFFFFF', 'Importato da PBX')
+2025-10-28 12:09:17,108 - sveglia_centralino.room_manager - INFO - load_rooms:477 -   Prima camera PARSED: num=103, ext=available, desc=2025-10-28 11:07:13
+2025-10-28 12:09:17,109 - sveglia_centralino.room_manager - WARNING - load_rooms:501 -   ✗ Interno available NON trovato in cache!
+2025-10-28 12:09:19,355 - sveglia_centralino.room_manager - INFO - do_clean_import:232 - Pulizia database camere...
+2025-10-28 12:09:19,368 - sveglia_centralino.room_manager - INFO - do_clean_import:241 - Tutte le camere eliminate
+2025-10-28 12:09:19,369 - sveglia_centralino.pbx_connection - INFO - get_sip_peers:227 - Lettura interni dal centralino...
+2025-10-28 12:09:19,426 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 12:09:19,500 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: asterisk -rx 'sip show peers'
+2025-10-28 12:09:19,500 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:255 - Parsing SIP output (112 righe)...
+2025-10-28 12:09:19,500 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:256 - Prime 5 righe output SIP:
+2025-10-28 12:09:19,501 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 0: Name/username             Host                                    Dyn Forcerport
+2025-10-28 12:09:19,501 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 1: 103                       (Unspecified)                            D  Yes       
+2025-10-28 12:09:19,501 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 2: 111/111                   5.98.202.136                             D  Yes       
+2025-10-28 12:09:19,501 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 3: 114/114                   192.168.10.151                           D  Yes       
+2025-10-28 12:09:19,501 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 4: 115/115                   192.168.10.127                           D  Yes       
+2025-10-28 12:09:19,501 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 103 -> offline (latency: Nonems)
+2025-10-28 12:09:19,501 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 111 -> online (latency: 29ms)
+2025-10-28 12:09:19,501 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 114 -> online (latency: 4ms)
+2025-10-28 12:09:19,502 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:313 - Trovati 90 interni SIP: 24 online, 66 offline, 0 unmonitored
+2025-10-28 12:09:19,502 - sveglia_centralino.room_manager - INFO - do_clean_import:256 - Trovati 90 interni sul PBX
+2025-10-28 12:09:19,556 - sveglia_centralino.room_manager - INFO - do_clean_import:278 - Importati 20/90...
+2025-10-28 12:09:19,617 - sveglia_centralino.room_manager - INFO - do_clean_import:278 - Importati 40/90...
+2025-10-28 12:09:19,674 - sveglia_centralino.room_manager - INFO - do_clean_import:278 - Importati 60/90...
+2025-10-28 12:09:19,736 - sveglia_centralino.room_manager - INFO - do_clean_import:278 - Importati 80/90...
+2025-10-28 12:09:19,770 - sveglia_centralino.room_manager - INFO - do_clean_import:280 - Import completato: 90 interni importati
+2025-10-28 12:09:19,770 - sveglia_centralino.room_manager - INFO - do_refresh:377 - Refresh stato interni PBX...
+2025-10-28 12:09:19,770 - sveglia_centralino.pbx_connection - INFO - get_sip_peers:227 - Lettura interni dal centralino...
+2025-10-28 12:09:19,846 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 12:09:19,919 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: asterisk -rx 'sip show peers'
+2025-10-28 12:09:19,919 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:255 - Parsing SIP output (112 righe)...
+2025-10-28 12:09:19,919 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:256 - Prime 5 righe output SIP:
+2025-10-28 12:09:19,919 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 0: Name/username             Host                                    Dyn Forcerport
+2025-10-28 12:09:19,919 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 1: 103                       (Unspecified)                            D  Yes       
+2025-10-28 12:09:19,919 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 2: 111/111                   5.98.202.136                             D  Yes       
+2025-10-28 12:09:19,919 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 3: 114/114                   192.168.10.151                           D  Yes       
+2025-10-28 12:09:19,920 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 4: 115/115                   192.168.10.127                           D  Yes       
+2025-10-28 12:09:19,920 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 103 -> offline (latency: Nonems)
+2025-10-28 12:09:19,920 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 111 -> online (latency: 29ms)
+2025-10-28 12:09:19,920 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 114 -> online (latency: 4ms)
+2025-10-28 12:09:19,920 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:313 - Trovati 90 interni SIP: 24 online, 66 offline, 0 unmonitored
+2025-10-28 12:09:19,920 - sveglia_centralino.room_manager - INFO - do_refresh:402 - Cache popolata con 90 interni: 24 online, 66 offline
+2025-10-28 12:09:19,920 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[103] = {'status': 'offline', 'latency': None, 'type': 'SIP'}
+2025-10-28 12:09:19,920 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[111] = {'status': 'online', 'latency': 29, 'type': 'SIP'}
+2025-10-28 12:09:19,920 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[114] = {'status': 'online', 'latency': 4, 'type': 'SIP'}
+2025-10-28 12:09:20,719 - sveglia_centralino.room_manager - INFO - load_rooms:450 - Caricamento camere... Cache PBX: 90 interni
+2025-10-28 12:09:20,719 - sveglia_centralino.room_manager - INFO - load_rooms:454 -   Campione cache: [('103', {'status': 'offline', 'latency': None, 'type': 'SIP'}), ('111', {'status': 'online', 'latency': 29, 'type': 'SIP'}), ('114', {'status': 'online', 'latency': 4, 'type': 'SIP'})]
+2025-10-28 12:09:20,722 - sveglia_centralino.room_manager - INFO - load_rooms:460 -   Prima camera dal DB (RAW): (501, '103', 'available', '2025-10-28 11:09:19', '103', 'Interno 103 (SIP)', '#FFFFFF', 'Importato da PBX')
+2025-10-28 12:09:20,723 - sveglia_centralino.room_manager - INFO - load_rooms:477 -   Prima camera PARSED: num=103, ext=available, desc=2025-10-28 11:09:19
+2025-10-28 12:09:20,723 - sveglia_centralino.room_manager - WARNING - load_rooms:501 -   ✗ Interno available NON trovato in cache!
+2025-10-28 12:09:44,562 - sveglia_centralino.room_manager - INFO - do_refresh:377 - Refresh stato interni PBX...
+2025-10-28 12:09:44,562 - sveglia_centralino.pbx_connection - INFO - get_sip_peers:227 - Lettura interni dal centralino...
+2025-10-28 12:09:44,669 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 12:09:44,742 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: asterisk -rx 'sip show peers'
+2025-10-28 12:09:44,744 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:255 - Parsing SIP output (112 righe)...
+2025-10-28 12:09:44,745 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:256 - Prime 5 righe output SIP:
+2025-10-28 12:09:44,745 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 0: Name/username             Host                                    Dyn Forcerport
+2025-10-28 12:09:44,746 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 1: 103                       (Unspecified)                            D  Yes       
+2025-10-28 12:09:44,746 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 2: 111/111                   5.98.202.136                             D  Yes       
+2025-10-28 12:09:44,746 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 3: 114/114                   192.168.10.151                           D  Yes       
+2025-10-28 12:09:44,747 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 4: 115/115                   192.168.10.127                           D  Yes       
+2025-10-28 12:09:44,747 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 103 -> offline (latency: Nonems)
+2025-10-28 12:09:44,747 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 111 -> online (latency: 29ms)
+2025-10-28 12:09:44,748 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 114 -> online (latency: 4ms)
+2025-10-28 12:09:44,748 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:313 - Trovati 90 interni SIP: 24 online, 66 offline, 0 unmonitored
+2025-10-28 12:09:44,748 - sveglia_centralino.room_manager - INFO - do_refresh:402 - Cache popolata con 90 interni: 24 online, 66 offline
+2025-10-28 12:09:44,748 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[103] = {'status': 'offline', 'latency': None, 'type': 'SIP'}
+2025-10-28 12:09:44,748 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[111] = {'status': 'online', 'latency': 29, 'type': 'SIP'}
+2025-10-28 12:09:44,748 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[114] = {'status': 'online', 'latency': 4, 'type': 'SIP'}
+2025-10-28 12:09:45,474 - sveglia_centralino.room_manager - INFO - load_rooms:450 - Caricamento camere... Cache PBX: 90 interni
+2025-10-28 12:09:45,475 - sveglia_centralino.room_manager - INFO - load_rooms:454 -   Campione cache: [('103', {'status': 'offline', 'latency': None, 'type': 'SIP'}), ('111', {'status': 'online', 'latency': 29, 'type': 'SIP'}), ('114', {'status': 'online', 'latency': 4, 'type': 'SIP'})]
+2025-10-28 12:09:45,475 - sveglia_centralino.room_manager - INFO - load_rooms:460 -   Prima camera dal DB (RAW): (501, '103', 'available', '2025-10-28 11:09:19', '103', 'Interno 103 (SIP)', '#FFFFFF', 'Importato da PBX')
+2025-10-28 12:09:45,475 - sveglia_centralino.room_manager - INFO - load_rooms:477 -   Prima camera PARSED: num=103, ext=available, desc=2025-10-28 11:09:19
+2025-10-28 12:09:45,475 - sveglia_centralino.room_manager - WARNING - load_rooms:501 -   ✗ Interno available NON trovato in cache!
+2025-10-28 12:11:52,987 - sveglia_centralino.main - INFO - __init__:56 - Gestore sveglie avviato
+2025-10-28 12:11:52,987 - sveglia_centralino.main - INFO - test_connection:371 - ============================================================
+2025-10-28 12:11:52,987 - sveglia_centralino.main - INFO - test_connection:372 - TEST CONNESSIONE PBX ALL'AVVIO
+2025-10-28 12:11:52,987 - sveglia_centralino.main - INFO - test_connection:373 - ============================================================
+2025-10-28 12:11:52,987 - sveglia_centralino.main - INFO - test_connection:374 - Host: 192.168.10.15:22
+2025-10-28 12:11:52,987 - sveglia_centralino.main - INFO - test_connection:375 - Username: root
+2025-10-28 12:11:53,052 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 12:11:53,169 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: echo 'PBX Connection Test'
+2025-10-28 12:11:53,169 - sveglia_centralino.pbx_connection - INFO - test_connection:186 - Test connessione PBX completato con successo
+2025-10-28 12:11:53,169 - sveglia_centralino.pbx_connection - INFO - disconnect:56 - Connessione SSH chiusa
+2025-10-28 12:11:53,177 - sveglia_centralino.main - INFO - test_connection:381 - ✓ Connessione PBX all'avvio: SUCCESSO
+2025-10-28 12:11:53,177 - sveglia_centralino.main - INFO - test_connection:382 - ============================================================
+2025-10-28 12:11:57,289 - sveglia_centralino.room_manager - INFO - __init__:19 - ============================================================
+2025-10-28 12:11:57,289 - sveglia_centralino.room_manager - INFO - __init__:20 - APERTURA GESTIONE CAMERE HOTEL - INTEGRAZIONE PBX
+2025-10-28 12:11:57,289 - sveglia_centralino.room_manager - INFO - __init__:21 - ============================================================
+2025-10-28 12:11:57,493 - sveglia_centralino.room_manager - INFO - load_rooms:450 - Caricamento camere... Cache PBX: 0 interni
+2025-10-28 12:11:57,493 - sveglia_centralino.room_manager - INFO - load_rooms:460 -   Prima camera dal DB (RAW): (1, '1101', '', '', 'available', '#FFFFFF', '', '2025-10-28 11:11:52')
+2025-10-28 12:11:57,493 - sveglia_centralino.room_manager - INFO - load_rooms:477 -   Prima camera PARSED: num=1101, ext=, desc=
+2025-10-28 12:11:59,503 - sveglia_centralino.room_manager - INFO - do_refresh:377 - Refresh stato interni PBX...
+2025-10-28 12:11:59,503 - sveglia_centralino.pbx_connection - INFO - get_sip_peers:227 - Lettura interni dal centralino...
+2025-10-28 12:11:59,569 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 12:11:59,642 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: asterisk -rx 'sip show peers'
+2025-10-28 12:11:59,642 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:255 - Parsing SIP output (112 righe)...
+2025-10-28 12:11:59,642 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:256 - Prime 5 righe output SIP:
+2025-10-28 12:11:59,642 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 0: Name/username             Host                                    Dyn Forcerport
+2025-10-28 12:11:59,642 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 1: 103                       (Unspecified)                            D  Yes       
+2025-10-28 12:11:59,642 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 2: 111/111                   5.98.202.136                             D  Yes       
+2025-10-28 12:11:59,642 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 3: 114/114                   192.168.10.151                           D  Yes       
+2025-10-28 12:11:59,642 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 4: 115/115                   192.168.10.127                           D  Yes       
+2025-10-28 12:11:59,642 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 103 -> offline (latency: Nonems)
+2025-10-28 12:11:59,642 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 111 -> online (latency: 32ms)
+2025-10-28 12:11:59,642 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 114 -> online (latency: 4ms)
+2025-10-28 12:11:59,642 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:313 - Trovati 90 interni SIP: 24 online, 66 offline, 0 unmonitored
+2025-10-28 12:11:59,643 - sveglia_centralino.room_manager - INFO - do_refresh:402 - Cache popolata con 90 interni: 24 online, 66 offline
+2025-10-28 12:11:59,643 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[103] = {'status': 'offline', 'latency': None, 'type': 'SIP'}
+2025-10-28 12:11:59,643 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[111] = {'status': 'online', 'latency': 32, 'type': 'SIP'}
+2025-10-28 12:11:59,643 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[114] = {'status': 'online', 'latency': 4, 'type': 'SIP'}
+2025-10-28 12:11:59,664 - sveglia_centralino.room_manager - INFO - load_rooms:450 - Caricamento camere... Cache PBX: 90 interni
+2025-10-28 12:11:59,665 - sveglia_centralino.room_manager - INFO - load_rooms:454 -   Campione cache: [('103', {'status': 'offline', 'latency': None, 'type': 'SIP'}), ('111', {'status': 'online', 'latency': 32, 'type': 'SIP'}), ('114', {'status': 'online', 'latency': 4, 'type': 'SIP'})]
+2025-10-28 12:11:59,665 - sveglia_centralino.room_manager - INFO - load_rooms:460 -   Prima camera dal DB (RAW): (1, '1101', '', '', 'available', '#FFFFFF', '', '2025-10-28 11:11:52')
+2025-10-28 12:11:59,665 - sveglia_centralino.room_manager - INFO - load_rooms:477 -   Prima camera PARSED: num=1101, ext=, desc=
+2025-10-28 12:12:02,009 - sveglia_centralino.room_manager - INFO - do_clean_import:232 - Pulizia database camere...
+2025-10-28 12:12:02,024 - sveglia_centralino.room_manager - INFO - do_clean_import:241 - Tutte le camere eliminate
+2025-10-28 12:12:02,024 - sveglia_centralino.pbx_connection - INFO - get_sip_peers:227 - Lettura interni dal centralino...
+2025-10-28 12:12:02,095 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 12:12:02,172 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: asterisk -rx 'sip show peers'
+2025-10-28 12:12:02,172 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:255 - Parsing SIP output (112 righe)...
+2025-10-28 12:12:02,173 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:256 - Prime 5 righe output SIP:
+2025-10-28 12:12:02,173 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 0: Name/username             Host                                    Dyn Forcerport
+2025-10-28 12:12:02,173 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 1: 103                       (Unspecified)                            D  Yes       
+2025-10-28 12:12:02,173 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 2: 111/111                   5.98.202.136                             D  Yes       
+2025-10-28 12:12:02,173 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 3: 114/114                   192.168.10.151                           D  Yes       
+2025-10-28 12:12:02,173 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 4: 115/115                   192.168.10.127                           D  Yes       
+2025-10-28 12:12:02,173 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 103 -> offline (latency: Nonems)
+2025-10-28 12:12:02,173 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 111 -> online (latency: 32ms)
+2025-10-28 12:12:02,173 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 114 -> online (latency: 4ms)
+2025-10-28 12:12:02,174 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:313 - Trovati 90 interni SIP: 24 online, 66 offline, 0 unmonitored
+2025-10-28 12:12:02,174 - sveglia_centralino.room_manager - INFO - do_clean_import:256 - Trovati 90 interni sul PBX
+2025-10-28 12:12:02,227 - sveglia_centralino.room_manager - INFO - do_clean_import:278 - Importati 20/90...
+2025-10-28 12:12:02,295 - sveglia_centralino.room_manager - INFO - do_clean_import:278 - Importati 40/90...
+2025-10-28 12:12:02,355 - sveglia_centralino.room_manager - INFO - do_clean_import:278 - Importati 60/90...
+2025-10-28 12:12:02,413 - sveglia_centralino.room_manager - INFO - do_clean_import:278 - Importati 80/90...
+2025-10-28 12:12:02,443 - sveglia_centralino.room_manager - INFO - do_clean_import:280 - Import completato: 90 interni importati
+2025-10-28 12:12:02,443 - sveglia_centralino.room_manager - INFO - do_refresh:377 - Refresh stato interni PBX...
+2025-10-28 12:12:02,443 - sveglia_centralino.pbx_connection - INFO - get_sip_peers:227 - Lettura interni dal centralino...
+2025-10-28 12:12:02,518 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 12:12:02,594 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: asterisk -rx 'sip show peers'
+2025-10-28 12:12:02,594 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:255 - Parsing SIP output (112 righe)...
+2025-10-28 12:12:02,594 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:256 - Prime 5 righe output SIP:
+2025-10-28 12:12:02,594 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 0: Name/username             Host                                    Dyn Forcerport
+2025-10-28 12:12:02,594 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 1: 103                       (Unspecified)                            D  Yes       
+2025-10-28 12:12:02,594 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 2: 111/111                   5.98.202.136                             D  Yes       
+2025-10-28 12:12:02,594 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 3: 114/114                   192.168.10.151                           D  Yes       
+2025-10-28 12:12:02,594 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 4: 115/115                   192.168.10.127                           D  Yes       
+2025-10-28 12:12:02,594 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 103 -> offline (latency: Nonems)
+2025-10-28 12:12:02,594 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 111 -> online (latency: 32ms)
+2025-10-28 12:12:02,594 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 114 -> online (latency: 4ms)
+2025-10-28 12:12:02,595 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:313 - Trovati 90 interni SIP: 24 online, 66 offline, 0 unmonitored
+2025-10-28 12:12:02,595 - sveglia_centralino.room_manager - INFO - do_refresh:402 - Cache popolata con 90 interni: 24 online, 66 offline
+2025-10-28 12:12:02,595 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[103] = {'status': 'offline', 'latency': None, 'type': 'SIP'}
+2025-10-28 12:12:02,595 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[111] = {'status': 'online', 'latency': 32, 'type': 'SIP'}
+2025-10-28 12:12:02,595 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[114] = {'status': 'online', 'latency': 4, 'type': 'SIP'}
+2025-10-28 12:12:02,913 - sveglia_centralino.room_manager - INFO - load_rooms:450 - Caricamento camere... Cache PBX: 90 interni
+2025-10-28 12:12:02,913 - sveglia_centralino.room_manager - INFO - load_rooms:454 -   Campione cache: [('103', {'status': 'offline', 'latency': None, 'type': 'SIP'}), ('111', {'status': 'online', 'latency': 32, 'type': 'SIP'}), ('114', {'status': 'online', 'latency': 4, 'type': 'SIP'})]
+2025-10-28 12:12:02,915 - sveglia_centralino.room_manager - INFO - load_rooms:460 -   Prima camera dal DB (RAW): (51, '103', '103', 'Interno 103 (SIP)', 'available', '#FFFFFF', 'Importato da PBX', '2025-10-28 11:12:02')
+2025-10-28 12:12:02,915 - sveglia_centralino.room_manager - INFO - load_rooms:477 -   Prima camera PARSED: num=103, ext=103, desc=Interno 103 (SIP)
+2025-10-28 12:12:02,915 - sveglia_centralino.room_manager - INFO - load_rooms:497 -   ✓ Primo interno: 103 -> offline
+2025-10-28 12:12:41,570 - sveglia_centralino.room_manager - INFO - __init__:19 - ============================================================
+2025-10-28 12:12:41,571 - sveglia_centralino.room_manager - INFO - __init__:20 - APERTURA GESTIONE CAMERE HOTEL - INTEGRAZIONE PBX
+2025-10-28 12:12:41,571 - sveglia_centralino.room_manager - INFO - __init__:21 - ============================================================
+2025-10-28 12:12:41,577 - sveglia_centralino.room_manager - INFO - load_rooms:450 - Caricamento camere... Cache PBX: 0 interni
+2025-10-28 12:12:41,578 - sveglia_centralino.room_manager - INFO - load_rooms:460 -   Prima camera dal DB (RAW): (51, '103', '103', 'Interno 103 (SIP)', 'available', '#FFFFFF', 'Importato da PBX', '2025-10-28 11:12:02')
+2025-10-28 12:12:41,578 - sveglia_centralino.room_manager - INFO - load_rooms:477 -   Prima camera PARSED: num=103, ext=103, desc=Interno 103 (SIP)
+2025-10-28 12:12:41,578 - sveglia_centralino.room_manager - WARNING - load_rooms:501 -   ✗ Interno 103 NON trovato in cache!
+2025-10-28 12:12:43,591 - sveglia_centralino.room_manager - INFO - do_refresh:377 - Refresh stato interni PBX...
+2025-10-28 12:12:43,591 - sveglia_centralino.pbx_connection - INFO - get_sip_peers:227 - Lettura interni dal centralino...
+2025-10-28 12:12:43,702 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 12:12:43,777 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: asterisk -rx 'sip show peers'
+2025-10-28 12:12:43,777 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:255 - Parsing SIP output (112 righe)...
+2025-10-28 12:12:43,777 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:256 - Prime 5 righe output SIP:
+2025-10-28 12:12:43,777 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 0: Name/username             Host                                    Dyn Forcerport
+2025-10-28 12:12:43,777 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 1: 103                       (Unspecified)                            D  Yes       
+2025-10-28 12:12:43,777 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 2: 111/111                   5.98.202.136                             D  Yes       
+2025-10-28 12:12:43,777 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 3: 114/114                   192.168.10.151                           D  Yes       
+2025-10-28 12:12:43,777 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 4: 115/115                   192.168.10.127                           D  Yes       
+2025-10-28 12:12:43,777 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 103 -> offline (latency: Nonems)
+2025-10-28 12:12:43,777 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 111 -> online (latency: 178ms)
+2025-10-28 12:12:43,777 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 114 -> online (latency: 4ms)
+2025-10-28 12:12:43,777 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:313 - Trovati 90 interni SIP: 24 online, 66 offline, 0 unmonitored
+2025-10-28 12:12:43,777 - sveglia_centralino.room_manager - INFO - do_refresh:402 - Cache popolata con 90 interni: 24 online, 66 offline
+2025-10-28 12:12:43,777 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[103] = {'status': 'offline', 'latency': None, 'type': 'SIP'}
+2025-10-28 12:12:43,777 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[111] = {'status': 'online', 'latency': 178, 'type': 'SIP'}
+2025-10-28 12:12:43,777 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[114] = {'status': 'online', 'latency': 4, 'type': 'SIP'}
+2025-10-28 12:12:44,184 - sveglia_centralino.room_manager - INFO - load_rooms:450 - Caricamento camere... Cache PBX: 90 interni
+2025-10-28 12:12:44,184 - sveglia_centralino.room_manager - INFO - load_rooms:454 -   Campione cache: [('103', {'status': 'offline', 'latency': None, 'type': 'SIP'}), ('111', {'status': 'online', 'latency': 178, 'type': 'SIP'}), ('114', {'status': 'online', 'latency': 4, 'type': 'SIP'})]
+2025-10-28 12:12:44,185 - sveglia_centralino.room_manager - INFO - load_rooms:460 -   Prima camera dal DB (RAW): (51, '103', '103', 'Interno 103 (SIP)', 'available', '#FFFFFF', 'Importato da PBX', '2025-10-28 11:12:02')
+2025-10-28 12:12:44,185 - sveglia_centralino.room_manager - INFO - load_rooms:477 -   Prima camera PARSED: num=103, ext=103, desc=Interno 103 (SIP)
+2025-10-28 12:12:44,185 - sveglia_centralino.room_manager - INFO - load_rooms:497 -   ✓ Primo interno: 103 -> offline
+2025-10-28 12:12:53,833 - sveglia_centralino.room_manager - INFO - load_rooms:450 - Caricamento camere... Cache PBX: 90 interni
+2025-10-28 12:12:53,833 - sveglia_centralino.room_manager - INFO - load_rooms:454 -   Campione cache: [('103', {'status': 'offline', 'latency': None, 'type': 'SIP'}), ('111', {'status': 'online', 'latency': 178, 'type': 'SIP'}), ('114', {'status': 'online', 'latency': 4, 'type': 'SIP'})]
+2025-10-28 12:12:53,834 - sveglia_centralino.room_manager - INFO - load_rooms:460 -   Prima camera dal DB (RAW): (51, '103', '103', 'Interno 103 (SIP)', 'available', '#FFFFFF', 'Importato da PBX', '2025-10-28 11:12:02')
+2025-10-28 12:12:53,834 - sveglia_centralino.room_manager - INFO - load_rooms:477 -   Prima camera PARSED: num=103, ext=103, desc=Interno 103 (SIP)
+2025-10-28 12:12:53,834 - sveglia_centralino.room_manager - INFO - load_rooms:497 -   ✓ Primo interno: 103 -> offline
+2025-10-28 12:12:55,833 - sveglia_centralino.room_manager - INFO - load_rooms:450 - Caricamento camere... Cache PBX: 90 interni
+2025-10-28 12:12:55,833 - sveglia_centralino.room_manager - INFO - load_rooms:454 -   Campione cache: [('103', {'status': 'offline', 'latency': None, 'type': 'SIP'}), ('111', {'status': 'online', 'latency': 178, 'type': 'SIP'}), ('114', {'status': 'online', 'latency': 4, 'type': 'SIP'})]
+2025-10-28 12:12:55,835 - sveglia_centralino.room_manager - INFO - load_rooms:460 -   Prima camera dal DB (RAW): (51, '103', '103', 'Interno 103 (SIP)', 'available', '#FFFFFF', 'Importato da PBX', '2025-10-28 11:12:02')
+2025-10-28 12:12:55,835 - sveglia_centralino.room_manager - INFO - load_rooms:477 -   Prima camera PARSED: num=103, ext=103, desc=Interno 103 (SIP)
+2025-10-28 12:12:55,835 - sveglia_centralino.room_manager - INFO - load_rooms:497 -   ✓ Primo interno: 103 -> offline
+2025-10-28 12:12:57,596 - sveglia_centralino.room_manager - INFO - load_rooms:450 - Caricamento camere... Cache PBX: 90 interni
+2025-10-28 12:12:57,596 - sveglia_centralino.room_manager - INFO - load_rooms:454 -   Campione cache: [('103', {'status': 'offline', 'latency': None, 'type': 'SIP'}), ('111', {'status': 'online', 'latency': 178, 'type': 'SIP'}), ('114', {'status': 'online', 'latency': 4, 'type': 'SIP'})]
+2025-10-28 12:12:57,597 - sveglia_centralino.room_manager - INFO - load_rooms:460 -   Prima camera dal DB (RAW): (51, '103', '103', 'Interno 103 (SIP)', 'available', '#FFFFFF', 'Importato da PBX', '2025-10-28 11:12:02')
+2025-10-28 12:12:57,597 - sveglia_centralino.room_manager - INFO - load_rooms:477 -   Prima camera PARSED: num=103, ext=103, desc=Interno 103 (SIP)
+2025-10-28 12:12:57,597 - sveglia_centralino.room_manager - INFO - load_rooms:497 -   ✓ Primo interno: 103 -> offline
+2025-10-28 12:12:59,212 - sveglia_centralino.room_manager - INFO - load_rooms:450 - Caricamento camere... Cache PBX: 90 interni
+2025-10-28 12:12:59,212 - sveglia_centralino.room_manager - INFO - load_rooms:454 -   Campione cache: [('103', {'status': 'offline', 'latency': None, 'type': 'SIP'}), ('111', {'status': 'online', 'latency': 178, 'type': 'SIP'}), ('114', {'status': 'online', 'latency': 4, 'type': 'SIP'})]
+2025-10-28 12:12:59,213 - sveglia_centralino.room_manager - INFO - load_rooms:460 -   Prima camera dal DB (RAW): (51, '103', '103', 'Interno 103 (SIP)', 'available', '#FFFFFF', 'Importato da PBX', '2025-10-28 11:12:02')
+2025-10-28 12:12:59,213 - sveglia_centralino.room_manager - INFO - load_rooms:477 -   Prima camera PARSED: num=103, ext=103, desc=Interno 103 (SIP)
+2025-10-28 12:12:59,213 - sveglia_centralino.room_manager - INFO - load_rooms:497 -   ✓ Primo interno: 103 -> offline
+2025-10-28 12:13:11,587 - sveglia_centralino.room_manager - INFO - do_refresh:377 - Refresh stato interni PBX...
+2025-10-28 12:13:11,588 - sveglia_centralino.pbx_connection - INFO - get_sip_peers:227 - Lettura interni dal centralino...
+2025-10-28 12:13:11,645 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 12:13:11,712 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: asterisk -rx 'sip show peers'
+2025-10-28 12:13:11,712 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:255 - Parsing SIP output (112 righe)...
+2025-10-28 12:13:11,713 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:256 - Prime 5 righe output SIP:
+2025-10-28 12:13:11,713 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 0: Name/username             Host                                    Dyn Forcerport
+2025-10-28 12:13:11,713 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 1: 103                       (Unspecified)                            D  Yes       
+2025-10-28 12:13:11,713 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 2: 111/111                   5.98.202.136                             D  Yes       
+2025-10-28 12:13:11,713 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 3: 114/114                   192.168.10.151                           D  Yes       
+2025-10-28 12:13:11,713 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 4: 115/115                   192.168.10.127                           D  Yes       
+2025-10-28 12:13:11,713 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 103 -> offline (latency: Nonems)
+2025-10-28 12:13:11,713 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 111 -> online (latency: 178ms)
+2025-10-28 12:13:11,713 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 114 -> online (latency: 4ms)
+2025-10-28 12:13:11,714 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:313 - Trovati 90 interni SIP: 24 online, 66 offline, 0 unmonitored
+2025-10-28 12:13:11,714 - sveglia_centralino.room_manager - INFO - do_refresh:402 - Cache popolata con 90 interni: 24 online, 66 offline
+2025-10-28 12:13:11,714 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[103] = {'status': 'offline', 'latency': None, 'type': 'SIP'}
+2025-10-28 12:13:11,714 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[111] = {'status': 'online', 'latency': 178, 'type': 'SIP'}
+2025-10-28 12:13:11,714 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[114] = {'status': 'online', 'latency': 4, 'type': 'SIP'}
+2025-10-28 12:13:12,092 - sveglia_centralino.room_manager - INFO - load_rooms:450 - Caricamento camere... Cache PBX: 90 interni
+2025-10-28 12:13:12,092 - sveglia_centralino.room_manager - INFO - load_rooms:454 -   Campione cache: [('103', {'status': 'offline', 'latency': None, 'type': 'SIP'}), ('111', {'status': 'online', 'latency': 178, 'type': 'SIP'}), ('114', {'status': 'online', 'latency': 4, 'type': 'SIP'})]
+2025-10-28 12:13:12,092 - sveglia_centralino.room_manager - INFO - load_rooms:460 -   Prima camera dal DB (RAW): (51, '103', '103', 'Interno 103 (SIP)', 'available', '#FFFFFF', 'Importato da PBX', '2025-10-28 11:12:02')
+2025-10-28 12:13:12,093 - sveglia_centralino.room_manager - INFO - load_rooms:477 -   Prima camera PARSED: num=103, ext=103, desc=Interno 103 (SIP)
+2025-10-28 12:13:12,093 - sveglia_centralino.room_manager - INFO - load_rooms:497 -   ✓ Primo interno: 103 -> offline
+2025-10-28 12:13:41,596 - sveglia_centralino.room_manager - INFO - do_refresh:377 - Refresh stato interni PBX...
+2025-10-28 12:13:41,597 - sveglia_centralino.pbx_connection - INFO - get_sip_peers:227 - Lettura interni dal centralino...
+2025-10-28 12:13:41,713 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 12:13:41,817 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: asterisk -rx 'sip show peers'
+2025-10-28 12:13:41,818 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:255 - Parsing SIP output (112 righe)...
+2025-10-28 12:13:41,819 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:256 - Prime 5 righe output SIP:
+2025-10-28 12:13:41,819 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 0: Name/username             Host                                    Dyn Forcerport
+2025-10-28 12:13:41,820 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 1: 103                       (Unspecified)                            D  Yes       
+2025-10-28 12:13:41,820 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 2: 111/111                   5.98.202.136                             D  Yes       
+2025-10-28 12:13:41,821 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 3: 114/114                   192.168.10.151                           D  Yes       
+2025-10-28 12:13:41,821 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 4: 115/115                   192.168.10.127                           D  Yes       
+2025-10-28 12:13:41,821 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 103 -> offline (latency: Nonems)
+2025-10-28 12:13:41,822 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 111 -> online (latency: 30ms)
+2025-10-28 12:13:41,822 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 114 -> online (latency: 4ms)
+2025-10-28 12:13:41,823 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:313 - Trovati 90 interni SIP: 24 online, 66 offline, 0 unmonitored
+2025-10-28 12:13:41,823 - sveglia_centralino.room_manager - INFO - do_refresh:402 - Cache popolata con 90 interni: 24 online, 66 offline
+2025-10-28 12:13:41,824 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[103] = {'status': 'offline', 'latency': None, 'type': 'SIP'}
+2025-10-28 12:13:41,824 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[111] = {'status': 'online', 'latency': 30, 'type': 'SIP'}
+2025-10-28 12:13:41,824 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[114] = {'status': 'online', 'latency': 4, 'type': 'SIP'}
+2025-10-28 12:13:44,494 - sveglia_centralino.room_manager - INFO - load_rooms:450 - Caricamento camere... Cache PBX: 90 interni
+2025-10-28 12:13:44,495 - sveglia_centralino.room_manager - INFO - load_rooms:454 -   Campione cache: [('103', {'status': 'offline', 'latency': None, 'type': 'SIP'}), ('111', {'status': 'online', 'latency': 30, 'type': 'SIP'}), ('114', {'status': 'online', 'latency': 4, 'type': 'SIP'})]
+2025-10-28 12:13:44,498 - sveglia_centralino.room_manager - INFO - load_rooms:460 -   Prima camera dal DB (RAW): (51, '103', '103', 'Interno 103 (SIP)', 'available', '#FFFFFF', 'Importato da PBX', '2025-10-28 11:12:02')
+2025-10-28 12:13:44,498 - sveglia_centralino.room_manager - INFO - load_rooms:477 -   Prima camera PARSED: num=103, ext=103, desc=Interno 103 (SIP)
+2025-10-28 12:13:44,498 - sveglia_centralino.room_manager - INFO - load_rooms:497 -   ✓ Primo interno: 103 -> offline
+2025-10-28 12:14:11,613 - sveglia_centralino.room_manager - INFO - do_refresh:377 - Refresh stato interni PBX...
+2025-10-28 12:14:11,614 - sveglia_centralino.pbx_connection - INFO - get_sip_peers:227 - Lettura interni dal centralino...
+2025-10-28 12:14:11,741 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 12:14:11,819 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: asterisk -rx 'sip show peers'
+2025-10-28 12:14:11,819 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:255 - Parsing SIP output (112 righe)...
+2025-10-28 12:14:11,819 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:256 - Prime 5 righe output SIP:
+2025-10-28 12:14:11,820 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 0: Name/username             Host                                    Dyn Forcerport
+2025-10-28 12:14:11,820 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 1: 103                       (Unspecified)                            D  Yes       
+2025-10-28 12:14:11,820 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 2: 111/111                   5.98.202.136                             D  Yes       
+2025-10-28 12:14:11,820 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 3: 114/114                   192.168.10.151                           D  Yes       
+2025-10-28 12:14:11,820 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 4: 115/115                   192.168.10.127                           D  Yes       
+2025-10-28 12:14:11,820 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 103 -> offline (latency: Nonems)
+2025-10-28 12:14:11,820 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 111 -> online (latency: 30ms)
+2025-10-28 12:14:11,820 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 114 -> online (latency: 4ms)
+2025-10-28 12:14:11,821 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:313 - Trovati 90 interni SIP: 24 online, 66 offline, 0 unmonitored
+2025-10-28 12:14:11,821 - sveglia_centralino.room_manager - INFO - do_refresh:402 - Cache popolata con 90 interni: 24 online, 66 offline
+2025-10-28 12:14:11,821 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[103] = {'status': 'offline', 'latency': None, 'type': 'SIP'}
+2025-10-28 12:14:11,821 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[111] = {'status': 'online', 'latency': 30, 'type': 'SIP'}
+2025-10-28 12:14:11,821 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[114] = {'status': 'online', 'latency': 4, 'type': 'SIP'}
+2025-10-28 12:14:13,991 - sveglia_centralino.room_manager - INFO - load_rooms:450 - Caricamento camere... Cache PBX: 90 interni
+2025-10-28 12:14:13,991 - sveglia_centralino.room_manager - INFO - load_rooms:454 -   Campione cache: [('103', {'status': 'offline', 'latency': None, 'type': 'SIP'}), ('111', {'status': 'online', 'latency': 30, 'type': 'SIP'}), ('114', {'status': 'online', 'latency': 4, 'type': 'SIP'})]
+2025-10-28 12:14:13,992 - sveglia_centralino.room_manager - INFO - load_rooms:460 -   Prima camera dal DB (RAW): (51, '103', '103', 'Interno 103 (SIP)', 'available', '#FFFFFF', 'Importato da PBX', '2025-10-28 11:12:02')
+2025-10-28 12:14:13,992 - sveglia_centralino.room_manager - INFO - load_rooms:477 -   Prima camera PARSED: num=103, ext=103, desc=Interno 103 (SIP)
+2025-10-28 12:14:13,992 - sveglia_centralino.room_manager - INFO - load_rooms:497 -   ✓ Primo interno: 103 -> offline
+2025-10-28 12:14:41,628 - sveglia_centralino.room_manager - INFO - do_refresh:377 - Refresh stato interni PBX...
+2025-10-28 12:14:41,629 - sveglia_centralino.pbx_connection - INFO - get_sip_peers:227 - Lettura interni dal centralino...
+2025-10-28 12:14:41,754 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 12:14:41,835 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: asterisk -rx 'sip show peers'
+2025-10-28 12:14:41,836 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:255 - Parsing SIP output (112 righe)...
+2025-10-28 12:14:41,836 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:256 - Prime 5 righe output SIP:
+2025-10-28 12:14:41,836 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 0: Name/username             Host                                    Dyn Forcerport
+2025-10-28 12:14:41,836 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 1: 103                       (Unspecified)                            D  Yes       
+2025-10-28 12:14:41,836 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 2: 111/111                   5.98.202.136                             D  Yes       
+2025-10-28 12:14:41,836 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 3: 114/114                   192.168.10.151                           D  Yes       
+2025-10-28 12:14:41,836 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 4: 115/115                   192.168.10.127                           D  Yes       
+2025-10-28 12:14:41,836 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 103 -> offline (latency: Nonems)
+2025-10-28 12:14:41,836 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 111 -> online (latency: 31ms)
+2025-10-28 12:14:41,836 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 114 -> online (latency: 9ms)
+2025-10-28 12:14:41,836 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:313 - Trovati 90 interni SIP: 24 online, 66 offline, 0 unmonitored
+2025-10-28 12:14:41,836 - sveglia_centralino.room_manager - INFO - do_refresh:402 - Cache popolata con 90 interni: 24 online, 66 offline
+2025-10-28 12:14:41,836 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[103] = {'status': 'offline', 'latency': None, 'type': 'SIP'}
+2025-10-28 12:14:41,836 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[111] = {'status': 'online', 'latency': 31, 'type': 'SIP'}
+2025-10-28 12:14:41,836 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[114] = {'status': 'online', 'latency': 9, 'type': 'SIP'}
+2025-10-28 12:14:43,433 - sveglia_centralino.room_manager - INFO - load_rooms:450 - Caricamento camere... Cache PBX: 90 interni
+2025-10-28 12:14:43,433 - sveglia_centralino.room_manager - INFO - load_rooms:454 -   Campione cache: [('103', {'status': 'offline', 'latency': None, 'type': 'SIP'}), ('111', {'status': 'online', 'latency': 31, 'type': 'SIP'}), ('114', {'status': 'online', 'latency': 9, 'type': 'SIP'})]
+2025-10-28 12:14:43,435 - sveglia_centralino.room_manager - INFO - load_rooms:460 -   Prima camera dal DB (RAW): (51, '103', '103', 'Interno 103 (SIP)', 'available', '#FFFFFF', 'Importato da PBX', '2025-10-28 11:12:02')
+2025-10-28 12:14:43,435 - sveglia_centralino.room_manager - INFO - load_rooms:477 -   Prima camera PARSED: num=103, ext=103, desc=Interno 103 (SIP)
+2025-10-28 12:14:43,436 - sveglia_centralino.room_manager - INFO - load_rooms:497 -   ✓ Primo interno: 103 -> offline
+2025-10-28 12:15:11,634 - sveglia_centralino.room_manager - INFO - do_refresh:377 - Refresh stato interni PBX...
+2025-10-28 12:15:11,635 - sveglia_centralino.pbx_connection - INFO - get_sip_peers:227 - Lettura interni dal centralino...
+2025-10-28 12:15:11,703 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 12:15:11,787 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: asterisk -rx 'sip show peers'
+2025-10-28 12:15:11,787 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:255 - Parsing SIP output (112 righe)...
+2025-10-28 12:15:11,788 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:256 - Prime 5 righe output SIP:
+2025-10-28 12:15:11,788 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 0: Name/username             Host                                    Dyn Forcerport
+2025-10-28 12:15:11,788 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 1: 103                       (Unspecified)                            D  Yes       
+2025-10-28 12:15:11,788 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 2: 111/111                   5.98.202.136                             D  Yes       
+2025-10-28 12:15:11,788 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 3: 114/114                   192.168.10.151                           D  Yes       
+2025-10-28 12:15:11,789 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 4: 115/115                   192.168.10.127                           D  Yes       
+2025-10-28 12:15:11,789 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 103 -> offline (latency: Nonems)
+2025-10-28 12:15:11,789 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 111 -> online (latency: 31ms)
+2025-10-28 12:15:11,789 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 114 -> online (latency: 9ms)
+2025-10-28 12:15:11,789 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:313 - Trovati 90 interni SIP: 24 online, 66 offline, 0 unmonitored
+2025-10-28 12:15:11,789 - sveglia_centralino.room_manager - INFO - do_refresh:402 - Cache popolata con 90 interni: 24 online, 66 offline
+2025-10-28 12:15:11,789 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[103] = {'status': 'offline', 'latency': None, 'type': 'SIP'}
+2025-10-28 12:15:11,789 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[111] = {'status': 'online', 'latency': 31, 'type': 'SIP'}
+2025-10-28 12:15:11,790 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[114] = {'status': 'online', 'latency': 9, 'type': 'SIP'}
+2025-10-28 12:15:13,552 - sveglia_centralino.room_manager - INFO - load_rooms:450 - Caricamento camere... Cache PBX: 90 interni
+2025-10-28 12:15:13,552 - sveglia_centralino.room_manager - INFO - load_rooms:454 -   Campione cache: [('103', {'status': 'offline', 'latency': None, 'type': 'SIP'}), ('111', {'status': 'online', 'latency': 31, 'type': 'SIP'}), ('114', {'status': 'online', 'latency': 9, 'type': 'SIP'})]
+2025-10-28 12:15:13,553 - sveglia_centralino.room_manager - INFO - load_rooms:460 -   Prima camera dal DB (RAW): (51, '103', '103', 'Interno 103 (SIP)', 'available', '#FFFFFF', 'Importato da PBX', '2025-10-28 11:12:02')
+2025-10-28 12:15:13,553 - sveglia_centralino.room_manager - INFO - load_rooms:477 -   Prima camera PARSED: num=103, ext=103, desc=Interno 103 (SIP)
+2025-10-28 12:15:13,553 - sveglia_centralino.room_manager - INFO - load_rooms:497 -   ✓ Primo interno: 103 -> offline
+2025-10-28 12:15:41,646 - sveglia_centralino.room_manager - INFO - do_refresh:377 - Refresh stato interni PBX...
+2025-10-28 12:15:41,647 - sveglia_centralino.pbx_connection - INFO - get_sip_peers:227 - Lettura interni dal centralino...
+2025-10-28 12:15:41,754 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 12:15:41,824 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: asterisk -rx 'sip show peers'
+2025-10-28 12:15:41,824 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:255 - Parsing SIP output (112 righe)...
+2025-10-28 12:15:41,824 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:256 - Prime 5 righe output SIP:
+2025-10-28 12:15:41,824 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 0: Name/username             Host                                    Dyn Forcerport
+2025-10-28 12:15:41,824 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 1: 103                       (Unspecified)                            D  Yes       
+2025-10-28 12:15:41,825 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 2: 111/111                   5.98.202.136                             D  Yes       
+2025-10-28 12:15:41,825 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 3: 114/114                   192.168.10.151                           D  Yes       
+2025-10-28 12:15:41,825 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 4: 115/115                   192.168.10.127                           D  Yes       
+2025-10-28 12:15:41,825 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 103 -> offline (latency: Nonems)
+2025-10-28 12:15:41,825 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 111 -> online (latency: 55ms)
+2025-10-28 12:15:41,825 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 114 -> online (latency: 6ms)
+2025-10-28 12:15:41,825 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:313 - Trovati 90 interni SIP: 24 online, 66 offline, 0 unmonitored
+2025-10-28 12:15:41,825 - sveglia_centralino.room_manager - INFO - do_refresh:402 - Cache popolata con 90 interni: 24 online, 66 offline
+2025-10-28 12:15:41,825 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[103] = {'status': 'offline', 'latency': None, 'type': 'SIP'}
+2025-10-28 12:15:41,825 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[111] = {'status': 'online', 'latency': 55, 'type': 'SIP'}
+2025-10-28 12:15:41,825 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[114] = {'status': 'online', 'latency': 6, 'type': 'SIP'}
+2025-10-28 12:15:43,772 - sveglia_centralino.room_manager - INFO - load_rooms:450 - Caricamento camere... Cache PBX: 90 interni
+2025-10-28 12:15:43,772 - sveglia_centralino.room_manager - INFO - load_rooms:454 -   Campione cache: [('103', {'status': 'offline', 'latency': None, 'type': 'SIP'}), ('111', {'status': 'online', 'latency': 55, 'type': 'SIP'}), ('114', {'status': 'online', 'latency': 6, 'type': 'SIP'})]
+2025-10-28 12:15:43,772 - sveglia_centralino.room_manager - INFO - load_rooms:460 -   Prima camera dal DB (RAW): (51, '103', '103', 'Interno 103 (SIP)', 'available', '#FFFFFF', 'Importato da PBX', '2025-10-28 11:12:02')
+2025-10-28 12:15:43,772 - sveglia_centralino.room_manager - INFO - load_rooms:477 -   Prima camera PARSED: num=103, ext=103, desc=Interno 103 (SIP)
+2025-10-28 12:15:43,773 - sveglia_centralino.room_manager - INFO - load_rooms:497 -   ✓ Primo interno: 103 -> offline
+2025-10-28 12:16:11,651 - sveglia_centralino.room_manager - INFO - do_refresh:377 - Refresh stato interni PBX...
+2025-10-28 12:16:11,652 - sveglia_centralino.pbx_connection - INFO - get_sip_peers:227 - Lettura interni dal centralino...
+2025-10-28 12:16:11,729 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 12:16:11,809 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: asterisk -rx 'sip show peers'
+2025-10-28 12:16:11,810 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:255 - Parsing SIP output (112 righe)...
+2025-10-28 12:16:11,810 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:256 - Prime 5 righe output SIP:
+2025-10-28 12:16:11,810 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 0: Name/username             Host                                    Dyn Forcerport
+2025-10-28 12:16:11,810 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 1: 103                       (Unspecified)                            D  Yes       
+2025-10-28 12:16:11,810 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 2: 111/111                   5.98.202.136                             D  Yes       
+2025-10-28 12:16:11,811 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 3: 114/114                   192.168.10.151                           D  Yes       
+2025-10-28 12:16:11,811 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 4: 115/115                   192.168.10.127                           D  Yes       
+2025-10-28 12:16:11,811 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 103 -> offline (latency: Nonems)
+2025-10-28 12:16:11,811 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 111 -> online (latency: 55ms)
+2025-10-28 12:16:11,811 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 114 -> online (latency: 6ms)
+2025-10-28 12:16:11,811 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:313 - Trovati 90 interni SIP: 24 online, 66 offline, 0 unmonitored
+2025-10-28 12:16:11,811 - sveglia_centralino.room_manager - INFO - do_refresh:402 - Cache popolata con 90 interni: 24 online, 66 offline
+2025-10-28 12:16:11,811 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[103] = {'status': 'offline', 'latency': None, 'type': 'SIP'}
+2025-10-28 12:16:11,811 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[111] = {'status': 'online', 'latency': 55, 'type': 'SIP'}
+2025-10-28 12:16:11,812 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[114] = {'status': 'online', 'latency': 6, 'type': 'SIP'}
+2025-10-28 12:16:13,524 - sveglia_centralino.room_manager - INFO - load_rooms:450 - Caricamento camere... Cache PBX: 90 interni
+2025-10-28 12:16:13,524 - sveglia_centralino.room_manager - INFO - load_rooms:454 -   Campione cache: [('103', {'status': 'offline', 'latency': None, 'type': 'SIP'}), ('111', {'status': 'online', 'latency': 55, 'type': 'SIP'}), ('114', {'status': 'online', 'latency': 6, 'type': 'SIP'})]
+2025-10-28 12:16:13,525 - sveglia_centralino.room_manager - INFO - load_rooms:460 -   Prima camera dal DB (RAW): (51, '103', '103', 'Interno 103 (SIP)', 'available', '#FFFFFF', 'Importato da PBX', '2025-10-28 11:12:02')
+2025-10-28 12:16:13,525 - sveglia_centralino.room_manager - INFO - load_rooms:477 -   Prima camera PARSED: num=103, ext=103, desc=Interno 103 (SIP)
+2025-10-28 12:16:13,525 - sveglia_centralino.room_manager - INFO - load_rooms:497 -   ✓ Primo interno: 103 -> offline
+2025-10-28 12:16:41,667 - sveglia_centralino.room_manager - INFO - do_refresh:377 - Refresh stato interni PBX...
+2025-10-28 12:16:41,667 - sveglia_centralino.pbx_connection - INFO - get_sip_peers:227 - Lettura interni dal centralino...
+2025-10-28 12:16:41,801 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 12:16:41,874 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: asterisk -rx 'sip show peers'
+2025-10-28 12:16:41,875 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:255 - Parsing SIP output (112 righe)...
+2025-10-28 12:16:41,876 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:256 - Prime 5 righe output SIP:
+2025-10-28 12:16:41,876 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 0: Name/username             Host                                    Dyn Forcerport
+2025-10-28 12:16:41,876 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 1: 103                       (Unspecified)                            D  Yes       
+2025-10-28 12:16:41,876 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 2: 111/111                   5.98.202.136                             D  Yes       
+2025-10-28 12:16:41,877 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 3: 114/114                   192.168.10.151                           D  Yes       
+2025-10-28 12:16:41,877 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 4: 115/115                   192.168.10.127                           D  Yes       
+2025-10-28 12:16:41,877 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 103 -> offline (latency: Nonems)
+2025-10-28 12:16:41,877 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 111 -> online (latency: 29ms)
+2025-10-28 12:16:41,878 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 114 -> online (latency: 4ms)
+2025-10-28 12:16:41,878 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:313 - Trovati 90 interni SIP: 24 online, 66 offline, 0 unmonitored
+2025-10-28 12:16:41,879 - sveglia_centralino.room_manager - INFO - do_refresh:402 - Cache popolata con 90 interni: 24 online, 66 offline
+2025-10-28 12:16:41,879 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[103] = {'status': 'offline', 'latency': None, 'type': 'SIP'}
+2025-10-28 12:16:41,879 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[111] = {'status': 'online', 'latency': 29, 'type': 'SIP'}
+2025-10-28 12:16:41,880 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[114] = {'status': 'online', 'latency': 4, 'type': 'SIP'}
+2025-10-28 12:16:43,625 - sveglia_centralino.room_manager - INFO - load_rooms:450 - Caricamento camere... Cache PBX: 90 interni
+2025-10-28 12:16:43,625 - sveglia_centralino.room_manager - INFO - load_rooms:454 -   Campione cache: [('103', {'status': 'offline', 'latency': None, 'type': 'SIP'}), ('111', {'status': 'online', 'latency': 29, 'type': 'SIP'}), ('114', {'status': 'online', 'latency': 4, 'type': 'SIP'})]
+2025-10-28 12:16:43,626 - sveglia_centralino.room_manager - INFO - load_rooms:460 -   Prima camera dal DB (RAW): (51, '103', '103', 'Interno 103 (SIP)', 'available', '#FFFFFF', 'Importato da PBX', '2025-10-28 11:12:02')
+2025-10-28 12:16:43,626 - sveglia_centralino.room_manager - INFO - load_rooms:477 -   Prima camera PARSED: num=103, ext=103, desc=Interno 103 (SIP)
+2025-10-28 12:16:43,626 - sveglia_centralino.room_manager - INFO - load_rooms:497 -   ✓ Primo interno: 103 -> offline
+2025-10-28 12:17:11,684 - sveglia_centralino.room_manager - INFO - do_refresh:377 - Refresh stato interni PBX...
+2025-10-28 12:17:11,684 - sveglia_centralino.pbx_connection - INFO - get_sip_peers:227 - Lettura interni dal centralino...
+2025-10-28 12:17:11,746 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 12:17:11,813 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: asterisk -rx 'sip show peers'
+2025-10-28 12:17:11,814 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:255 - Parsing SIP output (112 righe)...
+2025-10-28 12:17:11,815 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:256 - Prime 5 righe output SIP:
+2025-10-28 12:17:11,815 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 0: Name/username             Host                                    Dyn Forcerport
+2025-10-28 12:17:11,815 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 1: 103                       (Unspecified)                            D  Yes       
+2025-10-28 12:17:11,815 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 2: 111/111                   5.98.202.136                             D  Yes       
+2025-10-28 12:17:11,816 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 3: 114/114                   192.168.10.151                           D  Yes       
+2025-10-28 12:17:11,816 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 4: 115/115                   192.168.10.127                           D  Yes       
+2025-10-28 12:17:11,816 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 103 -> offline (latency: Nonems)
+2025-10-28 12:17:11,816 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 111 -> online (latency: 29ms)
+2025-10-28 12:17:11,816 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 114 -> online (latency: 4ms)
+2025-10-28 12:17:11,816 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:313 - Trovati 90 interni SIP: 24 online, 66 offline, 0 unmonitored
+2025-10-28 12:17:11,816 - sveglia_centralino.room_manager - INFO - do_refresh:402 - Cache popolata con 90 interni: 24 online, 66 offline
+2025-10-28 12:17:11,816 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[103] = {'status': 'offline', 'latency': None, 'type': 'SIP'}
+2025-10-28 12:17:11,816 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[111] = {'status': 'online', 'latency': 29, 'type': 'SIP'}
+2025-10-28 12:17:11,816 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[114] = {'status': 'online', 'latency': 4, 'type': 'SIP'}
+2025-10-28 12:17:13,593 - sveglia_centralino.room_manager - INFO - load_rooms:450 - Caricamento camere... Cache PBX: 90 interni
+2025-10-28 12:17:13,593 - sveglia_centralino.room_manager - INFO - load_rooms:454 -   Campione cache: [('103', {'status': 'offline', 'latency': None, 'type': 'SIP'}), ('111', {'status': 'online', 'latency': 29, 'type': 'SIP'}), ('114', {'status': 'online', 'latency': 4, 'type': 'SIP'})]
+2025-10-28 12:17:13,594 - sveglia_centralino.room_manager - INFO - load_rooms:460 -   Prima camera dal DB (RAW): (51, '103', '103', 'Interno 103 (SIP)', 'available', '#FFFFFF', 'Importato da PBX', '2025-10-28 11:12:02')
+2025-10-28 12:17:13,594 - sveglia_centralino.room_manager - INFO - load_rooms:477 -   Prima camera PARSED: num=103, ext=103, desc=Interno 103 (SIP)
+2025-10-28 12:17:13,594 - sveglia_centralino.room_manager - INFO - load_rooms:497 -   ✓ Primo interno: 103 -> offline
+2025-10-28 12:17:41,715 - sveglia_centralino.room_manager - INFO - do_refresh:377 - Refresh stato interni PBX...
+2025-10-28 12:17:41,716 - sveglia_centralino.pbx_connection - INFO - get_sip_peers:227 - Lettura interni dal centralino...
+2025-10-28 12:17:41,843 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 12:17:41,940 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: asterisk -rx 'sip show peers'
+2025-10-28 12:17:41,942 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:255 - Parsing SIP output (112 righe)...
+2025-10-28 12:17:41,942 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:256 - Prime 5 righe output SIP:
+2025-10-28 12:17:41,943 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 0: Name/username             Host                                    Dyn Forcerport
+2025-10-28 12:17:41,943 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 1: 103                       (Unspecified)                            D  Yes       
+2025-10-28 12:17:41,944 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 2: 111/111                   5.98.202.136                             D  Yes       
+2025-10-28 12:17:41,945 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 3: 114/114                   192.168.10.151                           D  Yes       
+2025-10-28 12:17:41,945 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 4: 115/115                   192.168.10.127                           D  Yes       
+2025-10-28 12:17:41,946 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 103 -> offline (latency: Nonems)
+2025-10-28 12:17:41,946 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 111 -> online (latency: 29ms)
+2025-10-28 12:17:41,947 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 114 -> online (latency: 4ms)
+2025-10-28 12:17:41,947 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:313 - Trovati 90 interni SIP: 24 online, 66 offline, 0 unmonitored
+2025-10-28 12:17:41,948 - sveglia_centralino.room_manager - INFO - do_refresh:402 - Cache popolata con 90 interni: 24 online, 66 offline
+2025-10-28 12:17:41,949 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[103] = {'status': 'offline', 'latency': None, 'type': 'SIP'}
+2025-10-28 12:17:41,949 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[111] = {'status': 'online', 'latency': 29, 'type': 'SIP'}
+2025-10-28 12:17:41,949 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[114] = {'status': 'online', 'latency': 4, 'type': 'SIP'}
+2025-10-28 12:17:43,728 - sveglia_centralino.room_manager - INFO - load_rooms:450 - Caricamento camere... Cache PBX: 90 interni
+2025-10-28 12:17:43,728 - sveglia_centralino.room_manager - INFO - load_rooms:454 -   Campione cache: [('103', {'status': 'offline', 'latency': None, 'type': 'SIP'}), ('111', {'status': 'online', 'latency': 29, 'type': 'SIP'}), ('114', {'status': 'online', 'latency': 4, 'type': 'SIP'})]
+2025-10-28 12:17:43,729 - sveglia_centralino.room_manager - INFO - load_rooms:460 -   Prima camera dal DB (RAW): (51, '103', '103', 'Interno 103 (SIP)', 'available', '#FFFFFF', 'Importato da PBX', '2025-10-28 11:12:02')
+2025-10-28 12:17:43,729 - sveglia_centralino.room_manager - INFO - load_rooms:477 -   Prima camera PARSED: num=103, ext=103, desc=Interno 103 (SIP)
+2025-10-28 12:17:43,729 - sveglia_centralino.room_manager - INFO - load_rooms:497 -   ✓ Primo interno: 103 -> offline
+2025-10-28 12:17:58,175 - sveglia_centralino.room_manager - INFO - load_rooms:450 - Caricamento camere... Cache PBX: 90 interni
+2025-10-28 12:17:58,175 - sveglia_centralino.room_manager - INFO - load_rooms:454 -   Campione cache: [('103', {'status': 'offline', 'latency': None, 'type': 'SIP'}), ('111', {'status': 'online', 'latency': 29, 'type': 'SIP'}), ('114', {'status': 'online', 'latency': 4, 'type': 'SIP'})]
+2025-10-28 12:17:58,176 - sveglia_centralino.room_manager - INFO - load_rooms:460 -   Prima camera dal DB (RAW): (51, '103', '103', 'Interno 103 (SIP)', 'available', '#FFFFFF', 'Importato da PBX', '2025-10-28 11:12:02')
+2025-10-28 12:17:58,176 - sveglia_centralino.room_manager - INFO - load_rooms:477 -   Prima camera PARSED: num=103, ext=103, desc=Interno 103 (SIP)
+2025-10-28 12:17:58,176 - sveglia_centralino.room_manager - INFO - load_rooms:497 -   ✓ Primo interno: 103 -> offline
+2025-10-28 12:18:03,958 - sveglia_centralino.room_manager - INFO - load_rooms:450 - Caricamento camere... Cache PBX: 90 interni
+2025-10-28 12:18:03,958 - sveglia_centralino.room_manager - INFO - load_rooms:454 -   Campione cache: [('103', {'status': 'offline', 'latency': None, 'type': 'SIP'}), ('111', {'status': 'online', 'latency': 29, 'type': 'SIP'}), ('114', {'status': 'online', 'latency': 4, 'type': 'SIP'})]
+2025-10-28 12:18:03,959 - sveglia_centralino.room_manager - INFO - load_rooms:460 -   Prima camera dal DB (RAW): (51, '103', '103', 'Interno 103 (SIP)', 'available', '#FFFFFF', 'Importato da PBX', '2025-10-28 11:12:02')
+2025-10-28 12:18:03,959 - sveglia_centralino.room_manager - INFO - load_rooms:477 -   Prima camera PARSED: num=103, ext=103, desc=Interno 103 (SIP)
+2025-10-28 12:18:03,959 - sveglia_centralino.room_manager - INFO - load_rooms:497 -   ✓ Primo interno: 103 -> offline
+2025-10-28 12:18:14,682 - sveglia_centralino.main - INFO - __init__:56 - Gestore sveglie avviato
+2025-10-28 12:18:14,682 - sveglia_centralino.main - INFO - test_connection:371 - ============================================================
+2025-10-28 12:18:14,683 - sveglia_centralino.main - INFO - test_connection:372 - TEST CONNESSIONE PBX ALL'AVVIO
+2025-10-28 12:18:14,683 - sveglia_centralino.main - INFO - test_connection:373 - ============================================================
+2025-10-28 12:18:14,683 - sveglia_centralino.main - INFO - test_connection:374 - Host: 192.168.10.15:22
+2025-10-28 12:18:14,683 - sveglia_centralino.main - INFO - test_connection:375 - Username: root
+2025-10-28 12:18:14,744 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 12:18:14,864 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: echo 'PBX Connection Test'
+2025-10-28 12:18:14,864 - sveglia_centralino.pbx_connection - INFO - test_connection:186 - Test connessione PBX completato con successo
+2025-10-28 12:18:14,865 - sveglia_centralino.pbx_connection - INFO - disconnect:56 - Connessione SSH chiusa
+2025-10-28 12:18:14,872 - sveglia_centralino.main - INFO - test_connection:381 - ✓ Connessione PBX all'avvio: SUCCESSO
+2025-10-28 12:18:14,873 - sveglia_centralino.main - INFO - test_connection:382 - ============================================================
+2025-10-28 12:18:17,715 - sveglia_centralino.room_manager - INFO - __init__:19 - ============================================================
+2025-10-28 12:18:17,715 - sveglia_centralino.room_manager - INFO - __init__:20 - APERTURA GESTIONE CAMERE HOTEL - INTEGRAZIONE PBX
+2025-10-28 12:18:17,715 - sveglia_centralino.room_manager - INFO - __init__:21 - ============================================================
+2025-10-28 12:18:17,964 - sveglia_centralino.room_manager - INFO - load_rooms:450 - Caricamento camere... Cache PBX: 0 interni
+2025-10-28 12:18:17,965 - sveglia_centralino.room_manager - INFO - load_rooms:460 -   Prima camera dal DB (RAW): (51, '103', '103', 'Interno 103 (SIP)', 'available', '#FFFFFF', 'Importato da PBX', '2025-10-28 11:12:02')
+2025-10-28 12:18:17,965 - sveglia_centralino.room_manager - INFO - load_rooms:477 -   Prima camera PARSED: num=103, ext=103, desc=Interno 103 (SIP)
+2025-10-28 12:18:17,965 - sveglia_centralino.room_manager - WARNING - load_rooms:501 -   ✗ Interno 103 NON trovato in cache!
+2025-10-28 12:18:19,974 - sveglia_centralino.room_manager - INFO - do_refresh:377 - Refresh stato interni PBX...
+2025-10-28 12:18:19,975 - sveglia_centralino.pbx_connection - INFO - get_sip_peers:227 - Lettura interni dal centralino...
+2025-10-28 12:18:20,035 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 12:18:20,099 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: asterisk -rx 'sip show peers'
+2025-10-28 12:18:20,101 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:255 - Parsing SIP output (112 righe)...
+2025-10-28 12:18:20,101 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:256 - Prime 5 righe output SIP:
+2025-10-28 12:18:20,101 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 0: Name/username             Host                                    Dyn Forcerport
+2025-10-28 12:18:20,101 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 1: 103                       (Unspecified)                            D  Yes       
+2025-10-28 12:18:20,101 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 2: 111/111                   5.98.202.136                             D  Yes       
+2025-10-28 12:18:20,101 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 3: 114/114                   192.168.10.151                           D  Yes       
+2025-10-28 12:18:20,101 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 4: 115/115                   192.168.10.127                           D  Yes       
+2025-10-28 12:18:20,101 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 103 -> offline (latency: Nonems)
+2025-10-28 12:18:20,101 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 111 -> online (latency: 27ms)
+2025-10-28 12:18:20,101 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 114 -> online (latency: 4ms)
+2025-10-28 12:18:20,101 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:313 - Trovati 90 interni SIP: 24 online, 66 offline, 0 unmonitored
+2025-10-28 12:18:20,101 - sveglia_centralino.room_manager - INFO - do_refresh:402 - Cache popolata con 90 interni: 24 online, 66 offline
+2025-10-28 12:18:20,101 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[103] = {'status': 'offline', 'latency': None, 'type': 'SIP'}
+2025-10-28 12:18:20,101 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[111] = {'status': 'online', 'latency': 27, 'type': 'SIP'}
+2025-10-28 12:18:20,101 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[114] = {'status': 'online', 'latency': 4, 'type': 'SIP'}
+2025-10-28 12:18:20,450 - sveglia_centralino.room_manager - INFO - load_rooms:450 - Caricamento camere... Cache PBX: 90 interni
+2025-10-28 12:18:20,450 - sveglia_centralino.room_manager - INFO - load_rooms:454 -   Campione cache: [('103', {'status': 'offline', 'latency': None, 'type': 'SIP'}), ('111', {'status': 'online', 'latency': 27, 'type': 'SIP'}), ('114', {'status': 'online', 'latency': 4, 'type': 'SIP'})]
+2025-10-28 12:18:20,451 - sveglia_centralino.room_manager - INFO - load_rooms:460 -   Prima camera dal DB (RAW): (51, '103', '103', 'Interno 103 (SIP)', 'available', '#FFFFFF', 'Importato da PBX', '2025-10-28 11:12:02')
+2025-10-28 12:18:20,451 - sveglia_centralino.room_manager - INFO - load_rooms:477 -   Prima camera PARSED: num=103, ext=103, desc=Interno 103 (SIP)
+2025-10-28 12:18:20,451 - sveglia_centralino.room_manager - INFO - load_rooms:497 -   ✓ Primo interno: 103 -> offline
+2025-10-28 12:18:22,444 - sveglia_centralino.room_manager - INFO - load_rooms:450 - Caricamento camere... Cache PBX: 90 interni
+2025-10-28 12:18:22,444 - sveglia_centralino.room_manager - INFO - load_rooms:454 -   Campione cache: [('103', {'status': 'offline', 'latency': None, 'type': 'SIP'}), ('111', {'status': 'online', 'latency': 27, 'type': 'SIP'}), ('114', {'status': 'online', 'latency': 4, 'type': 'SIP'})]
+2025-10-28 12:18:22,445 - sveglia_centralino.room_manager - INFO - load_rooms:460 -   Prima camera dal DB (RAW): (51, '103', '103', 'Interno 103 (SIP)', 'available', '#FFFFFF', 'Importato da PBX', '2025-10-28 11:12:02')
+2025-10-28 12:18:22,445 - sveglia_centralino.room_manager - INFO - load_rooms:477 -   Prima camera PARSED: num=103, ext=103, desc=Interno 103 (SIP)
+2025-10-28 12:18:22,445 - sveglia_centralino.room_manager - INFO - load_rooms:497 -   ✓ Primo interno: 103 -> offline
+2025-10-28 12:18:29,121 - sveglia_centralino.room_manager - INFO - load_rooms:450 - Caricamento camere... Cache PBX: 90 interni
+2025-10-28 12:18:29,121 - sveglia_centralino.room_manager - INFO - load_rooms:454 -   Campione cache: [('103', {'status': 'offline', 'latency': None, 'type': 'SIP'}), ('111', {'status': 'online', 'latency': 27, 'type': 'SIP'}), ('114', {'status': 'online', 'latency': 4, 'type': 'SIP'})]
+2025-10-28 12:18:29,123 - sveglia_centralino.room_manager - INFO - load_rooms:460 -   Prima camera dal DB (RAW): (51, '103', '103', 'Interno 103 (SIP)', 'available', '#FFFFFF', 'Importato da PBX', '2025-10-28 11:12:02')
+2025-10-28 12:18:29,123 - sveglia_centralino.room_manager - INFO - load_rooms:477 -   Prima camera PARSED: num=103, ext=103, desc=Interno 103 (SIP)
+2025-10-28 12:18:29,123 - sveglia_centralino.room_manager - INFO - load_rooms:497 -   ✓ Primo interno: 103 -> offline
+2025-10-28 12:18:38,647 - sveglia_centralino.room_manager - INFO - load_rooms:450 - Caricamento camere... Cache PBX: 90 interni
+2025-10-28 12:18:38,647 - sveglia_centralino.room_manager - INFO - load_rooms:454 -   Campione cache: [('103', {'status': 'offline', 'latency': None, 'type': 'SIP'}), ('111', {'status': 'online', 'latency': 27, 'type': 'SIP'}), ('114', {'status': 'online', 'latency': 4, 'type': 'SIP'})]
+2025-10-28 12:18:38,648 - sveglia_centralino.room_manager - INFO - load_rooms:460 -   Prima camera dal DB (RAW): (51, '103', '103', 'Interno 103 (SIP)', 'available', '#FFFFFF', 'Importato da PBX', '2025-10-28 11:12:02')
+2025-10-28 12:18:38,648 - sveglia_centralino.room_manager - INFO - load_rooms:477 -   Prima camera PARSED: num=103, ext=103, desc=Interno 103 (SIP)
+2025-10-28 12:18:38,649 - sveglia_centralino.room_manager - INFO - load_rooms:497 -   ✓ Primo interno: 103 -> offline
+2025-10-28 12:18:47,921 - sveglia_centralino.room_manager - INFO - load_rooms:450 - Caricamento camere... Cache PBX: 90 interni
+2025-10-28 12:18:47,921 - sveglia_centralino.room_manager - INFO - load_rooms:454 -   Campione cache: [('103', {'status': 'offline', 'latency': None, 'type': 'SIP'}), ('111', {'status': 'online', 'latency': 27, 'type': 'SIP'}), ('114', {'status': 'online', 'latency': 4, 'type': 'SIP'})]
+2025-10-28 12:18:47,923 - sveglia_centralino.room_manager - INFO - load_rooms:460 -   Prima camera dal DB (RAW): (51, '103', '103', 'Interno 103', 'available', '#FFFFFF', 'Importato da PBX', '2025-10-28 11:12:02')
+2025-10-28 12:18:47,923 - sveglia_centralino.room_manager - INFO - load_rooms:477 -   Prima camera PARSED: num=103, ext=103, desc=Interno 103
+2025-10-28 12:18:47,923 - sveglia_centralino.room_manager - INFO - load_rooms:497 -   ✓ Primo interno: 103 -> offline
+2025-10-28 12:18:47,973 - sveglia_centralino.room_manager - INFO - do_refresh:377 - Refresh stato interni PBX...
+2025-10-28 12:18:47,973 - sveglia_centralino.pbx_connection - INFO - get_sip_peers:227 - Lettura interni dal centralino...
+2025-10-28 12:18:48,039 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 12:18:48,112 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: asterisk -rx 'sip show peers'
+2025-10-28 12:18:48,112 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:255 - Parsing SIP output (112 righe)...
+2025-10-28 12:18:48,112 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:256 - Prime 5 righe output SIP:
+2025-10-28 12:18:48,112 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 0: Name/username             Host                                    Dyn Forcerport
+2025-10-28 12:18:48,112 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 1: 103                       (Unspecified)                            D  Yes       
+2025-10-28 12:18:48,112 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 2: 111/111                   5.98.202.136                             D  Yes       
+2025-10-28 12:18:48,112 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 3: 114/114                   192.168.10.151                           D  Yes       
+2025-10-28 12:18:48,112 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:258 -   Riga 4: 115/115                   192.168.10.127                           D  Yes       
+2025-10-28 12:18:48,112 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 103 -> offline (latency: Nonems)
+2025-10-28 12:18:48,112 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 111 -> online (latency: 27ms)
+2025-10-28 12:18:48,113 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:306 -   Parsed: 114 -> online (latency: 3ms)
+2025-10-28 12:18:48,113 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:313 - Trovati 90 interni SIP: 24 online, 66 offline, 0 unmonitored
+2025-10-28 12:18:48,113 - sveglia_centralino.room_manager - INFO - do_refresh:402 - Cache popolata con 90 interni: 24 online, 66 offline
+2025-10-28 12:18:48,113 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[103] = {'status': 'offline', 'latency': None, 'type': 'SIP'}
+2025-10-28 12:18:48,113 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[111] = {'status': 'online', 'latency': 27, 'type': 'SIP'}
+2025-10-28 12:18:48,113 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[114] = {'status': 'online', 'latency': 3, 'type': 'SIP'}
+2025-10-28 12:18:48,379 - sveglia_centralino.room_manager - INFO - load_rooms:450 - Caricamento camere... Cache PBX: 90 interni
+2025-10-28 12:18:48,379 - sveglia_centralino.room_manager - INFO - load_rooms:454 -   Campione cache: [('103', {'status': 'offline', 'latency': None, 'type': 'SIP'}), ('111', {'status': 'online', 'latency': 27, 'type': 'SIP'}), ('114', {'status': 'online', 'latency': 3, 'type': 'SIP'})]
+2025-10-28 12:18:48,380 - sveglia_centralino.room_manager - INFO - load_rooms:460 -   Prima camera dal DB (RAW): (51, '103', '103', 'Interno 103', 'available', '#FFFFFF', 'Importato da PBX', '2025-10-28 11:12:02')
+2025-10-28 12:18:48,380 - sveglia_centralino.room_manager - INFO - load_rooms:477 -   Prima camera PARSED: num=103, ext=103, desc=Interno 103
+2025-10-28 12:18:48,380 - sveglia_centralino.room_manager - INFO - load_rooms:497 -   ✓ Primo interno: 103 -> offline
+2025-10-28 12:20:08,179 - sveglia_centralino.main - INFO - __init__:56 - Gestore sveglie avviato
+2025-10-28 12:20:08,179 - sveglia_centralino.main - INFO - test_connection:371 - ============================================================
+2025-10-28 12:20:08,179 - sveglia_centralino.main - INFO - test_connection:372 - TEST CONNESSIONE PBX ALL'AVVIO
+2025-10-28 12:20:08,179 - sveglia_centralino.main - INFO - test_connection:373 - ============================================================
+2025-10-28 12:20:08,180 - sveglia_centralino.main - INFO - test_connection:374 - Host: 192.168.10.15:22
+2025-10-28 12:20:08,180 - sveglia_centralino.main - INFO - test_connection:375 - Username: root
+2025-10-28 12:20:08,242 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 12:20:08,377 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: echo 'PBX Connection Test'
+2025-10-28 12:20:08,377 - sveglia_centralino.pbx_connection - INFO - test_connection:186 - Test connessione PBX completato con successo
+2025-10-28 12:20:08,377 - sveglia_centralino.pbx_connection - INFO - disconnect:56 - Connessione SSH chiusa
+2025-10-28 12:20:08,383 - sveglia_centralino.main - INFO - test_connection:381 - ✓ Connessione PBX all'avvio: SUCCESSO
+2025-10-28 12:20:08,383 - sveglia_centralino.main - INFO - test_connection:382 - ============================================================
+2025-10-28 12:26:00,458 - sveglia_centralino.main - INFO - __init__:56 - Gestore sveglie avviato
+2025-10-28 12:26:00,459 - sveglia_centralino.main - INFO - test_connection:371 - ============================================================
+2025-10-28 12:26:00,459 - sveglia_centralino.main - INFO - test_connection:372 - TEST CONNESSIONE PBX ALL'AVVIO
+2025-10-28 12:26:00,459 - sveglia_centralino.main - INFO - test_connection:373 - ============================================================
+2025-10-28 12:26:00,459 - sveglia_centralino.main - INFO - test_connection:374 - Host: 192.168.10.15:22
+2025-10-28 12:26:00,459 - sveglia_centralino.main - INFO - test_connection:375 - Username: root
+2025-10-28 12:26:00,525 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 12:26:00,642 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: echo 'PBX Connection Test'
+2025-10-28 12:26:00,644 - sveglia_centralino.pbx_connection - INFO - test_connection:186 - Test connessione PBX completato con successo
+2025-10-28 12:26:00,645 - sveglia_centralino.pbx_connection - INFO - disconnect:56 - Connessione SSH chiusa
+2025-10-28 12:26:00,647 - sveglia_centralino.main - INFO - test_connection:381 - ✓ Connessione PBX all'avvio: SUCCESSO
+2025-10-28 12:26:00,647 - sveglia_centralino.main - INFO - test_connection:382 - ============================================================
+2025-10-28 12:26:43,688 - sveglia_centralino.main - INFO - __init__:56 - Gestore sveglie avviato
+2025-10-28 12:26:43,688 - sveglia_centralino.main - INFO - test_connection:371 - ============================================================
+2025-10-28 12:26:43,688 - sveglia_centralino.main - INFO - test_connection:372 - TEST CONNESSIONE PBX ALL'AVVIO
+2025-10-28 12:26:43,688 - sveglia_centralino.main - INFO - test_connection:373 - ============================================================
+2025-10-28 12:26:43,688 - sveglia_centralino.main - INFO - test_connection:374 - Host: 192.168.10.15:22
+2025-10-28 12:26:43,688 - sveglia_centralino.main - INFO - test_connection:375 - Username: root
+2025-10-28 12:26:43,749 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 12:26:43,860 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: echo 'PBX Connection Test'
+2025-10-28 12:26:43,860 - sveglia_centralino.pbx_connection - INFO - test_connection:186 - Test connessione PBX completato con successo
+2025-10-28 12:26:43,860 - sveglia_centralino.pbx_connection - INFO - disconnect:56 - Connessione SSH chiusa
+2025-10-28 12:26:43,865 - sveglia_centralino.main - INFO - test_connection:381 - ✓ Connessione PBX all'avvio: SUCCESSO
+2025-10-28 12:26:43,865 - sveglia_centralino.main - INFO - test_connection:382 - ============================================================
+2025-10-28 12:28:03,764 - sveglia_centralino.main - INFO - __init__:56 - Gestore sveglie avviato
+2025-10-28 12:28:03,765 - sveglia_centralino.main - INFO - test_connection:371 - ============================================================
+2025-10-28 12:28:03,765 - sveglia_centralino.main - INFO - test_connection:372 - TEST CONNESSIONE PBX ALL'AVVIO
+2025-10-28 12:28:03,765 - sveglia_centralino.main - INFO - test_connection:373 - ============================================================
+2025-10-28 12:28:03,765 - sveglia_centralino.main - INFO - test_connection:374 - Host: 192.168.10.15:22
+2025-10-28 12:28:03,766 - sveglia_centralino.main - INFO - test_connection:375 - Username: root
+2025-10-28 12:28:03,840 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 12:28:03,959 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: echo 'PBX Connection Test'
+2025-10-28 12:28:03,959 - sveglia_centralino.pbx_connection - INFO - test_connection:186 - Test connessione PBX completato con successo
+2025-10-28 12:28:03,959 - sveglia_centralino.pbx_connection - INFO - disconnect:56 - Connessione SSH chiusa
+2025-10-28 12:28:03,962 - sveglia_centralino.main - INFO - test_connection:381 - ✓ Connessione PBX all'avvio: SUCCESSO
+2025-10-28 12:28:03,962 - sveglia_centralino.main - INFO - test_connection:382 - ============================================================
+2025-10-28 12:28:53,774 - sveglia_centralino.main - INFO - __init__:56 - Gestore sveglie avviato
+2025-10-28 12:28:53,775 - sveglia_centralino.main - INFO - test_connection:371 - ============================================================
+2025-10-28 12:28:53,775 - sveglia_centralino.main - INFO - test_connection:372 - TEST CONNESSIONE PBX ALL'AVVIO
+2025-10-28 12:28:53,776 - sveglia_centralino.main - INFO - test_connection:373 - ============================================================
+2025-10-28 12:28:53,776 - sveglia_centralino.main - INFO - test_connection:374 - Host: 192.168.10.15:22
+2025-10-28 12:28:53,776 - sveglia_centralino.main - INFO - test_connection:375 - Username: root
+2025-10-28 12:28:53,844 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 12:28:53,964 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: echo 'PBX Connection Test'
+2025-10-28 12:28:53,964 - sveglia_centralino.pbx_connection - INFO - test_connection:186 - Test connessione PBX completato con successo
+2025-10-28 12:28:53,964 - sveglia_centralino.pbx_connection - INFO - disconnect:56 - Connessione SSH chiusa
+2025-10-28 12:28:53,969 - sveglia_centralino.main - INFO - test_connection:381 - ✓ Connessione PBX all'avvio: SUCCESSO
+2025-10-28 12:28:53,969 - sveglia_centralino.main - INFO - test_connection:382 - ============================================================
+2025-10-28 12:30:07,559 - sveglia_centralino.main - INFO - __init__:56 - Gestore sveglie avviato
+2025-10-28 12:30:07,559 - sveglia_centralino.main - INFO - test_connection:371 - ============================================================
+2025-10-28 12:30:07,560 - sveglia_centralino.main - INFO - test_connection:372 - TEST CONNESSIONE PBX ALL'AVVIO
+2025-10-28 12:30:07,560 - sveglia_centralino.main - INFO - test_connection:373 - ============================================================
+2025-10-28 12:30:07,560 - sveglia_centralino.main - INFO - test_connection:374 - Host: 192.168.10.15:22
+2025-10-28 12:30:07,560 - sveglia_centralino.main - INFO - test_connection:375 - Username: root
+2025-10-28 12:30:07,621 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 12:30:07,741 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: echo 'PBX Connection Test'
+2025-10-28 12:30:07,741 - sveglia_centralino.pbx_connection - INFO - test_connection:186 - Test connessione PBX completato con successo
+2025-10-28 12:30:07,741 - sveglia_centralino.pbx_connection - INFO - disconnect:56 - Connessione SSH chiusa
+2025-10-28 12:30:07,744 - sveglia_centralino.main - INFO - test_connection:381 - ✓ Connessione PBX all'avvio: SUCCESSO
+2025-10-28 12:30:07,744 - sveglia_centralino.main - INFO - test_connection:382 - ============================================================
+2025-10-28 12:30:17,996 - sveglia_centralino.audio_player - INFO - __init__:21 - Audio player inizializzato con successo
+2025-10-28 12:30:17,996 - sveglia_centralino.audio_player - INFO - play:44 - Riproduzione audio: audio_messages\wakeup_didimos_asterisk.wav
+2025-10-28 12:30:18,002 - sveglia_centralino.audio_player - INFO - play:55 - Riproduzione avviata: wakeup_didimos_asterisk.wav
+2025-10-28 12:30:48,744 - sveglia_centralino.audio_player - INFO - play:44 - Riproduzione audio: audio_messages\wakeup_didimos_asterisk.wav
+2025-10-28 12:30:48,744 - sveglia_centralino.audio_player - INFO - play:55 - Riproduzione avviata: wakeup_didimos_asterisk.wav
+2025-10-28 12:33:35,860 - sveglia_centralino.main - INFO - __init__:56 - Gestore sveglie avviato
+2025-10-28 12:33:35,861 - sveglia_centralino.main - INFO - test_connection:371 - ============================================================
+2025-10-28 12:33:35,861 - sveglia_centralino.main - INFO - test_connection:372 - TEST CONNESSIONE PBX ALL'AVVIO
+2025-10-28 12:33:35,861 - sveglia_centralino.main - INFO - test_connection:373 - ============================================================
+2025-10-28 12:33:35,861 - sveglia_centralino.main - INFO - test_connection:374 - Host: 192.168.10.15:22
+2025-10-28 12:33:35,861 - sveglia_centralino.main - INFO - test_connection:375 - Username: root
+2025-10-28 12:33:35,983 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 12:33:36,092 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: echo 'PBX Connection Test'
+2025-10-28 12:33:36,092 - sveglia_centralino.pbx_connection - INFO - test_connection:186 - Test connessione PBX completato con successo
+2025-10-28 12:33:36,092 - sveglia_centralino.pbx_connection - INFO - disconnect:56 - Connessione SSH chiusa
+2025-10-28 12:33:36,095 - sveglia_centralino.main - INFO - test_connection:381 - ✓ Connessione PBX all'avvio: SUCCESSO
+2025-10-28 12:33:36,095 - sveglia_centralino.main - INFO - test_connection:382 - ============================================================
+2025-10-28 12:33:48,514 - sveglia_centralino.audio_manager - INFO - __init__:20 - Apertura finestra Gestione Messaggi Audio
+2025-10-28 12:33:51,329 - sveglia_centralino.audio_player - INFO - __init__:21 - Audio player inizializzato con successo
+2025-10-28 12:33:51,329 - sveglia_centralino.audio_player - INFO - play:44 - Riproduzione audio: audio_messages\wakeup_didimos_asterisk.wav
+2025-10-28 12:33:51,330 - sveglia_centralino.audio_player - INFO - play:55 - Riproduzione avviata: wakeup_didimos_asterisk.wav
+2025-10-28 12:33:53,081 - sveglia_centralino.audio_manager - INFO - play_selected_audio:348 - Riproduzione audio: Wakeup_ita
+2025-10-28 12:39:17,834 - sveglia_centralino.audio_manager - INFO - __init__:20 - Apertura finestra Gestione Messaggi Audio
+2025-10-28 12:39:55,498 - sveglia_centralino.audio_manager - INFO - __init__:20 - Apertura finestra Gestione Messaggi Audio
+2025-10-28 12:40:04,730 - sveglia_centralino.audio_manager - INFO - __init__:20 - Apertura finestra Gestione Messaggi Audio
+2025-10-28 12:40:35,921 - sveglia_centralino.audio_player - INFO - cleanup:126 - Audio player chiuso
+2025-10-28 12:41:24,196 - sveglia_centralino.main - INFO - __init__:56 - Gestore sveglie avviato
+2025-10-28 12:41:24,196 - sveglia_centralino.main - INFO - test_connection:371 - ============================================================
+2025-10-28 12:41:24,197 - sveglia_centralino.main - INFO - test_connection:372 - TEST CONNESSIONE PBX ALL'AVVIO
+2025-10-28 12:41:24,197 - sveglia_centralino.main - INFO - test_connection:373 - ============================================================
+2025-10-28 12:41:24,197 - sveglia_centralino.main - INFO - test_connection:374 - Host: 192.168.10.15:22
+2025-10-28 12:41:24,197 - sveglia_centralino.main - INFO - test_connection:375 - Username: root
+2025-10-28 12:41:24,265 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 12:41:24,383 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: echo 'PBX Connection Test'
+2025-10-28 12:41:24,383 - sveglia_centralino.pbx_connection - INFO - test_connection:186 - Test connessione PBX completato con successo
+2025-10-28 12:41:24,384 - sveglia_centralino.pbx_connection - INFO - disconnect:56 - Connessione SSH chiusa
+2025-10-28 12:41:24,390 - sveglia_centralino.main - INFO - test_connection:381 - ✓ Connessione PBX all'avvio: SUCCESSO
+2025-10-28 12:41:24,390 - sveglia_centralino.main - INFO - test_connection:382 - ============================================================
+2025-10-28 12:41:37,579 - sveglia_centralino.audio_manager - INFO - __init__:20 - Apertura finestra Gestione Messaggi Audio
+2025-10-28 12:42:17,888 - sveglia_centralino.audio_player - INFO - __init__:21 - Audio player inizializzato con successo
+2025-10-28 12:42:17,919 - sveglia_centralino.audio_player - INFO - cleanup:126 - Audio player chiuso
+2025-10-28 12:44:15,468 - sveglia_centralino.main - INFO - __init__:56 - Gestore sveglie avviato
+2025-10-28 12:44:15,468 - sveglia_centralino.main - INFO - test_connection:371 - ============================================================
+2025-10-28 12:44:15,468 - sveglia_centralino.main - INFO - test_connection:372 - TEST CONNESSIONE PBX ALL'AVVIO
+2025-10-28 12:44:15,468 - sveglia_centralino.main - INFO - test_connection:373 - ============================================================
+2025-10-28 12:44:15,468 - sveglia_centralino.main - INFO - test_connection:374 - Host: 192.168.10.15:22
+2025-10-28 12:44:15,468 - sveglia_centralino.main - INFO - test_connection:375 - Username: root
+2025-10-28 12:44:15,531 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 12:44:15,640 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: echo 'PBX Connection Test'
+2025-10-28 12:44:15,641 - sveglia_centralino.pbx_connection - INFO - test_connection:186 - Test connessione PBX completato con successo
+2025-10-28 12:44:15,641 - sveglia_centralino.pbx_connection - INFO - disconnect:56 - Connessione SSH chiusa
+2025-10-28 12:44:15,643 - sveglia_centralino.main - INFO - test_connection:381 - ✓ Connessione PBX all'avvio: SUCCESSO
+2025-10-28 12:44:15,643 - sveglia_centralino.main - INFO - test_connection:382 - ============================================================
+2025-10-28 12:44:24,847 - sveglia_centralino.main - INFO - on_closing:647 - Chiusura applicazione in corso...
+2025-10-28 12:44:24,975 - sveglia_centralino.audio_player - INFO - __init__:21 - Audio player inizializzato con successo
+2025-10-28 12:44:25,036 - sveglia_centralino.audio_player - INFO - cleanup:132 - Audio player chiuso
+2025-10-28 12:44:25,471 - sveglia_centralino.main - INFO - on_closing:664 - Applicazione chiusa
+2025-10-28 12:45:07,348 - sveglia_centralino.main - INFO - __init__:56 - Gestore sveglie avviato
+2025-10-28 12:45:07,349 - sveglia_centralino.main - INFO - test_connection:371 - ============================================================
+2025-10-28 12:45:07,350 - sveglia_centralino.main - INFO - test_connection:372 - TEST CONNESSIONE PBX ALL'AVVIO
+2025-10-28 12:45:07,350 - sveglia_centralino.main - INFO - test_connection:373 - ============================================================
+2025-10-28 12:45:07,350 - sveglia_centralino.main - INFO - test_connection:374 - Host: 192.168.10.15:22
+2025-10-28 12:45:07,350 - sveglia_centralino.main - INFO - test_connection:375 - Username: root
+2025-10-28 12:45:07,421 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 12:45:07,541 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: echo 'PBX Connection Test'
+2025-10-28 12:45:07,541 - sveglia_centralino.pbx_connection - INFO - test_connection:186 - Test connessione PBX completato con successo
+2025-10-28 12:45:07,541 - sveglia_centralino.pbx_connection - INFO - disconnect:56 - Connessione SSH chiusa
+2025-10-28 12:45:07,544 - sveglia_centralino.main - INFO - test_connection:381 - ✓ Connessione PBX all'avvio: SUCCESSO
+2025-10-28 12:45:07,544 - sveglia_centralino.main - INFO - test_connection:382 - ============================================================
+2025-10-28 12:45:14,746 - sveglia_centralino.audio_manager - INFO - __init__:20 - Apertura finestra Gestione Messaggi Audio
+2025-10-28 12:45:53,503 - sveglia_centralino.main - INFO - on_closing:647 - Chiusura applicazione in corso...
+2025-10-28 12:45:53,636 - sveglia_centralino.audio_player - INFO - __init__:21 - Audio player inizializzato con successo
+2025-10-28 12:45:53,693 - sveglia_centralino.audio_player - INFO - cleanup:132 - Audio player chiuso
+2025-10-28 12:45:54,193 - sveglia_centralino.main - INFO - on_closing:664 - Applicazione chiusa
+2025-10-28 12:49:51,811 - sveglia_centralino.main - INFO - __init__:56 - Gestore sveglie avviato
+2025-10-28 12:49:51,811 - sveglia_centralino.main - INFO - test_connection:371 - ============================================================
+2025-10-28 12:49:51,811 - sveglia_centralino.main - INFO - test_connection:372 - TEST CONNESSIONE PBX ALL'AVVIO
+2025-10-28 12:49:51,812 - sveglia_centralino.main - INFO - test_connection:373 - ============================================================
+2025-10-28 12:49:51,812 - sveglia_centralino.main - INFO - test_connection:374 - Host: 192.168.10.15:22
+2025-10-28 12:49:51,812 - sveglia_centralino.main - INFO - test_connection:375 - Username: root
+2025-10-28 12:49:51,931 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 12:49:52,049 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: echo 'PBX Connection Test'
+2025-10-28 12:49:52,049 - sveglia_centralino.pbx_connection - INFO - test_connection:250 - Test connessione PBX completato con successo
+2025-10-28 12:49:52,050 - sveglia_centralino.pbx_connection - INFO - disconnect:56 - Connessione SSH chiusa
+2025-10-28 12:49:52,057 - sveglia_centralino.main - INFO - test_connection:381 - ✓ Connessione PBX all'avvio: SUCCESSO
+2025-10-28 12:49:52,057 - sveglia_centralino.main - INFO - test_connection:382 - ============================================================
+2025-10-28 12:49:54,849 - sveglia_centralino.audio_manager - INFO - __init__:20 - Apertura finestra Gestione Messaggi Audio
+2025-10-28 12:49:57,432 - sveglia_centralino.audio_player - INFO - __init__:21 - Audio player inizializzato con successo
+2025-10-28 12:49:57,432 - sveglia_centralino.audio_player - INFO - play:44 - Riproduzione audio: audio_messages\wakeup-msg_en.wav
+2025-10-28 12:49:57,432 - sveglia_centralino.audio_player - INFO - play:55 - Riproduzione avviata: wakeup-msg_en.wav
+2025-10-28 12:50:04,546 - sveglia_centralino.audio_manager - INFO - play_selected_audio:357 - Riproduzione audio: Wakeup_EN
+2025-10-28 12:50:14,791 - sveglia_centralino.main - INFO - on_closing:647 - Chiusura applicazione in corso...
+2025-10-28 12:50:14,837 - sveglia_centralino.audio_player - INFO - cleanup:132 - Audio player chiuso
+2025-10-28 12:50:15,337 - sveglia_centralino.main - INFO - on_closing:664 - Applicazione chiusa
+2025-10-28 12:53:30,236 - sveglia_centralino.main - INFO - __init__:56 - Gestore sveglie avviato
+2025-10-28 12:53:30,236 - sveglia_centralino.main - INFO - test_connection:371 - ============================================================
+2025-10-28 12:53:30,236 - sveglia_centralino.main - INFO - test_connection:372 - TEST CONNESSIONE PBX ALL'AVVIO
+2025-10-28 12:53:30,236 - sveglia_centralino.main - INFO - test_connection:373 - ============================================================
+2025-10-28 12:53:30,236 - sveglia_centralino.main - INFO - test_connection:374 - Host: 192.168.10.15:22
+2025-10-28 12:53:30,236 - sveglia_centralino.main - INFO - test_connection:375 - Username: root
+2025-10-28 12:53:30,299 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 12:53:30,417 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: echo 'PBX Connection Test'
+2025-10-28 12:53:30,417 - sveglia_centralino.pbx_connection - INFO - test_connection:250 - Test connessione PBX completato con successo
+2025-10-28 12:53:30,417 - sveglia_centralino.pbx_connection - INFO - disconnect:56 - Connessione SSH chiusa
+2025-10-28 12:53:30,420 - sveglia_centralino.main - INFO - test_connection:381 - ✓ Connessione PBX all'avvio: SUCCESSO
+2025-10-28 12:53:30,420 - sveglia_centralino.main - INFO - test_connection:382 - ============================================================
+2025-10-28 12:53:39,067 - sveglia_centralino.audio_manager - INFO - __init__:20 - Apertura finestra Gestione Messaggi Audio
+2025-10-28 12:53:54,351 - sveglia_centralino.audio_manager - INFO - __init__:20 - Apertura finestra Gestione Messaggi Audio
+2025-10-28 12:55:50,842 - sveglia_centralino.room_manager - INFO - __init__:19 - ============================================================
+2025-10-28 12:55:50,842 - sveglia_centralino.room_manager - INFO - __init__:20 - APERTURA GESTIONE CAMERE HOTEL - INTEGRAZIONE PBX
+2025-10-28 12:55:50,842 - sveglia_centralino.room_manager - INFO - __init__:21 - ============================================================
+2025-10-28 12:55:50,882 - sveglia_centralino.room_manager - INFO - load_rooms:450 - Caricamento camere... Cache PBX: 0 interni
+2025-10-28 12:55:50,883 - sveglia_centralino.room_manager - INFO - load_rooms:460 -   Prima camera dal DB (RAW): (51, '103', '103', 'Interno 103', 'available', '#FFFFFF', 'Importato da PBX', '2025-10-28 11:12:02')
+2025-10-28 12:55:50,883 - sveglia_centralino.room_manager - INFO - load_rooms:477 -   Prima camera PARSED: num=103, ext=103, desc=Interno 103
+2025-10-28 12:55:50,883 - sveglia_centralino.room_manager - WARNING - load_rooms:501 -   ✗ Interno 103 NON trovato in cache!
+2025-10-28 12:56:11,810 - sveglia_centralino.audio_manager - INFO - __init__:20 - Apertura finestra Gestione Messaggi Audio
+2025-10-28 12:57:30,433 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 12:57:30,506 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: asterisk -rx 'channel originate Local/130@internal extension 130@internal'
+2025-10-28 12:57:33,507 - sveglia_centralino.pbx_connection - INFO - play_audio_with_dtmf:157 - Riproduzione audio con DTMF per 130: audio_messages\wakeup_didimos_asterisk_1.wav
+2025-10-28 12:57:33,574 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: asterisk -rx 'channel originate Local/130@internal application Read dtmf_input,audio_messages\wakeup_didimos_asterisk_1,1,n,30'
+2025-10-28 12:57:33,574 - sveglia_centralino.pbx_connection - WARNING - play_audio_with_dtmf:173 - Nessun DTMF ricevuto da 130 (timeout)
+2025-10-28 13:02:51,375 - sveglia_centralino.main - INFO - on_closing:647 - Chiusura applicazione in corso...
+2025-10-28 13:02:51,377 - sveglia_centralino.audio_player - INFO - __init__:21 - Audio player inizializzato con successo
+2025-10-28 13:02:51,413 - sveglia_centralino.audio_player - INFO - cleanup:132 - Audio player chiuso
+2025-10-28 13:02:51,715 - sveglia_centralino.main - INFO - on_closing:664 - Applicazione chiusa
+2025-10-28 13:04:44,700 - sveglia_centralino.main - INFO - __init__:56 - Gestore sveglie avviato
+2025-10-28 13:04:44,701 - sveglia_centralino.main - INFO - test_connection:371 - ============================================================
+2025-10-28 13:04:44,701 - sveglia_centralino.main - INFO - test_connection:372 - TEST CONNESSIONE PBX ALL'AVVIO
+2025-10-28 13:04:44,701 - sveglia_centralino.main - INFO - test_connection:373 - ============================================================
+2025-10-28 13:04:44,701 - sveglia_centralino.main - INFO - test_connection:374 - Host: 192.168.10.15:22
+2025-10-28 13:04:44,701 - sveglia_centralino.main - INFO - test_connection:375 - Username: root
+2025-10-28 13:04:44,778 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 13:04:44,912 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: echo 'PBX Connection Test'
+2025-10-28 13:04:44,912 - sveglia_centralino.pbx_connection - INFO - test_connection:253 - Test connessione PBX completato con successo
+2025-10-28 13:04:44,912 - sveglia_centralino.pbx_connection - INFO - disconnect:56 - Connessione SSH chiusa
+2025-10-28 13:04:44,919 - sveglia_centralino.main - INFO - test_connection:381 - ✓ Connessione PBX all'avvio: SUCCESSO
+2025-10-28 13:04:44,919 - sveglia_centralino.main - INFO - test_connection:382 - ============================================================
+2025-10-28 13:05:14,786 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 13:05:14,858 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: asterisk -rx 'channel originate Local/130@internal extension 130@internal'
+2025-10-28 13:05:17,859 - sveglia_centralino.pbx_connection - INFO - play_audio_with_dtmf:160 - Riproduzione audio con DTMF per 130: audio_messages\wakeup_didimos_asterisk_1.wav
+2025-10-28 13:05:17,924 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: asterisk -rx 'channel originate Local/130@internal application Read dtmf_input,wakeup_didimos_asterisk_1,1,n,30'
+2025-10-28 13:05:17,925 - sveglia_centralino.pbx_connection - WARNING - play_audio_with_dtmf:176 - Nessun DTMF ricevuto da 130 (timeout)
+2025-10-28 13:07:13,480 - sveglia_centralino.main - INFO - on_closing:647 - Chiusura applicazione in corso...
+2025-10-28 13:07:13,618 - sveglia_centralino.audio_player - INFO - __init__:21 - Audio player inizializzato con successo
+2025-10-28 13:07:13,674 - sveglia_centralino.audio_player - INFO - cleanup:132 - Audio player chiuso
+2025-10-28 13:07:14,011 - sveglia_centralino.main - INFO - on_closing:664 - Applicazione chiusa
+2025-10-28 13:15:57,150 - sveglia_centralino.main - INFO - __init__:55 - Gestore sveglie avviato
+2025-10-28 13:15:57,151 - sveglia_centralino.main - INFO - test_connection:370 - ============================================================
+2025-10-28 13:15:57,151 - sveglia_centralino.main - INFO - test_connection:371 - TEST CONNESSIONE PBX ALL'AVVIO
+2025-10-28 13:15:57,151 - sveglia_centralino.main - INFO - test_connection:372 - ============================================================
+2025-10-28 13:15:57,151 - sveglia_centralino.main - INFO - test_connection:373 - Host: 192.168.10.15:22
+2025-10-28 13:15:57,151 - sveglia_centralino.main - INFO - test_connection:374 - Username: root
+2025-10-28 13:15:57,227 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 13:15:57,343 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: echo 'PBX Connection Test'
+2025-10-28 13:15:57,344 - sveglia_centralino.pbx_connection - INFO - test_connection:253 - Test connessione PBX completato con successo
+2025-10-28 13:15:57,344 - sveglia_centralino.pbx_connection - INFO - disconnect:56 - Connessione SSH chiusa
+2025-10-28 13:15:57,346 - sveglia_centralino.main - INFO - test_connection:380 - ✓ Connessione PBX all'avvio: SUCCESSO
+2025-10-28 13:15:57,347 - sveglia_centralino.main - INFO - test_connection:381 - ============================================================
+2025-10-28 13:16:35,761 - sveglia_centralino.main - INFO - set_alarm:563 - Audio wake_up trovato: Wakeup_ITA (ID: 3, Lingua: it)
+2025-10-28 13:17:27,261 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 13:17:27,322 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: asterisk -rx 'channel originate Local/130@internal extension 130@internal'
+2025-10-28 13:17:30,323 - sveglia_centralino.pbx_connection - INFO - play_audio_with_dtmf:160 - Riproduzione audio con DTMF per 130: audio_messages\wakeup_didimos_asterisk_1.wav
+2025-10-28 13:17:30,395 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: asterisk -rx 'channel originate Local/130@internal application Read dtmf_input,wakeup_didimos_asterisk_1,1,n,30'
+2025-10-28 13:17:30,399 - sveglia_centralino.pbx_connection - WARNING - play_audio_with_dtmf:176 - Nessun DTMF ricevuto da 130 (timeout)
+2025-10-28 13:21:06,783 - sveglia_centralino.main - INFO - on_closing:662 - Chiusura applicazione in corso...
+2025-10-28 13:21:06,907 - sveglia_centralino.audio_player - INFO - __init__:21 - Audio player inizializzato con successo
+2025-10-28 13:21:06,969 - sveglia_centralino.audio_player - INFO - cleanup:132 - Audio player chiuso
+2025-10-28 13:21:07,470 - sveglia_centralino.main - INFO - on_closing:679 - Applicazione chiusa
+2025-10-28 13:21:22,882 - sveglia_centralino.main - INFO - __init__:55 - Gestore sveglie avviato
+2025-10-28 13:21:22,882 - sveglia_centralino.main - INFO - test_connection:370 - ============================================================
+2025-10-28 13:21:22,883 - sveglia_centralino.main - INFO - test_connection:371 - TEST CONNESSIONE PBX ALL'AVVIO
+2025-10-28 13:21:22,883 - sveglia_centralino.main - INFO - test_connection:372 - ============================================================
+2025-10-28 13:21:22,883 - sveglia_centralino.main - INFO - test_connection:373 - Host: 192.168.10.15:22
+2025-10-28 13:21:22,883 - sveglia_centralino.main - INFO - test_connection:374 - Username: root
+2025-10-28 13:21:22,945 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 13:21:23,065 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: echo 'PBX Connection Test'
+2025-10-28 13:21:23,065 - sveglia_centralino.pbx_connection - INFO - test_connection:253 - Test connessione PBX completato con successo
+2025-10-28 13:21:23,066 - sveglia_centralino.pbx_connection - INFO - disconnect:56 - Connessione SSH chiusa
+2025-10-28 13:21:23,068 - sveglia_centralino.main - INFO - test_connection:380 - ✓ Connessione PBX all'avvio: SUCCESSO
+2025-10-28 13:21:23,068 - sveglia_centralino.main - INFO - test_connection:381 - ============================================================
+2025-10-28 13:21:47,106 - sveglia_centralino.main - INFO - set_alarm:563 - Audio wake_up trovato: Wakeup_ITA (ID: 3, Lingua: it)
+2025-10-28 13:24:23,010 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 13:24:23,080 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: asterisk -rx 'channel originate Local/130@internal extension 130@internal'
+2025-10-28 13:24:26,083 - sveglia_centralino.pbx_connection - INFO - play_audio_with_dtmf:160 - Riproduzione audio con DTMF per 130: audio_messages\wakeup_didimos_asterisk_1.wav
+2025-10-28 13:24:26,152 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: asterisk -rx 'channel originate Local/130@internal application Read dtmf_input,wakeup_didimos_asterisk_1,1,n,30'
+2025-10-28 13:24:26,153 - sveglia_centralino.pbx_connection - WARNING - play_audio_with_dtmf:176 - Nessun DTMF ricevuto da 130 (timeout)
+2025-10-28 13:24:34,432 - sveglia_centralino.alarm_manager - INFO - start:32 - Creazione thread alarm_loop...
+2025-10-28 13:24:34,433 - sveglia_centralino.alarm_manager - INFO - _alarm_loop:50 - Loop sveglie avviato - check_interval: 30s
+2025-10-28 13:24:34,534 - sveglia_centralino.alarm_manager - INFO - start:38 - Gestore sveglie avviato - Thread alive: True
+2025-10-28 13:24:34,534 - sveglia_centralino.main - INFO - __init__:55 - Gestore sveglie avviato
+2025-10-28 13:24:34,534 - sveglia_centralino.main - INFO - test_connection:370 - ============================================================
+2025-10-28 13:24:34,535 - sveglia_centralino.main - INFO - test_connection:371 - TEST CONNESSIONE PBX ALL'AVVIO
+2025-10-28 13:24:34,535 - sveglia_centralino.main - INFO - test_connection:372 - ============================================================
+2025-10-28 13:24:34,535 - sveglia_centralino.main - INFO - test_connection:373 - Host: 192.168.10.15:22
+2025-10-28 13:24:34,535 - sveglia_centralino.main - INFO - test_connection:374 - Username: root
+2025-10-28 13:24:34,600 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 13:24:34,715 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: echo 'PBX Connection Test'
+2025-10-28 13:24:34,715 - sveglia_centralino.pbx_connection - INFO - test_connection:253 - Test connessione PBX completato con successo
+2025-10-28 13:24:34,715 - sveglia_centralino.pbx_connection - INFO - disconnect:56 - Connessione SSH chiusa
+2025-10-28 13:24:34,718 - sveglia_centralino.main - INFO - test_connection:380 - ✓ Connessione PBX all'avvio: SUCCESSO
+2025-10-28 13:24:34,718 - sveglia_centralino.main - INFO - test_connection:381 - ============================================================
+2025-10-28 13:25:43,457 - sveglia_centralino.main - INFO - on_closing:662 - Chiusura applicazione in corso...
+2025-10-28 13:25:43,592 - sveglia_centralino.audio_player - INFO - __init__:21 - Audio player inizializzato con successo
+2025-10-28 13:25:43,649 - sveglia_centralino.audio_player - INFO - cleanup:132 - Audio player chiuso
+2025-10-28 13:25:44,150 - sveglia_centralino.main - INFO - on_closing:679 - Applicazione chiusa
+2025-10-28 13:25:44,729 - sveglia_centralino.main - INFO - on_closing:662 - Chiusura applicazione in corso...
+2025-10-28 13:25:44,855 - sveglia_centralino.audio_player - INFO - __init__:21 - Audio player inizializzato con successo
+2025-10-28 13:25:44,876 - sveglia_centralino.audio_player - INFO - cleanup:132 - Audio player chiuso
+2025-10-28 13:25:45,377 - sveglia_centralino.alarm_manager - INFO - stop:46 - Gestore sveglie fermato
+2025-10-28 13:25:45,377 - sveglia_centralino.main - INFO - on_closing:679 - Applicazione chiusa
+2025-10-28 13:25:49,140 - sveglia_centralino.alarm_manager - INFO - start:32 - Creazione thread alarm_loop...
+2025-10-28 13:25:49,141 - sveglia_centralino.alarm_manager - INFO - _alarm_loop:50 - Loop sveglie avviato - check_interval: 30s
+2025-10-28 13:25:49,241 - sveglia_centralino.alarm_manager - INFO - start:38 - Gestore sveglie avviato - Thread alive: True
+2025-10-28 13:25:49,242 - sveglia_centralino.main - INFO - __init__:55 - Gestore sveglie avviato
+2025-10-28 13:25:49,242 - sveglia_centralino.main - INFO - test_connection:370 - ============================================================
+2025-10-28 13:25:49,242 - sveglia_centralino.main - INFO - test_connection:371 - TEST CONNESSIONE PBX ALL'AVVIO
+2025-10-28 13:25:49,242 - sveglia_centralino.main - INFO - test_connection:372 - ============================================================
+2025-10-28 13:25:49,242 - sveglia_centralino.main - INFO - test_connection:373 - Host: 192.168.10.15:22
+2025-10-28 13:25:49,242 - sveglia_centralino.main - INFO - test_connection:374 - Username: root
+2025-10-28 13:25:49,308 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 13:25:49,426 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: echo 'PBX Connection Test'
+2025-10-28 13:25:49,426 - sveglia_centralino.pbx_connection - INFO - test_connection:253 - Test connessione PBX completato con successo
+2025-10-28 13:25:49,426 - sveglia_centralino.pbx_connection - INFO - disconnect:56 - Connessione SSH chiusa
+2025-10-28 13:25:49,429 - sveglia_centralino.main - INFO - test_connection:380 - ✓ Connessione PBX all'avvio: SUCCESSO
+2025-10-28 13:25:49,429 - sveglia_centralino.main - INFO - test_connection:381 - ============================================================
+2025-10-28 13:27:10,809 - sveglia_centralino.main - INFO - set_alarm:563 - Audio wake_up trovato: Wakeup_ITA (ID: 3, Lingua: it)
+2025-10-28 13:28:19,222 - sveglia_centralino.alarm_manager - INFO - _execute_alarm_with_snooze:298 - ============================================================
+2025-10-28 13:28:19,222 - sveglia_centralino.alarm_manager - INFO - _execute_alarm_with_snooze:299 - SVEGLIA CON SNOOZE - Camera 130 - Interno 130 - Lingua: 2025-10-28 11:12:02
+2025-10-28 13:28:19,222 - sveglia_centralino.alarm_manager - INFO - _execute_alarm_with_snooze:300 - ============================================================
+2025-10-28 13:28:19,287 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 13:28:19,362 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: asterisk -rx 'channel originate Local/130@internal extension 130@internal'
+2025-10-28 13:28:19,362 - sveglia_centralino.alarm_manager - INFO - _execute_alarm_with_snooze:310 - ✓ Chiamata avviata a 130
+2025-10-28 13:28:22,363 - sveglia_centralino.alarm_manager - INFO - _execute_alarm_with_snooze:314 - Riproduzione messaggio sveglia con opzioni snooze...
+2025-10-28 13:28:22,363 - sveglia_centralino.pbx_connection - INFO - play_audio_with_dtmf:160 - Riproduzione audio con DTMF per 130: audio_messages\wakeup_didimos_asterisk_1.wav
+2025-10-28 13:28:22,430 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: asterisk -rx 'channel originate Local/130@internal application Read dtmf_input,wakeup_didimos_asterisk_1,1,n,30'
+2025-10-28 13:28:22,430 - sveglia_centralino.pbx_connection - WARNING - play_audio_with_dtmf:176 - Nessun DTMF ricevuto da 130 (timeout)
+2025-10-28 13:28:22,430 - sveglia_centralino.alarm_manager - INFO - _execute_alarm_with_snooze:340 - Nessuno snooze richiesto - Cliente ha chiuso o timeout
+2025-10-28 13:28:22,446 - sveglia_centralino.alarm_manager - INFO - _execute_alarm:144 - Sveglia eseguita per camera 130 (interno 130)
+2025-10-28 13:29:22,457 - sveglia_centralino.alarm_manager - ERROR - _end_alarm_call:177 - Errore nella terminazione chiamata interno 130: Nessuna chiamata attiva per questa camera
+2025-10-28 13:34:11,684 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 13:34:11,754 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: asterisk -rx 'sip show peer 130'
+2025-10-28 13:34:11,859 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: asterisk -rx 'core show channels'
+2025-10-28 13:34:11,963 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: asterisk -rx 'dialplan show internal'

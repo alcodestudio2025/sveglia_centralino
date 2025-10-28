@@ -299,12 +299,11 @@ class AlarmManager:
             self.logger.info(f"SVEGLIA CON SNOOZE - Camera {room_number} - Interno {phone_extension} - Lingua: {language.upper()}")
             self.logger.info(f"="*60)
             
-            # 1. Effettua la chiamata
-            command = f"asterisk -rx 'channel originate Local/{phone_extension}@internal extension {phone_extension}@internal'"
-            output, error = self.pbx.pbx.execute_command(command)
+            # 1. Effettua la chiamata con CallerID personalizzato
+            success, message = self.pbx.pbx.make_call(phone_extension)
             
-            if error:
-                self.logger.error(f"Errore chiamata: {error}")
+            if not success:
+                self.logger.error(f"Errore chiamata: {message}")
                 return False, None
             
             self.logger.info(f"✓ Chiamata avviata a {phone_extension}")
