@@ -161,19 +161,15 @@ class PBXConnection:
 ; Il CALL_ID identifica i file temporanei con i path degli audio di conferma
 
 ; Extension dinamica: riceve nome file come ${EXTEN}
-; Formato: audio|callid|snooze5|snooze10 (es: custom-wakeup|130_123|custom%snooze_5|custom%snooze_10)
+; Formato: audio|callid (es: custom-wakeup|130_123)
+; Le variabili SNOOZE_*_AUDIO sono passate come variabili globali
 ; Pattern _. matcha QUALSIASI stringa (lettere, numeri, simboli)
 exten => _.,1,NoOp(=== SVEGLIA CON SNOOZE ===)
-exten => _.,n,NoOp(Extension completa: ${EXTEN})
-; Estrai componenti dall'extension
+exten => _.,n,NoOp(Extension: ${EXTEN})
+; Estrai audio e call_id dall'extension
 exten => _.,n,Set(AUDIO_EXTEN=${CUT(EXTEN,|,1)})
 exten => _.,n,Set(CALL_ID=${CUT(EXTEN,|,2)})
-exten => _.,n,Set(SNOOZE_5_RAW=${CUT(EXTEN,|,3)})
-exten => _.,n,Set(SNOOZE_10_RAW=${CUT(EXTEN,|,4)})
-; Riconverti "%" in "/" per i path audio
-exten => _.,n,Set(__SNOOZE_5_AUDIO=${STRREPLACE(SNOOZE_5_RAW,%,/)})
-exten => _.,n,Set(__SNOOZE_10_AUDIO=${STRREPLACE(SNOOZE_10_RAW,%,/)})
-exten => _.,n,NoOp(Audio main: ${AUDIO_EXTEN})
+exten => _.,n,NoOp(Audio: ${AUDIO_EXTEN})
 exten => _.,n,NoOp(Call ID: ${CALL_ID})
 exten => _.,n,NoOp(Snooze 5min: ${SNOOZE_5_AUDIO})
 exten => _.,n,NoOp(Snooze 10min: ${SNOOZE_10_AUDIO})
@@ -372,22 +368,27 @@ exten => i,n,Hangup()
             import time
             call_id = f"{phone_extension}_{int(time.time())}"
             
-            # 4. NUOVA STRATEGIA: Passa gli audio paths come variabili di canale globali
-            # Sostituiamo "/" con "%" per evitare problemi nei path
+            # 4. STRATEGIA FINALE: Usa variabili di canale globali (__VAR)
+            # Extension contiene solo audio e call_id per evitare troncamento
             audio_exten = audio_name.replace('/', '-')
-            snooze_5_var = snooze_5_path.replace('/', '%') if snooze_5_path else ""
-            snooze_10_var = snooze_10_path.replace('/', '%') if snooze_10_path else ""
             
             self.logger.info(f"Audio paths da passare ad Asterisk:")
-            self.logger.info(f"  Snooze 5min: {snooze_5_var}")
-            self.logger.info(f"  Snooze 10min: {snooze_10_var}")
+            self.logger.info(f"  Snooze 5min: {snooze_5_path}")
+            self.logger.info(f"  Snooze 10min: {snooze_10_path}")
             
-            # 5. Formato extension: audio|callid|snooze5|snooze10
-            audio_exten_with_data = f"{audio_exten}|{call_id}|{snooze_5_var}|{snooze_10_var}"
+            # 5. Extension più corta: solo audio|callid
+            audio_exten_with_id = f"{audio_exten}|{call_id}"
+            
+            # 6. Passa snooze paths come variabili globali
+            # Escape degli slash per bash
+            snooze_5_escaped = snooze_5_path.replace('/', '\\/') if snooze_5_path else ""
+            snooze_10_escaped = snooze_10_path.replace('/', '\\/') if snooze_10_path else ""
             
             command = (
                 f"asterisk -rx \"channel originate Local/{phone_extension}@{context}/n "
-                f"extension {audio_exten_with_data}@wakeup-service "
+                f"extension {audio_exten_with_id}@wakeup-service "
+                f"variable __SNOOZE_5_AUDIO={snooze_5_escaped} "
+                f"variable __SNOOZE_10_AUDIO={snooze_10_escaped} "
                 f"callerid '{wake_callerid} <{wake_extension}>'\" "
             )
             
