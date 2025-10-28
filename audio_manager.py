@@ -14,6 +14,11 @@ class AudioManagerWindow:
         self.db = db_manager
         self.on_save_callback = on_save_callback
         
+        # Inizializza logger
+        from logger import get_logger
+        self.logger = get_logger('audio_manager')
+        self.logger.info("Apertura finestra Gestione Messaggi Audio")
+        
         # Crea la finestra
         self.window = tk.Toplevel(parent)
         self.window.title("Gestione Messaggi Audio")
@@ -223,12 +228,29 @@ class AudioManagerWindow:
                 messagebox.showerror("Errore", f"Errore nel caricamento del file: {e}")
     
     def get_audio_duration(self, file_path):
-        """Calcola la durata del file audio (semplificato)"""
+        """Calcola la durata del file audio usando pygame"""
         try:
-            # Per ora restituisce None - implementeremo la riproduzione audio dopo
-            return None
-        except:
-            return None
+            import pygame.mixer
+            
+            # Inizializza mixer se necessario
+            if not pygame.mixer.get_init():
+                pygame.mixer.init()
+            
+            # Carica il file audio
+            sound = pygame.mixer.Sound(file_path)
+            
+            # Ottieni la durata in secondi
+            duration_seconds = sound.get_length()
+            
+            # Formatta in mm:ss
+            minutes = int(duration_seconds // 60)
+            seconds = int(duration_seconds % 60)
+            
+            return f"{minutes:02d}:{seconds:02d}"
+            
+        except Exception as e:
+            self.logger.warning(f"Impossibile calcolare durata per {file_path}: {e}")
+            return "N/A"
     
     def load_audio_messages(self):
         """Carica la lista dei messaggi audio"""

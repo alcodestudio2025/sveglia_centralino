@@ -641,8 +641,24 @@ def main():
     
     # Gestisce la chiusura dell'applicazione
     def on_closing():
-        app.alarm_manager.stop()
-        root.destroy()
+        """Chiusura pulita dell'applicazione"""
+        try:
+            # Ferma il gestore sveglie
+            app.alarm_manager.stop()
+            
+            # Chiudi audio player
+            try:
+                from audio_player import get_audio_player
+                player = get_audio_player()
+                player.cleanup()
+            except:
+                pass
+            
+            # Chiudi finestra
+            root.destroy()
+        except Exception as e:
+            print(f"Errore durante chiusura: {e}")
+            root.destroy()
     
     root.protocol("WM_DELETE_WINDOW", on_closing)
     root.mainloop()
