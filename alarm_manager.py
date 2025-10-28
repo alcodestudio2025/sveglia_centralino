@@ -7,6 +7,7 @@ import logging
 from datetime import datetime, timedelta
 from database import DatabaseManager
 from pbx_connection import PBXManager
+from logger import get_logger
 
 class AlarmManager:
     def __init__(self, db_manager=None, pbx_manager=None):
@@ -14,7 +15,7 @@ class AlarmManager:
         self.pbx = pbx_manager or PBXManager()
         self.running = False
         self.alarm_thread = None
-        self.logger = logging.getLogger(__name__)
+        self.logger = get_logger('alarm_manager')
         
         # Configurazione
         self.check_interval = 30  # secondi
