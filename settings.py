@@ -495,8 +495,188 @@ class SettingsWindow:
             self.load_current_settings()
     
     def test_pbx_connection(self):
-        """Testa la connessione al centralino PBX"""
-        messagebox.showinfo("Test Connessione", "Funzione di test connessione PBX in implementazione")
+        """Testa la connessione al centralino PBX con logging dettagliato"""
+        import threading
+        from pbx_connection import PBXConnection
+        import logging
+        
+        logger = logging.getLogger(__name__)
+        
+        def test_connection_thread():
+            """Thread per il test della connessione"""
+            try:
+                # Mostra dialog di attesa
+                self.update_status("Test connessione PBX in corso...")
+                logger.info("=" * 60)
+                logger.info("INIZIO TEST CONNESSIONE PBX")
+                logger.info("=" * 60)
+                
+                # Recupera le configurazioni correnti
+                host = self.pbx_host_var.get().strip()
+                port_str = self.pbx_port_var.get().strip()
+                username = self.pbx_username_var.get().strip()
+                password = self.pbx_password_var.get().strip()
+                timeout_str = self.pbx_timeout_var.get().strip()
+                
+                # Validazione input
+                logger.info(f"Host: {host}")
+                logger.info(f"Port: {port_str}")
+                logger.info(f"Username: {username}")
+                logger.info(f"Password: {'*' * len(password) if password else '(vuota)'}")
+                logger.info(f"Timeout: {timeout_str}s")
+                
+                if not host:
+                    logger.error("Host non specificato!")
+                    self.show_test_result(False, "Errore: Host PBX non specificato")
+                    return
+                
+                if not username:
+                    logger.error("Username non specificato!")
+                    self.show_test_result(False, "Errore: Username non specificato")
+                    return
+                
+                if not password:
+                    logger.warning("Password non specificata!")
+                    self.show_test_result(False, "Errore: Password non specificata")
+                    return
+                
+                try:
+                    port = int(port_str) if port_str else 22
+                    timeout = int(timeout_str) if timeout_str else 10
+                except ValueError as e:
+                    logger.error(f"Errore conversione porta o timeout: {e}")
+                    self.show_test_result(False, f"Errore: Porta o timeout non validi")
+                    return
+                
+                logger.info(f"Parametri validati - Port: {port}, Timeout: {timeout}")
+                
+                # Crea configurazione temporanea
+                temp_config = {
+                    'host': host,
+                    'port': port,
+                    'username': username,
+                    'password': password,
+                    'timeout': timeout
+                }
+                
+                # Crea connessione PBX temporanea
+                logger.info("Creazione oggetto PBXConnection...")
+                pbx = PBXConnection()
+                
+                # Sovrascrivi configurazione
+                pbx.config = temp_config
+                
+                # Test 1: Tentativo connessione SSH
+                logger.info("-" * 60)
+                logger.info("TEST 1: Connessione SSH al PBX")
+                logger.info(f"Tentativo connessione a {username}@{host}:{port}")
+                logger.info(f"Timeout: {timeout} secondi")
+                
+                success, message = pbx.connect()
+                
+                if not success:
+                    logger.error(f"Connessione SSH fallita: {message}")
+                    self.show_test_result(False, f"❌ Connessione Fallita\n\n{message}\n\nDettagli nel log.")
+                    return
+                
+                logger.info("✓ Connessione SSH stabilita con successo")
+                
+                # Test 2: Esecuzione comando di test
+                logger.info("-" * 60)
+                logger.info("TEST 2: Esecuzione comando di test")
+                
+                test_command = "echo 'PBX_TEST_CONNECTION'"
+                logger.info(f"Comando: {test_command}")
+                
+                cmd_success, output, error = pbx.execute_command(test_command)
+                
+                if not cmd_success:
+                    logger.error(f"Comando fallito: {error}")
+                    pbx.disconnect()
+                    self.show_test_result(False, f"❌ Test Comando Fallito\n\n{error}\n\nConnessione SSH OK ma comando non eseguito.")
+                    return
+                
+                logger.info(f"✓ Comando eseguito con successo")
+                logger.info(f"Output: {output}")
+                
+                # Test 3: Verifica comandi Asterisk (se disponibile)
+                logger.info("-" * 60)
+                logger.info("TEST 3: Verifica disponibilità Asterisk")
+                
+                asterisk_command = "asterisk -rx 'core show version'"
+                logger.info(f"Comando: {asterisk_command}")
+                
+                ast_success, ast_output, ast_error = pbx.execute_command(asterisk_command)
+                
+                asterisk_available = False
+                if ast_success and 'Asterisk' in ast_output:
+                    logger.info(f"✓ Asterisk disponibile")
+                    logger.info(f"Versione: {ast_output[:100]}")
+                    asterisk_available = True
+                else:
+                    logger.warning("⚠ Asterisk non rilevato o comando non disponibile")
+                    logger.warning(f"Output: {ast_output}")
+                    logger.warning(f"Error: {ast_error}")
+                
+                # Chiudi connessione
+                logger.info("-" * 60)
+                logger.info("Chiusura connessione...")
+                pbx.disconnect()
+                logger.info("✓ Connessione chiusa")
+                
+                # Risultato finale
+                logger.info("=" * 60)
+                logger.info("TEST COMPLETATO CON SUCCESSO")
+                logger.info("=" * 60)
+                
+                # Prepara messaggio risultato
+                result_message = f"✅ Connessione PBX Riuscita!\n\n"
+                result_message += f"Host: {host}:{port}\n"
+                result_message += f"Username: {username}\n\n"
+                result_message += f"✓ Connessione SSH: OK\n"
+                result_message += f"✓ Esecuzione comandi: OK\n"
+                
+                if asterisk_available:
+                    result_message += f"✓ Asterisk: Disponibile\n\n"
+                    result_message += f"Versione:\n{ast_output[:150]}"
+                else:
+                    result_message += f"⚠ Asterisk: Non rilevato\n\n"
+                    result_message += f"Nota: Verifica che Asterisk sia installato\n"
+                    result_message += f"o che l'utente abbia i permessi necessari."
+                
+                self.show_test_result(True, result_message)
+                
+            except Exception as e:
+                logger.error("=" * 60)
+                logger.error(f"ERRORE IMPREVISTO NEL TEST: {e}")
+                logger.error("=" * 60)
+                import traceback
+                logger.error(traceback.format_exc())
+                
+                self.show_test_result(
+                    False, 
+                    f"❌ Errore Imprevisto\n\n{str(e)}\n\nControlla il log per dettagli."
+                )
+        
+        # Avvia test in thread separato
+        threading.Thread(target=test_connection_thread, daemon=True).start()
+    
+    def show_test_result(self, success, message):
+        """Mostra il risultato del test in una messagebox thread-safe"""
+        def show_in_main_thread():
+            if success:
+                messagebox.showinfo("Test Connessione PBX", message)
+            else:
+                messagebox.showerror("Test Connessione PBX", message)
+            self.update_status("Pronto")
+        
+        # Schedula nella main thread
+        self.window.after(0, show_in_main_thread)
+    
+    def update_status(self, message):
+        """Aggiorna la status bar (se disponibile)"""
+        # Placeholder per futura status bar
+        pass
     
     def test_mail(self):
         """Testa l'invio di una mail"""
