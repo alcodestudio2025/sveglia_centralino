@@ -1354,3 +1354,110 @@
 2025-10-28 14:22:29,753 - sveglia_centralino.audio_player - INFO - cleanup:132 - Audio player chiuso
 2025-10-28 14:22:30,254 - sveglia_centralino.alarm_manager - INFO - stop:46 - Gestore sveglie fermato
 2025-10-28 14:22:30,254 - sveglia_centralino.main - INFO - on_closing:679 - Applicazione chiusa
+2025-10-28 14:24:21,620 - sveglia_centralino.alarm_manager - INFO - start:32 - Creazione thread alarm_loop...
+2025-10-28 14:24:21,621 - sveglia_centralino.alarm_manager - INFO - _alarm_loop:50 - Loop sveglie avviato - check_interval: 30s
+2025-10-28 14:24:21,722 - sveglia_centralino.alarm_manager - INFO - start:38 - Gestore sveglie avviato - Thread alive: True
+2025-10-28 14:24:21,722 - sveglia_centralino.main - INFO - __init__:55 - Gestore sveglie avviato
+2025-10-28 14:24:21,722 - sveglia_centralino.main - INFO - test_connection:370 - ============================================================
+2025-10-28 14:24:21,722 - sveglia_centralino.main - INFO - test_connection:371 - TEST CONNESSIONE PBX ALL'AVVIO
+2025-10-28 14:24:21,722 - sveglia_centralino.main - INFO - test_connection:372 - ============================================================
+2025-10-28 14:24:21,722 - sveglia_centralino.main - INFO - test_connection:373 - Host: 192.168.10.15:22
+2025-10-28 14:24:21,722 - sveglia_centralino.main - INFO - test_connection:374 - Username: root
+2025-10-28 14:24:21,799 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 14:24:21,918 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: echo 'PBX Connection Test'
+2025-10-28 14:24:21,918 - sveglia_centralino.pbx_connection - INFO - test_connection:438 - Test connessione PBX completato con successo
+2025-10-28 14:24:21,919 - sveglia_centralino.pbx_connection - INFO - disconnect:56 - Connessione SSH chiusa
+2025-10-28 14:24:21,921 - sveglia_centralino.main - INFO - test_connection:380 - ✓ Connessione PBX all'avvio: SUCCESSO
+2025-10-28 14:24:21,922 - sveglia_centralino.main - INFO - test_connection:381 - ============================================================
+2025-10-28 14:24:51,170 - sveglia_centralino.pbx_connection - INFO - setup_wakeup_context:152 - Setup context wakeup-service nel dialplan...
+2025-10-28 14:24:51,237 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 14:24:51,418 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: asterisk -rx 'dialplan reload'
+2025-10-28 14:24:51,418 - sveglia_centralino.pbx_connection - INFO - setup_wakeup_context:220 - ✓ Context wakeup-service configurato e caricato
+2025-10-28 14:24:56,246 - sveglia_centralino.pbx_connection - INFO - disconnect:56 - Connessione SSH chiusa
+2025-10-28 14:25:21,283 - sveglia_centralino.audio_manager - INFO - __init__:20 - Apertura finestra Gestione Messaggi Audio
+2025-10-28 14:26:30,203 - sveglia_centralino.audio_manager - INFO - __init__:20 - Apertura finestra Gestione Messaggi Audio
+2025-10-28 14:27:16,786 - sveglia_centralino.main - INFO - set_alarm:563 - Audio wake_up trovato: Ridarda_10 (ID: 11, Lingua: it)
+2025-10-28 14:27:30,715 - sveglia_centralino.room_manager - INFO - __init__:19 - ============================================================
+2025-10-28 14:27:30,715 - sveglia_centralino.room_manager - INFO - __init__:20 - APERTURA GESTIONE CAMERE HOTEL - INTEGRAZIONE PBX
+2025-10-28 14:27:30,715 - sveglia_centralino.room_manager - INFO - __init__:21 - ============================================================
+2025-10-28 14:27:30,752 - sveglia_centralino.room_manager - INFO - load_rooms:450 - Caricamento camere... Cache PBX: 0 interni
+2025-10-28 14:27:30,753 - sveglia_centralino.room_manager - INFO - load_rooms:460 -   Prima camera dal DB (RAW): (51, '103', '103', 'Interno 103', 'available', '#FFFFFF', 'Importato da PBX', '2025-10-28 11:12:02', 'it')
+2025-10-28 14:27:30,753 - sveglia_centralino.room_manager - INFO - load_rooms:477 -   Prima camera PARSED: num=103, ext=103, desc=Interno 103
+2025-10-28 14:27:30,753 - sveglia_centralino.room_manager - WARNING - load_rooms:501 -   ✗ Interno 103 NON trovato in cache!
+2025-10-28 14:27:35,228 - sveglia_centralino.audio_manager - INFO - __init__:20 - Apertura finestra Gestione Messaggi Audio
+2025-10-28 14:28:21,720 - sveglia_centralino.alarm_manager - INFO - _execute_alarm_with_snooze:298 - ============================================================
+2025-10-28 14:28:21,721 - sveglia_centralino.alarm_manager - INFO - _execute_alarm_with_snooze:299 - SVEGLIA CON SNOOZE - Camera 130 - Interno 130 - Lingua: 2025-10-28 11:12:02
+2025-10-28 14:28:21,721 - sveglia_centralino.alarm_manager - INFO - _execute_alarm_with_snooze:300 - ============================================================
+2025-10-28 14:28:21,721 - sveglia_centralino.alarm_manager - INFO - _execute_alarm_with_snooze:304 - Avvio chiamata con audio e rilevamento DTMF...
+2025-10-28 14:28:21,721 - sveglia_centralino.pbx_connection - INFO - play_audio_with_dtmf:303 - Upload audio su Asterisk: None
+2025-10-28 14:28:21,721 - sveglia_centralino.pbx_connection - ERROR - upload_audio_to_asterisk:276 - Errore upload audio: expected str, bytes or os.PathLike object, not NoneType
+2025-10-28 14:28:21,721 - sveglia_centralino.pbx_connection - ERROR - play_audio_with_dtmf:307 - Errore upload: expected str, bytes or os.PathLike object, not NoneType
+2025-10-28 14:28:21,721 - sveglia_centralino.alarm_manager - ERROR - _execute_alarm_with_snooze:312 - Errore nella riproduzione audio
+2025-10-28 14:28:21,721 - sveglia_centralino.alarm_manager - ERROR - _execute_alarm:150 - Errore nell'esecuzione sveglia camera 130
+2025-10-28 14:28:38,921 - sveglia_centralino.main - INFO - set_alarm:563 - Audio wake_up trovato: Wakeup_ITA (ID: 3, Lingua: it)
+2025-10-28 14:29:21,752 - sveglia_centralino.alarm_manager - INFO - _execute_alarm_with_snooze:298 - ============================================================
+2025-10-28 14:29:21,752 - sveglia_centralino.alarm_manager - INFO - _execute_alarm_with_snooze:299 - SVEGLIA CON SNOOZE - Camera 130 - Interno 130 - Lingua: 2025-10-28 11:12:02
+2025-10-28 14:29:21,753 - sveglia_centralino.alarm_manager - INFO - _execute_alarm_with_snooze:300 - ============================================================
+2025-10-28 14:29:21,753 - sveglia_centralino.alarm_manager - INFO - _execute_alarm_with_snooze:304 - Avvio chiamata con audio e rilevamento DTMF...
+2025-10-28 14:29:21,753 - sveglia_centralino.pbx_connection - INFO - play_audio_with_dtmf:303 - Upload audio su Asterisk: audio_messages\wakeup_didimos_asterisk_1.wav
+2025-10-28 14:29:21,753 - sveglia_centralino.pbx_connection - INFO - upload_audio_to_asterisk:248 - Upload audio wakeup_didimos_asterisk_1.wav su Asterisk...
+2025-10-28 14:29:21,823 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 14:29:21,901 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: mkdir -p /var/lib/asterisk/sounds/custom/
+2025-10-28 14:29:22,031 - sveglia_centralino.pbx_connection - INFO - upload_audio_to_asterisk:269 - ✓ Audio caricato: /var/lib/asterisk/sounds/custom/wakeup_didimos_asterisk_1.wav
+2025-10-28 14:29:22,031 - sveglia_centralino.pbx_connection - INFO - play_audio_with_dtmf:324 - Chiamata con DTMF a 130: custom/wakeup_didimos_asterisk_1
+2025-10-28 14:29:22,098 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: asterisk -rx 'channel originate Local/130@from-internal/n extension s@wakeup-service(custom/wakeup_didimos_asterisk_1) callerid "Servizio Sveglie <999>"'
+2025-10-28 14:29:22,098 - sveglia_centralino.pbx_connection - INFO - play_audio_with_dtmf:333 - ✓ Chiamata avviata verso wakeup-service
+2025-10-28 14:29:33,920 - sveglia_centralino.main - INFO - on_closing:662 - Chiusura applicazione in corso...
+2025-10-28 14:29:33,921 - sveglia_centralino.audio_player - INFO - __init__:21 - Audio player inizializzato con successo
+2025-10-28 14:29:33,957 - sveglia_centralino.audio_player - INFO - cleanup:132 - Audio player chiuso
+2025-10-28 14:29:34,458 - sveglia_centralino.alarm_manager - INFO - stop:46 - Gestore sveglie fermato
+2025-10-28 14:29:34,458 - sveglia_centralino.main - INFO - on_closing:679 - Applicazione chiusa
+2025-10-28 14:30:09,204 - sveglia_centralino.alarm_manager - INFO - start:32 - Creazione thread alarm_loop...
+2025-10-28 14:30:09,204 - sveglia_centralino.alarm_manager - INFO - _alarm_loop:50 - Loop sveglie avviato - check_interval: 30s
+2025-10-28 14:30:09,205 - sveglia_centralino.alarm_manager - INFO - _execute_alarm_with_snooze:298 - ============================================================
+2025-10-28 14:30:09,205 - sveglia_centralino.alarm_manager - INFO - _execute_alarm_with_snooze:299 - SVEGLIA CON SNOOZE - Camera 130 - Interno 130 - Lingua: 2025-10-28 11:12:02
+2025-10-28 14:30:09,205 - sveglia_centralino.alarm_manager - INFO - _execute_alarm_with_snooze:300 - ============================================================
+2025-10-28 14:30:09,205 - sveglia_centralino.alarm_manager - INFO - _execute_alarm_with_snooze:304 - Avvio chiamata con audio e rilevamento DTMF...
+2025-10-28 14:30:09,205 - sveglia_centralino.pbx_connection - INFO - play_audio_with_dtmf:303 - Upload audio su Asterisk: audio_messages\wakeup_didimos_asterisk_1.wav
+2025-10-28 14:30:09,205 - sveglia_centralino.pbx_connection - INFO - upload_audio_to_asterisk:248 - Upload audio wakeup_didimos_asterisk_1.wav su Asterisk...
+2025-10-28 14:30:09,265 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 14:30:09,305 - sveglia_centralino.alarm_manager - INFO - start:38 - Gestore sveglie avviato - Thread alive: True
+2025-10-28 14:30:09,305 - sveglia_centralino.main - INFO - __init__:55 - Gestore sveglie avviato
+2025-10-28 14:30:09,306 - sveglia_centralino.main - INFO - test_connection:370 - ============================================================
+2025-10-28 14:30:09,306 - sveglia_centralino.main - INFO - test_connection:371 - TEST CONNESSIONE PBX ALL'AVVIO
+2025-10-28 14:30:09,307 - sveglia_centralino.main - INFO - test_connection:372 - ============================================================
+2025-10-28 14:30:09,307 - sveglia_centralino.main - INFO - test_connection:373 - Host: 192.168.10.15:22
+2025-10-28 14:30:09,308 - sveglia_centralino.main - INFO - test_connection:374 - Username: root
+2025-10-28 14:30:09,332 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: mkdir -p /var/lib/asterisk/sounds/custom/
+2025-10-28 14:30:09,462 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 14:30:09,582 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: echo 'PBX Connection Test'
+2025-10-28 14:30:09,583 - sveglia_centralino.pbx_connection - INFO - test_connection:438 - Test connessione PBX completato con successo
+2025-10-28 14:30:09,583 - sveglia_centralino.pbx_connection - INFO - disconnect:56 - Connessione SSH chiusa
+2025-10-28 14:30:09,589 - sveglia_centralino.main - INFO - test_connection:380 - ✓ Connessione PBX all'avvio: SUCCESSO
+2025-10-28 14:30:09,590 - sveglia_centralino.main - INFO - test_connection:381 - ============================================================
+2025-10-28 14:30:09,759 - sveglia_centralino.pbx_connection - INFO - connect:38 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 14:30:09,852 - sveglia_centralino.pbx_connection - INFO - upload_audio_to_asterisk:269 - ✓ Audio caricato: /var/lib/asterisk/sounds/custom/wakeup_didimos_asterisk_1.wav
+2025-10-28 14:30:09,852 - sveglia_centralino.pbx_connection - INFO - play_audio_with_dtmf:324 - Chiamata con DTMF a 130: custom/wakeup_didimos_asterisk_1
+2025-10-28 14:30:09,917 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: asterisk -rx 'channel originate Local/130@from-internal/n extension s@wakeup-service(custom/wakeup_didimos_asterisk_1) callerid "Servizio Sveglie <999>"'
+2025-10-28 14:30:09,918 - sveglia_centralino.pbx_connection - INFO - play_audio_with_dtmf:333 - ✓ Chiamata avviata verso wakeup-service
+2025-10-28 14:30:30,499 - sveglia_centralino.main - INFO - set_alarm:563 - Audio wake_up trovato: Wakeup_ITA (ID: 3, Lingua: it)
+2025-10-28 14:30:44,985 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: ls -t /tmp/asterisk_dtmf_* 2>/dev/null | head -1
+2025-10-28 14:30:44,985 - sveglia_centralino.pbx_connection - INFO - play_audio_with_dtmf:361 - Nessun DTMF ricevuto (timeout o no input)
+2025-10-28 14:30:44,985 - sveglia_centralino.alarm_manager - INFO - _execute_alarm_with_snooze:330 - Nessuno snooze richiesto - Cliente ha chiuso o timeout
+2025-10-28 14:30:44,997 - sveglia_centralino.alarm_manager - INFO - _execute_alarm:144 - Sveglia eseguita per camera 130 (interno 130)
+2025-10-28 14:31:15,021 - sveglia_centralino.alarm_manager - INFO - _execute_alarm_with_snooze:298 - ============================================================
+2025-10-28 14:31:15,022 - sveglia_centralino.alarm_manager - INFO - _execute_alarm_with_snooze:299 - SVEGLIA CON SNOOZE - Camera 130 - Interno 130 - Lingua: 2025-10-28 11:12:02
+2025-10-28 14:31:15,022 - sveglia_centralino.alarm_manager - INFO - _execute_alarm_with_snooze:300 - ============================================================
+2025-10-28 14:31:15,023 - sveglia_centralino.alarm_manager - INFO - _execute_alarm_with_snooze:304 - Avvio chiamata con audio e rilevamento DTMF...
+2025-10-28 14:31:15,023 - sveglia_centralino.pbx_connection - INFO - play_audio_with_dtmf:303 - Upload audio su Asterisk: audio_messages\wakeup_didimos_asterisk_1.wav
+2025-10-28 14:31:15,024 - sveglia_centralino.pbx_connection - INFO - upload_audio_to_asterisk:248 - Upload audio wakeup_didimos_asterisk_1.wav su Asterisk...
+2025-10-28 14:31:15,092 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: mkdir -p /var/lib/asterisk/sounds/custom/
+2025-10-28 14:31:15,223 - sveglia_centralino.pbx_connection - INFO - upload_audio_to_asterisk:269 - ✓ Audio caricato: /var/lib/asterisk/sounds/custom/wakeup_didimos_asterisk_1.wav
+2025-10-28 14:31:15,223 - sveglia_centralino.pbx_connection - INFO - play_audio_with_dtmf:324 - Chiamata con DTMF a 130: custom/wakeup_didimos_asterisk_1
+2025-10-28 14:31:15,334 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: asterisk -rx 'channel originate Local/130@from-internal/n extension s@wakeup-service(custom/wakeup_didimos_asterisk_1) callerid "Servizio Sveglie <999>"'
+2025-10-28 14:31:15,335 - sveglia_centralino.pbx_connection - INFO - play_audio_with_dtmf:333 - ✓ Chiamata avviata verso wakeup-service
+2025-10-28 14:31:45,000 - sveglia_centralino.alarm_manager - ERROR - _end_alarm_call:177 - Errore nella terminazione chiamata interno 130: Nessuna chiamata attiva per questa camera
+2025-10-28 14:31:50,401 - sveglia_centralino.pbx_connection - INFO - execute_command:88 - Comando eseguito: ls -t /tmp/asterisk_dtmf_* 2>/dev/null | head -1
+2025-10-28 14:31:50,403 - sveglia_centralino.pbx_connection - INFO - play_audio_with_dtmf:361 - Nessun DTMF ricevuto (timeout o no input)
+2025-10-28 14:31:50,404 - sveglia_centralino.alarm_manager - INFO - _execute_alarm_with_snooze:330 - Nessuno snooze richiesto - Cliente ha chiuso o timeout
+2025-10-28 14:31:50,454 - sveglia_centralino.alarm_manager - INFO - _execute_alarm:144 - Sveglia eseguita per camera 130 (interno 130)

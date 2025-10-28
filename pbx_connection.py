@@ -152,17 +152,19 @@ class PBXConnection:
             self.logger.info("Setup context wakeup-service nel dialplan...")
             
             # Context dedicato per sveglie con DTMF
+            # NOTA: L'audio viene passato tramite variabile WAKEUP_AUDIO
             context_config = """
 [wakeup-service]
 ; Context per gestione sveglie con DTMF
-; ARG1 = nome file audio da riprodurre
+; Variabile richiesta: WAKEUP_AUDIO = path file audio
 
 exten => s,1,NoOp(=== SVEGLIA CON SNOOZE ===)
+exten => s,n,NoOp(Audio file: ${WAKEUP_AUDIO})
 exten => s,n,Answer()
 exten => s,n,Wait(1)
 exten => s,n,Set(TIMEOUT(digit)=5)
 exten => s,n,Set(TIMEOUT(response)=30)
-exten => s,n,Background(${ARG1})
+exten => s,n,Background(${WAKEUP_AUDIO})
 exten => s,n,WaitExten(30)
 exten => s,n,NoOp(Nessun input DTMF - chiusura)
 exten => s,n,Hangup()
@@ -170,15 +172,15 @@ exten => s,n,Hangup()
 ; DTMF 1 - Snooze 5 minuti
 exten => 1,1,NoOp(DTMF 1 ricevuto - Snooze 5 min)
 exten => 1,n,Set(SNOOZE_CHOICE=1)
-exten => 1,n,System(echo "1" > /tmp/asterisk_dtmf_${CHANNEL}.txt)
-exten => 1,n,Playback(custom/snooze_5min_confirm)
+exten => 1,n,System(echo "1" > /tmp/asterisk_dtmf_${UNIQUEID}.txt)
+exten => 1,n,NoOp(File DTMF: /tmp/asterisk_dtmf_${UNIQUEID}.txt)
 exten => 1,n,Hangup()
 
 ; DTMF 2 - Snooze 10 minuti
 exten => 2,1,NoOp(DTMF 2 ricevuto - Snooze 10 min)
 exten => 2,n,Set(SNOOZE_CHOICE=2)
-exten => 2,n,System(echo "2" > /tmp/asterisk_dtmf_${CHANNEL}.txt)
-exten => 2,n,Playback(custom/snooze_10min_confirm)
+exten => 2,n,System(echo "2" > /tmp/asterisk_dtmf_${UNIQUEID}.txt)
+exten => 2,n,NoOp(File DTMF: /tmp/asterisk_dtmf_${UNIQUEID}.txt)
 exten => 2,n,Hangup()
 
 ; Timeout o altro input
@@ -314,10 +316,11 @@ exten => i,n,Hangup()
             call_id = f"{phone_extension}_{int(time.time())}"
             
             # 3. Comando Originate verso il context wakeup-service
-            # Il context gestirà automaticamente DTMF e scriverà il risultato
+            # Passa l'audio tramite variabile di canale WAKEUP_AUDIO
             command = (
                 f"asterisk -rx 'channel originate Local/{phone_extension}@{context}/n "
-                f"extension s@wakeup-service({audio_name}) "
+                f"exten s@wakeup-service "
+                f"variable WAKEUP_AUDIO={audio_name} "
                 f"callerid \"{wake_callerid} <{wake_extension}>\"'"
             )
             
