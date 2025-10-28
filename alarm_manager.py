@@ -95,6 +95,9 @@ class AlarmManager:
             # Usa l'interno telefonico se specificato, altrimenti il numero camera
             phone_extension = room_data[2] if len(room_data) > 2 and room_data[2] else room_number
             
+            # Ottiene la lingua della camera (colonna 7, dopo phone_extension, description, status, color, label)
+            room_language = room_data[7] if len(room_data) > 7 and room_data[7] else 'it'
+            
             # Ottiene il file audio principale (wake_up)
             audio_file_path = None
             if audio_message_id:
@@ -109,7 +112,8 @@ class AlarmManager:
                 phone_extension, 
                 audio_file_path,
                 alarm_id,
-                room_number
+                room_number,
+                room_language  # Passa la lingua della camera
             )
             
             if success:
@@ -263,7 +267,7 @@ class AlarmManager:
         """Testa la connessione al centralino"""
         return self.pbx.pbx.test_connection()
     
-    def _execute_alarm_with_snooze(self, phone_extension, wake_audio_path, alarm_id, room_number):
+    def _execute_alarm_with_snooze(self, phone_extension, wake_audio_path, alarm_id, room_number, language='it'):
         """
         Esegue sveglia con opzioni snooze tramite DTMF
         
@@ -272,13 +276,14 @@ class AlarmManager:
             wake_audio_path: File audio sveglia principale
             alarm_id: ID sveglia nel database
             room_number: Numero camera
+            language: Lingua della camera (it, en, etc.)
             
         Returns:
             (success, dtmf_digit): Success e tasto premuto
         """
         try:
             self.logger.info(f"="*60)
-            self.logger.info(f"SVEGLIA CON SNOOZE - Camera {room_number} - Interno {phone_extension}")
+            self.logger.info(f"SVEGLIA CON SNOOZE - Camera {room_number} - Interno {phone_extension} - Lingua: {language.upper()}")
             self.logger.info(f"="*60)
             
             # 1. Effettua la chiamata
@@ -309,18 +314,18 @@ class AlarmManager:
                 # Snooze 5 minuti
                 self.logger.info(f"✓ DTMF '1' ricevuto - Snooze 5 minuti")
                 snooze_minutes = 5
-                confirm_audio = self._get_audio_by_action('snooze_confirm', 'it', '5min')
+                confirm_audio = self._get_audio_by_action('snooze_confirm', language, '5')
                 
             elif dtmf_digit == '2':
                 # Snooze 10 minuti
                 self.logger.info(f"✓ DTMF '2' ricevuto - Snooze 10 minuti")
                 snooze_minutes = 10
-                confirm_audio = self._get_audio_by_action('snooze_confirm', 'it', '10min')
+                confirm_audio = self._get_audio_by_action('snooze_confirm', language, '10')
                 
             else:
                 # Nessun snooze - sveglia completata
                 self.logger.info(f"Nessuno snooze richiesto - Sveglia completata")
-                goodbye_audio = self._get_audio_by_action('goodbye', 'it')
+                goodbye_audio = self._get_audio_by_action('goodbye', language)
                 if goodbye_audio:
                     self.pbx.pbx.play_audio(phone_extension, goodbye_audio)
                     time.sleep(2)

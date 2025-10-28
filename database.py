@@ -25,6 +25,7 @@ class DatabaseManager:
                 status TEXT DEFAULT 'available',
                 color TEXT DEFAULT '#FFFFFF',
                 label TEXT DEFAULT '',
+                language TEXT DEFAULT 'it',
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             )
         ''')
@@ -113,6 +114,12 @@ class DatabaseManager:
                 cursor.execute("ALTER TABLE rooms ADD COLUMN label TEXT DEFAULT ''")
                 conn.commit()
                 print("Aggiunta colonna label alla tabella rooms")
+            
+            if 'language' not in columns:
+                # Aggiunge la colonna language per le camere
+                cursor.execute("ALTER TABLE rooms ADD COLUMN language TEXT DEFAULT 'it'")
+                conn.commit()
+                print("Aggiunta colonna language alla tabella rooms")
             
             # Verifica se la colonna language esiste nella tabella audio_messages
             cursor.execute("PRAGMA table_info(audio_messages)")
@@ -206,26 +213,26 @@ class DatabaseManager:
         conn.commit()
         conn.close()
     
-    def add_room(self, room_number, phone_extension='', description='', status='available', color='#FFFFFF', label=''):
+    def add_room(self, room_number, phone_extension='', description='', status='available', color='#FFFFFF', label='', language='it'):
         """Aggiunge una nuova camera"""
         conn = self.get_connection()
         cursor = conn.cursor()
         cursor.execute(
-            "INSERT INTO rooms (room_number, phone_extension, description, status, color, label) VALUES (?, ?, ?, ?, ?, ?)",
-            (room_number, phone_extension, description, status, color, label)
+            "INSERT INTO rooms (room_number, phone_extension, description, status, color, label, language) VALUES (?, ?, ?, ?, ?, ?, ?)",
+            (room_number, phone_extension, description, status, color, label, language)
         )
         conn.commit()
         room_id = cursor.lastrowid
         conn.close()
         return room_id
     
-    def update_room(self, room_id, room_number, phone_extension, description, status, color, label):
+    def update_room(self, room_id, room_number, phone_extension, description, status, color, label, language='it'):
         """Aggiorna una camera esistente"""
         conn = self.get_connection()
         cursor = conn.cursor()
         cursor.execute(
-            "UPDATE rooms SET room_number = ?, phone_extension = ?, description = ?, status = ?, color = ?, label = ? WHERE id = ?",
-            (room_number, phone_extension, description, status, color, label, room_id)
+            "UPDATE rooms SET room_number = ?, phone_extension = ?, description = ?, status = ?, color = ?, label = ?, language = ? WHERE id = ?",
+            (room_number, phone_extension, description, status, color, label, language, room_id)
         )
         conn.commit()
         conn.close()
