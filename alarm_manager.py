@@ -147,7 +147,7 @@ class AlarmManager:
                 threading.Timer(self.call_duration, self._end_alarm_call, 
                               args=[alarm_id, phone_extension]).start()
             else:
-                self.logger.error(f"Errore nell'esecuzione sveglia camera {room_number}: {message}")
+                self.logger.error(f"Errore nell'esecuzione sveglia camera {room_number}")
                 self.db.update_alarm_status(alarm_id, "failed")
                 
         except Exception as e:
@@ -295,9 +295,9 @@ class AlarmManager:
             (success, dtmf_digit): Success e tasto premuto
         """
         try:
-            self.logger.info(f="="*60)
+            self.logger.info("="*60)
             self.logger.info(f"SVEGLIA CON SNOOZE - Camera {room_number} - Interno {phone_extension} - Lingua: {language.upper()}")
-            self.logger.info(f"="*60)
+            self.logger.info("="*60)
             
             # 1. Chiamata + riproduzione audio + DTMF in UN SOLO comando
             # NON chiamare make_call separatamente!
