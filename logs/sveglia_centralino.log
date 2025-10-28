@@ -3522,3 +3522,112 @@
 2025-10-28 16:58:16,387 - sveglia_centralino.alarm_manager - INFO - _alarm_loop:73 - Loop sveglie terminato
 2025-10-28 16:58:16,388 - sveglia_centralino.alarm_manager - INFO - stop:46 - Gestore sveglie fermato
 2025-10-28 16:58:16,388 - sveglia_centralino.main - INFO - on_closing:679 - Applicazione chiusa
+2025-10-28 17:00:11,249 - sveglia_centralino.alarm_manager - INFO - start:32 - Creazione thread alarm_loop...
+2025-10-28 17:00:11,249 - sveglia_centralino.alarm_manager - INFO - _alarm_loop:50 - Loop sveglie avviato - check_interval: 30s
+2025-10-28 17:00:11,350 - sveglia_centralino.alarm_manager - INFO - start:38 - Gestore sveglie avviato - Thread alive: True
+2025-10-28 17:00:11,350 - sveglia_centralino.main - INFO - __init__:55 - Gestore sveglie avviato
+2025-10-28 17:00:11,352 - sveglia_centralino.main - INFO - test_connection:375 - ============================================================
+2025-10-28 17:00:11,352 - sveglia_centralino.main - INFO - test_connection:376 - TEST CONNESSIONE PBX ALL'AVVIO
+2025-10-28 17:00:11,352 - sveglia_centralino.main - INFO - test_connection:377 - ============================================================
+2025-10-28 17:00:11,352 - sveglia_centralino.main - INFO - test_connection:378 - Host: 192.168.10.15:22
+2025-10-28 17:00:11,352 - sveglia_centralino.main - INFO - test_connection:379 - Username: root
+2025-10-28 17:00:11,419 - sveglia_centralino.pbx_connection - INFO - connect:39 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 17:00:11,528 - sveglia_centralino.pbx_connection - INFO - execute_command:89 - Comando eseguito: echo 'PBX Connection Test'
+2025-10-28 17:00:11,528 - sveglia_centralino.pbx_connection - INFO - test_connection:588 - Test connessione PBX completato con successo
+2025-10-28 17:00:11,529 - sveglia_centralino.pbx_connection - INFO - disconnect:57 - Connessione SSH chiusa
+2025-10-28 17:00:11,536 - sveglia_centralino.main - INFO - test_connection:385 - ✓ Connessione PBX all'avvio: SUCCESSO
+2025-10-28 17:00:11,536 - sveglia_centralino.main - INFO - test_connection:386 - ============================================================
+2025-10-28 17:00:41,265 - sveglia_centralino.alarm_manager - INFO - _execute_alarm:122 - Audio wake_up: Wakeup_EN, Lingua: en
+2025-10-28 17:00:41,265 - sveglia_centralino.alarm_manager - INFO - _execute_alarm_with_snooze:304 - ============================================================
+2025-10-28 17:00:41,265 - sveglia_centralino.alarm_manager - INFO - _execute_alarm_with_snooze:305 - SVEGLIA CON SNOOZE - Camera 130 - Interno 130 - Lingua: EN
+2025-10-28 17:00:41,265 - sveglia_centralino.alarm_manager - INFO - _execute_alarm_with_snooze:306 - ============================================================
+2025-10-28 17:00:41,266 - sveglia_centralino.alarm_manager - INFO - _get_audio_by_action:400 - Audio trovato: snooze_5_en (snooze_confirm, en, 5)
+2025-10-28 17:00:41,266 - sveglia_centralino.alarm_manager - INFO - _get_audio_by_action:400 - Audio trovato: snooze_10_en (snooze_confirm, en, 10)
+2025-10-28 17:00:41,266 - sveglia_centralino.alarm_manager - INFO - _execute_alarm_with_snooze:313 - Audio conferma 5min: audio_messages\snooze_5_en.wav
+2025-10-28 17:00:41,266 - sveglia_centralino.alarm_manager - INFO - _execute_alarm_with_snooze:315 - Audio conferma 10min: audio_messages\snooze_10_en.wav
+2025-10-28 17:00:41,266 - sveglia_centralino.alarm_manager - INFO - _execute_alarm_with_snooze:318 - Avvio chiamata con audio, DTMF e conferma...
+2025-10-28 17:00:41,266 - sveglia_centralino.pbx_connection - INFO - play_audio_with_dtmf:342 - Upload audio sveglia: audio_messages\wakeup-msg_en_1.wav
+2025-10-28 17:00:41,266 - sveglia_centralino.pbx_connection - INFO - upload_audio_to_asterisk:284 - Upload audio wakeup-msg_en_1.wav su Asterisk...
+2025-10-28 17:00:41,325 - sveglia_centralino.pbx_connection - INFO - connect:39 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 17:00:41,387 - sveglia_centralino.pbx_connection - INFO - execute_command:89 - Comando eseguito: mkdir -p /var/lib/asterisk/sounds/custom/
+2025-10-28 17:00:41,510 - sveglia_centralino.pbx_connection - INFO - upload_audio_to_asterisk:305 - ✓ Audio caricato: /var/lib/asterisk/sounds/custom/wakeup-msg_en_1.wav
+2025-10-28 17:00:41,510 - sveglia_centralino.pbx_connection - INFO - play_audio_with_dtmf:356 - Upload audio conferma 5min: audio_messages\snooze_5_en.wav
+2025-10-28 17:00:41,510 - sveglia_centralino.pbx_connection - INFO - upload_audio_to_asterisk:284 - Upload audio snooze_5_en.wav su Asterisk...
+2025-10-28 17:00:41,572 - sveglia_centralino.pbx_connection - INFO - execute_command:89 - Comando eseguito: mkdir -p /var/lib/asterisk/sounds/custom/
+2025-10-28 17:00:41,687 - sveglia_centralino.pbx_connection - INFO - upload_audio_to_asterisk:305 - ✓ Audio caricato: /var/lib/asterisk/sounds/custom/snooze_5_en.wav
+2025-10-28 17:00:41,687 - sveglia_centralino.pbx_connection - INFO - play_audio_with_dtmf:360 - ✓ Conferma 5min: custom/snooze_5_en
+2025-10-28 17:00:41,687 - sveglia_centralino.pbx_connection - INFO - play_audio_with_dtmf:363 - Upload audio conferma 10min: audio_messages\snooze_10_en.wav
+2025-10-28 17:00:41,687 - sveglia_centralino.pbx_connection - INFO - upload_audio_to_asterisk:284 - Upload audio snooze_10_en.wav su Asterisk...
+2025-10-28 17:00:41,754 - sveglia_centralino.pbx_connection - INFO - execute_command:89 - Comando eseguito: mkdir -p /var/lib/asterisk/sounds/custom/
+2025-10-28 17:00:41,871 - sveglia_centralino.pbx_connection - INFO - upload_audio_to_asterisk:305 - ✓ Audio caricato: /var/lib/asterisk/sounds/custom/snooze_10_en.wav
+2025-10-28 17:00:41,871 - sveglia_centralino.pbx_connection - INFO - play_audio_with_dtmf:367 - ✓ Conferma 10min: custom/snooze_10_en
+2025-10-28 17:00:41,871 - sveglia_centralino.pbx_connection - INFO - play_audio_with_dtmf:377 - Audio paths da passare ad Asterisk:
+2025-10-28 17:00:41,871 - sveglia_centralino.pbx_connection - INFO - play_audio_with_dtmf:378 -   Wake-up: custom/wakeup-msg_en_1
+2025-10-28 17:00:41,871 - sveglia_centralino.pbx_connection - INFO - play_audio_with_dtmf:379 -   Snooze 5min: custom/snooze_5_en
+2025-10-28 17:00:41,871 - sveglia_centralino.pbx_connection - INFO - play_audio_with_dtmf:380 -   Snooze 10min: custom/snooze_10_en
+2025-10-28 17:00:41,871 - sveglia_centralino.pbx_connection - INFO - play_audio_with_dtmf:381 -   Call ID: 6078
+2025-10-28 17:00:41,932 - sveglia_centralino.pbx_connection - INFO - execute_command:89 - Comando eseguito: echo -n 'custom/snooze_5_en' > /tmp/s5_6078.txt
+2025-10-28 17:00:41,932 - sveglia_centralino.pbx_connection - INFO - play_audio_with_dtmf:389 - ✓ File snooze 5: /tmp/s5_6078.txt
+2025-10-28 17:00:42,035 - sveglia_centralino.pbx_connection - INFO - execute_command:89 - Comando eseguito: echo -n 'custom/snooze_10_en' > /tmp/s10_6078.txt
+2025-10-28 17:00:42,035 - sveglia_centralino.pbx_connection - INFO - play_audio_with_dtmf:394 - ✓ File snooze 10: /tmp/s10_6078.txt
+2025-10-28 17:00:42,137 - sveglia_centralino.pbx_connection - INFO - execute_command:89 - Comando eseguito: echo -n 'custom-wakeup-msg_en_1' > /tmp/w_6078.txt
+2025-10-28 17:00:42,138 - sveglia_centralino.pbx_connection - INFO - play_audio_with_dtmf:400 - ✓ File wake-up: /tmp/w_6078.txt
+2025-10-28 17:00:42,139 - sveglia_centralino.pbx_connection - INFO - play_audio_with_dtmf:412 - Chiamata con DTMF a 130: custom/wakeup-msg_en_1
+2025-10-28 17:00:42,243 - sveglia_centralino.pbx_connection - INFO - execute_command:89 - Comando eseguito: asterisk -rx "channel originate Local/130@from-internal/n extension 6078@wakeup-service callerid 'Servizio Sveglie <999>'" 
+2025-10-28 17:00:42,243 - sveglia_centralino.pbx_connection - INFO - play_audio_with_dtmf:421 - ✓ Chiamata avviata verso wakeup-service
+2025-10-28 17:01:17,307 - sveglia_centralino.pbx_connection - INFO - execute_command:89 - Comando eseguito: ls -t /tmp/asterisk_dtmf_* 2>/dev/null | head -1
+2025-10-28 17:01:17,414 - sveglia_centralino.pbx_connection - INFO - execute_command:89 - Comando eseguito: cat /tmp/asterisk_dtmf_1761667242.3458.txt
+2025-10-28 17:01:17,415 - sveglia_centralino.pbx_connection - INFO - play_audio_with_dtmf:442 - ✓ DTMF ricevuto: 1
+2025-10-28 17:01:17,516 - sveglia_centralino.pbx_connection - INFO - execute_command:89 - Comando eseguito: rm -f /tmp/asterisk_dtmf_1761667242.3458.txt
+2025-10-28 17:01:17,619 - sveglia_centralino.pbx_connection - INFO - execute_command:89 - Comando eseguito: rm -f /tmp/w_6078.txt /tmp/s5_6078.txt /tmp/s10_6078.txt
+2025-10-28 17:01:17,620 - sveglia_centralino.pbx_connection - INFO - play_audio_with_dtmf:449 - ✓ File temporanei puliti per ID 6078
+2025-10-28 17:01:17,620 - sveglia_centralino.alarm_manager - INFO - _execute_alarm_with_snooze:334 - ✓ DTMF '1' ricevuto - Snooze 5 minuti (conferma già riprodotta)
+2025-10-28 17:01:17,620 - sveglia_centralino.alarm_manager - INFO - _execute_alarm_with_snooze:350 - Riprogrammazione sveglia per 17:06
+2025-10-28 17:01:17,646 - sveglia_centralino.alarm_manager - INFO - _execute_alarm_with_snooze:365 - ✓ Sveglia riprogrammata con successo
+2025-10-28 17:01:17,646 - sveglia_centralino.alarm_manager - INFO - _execute_alarm_with_snooze:366 - ============================================================
+2025-10-28 17:01:17,653 - sveglia_centralino.alarm_manager - INFO - _execute_alarm:150 - Sveglia eseguita per camera 130 (interno 130)
+2025-10-28 17:02:17,665 - sveglia_centralino.alarm_manager - ERROR - _end_alarm_call:183 - Errore nella terminazione chiamata interno 130: Nessuna chiamata attiva per questa camera
+2025-10-28 17:05:17,792 - sveglia_centralino.alarm_manager - INFO - _execute_alarm:122 - Audio wake_up: Wakeup_EN, Lingua: en
+2025-10-28 17:05:17,793 - sveglia_centralino.alarm_manager - INFO - _execute_alarm_with_snooze:304 - ============================================================
+2025-10-28 17:05:17,794 - sveglia_centralino.alarm_manager - INFO - _execute_alarm_with_snooze:305 - SVEGLIA CON SNOOZE - Camera 130 - Interno 130 - Lingua: EN
+2025-10-28 17:05:17,794 - sveglia_centralino.alarm_manager - INFO - _execute_alarm_with_snooze:306 - ============================================================
+2025-10-28 17:05:17,797 - sveglia_centralino.alarm_manager - INFO - _get_audio_by_action:400 - Audio trovato: snooze_5_en (snooze_confirm, en, 5)
+2025-10-28 17:05:17,799 - sveglia_centralino.alarm_manager - INFO - _get_audio_by_action:400 - Audio trovato: snooze_10_en (snooze_confirm, en, 10)
+2025-10-28 17:05:17,799 - sveglia_centralino.alarm_manager - INFO - _execute_alarm_with_snooze:313 - Audio conferma 5min: audio_messages\snooze_5_en.wav
+2025-10-28 17:05:17,799 - sveglia_centralino.alarm_manager - INFO - _execute_alarm_with_snooze:315 - Audio conferma 10min: audio_messages\snooze_10_en.wav
+2025-10-28 17:05:17,799 - sveglia_centralino.alarm_manager - INFO - _execute_alarm_with_snooze:318 - Avvio chiamata con audio, DTMF e conferma...
+2025-10-28 17:05:17,800 - sveglia_centralino.pbx_connection - INFO - play_audio_with_dtmf:342 - Upload audio sveglia: audio_messages\wakeup-msg_en_1.wav
+2025-10-28 17:05:17,800 - sveglia_centralino.pbx_connection - INFO - upload_audio_to_asterisk:284 - Upload audio wakeup-msg_en_1.wav su Asterisk...
+2025-10-28 17:05:17,865 - sveglia_centralino.pbx_connection - INFO - execute_command:89 - Comando eseguito: mkdir -p /var/lib/asterisk/sounds/custom/
+2025-10-28 17:05:18,001 - sveglia_centralino.pbx_connection - INFO - upload_audio_to_asterisk:305 - ✓ Audio caricato: /var/lib/asterisk/sounds/custom/wakeup-msg_en_1.wav
+2025-10-28 17:05:18,001 - sveglia_centralino.pbx_connection - INFO - play_audio_with_dtmf:356 - Upload audio conferma 5min: audio_messages\snooze_5_en.wav
+2025-10-28 17:05:18,001 - sveglia_centralino.pbx_connection - INFO - upload_audio_to_asterisk:284 - Upload audio snooze_5_en.wav su Asterisk...
+2025-10-28 17:05:18,067 - sveglia_centralino.pbx_connection - INFO - execute_command:89 - Comando eseguito: mkdir -p /var/lib/asterisk/sounds/custom/
+2025-10-28 17:05:18,190 - sveglia_centralino.pbx_connection - INFO - upload_audio_to_asterisk:305 - ✓ Audio caricato: /var/lib/asterisk/sounds/custom/snooze_5_en.wav
+2025-10-28 17:05:18,191 - sveglia_centralino.pbx_connection - INFO - play_audio_with_dtmf:360 - ✓ Conferma 5min: custom/snooze_5_en
+2025-10-28 17:05:18,192 - sveglia_centralino.pbx_connection - INFO - play_audio_with_dtmf:363 - Upload audio conferma 10min: audio_messages\snooze_10_en.wav
+2025-10-28 17:05:18,192 - sveglia_centralino.pbx_connection - INFO - upload_audio_to_asterisk:284 - Upload audio snooze_10_en.wav su Asterisk...
+2025-10-28 17:05:18,298 - sveglia_centralino.pbx_connection - INFO - execute_command:89 - Comando eseguito: mkdir -p /var/lib/asterisk/sounds/custom/
+2025-10-28 17:05:18,419 - sveglia_centralino.pbx_connection - INFO - upload_audio_to_asterisk:305 - ✓ Audio caricato: /var/lib/asterisk/sounds/custom/snooze_10_en.wav
+2025-10-28 17:05:18,419 - sveglia_centralino.pbx_connection - INFO - play_audio_with_dtmf:367 - ✓ Conferma 10min: custom/snooze_10_en
+2025-10-28 17:05:18,419 - sveglia_centralino.pbx_connection - INFO - play_audio_with_dtmf:377 - Audio paths da passare ad Asterisk:
+2025-10-28 17:05:18,419 - sveglia_centralino.pbx_connection - INFO - play_audio_with_dtmf:378 -   Wake-up: custom/wakeup-msg_en_1
+2025-10-28 17:05:18,419 - sveglia_centralino.pbx_connection - INFO - play_audio_with_dtmf:379 -   Snooze 5min: custom/snooze_5_en
+2025-10-28 17:05:18,419 - sveglia_centralino.pbx_connection - INFO - play_audio_with_dtmf:380 -   Snooze 10min: custom/snooze_10_en
+2025-10-28 17:05:18,420 - sveglia_centralino.pbx_connection - INFO - play_audio_with_dtmf:381 -   Call ID: 6796
+2025-10-28 17:05:18,527 - sveglia_centralino.pbx_connection - INFO - execute_command:89 - Comando eseguito: echo -n 'custom/snooze_5_en' > /tmp/s5_6796.txt
+2025-10-28 17:05:18,528 - sveglia_centralino.pbx_connection - INFO - play_audio_with_dtmf:389 - ✓ File snooze 5: /tmp/s5_6796.txt
+2025-10-28 17:05:18,631 - sveglia_centralino.pbx_connection - INFO - execute_command:89 - Comando eseguito: echo -n 'custom/snooze_10_en' > /tmp/s10_6796.txt
+2025-10-28 17:05:18,633 - sveglia_centralino.pbx_connection - INFO - play_audio_with_dtmf:394 - ✓ File snooze 10: /tmp/s10_6796.txt
+2025-10-28 17:05:18,739 - sveglia_centralino.pbx_connection - INFO - execute_command:89 - Comando eseguito: echo -n 'custom-wakeup-msg_en_1' > /tmp/w_6796.txt
+2025-10-28 17:05:18,740 - sveglia_centralino.pbx_connection - INFO - play_audio_with_dtmf:400 - ✓ File wake-up: /tmp/w_6796.txt
+2025-10-28 17:05:18,740 - sveglia_centralino.pbx_connection - INFO - play_audio_with_dtmf:412 - Chiamata con DTMF a 130: custom/wakeup-msg_en_1
+2025-10-28 17:05:18,852 - sveglia_centralino.pbx_connection - INFO - execute_command:89 - Comando eseguito: asterisk -rx "channel originate Local/130@from-internal/n extension 6796@wakeup-service callerid 'Servizio Sveglie <999>'" 
+2025-10-28 17:05:18,853 - sveglia_centralino.pbx_connection - INFO - play_audio_with_dtmf:421 - ✓ Chiamata avviata verso wakeup-service
+2025-10-28 17:05:53,925 - sveglia_centralino.pbx_connection - INFO - execute_command:89 - Comando eseguito: ls -t /tmp/asterisk_dtmf_* 2>/dev/null | head -1
+2025-10-28 17:05:53,927 - sveglia_centralino.pbx_connection - INFO - play_audio_with_dtmf:453 - Nessun DTMF ricevuto (timeout o no input)
+2025-10-28 17:05:54,035 - sveglia_centralino.pbx_connection - INFO - execute_command:89 - Comando eseguito: rm -f /tmp/w_6796.txt /tmp/s5_6796.txt /tmp/s10_6796.txt
+2025-10-28 17:05:54,036 - sveglia_centralino.pbx_connection - INFO - play_audio_with_dtmf:457 - ✓ File temporanei puliti per ID 6796
+2025-10-28 17:05:54,036 - sveglia_centralino.alarm_manager - INFO - _execute_alarm_with_snooze:344 - Nessuno snooze richiesto - Cliente ha chiuso o timeout
+2025-10-28 17:05:54,109 - sveglia_centralino.alarm_manager - INFO - _execute_alarm:150 - Sveglia eseguita per camera 130 (interno 130)
+2025-10-28 17:06:54,123 - sveglia_centralino.alarm_manager - ERROR - _end_alarm_call:183 - Errore nella terminazione chiamata interno 130: Nessuna chiamata attiva per questa camera

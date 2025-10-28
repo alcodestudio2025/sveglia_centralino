@@ -214,11 +214,12 @@ class AlarmManager:
             current_snooze_count = alarm[5] if len(alarm) > 5 else 0
             new_snooze_count = current_snooze_count + 1
             
-            # Crea una nuova sveglia posticipata
+            # Crea una nuova sveglia posticipata con conteggio rinvii
             new_alarm_id = self.db.add_alarm(
                 room_number=alarm[1],
                 alarm_time=new_time.isoformat(),
-                audio_message_id=alarm[3]
+                audio_message_id=alarm[3],
+                snooze_count=new_snooze_count
             )
             
             # Aggiorna lo status della sveglia originale
@@ -352,14 +353,17 @@ class AlarmManager:
             # Aggiorna sveglia esistente
             self.db.update_alarm_status(alarm_id, "snoozed")
             
-            # Crea nuova sveglia per snooze - USA LO STESSO AUDIO_MESSAGE_ID
+            # Crea nuova sveglia per snooze - USA LO STESSO AUDIO_MESSAGE_ID E INCREMENTA SNOOZE_COUNT
             alarm_data = self.db.get_alarm(alarm_id)
             original_audio_id = alarm_data[3] if alarm_data and len(alarm_data) > 3 else None
+            current_snooze_count = alarm_data[5] if alarm_data and len(alarm_data) > 5 else 0
+            new_snooze_count = current_snooze_count + 1
             
             self.db.add_alarm(
                 room_number,
                 new_alarm_time.isoformat(),
-                audio_message_id=original_audio_id  # Usa stesso audio della sveglia originale
+                audio_message_id=original_audio_id,  # Usa stesso audio della sveglia originale
+                snooze_count=new_snooze_count  # Incrementa contatore rinvii
             )
             
             self.logger.info(f"✓ Sveglia riprogrammata con successo")

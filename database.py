@@ -290,13 +290,13 @@ class DatabaseManager:
         conn.close()
         return message
     
-    def add_alarm(self, room_number, alarm_time, audio_message_id=None):
+    def add_alarm(self, room_number, alarm_time, audio_message_id=None, snooze_count=0):
         """Aggiunge una sveglia"""
         conn = self.get_connection()
         cursor = conn.cursor()
         cursor.execute(
-            "INSERT INTO alarms (room_number, alarm_time, audio_message_id) VALUES (?, ?, ?)",
-            (room_number, alarm_time, audio_message_id)
+            "INSERT INTO alarms (room_number, alarm_time, audio_message_id, snooze_count) VALUES (?, ?, ?, ?)",
+            (room_number, alarm_time, audio_message_id, snooze_count)
         )
         conn.commit()
         alarm_id = cursor.lastrowid
