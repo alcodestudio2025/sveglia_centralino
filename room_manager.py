@@ -287,14 +287,26 @@ class RoomManagerWindow:
                 
                 # Aggiorna cache stato
                 self.pbx_status_cache = {}
+                online_count = 0
+                offline_count = 0
+                
                 for peer in peers:
                     self.pbx_status_cache[peer['extension']] = {
                         'status': peer['status'],
                         'latency': peer['latency'],
                         'type': peer['type']
                     }
+                    if peer['status'] == 'online':
+                        online_count += 1
+                    elif peer['status'] == 'offline':
+                        offline_count += 1
                 
-                self.logger.info(f"Aggiornati stati per {len(peers)} interni")
+                self.logger.info(f"Cache popolata con {len(peers)} interni: {online_count} online, {offline_count} offline")
+                
+                # Log primi 3 interni per debug
+                sample_keys = list(self.pbx_status_cache.keys())[:3]
+                for ext in sample_keys:
+                    self.logger.debug(f"  Cache[{ext}] = {self.pbx_status_cache[ext]}")
                 
                 # Ricarica la lista per aggiornare i colori
                 self.load_rooms()
@@ -329,7 +341,20 @@ class RoomManagerWindow:
         for item in self.rooms_tree.get_children():
             self.rooms_tree.delete(item)
         
+        # Configura i tag PRIMA del loop (una sola volta)
+        self.rooms_tree.tag_configure('pbx_green', foreground='green')
+        self.rooms_tree.tag_configure('pbx_red', foreground='red')
+        self.rooms_tree.tag_configure('pbx_orange', foreground='orange')
+        self.rooms_tree.tag_configure('pbx_gray', foreground='gray')
+        
         try:
+            # Log cache status
+            self.logger.info(f"Caricamento camere... Cache PBX: {len(self.pbx_status_cache)} interni")
+            if len(self.pbx_status_cache) > 0:
+                # Log primi 3 interni in cache
+                sample = list(self.pbx_status_cache.items())[:3]
+                self.logger.debug(f"  Campione cache: {sample}")
+            
             rooms = self.db.get_rooms()
             for room in rooms:
                 # Estrae i dati (ordine corretto dal database)
@@ -359,6 +384,14 @@ class RoomManagerWindow:
                     elif ext_status == 'unmonitored':
                         pbx_status_display = "○ Non monitorato"
                         pbx_color = "orange"
+                    
+                    # Log solo primo match per vedere se funziona
+                    if room_id == rooms[0][0]:
+                        self.logger.debug(f"  Primo interno: {phone_extension} -> {ext_status}")
+                elif phone_extension:
+                    # Log solo primo mismatch
+                    if room_id == rooms[0][0]:
+                        self.logger.warning(f"  Interno {phone_extension} NON trovato in cache!")
                 
                 # Converte stato in italiano
                 status_it = {
@@ -381,8 +414,7 @@ class RoomManagerWindow:
                     created_date         # Data creazione
                 ))
                 
-                # Colora la riga in base allo stato PBX
-                self.rooms_tree.tag_configure(f'pbx_{pbx_color}', foreground=pbx_color)
+                # Colora la riga in base allo stato PBX (usa tag già configurato)
                 self.rooms_tree.item(item_id, tags=(f'pbx_{pbx_color}',))
         
         except Exception as e:
