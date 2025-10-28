@@ -294,8 +294,113 @@ Funzionalità:
     
     def open_alarm_edit_dialog(self, alarm_id):
         """Apre la finestra di modifica sveglia"""
-        # Per ora mostra un messaggio - implementeremo la finestra di modifica
-        messagebox.showinfo("Modifica Sveglia", f"Modifica sveglia ID: {alarm_id}\n\nFunzione in implementazione")
+        # Ottieni i dati della sveglia
+        alarm = self.db.get_alarm(alarm_id)
+        if not alarm:
+            messagebox.showerror("Errore", "Sveglia non trovata")
+            return
+        
+        # Crea finestra di dialogo
+        edit_window = tk.Toplevel(self.root)
+        edit_window.title("Modifica Sveglia")
+        edit_window.geometry("400x300")
+        edit_window.resizable(False, False)
+        
+        # Centra la finestra
+        edit_window.transient(self.root)
+        edit_window.grab_set()
+        
+        # Frame principale
+        main_frame = ttk.Frame(edit_window, padding="20")
+        main_frame.pack(fill=tk.BOTH, expand=True)
+        
+        # Titolo
+        ttk.Label(main_frame, text=f"Modifica Sveglia - Camera {alarm[1]}", 
+                 font=("Arial", 12, "bold")).pack(pady=(0, 20))
+        
+        # Form di modifica
+        form_frame = ttk.Frame(main_frame)
+        form_frame.pack(fill=tk.BOTH, expand=True)
+        
+        # Data
+        ttk.Label(form_frame, text="Data:").grid(row=0, column=0, sticky=tk.W, pady=5)
+        date_entry = ttk.Entry(form_frame, width=15)
+        date_entry.grid(row=0, column=1, sticky=(tk.W, tk.E), pady=5, padx=(10, 0))
+        alarm_time = datetime.datetime.fromisoformat(alarm[2])
+        date_entry.insert(0, alarm_time.strftime("%Y-%m-%d"))
+        
+        # Ora
+        ttk.Label(form_frame, text="Ora:").grid(row=1, column=0, sticky=tk.W, pady=5)
+        time_entry = ttk.Entry(form_frame, width=15)
+        time_entry.grid(row=1, column=1, sticky=(tk.W, tk.E), pady=5, padx=(10, 0))
+        time_entry.insert(0, alarm_time.strftime("%H:%M"))
+        
+        # Lingua (se c'è audio message)
+        ttk.Label(form_frame, text="Lingua:").grid(row=2, column=0, sticky=tk.W, pady=5)
+        language_var = tk.StringVar(value="it")
+        
+        # Trova lingua dell'audio corrente
+        if alarm[3]:  # Se c'è un audio_message_id
+            audio_messages = self.db.get_audio_messages()
+            for msg in audio_messages:
+                if msg[0] == alarm[3]:
+                    language_var.set(msg[5] if len(msg) > 5 else "it")
+                    break
+        
+        language_combo = ttk.Combobox(form_frame, textvariable=language_var, 
+                                     values=["it", "en", "fr", "de", "es"],
+                                     state="readonly", width=12)
+        language_combo.grid(row=2, column=1, sticky=(tk.W, tk.E), pady=5, padx=(10, 0))
+        
+        form_frame.columnconfigure(1, weight=1)
+        
+        # Pulsanti
+        buttons_frame = ttk.Frame(main_frame)
+        buttons_frame.pack(fill=tk.X, pady=(20, 0))
+        
+        def save_changes():
+            try:
+                date_str = date_entry.get()
+                time_str = time_entry.get()
+                language = language_var.get()
+                
+                # Valida e combina data e ora
+                new_alarm_time = datetime.datetime.strptime(f"{date_str} {time_str}", "%Y-%m-%d %H:%M")
+                
+                # Verifica che la data sia nel futuro
+                if new_alarm_time <= datetime.datetime.now():
+                    messagebox.showerror("Errore", "La sveglia deve essere programmata nel futuro")
+                    return
+                
+                # Trova audio message per la lingua selezionata
+                audio_id = None
+                messages = self.db.get_audio_messages()
+                for msg in messages:
+                    msg_language = msg[5] if len(msg) > 5 else 'it'
+                    msg_action = msg[6] if len(msg) > 6 else None
+                    
+                    if msg_language.lower() == language.lower() and msg_action == 'wake_up':
+                        audio_id = msg[0]
+                        break
+                
+                # Aggiorna la sveglia
+                success = self.db.update_alarm(alarm_id, new_alarm_time.isoformat(), audio_id)
+                
+                if success:
+                    messagebox.showinfo("Successo", "Sveglia modificata con successo")
+                    self.load_alarms()
+                    self.status_var.set(f"Sveglia {alarm_id} modificata")
+                    edit_window.destroy()
+                else:
+                    messagebox.showerror("Errore", "Errore nella modifica della sveglia")
+                    
+            except ValueError as e:
+                messagebox.showerror("Errore", f"Formato data/ora non valido: {e}")
+            except Exception as e:
+                messagebox.showerror("Errore", f"Errore: {e}")
+        
+        ttk.Button(buttons_frame, text="Salva", command=save_changes).pack(side=tk.RIGHT, padx=(5, 0))
+        ttk.Button(buttons_frame, text="Annulla", command=edit_window.destroy).pack(side=tk.RIGHT)
     
     def snooze_selected_alarm(self):
         """Posticipa la sveglia selezionata"""
@@ -316,7 +421,7 @@ Funzionalità:
         # Crea finestra di dialogo per selezione rinvio
         snooze_window = tk.Toplevel(self.root)
         snooze_window.title("Posticipa Sveglia")
-        snooze_window.geometry("300x200")
+        snooze_window.geometry("350x280")
         snooze_window.resizable(False, False)
         
         # Centra la finestra

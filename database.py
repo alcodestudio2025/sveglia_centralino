@@ -335,6 +335,33 @@ class DatabaseManager:
         conn.close()
         return alarms
     
+    def update_alarm(self, alarm_id, alarm_time=None, audio_message_id=None):
+        """Aggiorna i dati di una sveglia"""
+        conn = self.get_connection()
+        cursor = conn.cursor()
+        
+        # Aggiorna solo i campi forniti
+        if alarm_time and audio_message_id is not None:
+            cursor.execute(
+                "UPDATE alarms SET alarm_time = ?, audio_message_id = ? WHERE id = ?",
+                (alarm_time, audio_message_id, alarm_id)
+            )
+        elif alarm_time:
+            cursor.execute(
+                "UPDATE alarms SET alarm_time = ? WHERE id = ?",
+                (alarm_time, alarm_id)
+            )
+        elif audio_message_id is not None:
+            cursor.execute(
+                "UPDATE alarms SET audio_message_id = ? WHERE id = ?",
+                (audio_message_id, alarm_id)
+            )
+        
+        conn.commit()
+        affected = cursor.rowcount > 0
+        conn.close()
+        return affected
+    
     def update_alarm_status(self, alarm_id, status):
         """Aggiorna lo status di una sveglia"""
         conn = self.get_connection()
