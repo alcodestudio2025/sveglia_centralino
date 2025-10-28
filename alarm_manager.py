@@ -41,8 +41,11 @@ class AlarmManager:
     
     def _alarm_loop(self):
         """Loop principale per il controllo delle sveglie"""
+        self.logger.info("Loop sveglie avviato - check_interval: {}s".format(self.check_interval))
+        
         while self.running:
             try:
+                self.logger.debug("Controllo sveglie in corso...")
                 self._check_pending_alarms()
                 self._cleanup_completed_calls()
                 
@@ -53,11 +56,15 @@ class AlarmManager:
                     time.sleep(1)
             except Exception as e:
                 self.logger.error(f"Errore nel loop sveglie: {e}")
+                import traceback
+                self.logger.error(traceback.format_exc())
                 # Attesa più lunga in caso di errore, ma interrompibile
                 for _ in range(10):
                     if not self.running:
                         break
                     time.sleep(1)
+        
+        self.logger.info("Loop sveglie terminato")
     
     def _check_pending_alarms(self):
         """Controlla le sveglie in attesa"""
