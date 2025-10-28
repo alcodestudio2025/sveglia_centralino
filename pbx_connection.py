@@ -187,13 +187,11 @@ exten => 1,1,NoOp(DTMF 1 ricevuto - Snooze 5 min)
 exten => 1,n,Set(SNOOZE_CHOICE=1)
 exten => 1,n,System(echo "1" > /tmp/asterisk_dtmf_${UNIQUEID}.txt)
 exten => 1,n,NoOp(File DTMF creato: /tmp/asterisk_dtmf_${UNIQUEID}.txt)
-; Leggi path audio conferma dal file temporaneo usando System + FILE
+; Leggi path audio conferma dal file temporaneo
 exten => 1,n,Set(AUDIO_FILE_PATH=/tmp/snooze_5_audio_${CALL_ID}.txt)
 exten => 1,n,NoOp(Cerco file: ${AUDIO_FILE_PATH})
-; Usa FILE() per leggere il contenuto
-exten => 1,n,Set(SNOOZE_AUDIO=${FILE(${AUDIO_FILE_PATH},0,1000)})
-exten => 1,n,Set(SNOOZE_AUDIO=${STRREPLACE(SNOOZE_AUDIO,\n,)})
-exten => 1,n,Set(SNOOZE_AUDIO=${STRREPLACE(SNOOZE_AUDIO,\r,)})
+; Leggi contenuto con FILE() - echo -n già evita newline
+exten => 1,n,Set(SNOOZE_AUDIO=${FILE(${AUDIO_FILE_PATH},0,100,l)})
 exten => 1,n,NoOp(Audio letto: [${SNOOZE_AUDIO}])
 exten => 1,n,GotoIf($["${SNOOZE_AUDIO}" = ""]?noadio)
 exten => 1,n,NoOp(Riproduzione conferma: ${SNOOZE_AUDIO})
@@ -208,13 +206,11 @@ exten => 2,1,NoOp(DTMF 2 ricevuto - Snooze 10 min)
 exten => 2,n,Set(SNOOZE_CHOICE=2)
 exten => 2,n,System(echo "2" > /tmp/asterisk_dtmf_${UNIQUEID}.txt)
 exten => 2,n,NoOp(File DTMF creato: /tmp/asterisk_dtmf_${UNIQUEID}.txt)
-; Leggi path audio conferma dal file temporaneo usando System + FILE
+; Leggi path audio conferma dal file temporaneo
 exten => 2,n,Set(AUDIO_FILE_PATH=/tmp/snooze_10_audio_${CALL_ID}.txt)
 exten => 2,n,NoOp(Cerco file: ${AUDIO_FILE_PATH})
-; Usa FILE() per leggere il contenuto
-exten => 2,n,Set(SNOOZE_AUDIO=${FILE(${AUDIO_FILE_PATH},0,1000)})
-exten => 2,n,Set(SNOOZE_AUDIO=${STRREPLACE(SNOOZE_AUDIO,\n,)})
-exten => 2,n,Set(SNOOZE_AUDIO=${STRREPLACE(SNOOZE_AUDIO,\r,)})
+; Leggi contenuto con FILE() - echo -n già evita newline
+exten => 2,n,Set(SNOOZE_AUDIO=${FILE(${AUDIO_FILE_PATH},0,100,l)})
 exten => 2,n,NoOp(Audio letto: [${SNOOZE_AUDIO}])
 exten => 2,n,GotoIf($["${SNOOZE_AUDIO}" = ""]?noadio)
 exten => 2,n,NoOp(Riproduzione conferma: ${SNOOZE_AUDIO})
