@@ -380,6 +380,9 @@ Funzionalità:
                     self.status_var.set("✓ Connessione PBX: OK")
                     self.logger.info("✓ Connessione PBX all'avvio: SUCCESSO")
                     self.logger.info("="*60)
+                    
+                    # Mostra popup di successo con chiusura automatica
+                    self.show_success_popup()
                 else:
                     self.status_var.set("✗ Connessione PBX: ERRORE")
                     self.logger.error(f"✗ Connessione PBX all'avvio: FALLITA - {message}")
@@ -398,6 +401,67 @@ Funzionalità:
         
         # Esegue il test in un thread separato per non bloccare l'UI
         threading.Thread(target=test_connection, daemon=True).start()
+    
+    def show_success_popup(self):
+        """Mostra popup di successo connessione PBX con chiusura automatica"""
+        def show_popup():
+            # Crea finestra popup
+            popup = tk.Toplevel(self.root)
+            popup.title("Connessione PBX")
+            popup.geometry("400x200")
+            popup.resizable(False, False)
+            
+            # Centra la finestra
+            popup.transient(self.root)
+            popup.grab_set()
+            
+            # Frame principale
+            main_frame = ttk.Frame(popup, padding="20")
+            main_frame.pack(fill=tk.BOTH, expand=True)
+            
+            # Icona e messaggio successo
+            success_frame = ttk.Frame(main_frame)
+            success_frame.pack(pady=(10, 20))
+            
+            # Emoji/simbolo successo
+            ttk.Label(success_frame, text="✓", font=("Arial", 48, "bold"), 
+                     foreground="green").pack()
+            
+            # Messaggio principale
+            ttk.Label(main_frame, text="Connessione PBX Stabilita", 
+                     font=("Arial", 14, "bold")).pack(pady=(0, 10))
+            
+            # Dettagli connessione
+            details_text = f"Host: {PBX_CONFIG.get('host')}:{PBX_CONFIG.get('port')}\n"
+            details_text += f"Username: {PBX_CONFIG.get('username')}\n"
+            details_text += f"Asterisk: Disponibile"
+            
+            ttk.Label(main_frame, text=details_text, 
+                     font=("Arial", 10)).pack(pady=(0, 15))
+            
+            # Label countdown
+            countdown_var = tk.StringVar(value="Chiusura automatica in 5 secondi...")
+            countdown_label = ttk.Label(main_frame, textvariable=countdown_var, 
+                                       font=("Arial", 9), foreground="gray")
+            countdown_label.pack(pady=(10, 0))
+            
+            # Countdown e chiusura automatica
+            def countdown(seconds):
+                if seconds > 0 and popup.winfo_exists():
+                    countdown_var.set(f"Chiusura automatica in {seconds} secondi...")
+                    popup.after(1000, countdown, seconds - 1)
+                elif popup.winfo_exists():
+                    popup.destroy()
+            
+            # Avvia countdown
+            countdown(5)
+            
+            # Pulsante chiusura manuale
+            ttk.Button(main_frame, text="Chiudi Ora", 
+                      command=popup.destroy).pack(pady=(5, 0))
+        
+        # Esegue nella main thread
+        self.root.after(0, show_popup)
     
     def test_pbx_connection(self):
         """Testa la connessione PBX manualmente"""
