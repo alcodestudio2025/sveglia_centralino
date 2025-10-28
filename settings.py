@@ -451,6 +451,12 @@ class SettingsWindow:
             self.settings["pbx"]["password"] = self.pbx_password.get()
             self.settings["pbx"]["timeout"] = int(self.pbx_timeout.get())
             
+            # Salva su file usando la funzione di config
+            from config import save_user_config, PBX_CONFIG
+            if save_user_config(self.settings):
+                # Aggiorna anche PBX_CONFIG in memoria
+                PBX_CONFIG.update(self.settings["pbx"])
+            
             self.settings["mail"]["enabled"] = self.mail_enabled.get()
             self.settings["mail"]["smtp_server"] = self.mail_smtp_server.get()
             self.settings["mail"]["smtp_port"] = self.mail_smtp_port.get()

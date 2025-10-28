@@ -55,7 +55,7 @@ class SvegliaCentralinoApp:
         self.alarm_manager.start()
         self.logger.info("Gestore sveglie avviato")
         
-        # Testa la connessione PBX all'avvio
+        # Testa la connessione PBX all'avvio (usa impostazioni salvate)
         self.test_pbx_on_startup()
     
     def create_widgets(self):
@@ -358,14 +358,43 @@ Funzionalità:
     def test_pbx_on_startup(self):
         """Testa la connessione PBX all'avvio dell'applicazione"""
         def test_connection():
-            success, message = self.alarm_manager.test_pbx_connection()
-            if success:
-                self.status_var.set("Connessione PBX: OK")
-            else:
-                self.status_var.set(f"Connessione PBX: ERRORE - {message}")
-                messagebox.showwarning("Connessione PBX", 
-                                     f"Impossibile connettersi al centralino PBX:\n{message}\n\n"
-                                     f"Verifica le impostazioni di connessione.")
+            try:
+                # Verifica se il PBX è configurato (non valori di default)
+                if PBX_CONFIG.get('host') == '192.168.1.100' and PBX_CONFIG.get('password') == 'password':
+                    # Configurazione di default - non testare
+                    self.status_var.set("PBX non configurato - Vai in Impostazioni")
+                    self.logger.info("PBX non configurato (valori di default)")
+                    self.logger.info("Configura il PBX in: Menu → Impostazioni → Connessione PBX")
+                    return
+                
+                # Test reale con configurazione salvata
+                self.logger.info("="*60)
+                self.logger.info("TEST CONNESSIONE PBX ALL'AVVIO")
+                self.logger.info("="*60)
+                self.logger.info(f"Host: {PBX_CONFIG.get('host')}:{PBX_CONFIG.get('port')}")
+                self.logger.info(f"Username: {PBX_CONFIG.get('username')}")
+                
+                success, message = self.alarm_manager.test_pbx_connection()
+                
+                if success:
+                    self.status_var.set("✓ Connessione PBX: OK")
+                    self.logger.info("✓ Connessione PBX all'avvio: SUCCESSO")
+                    self.logger.info("="*60)
+                else:
+                    self.status_var.set("✗ Connessione PBX: ERRORE")
+                    self.logger.error(f"✗ Connessione PBX all'avvio: FALLITA - {message}")
+                    self.logger.info("="*60)
+                    
+                    # Mostra popup solo se configurato ma non raggiungibile
+                    messagebox.showwarning("Connessione PBX", 
+                                         f"Impossibile connettersi al centralino PBX:\n{message}\n\n"
+                                         f"Il sistema funzionerà ma le sveglie non potranno\n"
+                                         f"essere eseguite fino alla risoluzione del problema.\n\n"
+                                         f"Verifica in: Menu → Impostazioni → Test Connessione")
+                    
+            except Exception as e:
+                self.logger.error(f"Errore nel test PBX all'avvio: {e}")
+                self.status_var.set("Errore test PBX - Verifica configurazione")
         
         # Esegue il test in un thread separato per non bloccare l'UI
         threading.Thread(target=test_connection, daemon=True).start()
