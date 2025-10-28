@@ -147,7 +147,10 @@ class PBXConnection:
         try:
             # Costruisce comando Asterisk per riproduzione + lettura DTMF
             # Read(variable,filename,max_digits,option,timeout)
-            audio_name = audio_file_path.replace('.wav', '').replace('.mp3', '')
+            # Asterisk ha bisogno solo del nome file senza percorso e estensione
+            import os
+            audio_filename = os.path.basename(audio_file_path)
+            audio_name = audio_filename.replace('.wav', '').replace('.mp3', '').replace('.ogg', '')
             
             command = (
                 f"asterisk -rx 'channel originate Local/{phone_extension}@internal "
