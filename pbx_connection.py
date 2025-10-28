@@ -165,10 +165,10 @@ class PBXConnection:
 ; Pattern _X. matcha stringhe numeriche
 exten => _X.,1,NoOp(=== SVEGLIA ID: ${EXTEN} ===)
 exten => _X.,n,Set(CALL_ID=${EXTEN})
-; Leggi TUTTI i path dai file temporanei
-exten => _X.,n,Set(AUDIO_EXTEN=${FILE(/tmp/w_${CALL_ID}.txt,0,9999)})
-exten => _X.,n,Set(__SNOOZE_5_AUDIO=${FILE(/tmp/s5_${CALL_ID}.txt,0,9999)})
-exten => _X.,n,Set(__SNOOZE_10_AUDIO=${FILE(/tmp/s10_${CALL_ID}.txt,0,9999)})
+; Leggi i path dai file temporanei usando SHELL()
+exten => _X.,n,Set(AUDIO_EXTEN=${SHELL(cat /tmp/w_${CALL_ID}.txt 2>/dev/null)})
+exten => _X.,n,Set(__SNOOZE_5_AUDIO=${SHELL(cat /tmp/s5_${CALL_ID}.txt 2>/dev/null)})
+exten => _X.,n,Set(__SNOOZE_10_AUDIO=${SHELL(cat /tmp/s10_${CALL_ID}.txt 2>/dev/null)})
 exten => _X.,n,NoOp(Wake-up: ${AUDIO_EXTEN})
 exten => _X.,n,NoOp(Snooze 5: ${SNOOZE_5_AUDIO})
 exten => _X.,n,NoOp(Snooze 10: ${SNOOZE_10_AUDIO})
