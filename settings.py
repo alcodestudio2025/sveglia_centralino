@@ -512,11 +512,11 @@ class SettingsWindow:
                 logger.info("=" * 60)
                 
                 # Recupera le configurazioni correnti
-                host = self.pbx_host_var.get().strip()
-                port_str = self.pbx_port_var.get().strip()
-                username = self.pbx_username_var.get().strip()
-                password = self.pbx_password_var.get().strip()
-                timeout_str = self.pbx_timeout_var.get().strip()
+                host = self.pbx_host.get().strip()
+                port_str = self.pbx_port.get().strip()
+                username = self.pbx_username.get().strip()
+                password = self.pbx_password.get().strip()
+                timeout_str = self.pbx_timeout.get().strip()
                 
                 # Validazione input
                 logger.info(f"Host: {host}")
