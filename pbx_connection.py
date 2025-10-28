@@ -114,7 +114,7 @@ class PBXConnection:
             self.logger.error(f"Errore nella chiamata all'interno {phone_extension}: {e}")
             return False, str(e)
     
-    def play_audio(self, room_number, audio_file_path):
+    def play_audio(self, phone_extension, audio_file_path):
         """Riproduce un file audio durante la chiamata"""
         try:
             # Comando per riprodurre audio (da adattare al centralino specifico)
@@ -125,12 +125,76 @@ class PBXConnection:
             if error:
                 return False, f"Errore nella riproduzione audio: {error}"
             
-            self.logger.info(f"Audio riprodotto per camera {room_number}: {audio_file_path}")
+            self.logger.info(f"Audio riprodotto per interno {phone_extension}: {audio_file_path}")
             return True, "Audio riprodotto con successo"
             
         except Exception as e:
             self.logger.error(f"Errore nella riproduzione audio: {e}")
             return False, str(e)
+    
+    def play_audio_with_dtmf(self, phone_extension, audio_file_path, timeout=30):
+        """
+        Riproduce audio e attende input DTMF dall'utente
+        
+        Args:
+            phone_extension: Interno telefonico
+            audio_file_path: File audio da riprodurre
+            timeout: Secondi di attesa per input DTMF
+            
+        Returns:
+            (success, dtmf_digit): Tupla con successo e tasto premuto (1, 2, ecc.)
+        """
+        try:
+            # Costruisce comando Asterisk per riproduzione + lettura DTMF
+            # Read(variable,filename,max_digits,option,timeout)
+            audio_name = audio_file_path.replace('.wav', '').replace('.mp3', '')
+            
+            command = (
+                f"asterisk -rx 'channel originate Local/{phone_extension}@internal "
+                f"application Read dtmf_input,{audio_name},1,n,{timeout}'"
+            )
+            
+            self.logger.info(f"Riproduzione audio con DTMF per {phone_extension}: {audio_file_path}")
+            self.logger.debug(f"Comando DTMF: {command}")
+            
+            output, error = self.execute_command(command)
+            
+            if error:
+                return False, None
+            
+            # Estrae il digit premuto dall'output
+            # Output tipico: "DTMF digit pressed: 1"
+            dtmf_digit = self._extract_dtmf_from_output(output)
+            
+            if dtmf_digit:
+                self.logger.info(f"DTMF ricevuto da {phone_extension}: {dtmf_digit}")
+                return True, dtmf_digit
+            else:
+                self.logger.warning(f"Nessun DTMF ricevuto da {phone_extension} (timeout)")
+                return True, None  # Successo ma nessun input
+            
+        except Exception as e:
+            self.logger.error(f"Errore riproduzione audio con DTMF: {e}")
+            return False, None
+    
+    def _extract_dtmf_from_output(self, output):
+        """Estrae il digit DTMF dall'output del comando Asterisk"""
+        import re
+        
+        # Pattern per cercare digit DTMF nell'output
+        patterns = [
+            r'DTMF[:\s]+([0-9#*])',
+            r'digit[:\s]+([0-9#*])',
+            r'pressed[:\s]+([0-9#*])',
+            r'input[:\s]+([0-9#*])',
+        ]
+        
+        for pattern in patterns:
+            match = re.search(pattern, output, re.IGNORECASE)
+            if match:
+                return match.group(1)
+        
+        return None
     
     def hangup_call(self, room_number):
         """Termina la chiamata alla camera specificata"""

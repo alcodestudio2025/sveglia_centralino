@@ -79,7 +79,7 @@ class AlarmManager:
             self.logger.error(f"Errore nel controllo sveglie: {e}")
     
     def _execute_alarm(self, alarm):
-        """Esegue una sveglia specifica"""
+        """Esegue una sveglia specifica con supporto snooze"""
         alarm_id = alarm[0]
         room_number = alarm[1]
         audio_message_id = alarm[3]
@@ -95,7 +95,7 @@ class AlarmManager:
             # Usa l'interno telefonico se specificato, altrimenti il numero camera
             phone_extension = room_data[2] if len(room_data) > 2 and room_data[2] else room_number
             
-            # Ottiene il file audio se specificato
+            # Ottiene il file audio principale (wake_up)
             audio_file_path = None
             if audio_message_id:
                 audio_messages = self.db.get_audio_messages()
@@ -104,8 +104,13 @@ class AlarmManager:
                         audio_file_path = msg[2]  # file_path
                         break
             
-            # Avvia la chiamata
-            success, message = self.pbx.start_alarm_call(phone_extension, audio_file_path)
+            # Avvia la chiamata con DTMF per snooze
+            success, dtmf_digit = self._execute_alarm_with_snooze(
+                phone_extension, 
+                audio_file_path,
+                alarm_id,
+                room_number
+            )
             
             if success:
                 # Aggiorna lo status della sveglia
@@ -257,6 +262,139 @@ class AlarmManager:
     def test_pbx_connection(self):
         """Testa la connessione al centralino"""
         return self.pbx.pbx.test_connection()
+    
+    def _execute_alarm_with_snooze(self, phone_extension, wake_audio_path, alarm_id, room_number):
+        """
+        Esegue sveglia con opzioni snooze tramite DTMF
+        
+        Args:
+            phone_extension: Interno telefonico
+            wake_audio_path: File audio sveglia principale
+            alarm_id: ID sveglia nel database
+            room_number: Numero camera
+            
+        Returns:
+            (success, dtmf_digit): Success e tasto premuto
+        """
+        try:
+            self.logger.info(f"="*60)
+            self.logger.info(f"SVEGLIA CON SNOOZE - Camera {room_number} - Interno {phone_extension}")
+            self.logger.info(f"="*60)
+            
+            # 1. Effettua la chiamata
+            command = f"asterisk -rx 'channel originate Local/{phone_extension}@internal extension {phone_extension}@internal'"
+            output, error = self.pbx.pbx.execute_command(command)
+            
+            if error:
+                self.logger.error(f"Errore chiamata: {error}")
+                return False, None
+            
+            self.logger.info(f"✓ Chiamata avviata a {phone_extension}")
+            time.sleep(3)  # Attende risposta
+            
+            # 2. Riproduce messaggio principale con opzioni DTMF
+            self.logger.info(f"Riproduzione messaggio sveglia con opzioni snooze...")
+            success, dtmf_digit = self.pbx.pbx.play_audio_with_dtmf(
+                phone_extension,
+                wake_audio_path,
+                timeout=30
+            )
+            
+            if not success:
+                self.logger.error("Errore nella riproduzione audio")
+                return False, None
+            
+            # 3. Gestisce risposta DTMF
+            if dtmf_digit == '1':
+                # Snooze 5 minuti
+                self.logger.info(f"✓ DTMF '1' ricevuto - Snooze 5 minuti")
+                snooze_minutes = 5
+                confirm_audio = self._get_audio_by_action('snooze_confirm', 'it', '5min')
+                
+            elif dtmf_digit == '2':
+                # Snooze 10 minuti
+                self.logger.info(f"✓ DTMF '2' ricevuto - Snooze 10 minuti")
+                snooze_minutes = 10
+                confirm_audio = self._get_audio_by_action('snooze_confirm', 'it', '10min')
+                
+            else:
+                # Nessun snooze - sveglia completata
+                self.logger.info(f"Nessuno snooze richiesto - Sveglia completata")
+                goodbye_audio = self._get_audio_by_action('goodbye', 'it')
+                if goodbye_audio:
+                    self.pbx.pbx.play_audio(phone_extension, goodbye_audio)
+                    time.sleep(2)
+                
+                self.db.update_alarm_status(alarm_id, "completed")
+                return True, None
+            
+            # 4. Riproduce messaggio conferma snooze
+            if confirm_audio:
+                self.logger.info(f"Riproduzione conferma snooze {snooze_minutes} minuti...")
+                self.pbx.pbx.play_audio(phone_extension, confirm_audio)
+                time.sleep(2)
+            
+            # 5. Riprogramma sveglia
+            new_alarm_time = datetime.now() + timedelta(minutes=snooze_minutes)
+            self.logger.info(f"Riprogrammazione sveglia per {new_alarm_time.strftime('%H:%M')}")
+            
+            # Aggiorna sveglia esistente
+            self.db.update_alarm_status(alarm_id, "snoozed")
+            
+            # Crea nuova sveglia per snooze
+            self.db.add_alarm(
+                room_number,
+                new_alarm_time.isoformat(),
+                audio_message_id=None  # Usa stesso audio della sveglia originale
+            )
+            
+            self.logger.info(f"✓ Sveglia riprogrammata con successo")
+            self.logger.info(f"="*60)
+            
+            return True, dtmf_digit
+            
+        except Exception as e:
+            self.logger.error(f"Errore esecuzione sveglia con snooze: {e}")
+            return False, None
+    
+    def _get_audio_by_action(self, action_type, language='it', variant=None):
+        """
+        Ottiene file audio per azione specifica
+        
+        Args:
+            action_type: 'wake_up', 'snooze_confirm', 'goodbye'
+            language: Codice lingua (it, en, etc.)
+            variant: Variante specifica (es. '5min', '10min')
+            
+        Returns:
+            path del file audio o None
+        """
+        try:
+            audio_messages = self.db.get_audio_messages()
+            
+            for msg in audio_messages:
+                # msg = (id, name, file_path, duration, category, language, action_type, created_at)
+                msg_action = msg[6] if len(msg) > 6 else None
+                msg_language = msg[5] if len(msg) > 5 else 'it'
+                msg_name = msg[1]
+                
+                # Match per action type e lingua
+                if msg_action == action_type and msg_language.lower() == language.lower():
+                    # Se variant specificato, cerca nel nome
+                    if variant:
+                        if variant.lower() in msg_name.lower():
+                            self.logger.info(f"Audio trovato: {msg_name} ({action_type}, {language}, {variant})")
+                            return msg[2]  # file_path
+                    else:
+                        self.logger.info(f"Audio trovato: {msg_name} ({action_type}, {language})")
+                        return msg[2]  # file_path
+            
+            self.logger.warning(f"Audio non trovato: {action_type}, {language}, {variant}")
+            return None
+            
+        except Exception as e:
+            self.logger.error(f"Errore ricerca audio: {e}")
+            return None
 
 if __name__ == "__main__":
     # Test del modulo
