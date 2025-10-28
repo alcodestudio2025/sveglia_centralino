@@ -8,7 +8,7 @@ Il sistema di snooze con DTMF è stato completamente implementato!
 
 ## 🎵 MESSAGGI AUDIO NECESSARI
 
-Per il sistema snooze servono **4 tipi** di messaggi audio:
+Per il sistema snooze servono **3 tipi** di messaggi audio:
 
 ### **1. MESSAGGIO SVEGLIA (wake_up)**
 **Tipo Azione**: `Messaggio Sveglia`  
@@ -27,38 +27,29 @@ Per terminare, riagganci pure."
 
 ### **2. CONFERMA SNOOZE 5 MINUTI**
 **Tipo Azione**: `Conferma Riprogrammazione`  
-**Nome file**: Deve contenere "5min" (es: `Snooze_5min_ita`)  
+**Nome file**: Deve contenere "5" (es: `Ritarda_5`)  
 **Quando**: Dopo che il cliente preme il tasto 1  
 **Esempio testo**:
 ```
 "Sveglia posticipata di 5 minuti.
 La richiameremo alle 7:05.
-Buon riposo!"
+Buon riposo! Arrivederci."
 ```
+⚠️ **Importante**: Include già il saluto finale!
 
 ---
 
 ### **3. CONFERMA SNOOZE 10 MINUTI**
 **Tipo Azione**: `Conferma Riprogrammazione`  
-**Nome file**: Deve contenere "10min" (es: `Snooze_10min_ita`)  
+**Nome file**: Deve contenere "10" (es: `Ritarda_10`)  
 **Quando**: Dopo che il cliente preme il tasto 2  
 **Esempio testo**:
 ```
 "Sveglia posticipata di 10 minuti.
 La richiameremo alle 7:10.
-Buon riposo!"
+Buon riposo! Arrivederci."
 ```
-
----
-
-### **4. SALUTO FINALE (goodbye)**
-**Tipo Azione**: `Saluto`  
-**Quando**: Quando il cliente non preme nulla (accetta la sveglia)  
-**Esempio testo**:
-```
-"Buona giornata!
-Arrivederci."
-```
+⚠️ **Importante**: Include già il saluto finale!
 
 ---
 
@@ -73,9 +64,8 @@ Arrivederci."
 **Nomi file suggeriti**:
 ```
 wakeup_main_ita.wav
-snooze_5min_ita.wav
-snooze_10min_ita.wav
-goodbye_ita.wav
+ritarda_5_ita.wav
+ritarda_10_ita.wav
 ```
 
 ---
@@ -91,25 +81,18 @@ goodbye_ita.wav
 - Click "Seleziona File Audio" → `wakeup_main_ita.wav`
 
 **2. CONFERMA SNOOZE 5 MINUTI**
-- Nome: `Snooze_5min_IT` *(importante: contiene "5min")*
+- Nome: `Ritarda_5` *(importante: contiene "5")*
 - Categoria: `standard`
 - Lingua: `it`
 - Tipo Azione: `Conferma Riprogrammazione`
-- Click "Seleziona File Audio" → `snooze_5min_ita.wav`
+- Click "Seleziona File Audio" → `ritarda_5_ita.wav`
 
 **3. CONFERMA SNOOZE 10 MINUTI**
-- Nome: `Snooze_10min_IT` *(importante: contiene "10min")*
+- Nome: `Ritarda_10` *(importante: contiene "10")*
 - Categoria: `standard`
 - Lingua: `it`
 - Tipo Azione: `Conferma Riprogrammazione`
-- Click "Seleziona File Audio" → `snooze_10min_ita.wav`
-
-**4. SALUTO FINALE**
-- Nome: `Goodbye_IT`
-- Categoria: `standard`
-- Lingua: `it`
-- Tipo Azione: `Saluto`
-- Click "Seleziona File Audio" → `goodbye_ita.wav`
+- Click "Seleziona File Audio" → `ritarda_10_ita.wav`
 
 ---
 
@@ -149,9 +132,8 @@ goodbye_ita.wav
 1. 🔔 Chiamata avviata → Interno 103
 2. 🔊 Audio: "Buongiorno... Per posticipare prema 1 o 2..."
 3. ☎️ Cliente: NON preme nulla / Riaggancia
-4. ⏱️ Sistema: Timeout (30 secondi)
-5. 🔊 Audio: "Buona giornata! Arrivederci."
-6. ✓ Sveglia completata
+4. ⏱️ Sistema: Timeout (30 secondi) o hangup
+5. ✓ Sveglia completata (nessun audio aggiuntivo)
 ```
 
 ---
@@ -227,14 +209,15 @@ asterisk -rx 'playback snooze_5min_ita'
 
 ## ✅ CHECKLIST SETUP COMPLETO
 
-- [ ] File audio preparati (4 file: wake, snooze 5, snooze 10, goodbye)
+- [ ] File audio preparati (**3 file**: wake, snooze 5, snooze 10)
 - [ ] Audio caricati nell'app con **tipo azione corretto**
-- [ ] Nome file snooze contiene "5min" e "10min"
+- [ ] Nome file snooze contiene "5" e "10"
 - [ ] Lingua impostata correttamente (IT)
 - [ ] Test riproduzione da "Gestisci Messaggi Audio"
 - [ ] PBX connesso e raggiungibile
 - [ ] Camera configurata con interno valido
 - [ ] Test sveglia manuale con DTMF
+- [ ] Messaggi conferma includono saluto finale
 
 ---
 
