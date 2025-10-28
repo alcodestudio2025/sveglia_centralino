@@ -7,6 +7,7 @@ from tkinter import ttk, messagebox, filedialog
 import datetime
 import threading
 import os
+from PIL import Image, ImageTk
 from config import create_directories, PBX_CONFIG, AUDIO_CONFIG
 from database import DatabaseManager
 from settings import SettingsWindow
@@ -88,6 +89,9 @@ class SvegliaCentralinoApp:
         status_bar = ttk.Label(main_frame, textvariable=self.status_var, 
                               relief=tk.SUNKEN, anchor=tk.W)
         status_bar.grid(row=3, column=0, columnspan=2, sticky=(tk.W, tk.E), pady=(20, 0))
+        
+        # Aggiungi logo in basso a destra
+        self.add_logo(main_frame, row=4, column=1)
     
     def create_menu_bar(self):
         """Crea la barra del menu"""
@@ -770,6 +774,33 @@ Funzionalità:
                 self.status_var.set(f"Sveglia eliminata: Camera {room}")
             except Exception as e:
                 messagebox.showerror("Errore", f"Errore nell'eliminazione: {e}")
+    
+    def add_logo(self, parent, row, column):
+        """Aggiunge il logo AL CODE STUDIO in basso a destra"""
+        try:
+            # Determina dimensione logo in base alla dimensione della finestra
+            window_width = self.root.winfo_width()
+            
+            # Scegli dimensione logo appropriata
+            if window_width < 800:
+                logo_file = 'assets/logo_small.png'
+            elif window_width < 1200:
+                logo_file = 'assets/logo_medium.png'
+            else:
+                logo_file = 'assets/logo_large.png'
+            
+            # Carica logo
+            if os.path.exists(logo_file):
+                logo_img = Image.open(logo_file)
+                logo_photo = ImageTk.PhotoImage(logo_img)
+                
+                # Crea label per logo
+                logo_label = ttk.Label(parent, image=logo_photo)
+                logo_label.image = logo_photo  # Mantieni riferimento
+                logo_label.grid(row=row, column=column, sticky=tk.SE, pady=(10, 0), padx=(0, 10))
+            
+        except Exception as e:
+            self.logger.warning(f"Impossibile caricare logo: {e}")
 
 def main():
     """Funzione principale"""

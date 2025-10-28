@@ -3722,3 +3722,8 @@
 2025-10-28 17:16:05,870 - sveglia_centralino.pbx_connection - INFO - disconnect:57 - Connessione SSH chiusa
 2025-10-28 17:16:05,873 - sveglia_centralino.main - INFO - test_connection:490 - ✓ Connessione PBX all'avvio: SUCCESSO
 2025-10-28 17:16:05,873 - sveglia_centralino.main - INFO - test_connection:491 - ============================================================
+2025-10-28 17:22:29,035 - sveglia_centralino.main - INFO - on_closing:784 - Chiusura applicazione in corso...
+2025-10-28 17:22:29,163 - sveglia_centralino.audio_player - INFO - __init__:21 - Audio player inizializzato con successo
+2025-10-28 17:22:29,191 - sveglia_centralino.audio_player - INFO - cleanup:132 - Audio player chiuso
+2025-10-28 17:22:29,691 - sveglia_centralino.alarm_manager - INFO - stop:46 - Gestore sveglie fermato
+2025-10-28 17:22:29,691 - sveglia_centralino.main - INFO - on_closing:801 - Applicazione chiusa
