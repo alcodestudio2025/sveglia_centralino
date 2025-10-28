@@ -3776,3 +3776,92 @@
 2025-10-28 17:28:20,075 - sveglia_centralino.alarm_manager - INFO - stop:46 - Gestore sveglie fermato
 2025-10-28 17:28:20,075 - sveglia_centralino.main - INFO - on_closing:832 - Applicazione chiusa
 2025-10-28 17:28:20,077 - sveglia_centralino.alarm_manager - INFO - _alarm_loop:73 - Loop sveglie terminato
+2025-10-28 17:30:24,369 - sveglia_centralino.alarm_manager - INFO - start:32 - Creazione thread alarm_loop...
+2025-10-28 17:30:24,369 - sveglia_centralino.alarm_manager - INFO - _alarm_loop:50 - Loop sveglie avviato - check_interval: 30s
+2025-10-28 17:30:24,471 - sveglia_centralino.alarm_manager - INFO - start:38 - Gestore sveglie avviato - Thread alive: True
+2025-10-28 17:30:24,471 - sveglia_centralino.main - INFO - __init__:56 - Gestore sveglie avviato
+2025-10-28 17:30:24,471 - sveglia_centralino.main - INFO - test_connection:484 - ============================================================
+2025-10-28 17:30:24,471 - sveglia_centralino.main - INFO - test_connection:485 - TEST CONNESSIONE PBX ALL'AVVIO
+2025-10-28 17:30:24,471 - sveglia_centralino.main - INFO - test_connection:486 - ============================================================
+2025-10-28 17:30:24,471 - sveglia_centralino.main - INFO - test_connection:487 - Host: 192.168.10.15:22
+2025-10-28 17:30:24,471 - sveglia_centralino.main - INFO - test_connection:488 - Username: root
+2025-10-28 17:30:24,535 - sveglia_centralino.pbx_connection - INFO - connect:39 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 17:30:24,643 - sveglia_centralino.pbx_connection - INFO - execute_command:89 - Comando eseguito: echo 'PBX Connection Test'
+2025-10-28 17:30:24,643 - sveglia_centralino.pbx_connection - INFO - test_connection:588 - Test connessione PBX completato con successo
+2025-10-28 17:30:24,643 - sveglia_centralino.pbx_connection - INFO - disconnect:57 - Connessione SSH chiusa
+2025-10-28 17:30:24,645 - sveglia_centralino.main - INFO - test_connection:494 - ✓ Connessione PBX all'avvio: SUCCESSO
+2025-10-28 17:30:24,645 - sveglia_centralino.main - INFO - test_connection:495 - ============================================================
+2025-10-28 17:30:32,142 - sveglia_centralino.room_manager - INFO - __init__:19 - ============================================================
+2025-10-28 17:30:32,142 - sveglia_centralino.room_manager - INFO - __init__:20 - APERTURA GESTIONE CAMERE HOTEL - INTEGRAZIONE PBX
+2025-10-28 17:30:32,142 - sveglia_centralino.room_manager - INFO - __init__:21 - ============================================================
+2025-10-28 17:30:32,366 - sveglia_centralino.room_manager - INFO - load_rooms:450 - Caricamento camere... Cache PBX: 0 interni
+2025-10-28 17:30:32,366 - sveglia_centralino.room_manager - INFO - load_rooms:460 -   Prima camera dal DB (RAW): (51, '103', '103', 'Interno 103', 'available', '#FFFFFF', 'Importato da PBX', '2025-10-28 11:12:02', 'it')
+2025-10-28 17:30:32,366 - sveglia_centralino.room_manager - INFO - load_rooms:477 -   Prima camera PARSED: num=103, ext=103, desc=Interno 103
+2025-10-28 17:30:32,367 - sveglia_centralino.room_manager - WARNING - load_rooms:501 -   ✗ Interno 103 NON trovato in cache!
+2025-10-28 17:30:36,104 - sveglia_centralino.audio_manager - INFO - __init__:20 - Apertura finestra Gestione Messaggi Audio
+2025-10-28 17:30:52,411 - sveglia_centralino.main - INFO - on_closing:815 - Chiusura applicazione in corso...
+2025-10-28 17:30:52,541 - sveglia_centralino.audio_player - INFO - __init__:21 - Audio player inizializzato con successo
+2025-10-28 17:30:52,601 - sveglia_centralino.audio_player - INFO - cleanup:132 - Audio player chiuso
+2025-10-28 17:30:53,101 - sveglia_centralino.alarm_manager - INFO - stop:46 - Gestore sveglie fermato
+2025-10-28 17:30:53,101 - sveglia_centralino.main - INFO - on_closing:832 - Applicazione chiusa
+2025-10-28 17:32:31,660 - sveglia_centralino.alarm_manager - INFO - start:32 - Creazione thread alarm_loop...
+2025-10-28 17:32:31,661 - sveglia_centralino.alarm_manager - INFO - _alarm_loop:50 - Loop sveglie avviato - check_interval: 30s
+2025-10-28 17:32:31,762 - sveglia_centralino.alarm_manager - INFO - start:38 - Gestore sveglie avviato - Thread alive: True
+2025-10-28 17:32:31,762 - sveglia_centralino.main - INFO - __init__:56 - Gestore sveglie avviato
+2025-10-28 17:32:31,762 - sveglia_centralino.main - INFO - test_connection:484 - ============================================================
+2025-10-28 17:32:31,763 - sveglia_centralino.main - INFO - test_connection:485 - TEST CONNESSIONE PBX ALL'AVVIO
+2025-10-28 17:32:31,763 - sveglia_centralino.main - INFO - test_connection:486 - ============================================================
+2025-10-28 17:32:31,763 - sveglia_centralino.main - INFO - test_connection:487 - Host: 192.168.10.15:22
+2025-10-28 17:32:31,763 - sveglia_centralino.main - INFO - test_connection:488 - Username: root
+2025-10-28 17:32:31,875 - sveglia_centralino.pbx_connection - INFO - connect:39 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 17:32:31,987 - sveglia_centralino.pbx_connection - INFO - execute_command:89 - Comando eseguito: echo 'PBX Connection Test'
+2025-10-28 17:32:31,987 - sveglia_centralino.pbx_connection - INFO - test_connection:588 - Test connessione PBX completato con successo
+2025-10-28 17:32:31,987 - sveglia_centralino.pbx_connection - INFO - disconnect:57 - Connessione SSH chiusa
+2025-10-28 17:32:31,996 - sveglia_centralino.main - INFO - test_connection:494 - ✓ Connessione PBX all'avvio: SUCCESSO
+2025-10-28 17:32:31,996 - sveglia_centralino.main - INFO - test_connection:495 - ============================================================
+2025-10-28 17:32:36,459 - sveglia_centralino.main - INFO - on_closing:815 - Chiusura applicazione in corso...
+2025-10-28 17:32:36,591 - sveglia_centralino.audio_player - INFO - __init__:21 - Audio player inizializzato con successo
+2025-10-28 17:32:36,646 - sveglia_centralino.audio_player - INFO - cleanup:132 - Audio player chiuso
+2025-10-28 17:32:36,663 - sveglia_centralino.alarm_manager - INFO - _alarm_loop:73 - Loop sveglie terminato
+2025-10-28 17:32:36,663 - sveglia_centralino.alarm_manager - INFO - stop:46 - Gestore sveglie fermato
+2025-10-28 17:32:36,663 - sveglia_centralino.main - INFO - on_closing:832 - Applicazione chiusa
+2025-10-28 17:33:06,606 - sveglia_centralino.alarm_manager - INFO - start:32 - Creazione thread alarm_loop...
+2025-10-28 17:33:06,606 - sveglia_centralino.alarm_manager - INFO - _alarm_loop:50 - Loop sveglie avviato - check_interval: 30s
+2025-10-28 17:33:06,708 - sveglia_centralino.alarm_manager - INFO - start:38 - Gestore sveglie avviato - Thread alive: True
+2025-10-28 17:33:06,708 - sveglia_centralino.main - INFO - __init__:56 - Gestore sveglie avviato
+2025-10-28 17:33:06,709 - sveglia_centralino.main - INFO - test_connection:484 - ============================================================
+2025-10-28 17:33:06,709 - sveglia_centralino.main - INFO - test_connection:485 - TEST CONNESSIONE PBX ALL'AVVIO
+2025-10-28 17:33:06,709 - sveglia_centralino.main - INFO - test_connection:486 - ============================================================
+2025-10-28 17:33:06,709 - sveglia_centralino.main - INFO - test_connection:487 - Host: 192.168.10.15:22
+2025-10-28 17:33:06,710 - sveglia_centralino.main - INFO - test_connection:488 - Username: root
+2025-10-28 17:33:06,775 - sveglia_centralino.pbx_connection - INFO - connect:39 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 17:33:06,892 - sveglia_centralino.pbx_connection - INFO - execute_command:89 - Comando eseguito: echo 'PBX Connection Test'
+2025-10-28 17:33:06,892 - sveglia_centralino.pbx_connection - INFO - test_connection:588 - Test connessione PBX completato con successo
+2025-10-28 17:33:06,892 - sveglia_centralino.pbx_connection - INFO - disconnect:57 - Connessione SSH chiusa
+2025-10-28 17:33:06,897 - sveglia_centralino.main - INFO - test_connection:494 - ✓ Connessione PBX all'avvio: SUCCESSO
+2025-10-28 17:33:06,897 - sveglia_centralino.main - INFO - test_connection:495 - ============================================================
+2025-10-28 17:33:12,844 - sveglia_centralino.main - INFO - on_closing:815 - Chiusura applicazione in corso...
+2025-10-28 17:33:12,968 - sveglia_centralino.audio_player - INFO - __init__:21 - Audio player inizializzato con successo
+2025-10-28 17:33:13,023 - sveglia_centralino.audio_player - INFO - cleanup:132 - Audio player chiuso
+2025-10-28 17:33:13,523 - sveglia_centralino.alarm_manager - INFO - stop:46 - Gestore sveglie fermato
+2025-10-28 17:33:13,523 - sveglia_centralino.main - INFO - on_closing:832 - Applicazione chiusa
+2025-10-28 17:34:19,146 - sveglia_centralino.alarm_manager - INFO - start:32 - Creazione thread alarm_loop...
+2025-10-28 17:34:19,147 - sveglia_centralino.alarm_manager - INFO - _alarm_loop:50 - Loop sveglie avviato - check_interval: 30s
+2025-10-28 17:34:19,248 - sveglia_centralino.alarm_manager - INFO - start:38 - Gestore sveglie avviato - Thread alive: True
+2025-10-28 17:34:19,248 - sveglia_centralino.main - INFO - __init__:56 - Gestore sveglie avviato
+2025-10-28 17:34:19,248 - sveglia_centralino.main - INFO - test_connection:484 - ============================================================
+2025-10-28 17:34:19,249 - sveglia_centralino.main - INFO - test_connection:485 - TEST CONNESSIONE PBX ALL'AVVIO
+2025-10-28 17:34:19,249 - sveglia_centralino.main - INFO - test_connection:486 - ============================================================
+2025-10-28 17:34:19,250 - sveglia_centralino.main - INFO - test_connection:487 - Host: 192.168.10.15:22
+2025-10-28 17:34:19,250 - sveglia_centralino.main - INFO - test_connection:488 - Username: root
+2025-10-28 17:34:19,313 - sveglia_centralino.pbx_connection - INFO - connect:39 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 17:34:19,430 - sveglia_centralino.pbx_connection - INFO - execute_command:89 - Comando eseguito: echo 'PBX Connection Test'
+2025-10-28 17:34:19,431 - sveglia_centralino.pbx_connection - INFO - test_connection:588 - Test connessione PBX completato con successo
+2025-10-28 17:34:19,431 - sveglia_centralino.pbx_connection - INFO - disconnect:57 - Connessione SSH chiusa
+2025-10-28 17:34:19,433 - sveglia_centralino.main - INFO - test_connection:494 - ✓ Connessione PBX all'avvio: SUCCESSO
+2025-10-28 17:34:19,433 - sveglia_centralino.main - INFO - test_connection:495 - ============================================================
+2025-10-28 17:34:25,378 - sveglia_centralino.main - INFO - on_closing:815 - Chiusura applicazione in corso...
+2025-10-28 17:34:25,509 - sveglia_centralino.audio_player - INFO - __init__:21 - Audio player inizializzato con successo
+2025-10-28 17:34:25,564 - sveglia_centralino.audio_player - INFO - cleanup:132 - Audio player chiuso
+2025-10-28 17:34:26,065 - sveglia_centralino.alarm_manager - INFO - stop:46 - Gestore sveglie fermato
+2025-10-28 17:34:26,065 - sveglia_centralino.main - INFO - on_closing:832 - Applicazione chiusa

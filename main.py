@@ -26,6 +26,15 @@ class SvegliaCentralinoApp:
         self.root.title("Sistema Gestione Sveglie Hotel")
         self.root.geometry("1000x700")
         
+        # Imposta icona della finestra (icona_2 per taskbar)
+        try:
+            if os.path.exists('assets/icona_2.png'):
+                icon_img = Image.open('assets/icona_2.png')
+                icon_photo = ImageTk.PhotoImage(icon_img)
+                self.root.iconphoto(True, icon_photo)
+        except Exception as e:
+            print(f"Impossibile caricare icona finestra: {e}")
+        
         # Inizializza database
         self.db = DatabaseManager()
         
@@ -72,10 +81,28 @@ class SvegliaCentralinoApp:
         # Barra del menu
         self.create_menu_bar()
         
+        # Frame per header con icona e titolo
+        header_frame = ttk.Frame(main_frame)
+        header_frame.grid(row=0, column=0, columnspan=2, pady=(0, 20), sticky=(tk.W, tk.E))
+        header_frame.columnconfigure(1, weight=1)
+        
+        # Icona principale (icona_1) in alto a sinistra
+        try:
+            if os.path.exists('assets/icona_1.png'):
+                icon1_img = Image.open('assets/icona_1.png')
+                # Ridimensiona l'icona a circa 50x50px
+                icon1_img = icon1_img.resize((50, 50), Image.Resampling.LANCZOS)
+                icon1_photo = ImageTk.PhotoImage(icon1_img)
+                icon1_label = ttk.Label(header_frame, image=icon1_photo)
+                icon1_label.image = icon1_photo  # Mantieni riferimento
+                icon1_label.grid(row=0, column=0, padx=(0, 15), sticky=tk.W)
+        except Exception as e:
+            print(f"Impossibile caricare icona principale: {e}")
+        
         # Titolo
-        title_label = ttk.Label(main_frame, text="Sistema Gestione Sveglie Hotel", 
+        title_label = ttk.Label(header_frame, text="Sistema Gestione Sveglie Hotel", 
                                font=("Arial", 16, "bold"))
-        title_label.grid(row=0, column=0, columnspan=2, pady=(0, 20))
+        title_label.grid(row=0, column=1, sticky=tk.W)
         
         # Sezione 1: Impostazione sveglia (semplificata)
         self.create_alarm_section(main_frame, row=1)
