@@ -161,17 +161,21 @@ class PBXConnection:
 ; Il CALL_ID identifica i file temporanei con i path degli audio di conferma
 
 ; Extension dinamica: riceve nome file come ${EXTEN}
-; Il nome arriva con "-" al posto di "/" (es: custom-wakeup_didimos_asterisk_1)
+; Formato: audio_name|call_id (es: custom-wakeup_audio|130_1234567890)
 ; Pattern _. matcha QUALSIASI stringa (lettere, numeri, simboli)
 exten => _.,1,NoOp(=== SVEGLIA CON SNOOZE ===)
-exten => _.,n,NoOp(Audio extension: ${EXTEN})
-exten => _.,n,NoOp(Call ID: ${CALL_ID})
+exten => _.,n,NoOp(Extension completa: ${EXTEN})
+; Estrai audio name e call_id dall'extension
+exten => _.,n,Set(AUDIO_EXTEN=${CUT(EXTEN,|,1)})
+exten => _.,n,Set(CALL_ID=${CUT(EXTEN,|,2)})
+exten => _.,n,NoOp(Audio extension: ${AUDIO_EXTEN})
+exten => _.,n,NoOp(Call ID estratto: ${CALL_ID})
 exten => _.,n,Answer()
 exten => _.,n,Wait(1)
 exten => _.,n,Set(TIMEOUT(digit)=5)
 exten => _.,n,Set(TIMEOUT(response)=30)
 ; Riconverti "-" in "/" per path corretto
-exten => _.,n,Set(AUDIO_FILE=${STRREPLACE(EXTEN,-,/)})
+exten => _.,n,Set(AUDIO_FILE=${STRREPLACE(AUDIO_EXTEN,-,/)})
 exten => _.,n,NoOp(Audio file path: ${AUDIO_FILE})
 exten => _.,n,Background(${AUDIO_FILE})
 exten => _.,n,WaitExten(30)
@@ -406,11 +410,14 @@ exten => i,n,Hangup()
             # NOTA: Sostituiamo "/" con "-" per compatibilità extension pattern
             audio_exten = audio_name.replace('/', '-')
             
+            # SOLUZIONE: Passa CALL_ID direttamente nell'extension name
+            # Formato: audio_name|call_id
+            audio_exten_with_id = f"{audio_exten}|{call_id}"
+            
             command = (
                 f"asterisk -rx \"channel originate Local/{phone_extension}@{context}/n "
-                f"extension {audio_exten}@wakeup-service "
-                f"callerid '{wake_callerid} <{wake_extension}>' "
-                f"variable CALL_ID={call_id}\" "
+                f"extension '{audio_exten_with_id}'@wakeup-service "
+                f"callerid '{wake_callerid} <{wake_extension}>'\" "
             )
             
             self.logger.info(f"Chiamata con DTMF a {phone_extension}: {audio_name}")
