@@ -3707,3 +3707,18 @@
 2025-10-28 17:14:48,773 - sveglia_centralino.audio_player - INFO - cleanup:132 - Audio player chiuso
 2025-10-28 17:14:49,273 - sveglia_centralino.alarm_manager - INFO - stop:46 - Gestore sveglie fermato
 2025-10-28 17:14:49,273 - sveglia_centralino.main - INFO - on_closing:696 - Applicazione chiusa
+2025-10-28 17:16:05,569 - sveglia_centralino.alarm_manager - INFO - start:32 - Creazione thread alarm_loop...
+2025-10-28 17:16:05,569 - sveglia_centralino.alarm_manager - INFO - _alarm_loop:50 - Loop sveglie avviato - check_interval: 30s
+2025-10-28 17:16:05,670 - sveglia_centralino.alarm_manager - INFO - start:38 - Gestore sveglie avviato - Thread alive: True
+2025-10-28 17:16:05,670 - sveglia_centralino.main - INFO - __init__:55 - Gestore sveglie avviato
+2025-10-28 17:16:05,670 - sveglia_centralino.main - INFO - test_connection:480 - ============================================================
+2025-10-28 17:16:05,671 - sveglia_centralino.main - INFO - test_connection:481 - TEST CONNESSIONE PBX ALL'AVVIO
+2025-10-28 17:16:05,671 - sveglia_centralino.main - INFO - test_connection:482 - ============================================================
+2025-10-28 17:16:05,671 - sveglia_centralino.main - INFO - test_connection:483 - Host: 192.168.10.15:22
+2025-10-28 17:16:05,671 - sveglia_centralino.main - INFO - test_connection:484 - Username: root
+2025-10-28 17:16:05,750 - sveglia_centralino.pbx_connection - INFO - connect:39 - Connessione SSH stabilita con 192.168.10.15
+2025-10-28 17:16:05,869 - sveglia_centralino.pbx_connection - INFO - execute_command:89 - Comando eseguito: echo 'PBX Connection Test'
+2025-10-28 17:16:05,869 - sveglia_centralino.pbx_connection - INFO - test_connection:588 - Test connessione PBX completato con successo
+2025-10-28 17:16:05,870 - sveglia_centralino.pbx_connection - INFO - disconnect:57 - Connessione SSH chiusa
+2025-10-28 17:16:05,873 - sveglia_centralino.main - INFO - test_connection:490 - ✓ Connessione PBX all'avvio: SUCCESSO
+2025-10-28 17:16:05,873 - sveglia_centralino.main - INFO - test_connection:491 - ============================================================

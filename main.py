@@ -601,19 +601,19 @@ Funzionalità:
         alarms = self.db.get_alarms()
         self.alarms_tree.delete(*self.alarms_tree.get_children())
         
+        # Carica TUTTI gli audio UNA SOLA VOLTA prima del loop (performance)
+        audio_messages = self.db.get_audio_messages()
+        audio_dict = {msg[0]: msg[1] for msg in audio_messages}  # Crea dizionario ID -> Nome
+        
         for alarm in alarms:
             alarm_time = datetime.datetime.fromisoformat(alarm[2])
             date_str = alarm_time.strftime("%Y-%m-%d")
             time_str = alarm_time.strftime("%H:%M")
             
-            # Ottieni nome messaggio audio
+            # Ottieni nome messaggio audio dal dizionario (veloce!)
             audio_name = "Nessuno"
             if alarm[3]:  # Se c'è un audio_message_id
-                audio_messages = self.db.get_audio_messages()
-                for msg in audio_messages:
-                    if msg[0] == alarm[3]:
-                        audio_name = msg[1]
-                        break
+                audio_name = audio_dict.get(alarm[3], "Nessuno")
             
             # Determina il colore in base allo status
             status = alarm[4]
