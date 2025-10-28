@@ -75,6 +75,16 @@ class AlarmManager:
         audio_message_id = alarm[3]
         
         try:
+            # Ottiene l'interno telefonico della camera
+            room_data = self.db.get_room(room_number)
+            if not room_data:
+                self.logger.error(f"Camera {room_number} non trovata")
+                self.db.update_alarm_status(alarm_id, "failed")
+                return
+            
+            # Usa l'interno telefonico se specificato, altrimenti il numero camera
+            phone_extension = room_data[2] if len(room_data) > 2 and room_data[2] else room_number
+            
             # Ottiene il file audio se specificato
             audio_file_path = None
             if audio_message_id:
@@ -85,7 +95,7 @@ class AlarmManager:
                         break
             
             # Avvia la chiamata
-            success, message = self.pbx.start_alarm_call(room_number, audio_file_path)
+            success, message = self.pbx.start_alarm_call(phone_extension, audio_file_path)
             
             if success:
                 # Aggiorna lo status della sveglia
@@ -99,11 +109,11 @@ class AlarmManager:
                     status="initiated"
                 )
                 
-                self.logger.info(f"Sveglia eseguita per camera {room_number}")
+                self.logger.info(f"Sveglia eseguita per camera {room_number} (interno {phone_extension})")
                 
                 # Programma la terminazione della chiamata
                 threading.Timer(self.call_duration, self._end_alarm_call, 
-                              args=[alarm_id, room_number]).start()
+                              args=[alarm_id, phone_extension]).start()
             else:
                 self.logger.error(f"Errore nell'esecuzione sveglia camera {room_number}: {message}")
                 self.db.update_alarm_status(alarm_id, "failed")
@@ -112,11 +122,11 @@ class AlarmManager:
             self.logger.error(f"Errore nell'esecuzione sveglia: {e}")
             self.db.update_alarm_status(alarm_id, "failed")
     
-    def _end_alarm_call(self, alarm_id, room_number):
+    def _end_alarm_call(self, alarm_id, phone_extension):
         """Termina una chiamata di sveglia"""
         try:
             # Termina la chiamata
-            success, message = self.pbx.end_alarm_call(room_number)
+            success, message = self.pbx.end_alarm_call(phone_extension)
             
             if success:
                 # Aggiorna lo status
@@ -125,14 +135,14 @@ class AlarmManager:
                 # Log della terminazione
                 self.db.add_call_log(
                     alarm_id=alarm_id,
-                    room_number=room_number,
+                    room_number="",  # Non abbiamo il numero camera qui
                     call_time=datetime.now(),
                     status="completed"
                 )
                 
-                self.logger.info(f"Chiamata sveglia terminata per camera {room_number}")
+                self.logger.info(f"Chiamata sveglia terminata per interno {phone_extension}")
             else:
-                self.logger.error(f"Errore nella terminazione chiamata camera {room_number}: {message}")
+                self.logger.error(f"Errore nella terminazione chiamata interno {phone_extension}: {message}")
                 
         except Exception as e:
             self.logger.error(f"Errore nella terminazione chiamata: {e}")

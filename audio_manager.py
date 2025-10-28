@@ -28,6 +28,16 @@ class AudioManagerWindow:
         self.selected_audio_id = None
         self.audio_name_var = tk.StringVar()
         self.audio_category_var = tk.StringVar(value="standard")
+        self.audio_language_var = tk.StringVar(value="it")
+        self.audio_action_var = tk.StringVar(value="Messaggio Sveglia")
+        
+        # Mappatura azioni
+        self.action_map = {
+            "Messaggio Sveglia": "wake_up",
+            "Conferma Riprogrammazione": "snooze_confirm",
+            "Saluto": "goodbye"
+        }
+        self.action_map_reverse = {v: k for k, v in self.action_map.items()}
         
         # Crea l'interfaccia
         self.create_widgets()
@@ -70,13 +80,27 @@ class AudioManagerWindow:
                                      state="readonly", width=15)
         category_combo.grid(row=0, column=3, sticky=(tk.W, tk.E), pady=5)
         
+        # Lingua
+        ttk.Label(upload_frame, text="Lingua:").grid(row=1, column=0, sticky=tk.W, padx=(0, 10), pady=5)
+        language_combo = ttk.Combobox(upload_frame, textvariable=self.audio_language_var, 
+                                     values=["it", "en", "fr", "de", "es", "pt", "ru", "zh", "ja", "ar"], 
+                                     state="readonly", width=15)
+        language_combo.grid(row=1, column=1, sticky=(tk.W, tk.E), padx=(0, 20), pady=5)
+        
+        # Tipo di azione
+        ttk.Label(upload_frame, text="Tipo Azione:").grid(row=1, column=2, sticky=tk.W, padx=(0, 10), pady=5)
+        action_combo = ttk.Combobox(upload_frame, textvariable=self.audio_action_var, 
+                                   values=list(self.action_map.keys()), 
+                                   state="readonly", width=20)
+        action_combo.grid(row=1, column=3, sticky=(tk.W, tk.E), pady=5)
+        
         # Pulsante caricamento
         ttk.Button(upload_frame, text="Seleziona File Audio", 
-                  command=self.load_audio_file).grid(row=1, column=0, columnspan=4, pady=10)
+                  command=self.load_audio_file).grid(row=2, column=0, columnspan=4, pady=10)
         
         # Info formati supportati
         info_text = f"Formati supportati: {', '.join(AUDIO_CONFIG['supported_formats'])}"
-        ttk.Label(upload_frame, text=info_text, font=("Arial", 9), foreground="gray").grid(row=2, column=0, columnspan=4, pady=5)
+        ttk.Label(upload_frame, text=info_text, font=("Arial", 9), foreground="gray").grid(row=3, column=0, columnspan=4, pady=5)
     
     def create_audio_list_section(self, parent):
         """Crea la sezione per la lista dei messaggi audio"""
@@ -86,11 +110,11 @@ class AudioManagerWindow:
         list_frame.rowconfigure(0, weight=1)
         
         # Treeview per i messaggi audio
-        columns = ("ID", "Nome", "File", "Durata", "Categoria", "Creata")
+        columns = ("ID", "Nome", "File", "Durata", "Categoria", "Lingua", "Azione", "Creata")
         self.audio_tree = ttk.Treeview(list_frame, columns=columns, show="headings", height=12)
         
         # Configurazione colonne
-        column_widths = {"ID": 50, "Nome": 150, "File": 200, "Durata": 80, "Categoria": 100, "Creata": 120}
+        column_widths = {"ID": 40, "Nome": 130, "File": 150, "Durata": 60, "Categoria": 80, "Lingua": 50, "Azione": 150, "Creata": 100}
         
         for col in columns:
             self.audio_tree.heading(col, text=col)
@@ -177,11 +201,14 @@ class AudioManagerWindow:
                 duration = self.get_audio_duration(dest_path)
                 
                 # Aggiunge al database
+                action_type = self.action_map.get(self.audio_action_var.get(), "wake_up")
                 audio_id = self.db.add_audio_message(
                     name=audio_name,
                     file_path=dest_path,
                     duration=duration,
-                    category=self.audio_category_var.get()
+                    category=self.audio_category_var.get(),
+                    language=self.audio_language_var.get(),
+                    action_type=action_type
                 )
                 
                 messagebox.showinfo("Successo", f"Messaggio audio '{audio_name}' caricato con successo")
@@ -215,8 +242,13 @@ class AudioManagerWindow:
                 # Formatta la durata
                 duration = f"{msg[3]:.1f}s" if msg[3] else "N/A"
                 
+                # Ottiene la lingua e l'azione
+                language = msg[5] if len(msg) > 5 else "it"
+                action_type = msg[6] if len(msg) > 6 else "wake_up"
+                action_display = self.action_map_reverse.get(action_type, "Messaggio Sveglia")
+                
                 # Formatta la data di creazione
-                created_date = msg[4].split(' ')[0] if len(msg) > 4 and msg[4] else "N/A"
+                created_date = msg[7].split(' ')[0] if len(msg) > 7 and msg[7] else "N/A"
                 
                 # Inserisci nella lista
                 item_id = self.audio_tree.insert("", "end", values=(
@@ -224,7 +256,9 @@ class AudioManagerWindow:
                     msg[1],  # Nome
                     os.path.basename(msg[2]),  # File (solo nome)
                     duration,  # Durata
-                    msg[5] if len(msg) > 5 else "standard",  # Categoria
+                    msg[4] if len(msg) > 4 else "standard",  # Categoria
+                    language.upper(),  # Lingua
+                    action_display,  # Tipo Azione
                     created_date  # Data creazione
                 ))
         

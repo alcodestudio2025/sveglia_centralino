@@ -94,26 +94,23 @@ class PBXConnection:
             self.logger.error(f"Errore nell'esecuzione del comando: {e}")
             return None, str(e)
     
-    def make_call(self, room_number, audio_file_path=None):
-        """Effettua una chiamata alla camera specificata"""
+    def make_call(self, phone_extension, audio_file_path=None):
+        """Effettua una chiamata all'interno telefonico specificato"""
         try:
             # Comando per effettuare la chiamata (da adattare al centralino specifico)
             # Esempio per centralini basati su Asterisk
-            if audio_file_path:
-                command = f"asterisk -rx 'originate Local/{room_number}@internal extension {room_number}@internal'"
-            else:
-                command = f"asterisk -rx 'originate Local/{room_number}@internal extension {room_number}@internal'"
+            command = f"asterisk -rx 'originate Local/{phone_extension}@internal extension {phone_extension}@internal'"
             
             output, error = self.execute_command(command)
             
             if error:
                 return False, f"Errore nella chiamata: {error}"
             
-            self.logger.info(f"Chiamata effettuata alla camera {room_number}")
+            self.logger.info(f"Chiamata effettuata all'interno {phone_extension}")
             return True, "Chiamata effettuata con successo"
             
         except Exception as e:
-            self.logger.error(f"Errore nella chiamata alla camera {room_number}: {e}")
+            self.logger.error(f"Errore nella chiamata all'interno {phone_extension}: {e}")
             return False, str(e)
     
     def play_audio(self, room_number, audio_file_path):
@@ -230,15 +227,15 @@ class PBXManager:
         self.pbx = PBXConnection()
         self.active_calls = {}  # Traccia le chiamate attive
     
-    def start_alarm_call(self, room_number, audio_file_path=None):
+    def start_alarm_call(self, phone_extension, audio_file_path=None):
         """Avvia una chiamata di sveglia"""
         try:
             # Effettua la chiamata
-            success, message = self.pbx.make_call(room_number, audio_file_path)
+            success, message = self.pbx.make_call(phone_extension, audio_file_path)
             
             if success:
                 # Registra la chiamata attiva
-                self.active_calls[room_number] = {
+                self.active_calls[phone_extension] = {
                     'start_time': datetime.now(),
                     'audio_file': audio_file_path,
                     'status': 'ringing'
@@ -247,7 +244,7 @@ class PBXManager:
                 # Se c'è un file audio, lo riproduce
                 if audio_file_path:
                     time.sleep(2)  # Attende che la chiamata si stabilisca
-                    self.pbx.play_audio(room_number, audio_file_path)
+                    self.pbx.play_audio(phone_extension, audio_file_path)
                 
                 return True, "Chiamata di sveglia avviata"
             else:

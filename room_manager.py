@@ -24,6 +24,7 @@ class RoomManagerWindow:
         # Variabili per i controlli
         self.selected_room_id = None
         self.room_number_var = tk.StringVar()
+        self.phone_extension_var = tk.StringVar()
         self.room_status_var = tk.StringVar(value="available")
         self.room_color_var = tk.StringVar(value="#FFFFFF")
         self.room_label_var = tk.StringVar()
@@ -62,17 +63,21 @@ class RoomManagerWindow:
         ttk.Label(input_frame, text="Numero Camera:").grid(row=0, column=0, sticky=tk.W, padx=(0, 10), pady=5)
         ttk.Entry(input_frame, textvariable=self.room_number_var, width=20).grid(row=0, column=1, sticky=(tk.W, tk.E), padx=(0, 20), pady=5)
         
+        # Interno telefonico
+        ttk.Label(input_frame, text="Interno Telefonico:").grid(row=0, column=2, sticky=tk.W, padx=(0, 10), pady=5)
+        ttk.Entry(input_frame, textvariable=self.phone_extension_var, width=15).grid(row=0, column=3, sticky=(tk.W, tk.E), pady=5)
+        
         # Status
-        ttk.Label(input_frame, text="Stato:").grid(row=0, column=2, sticky=tk.W, padx=(0, 10), pady=5)
+        ttk.Label(input_frame, text="Stato:").grid(row=1, column=0, sticky=tk.W, padx=(0, 10), pady=5)
         status_combo = ttk.Combobox(input_frame, textvariable=self.room_status_var, 
                                    values=["available", "occupied", "maintenance", "cleaning"], 
                                    state="readonly", width=15)
-        status_combo.grid(row=0, column=3, sticky=(tk.W, tk.E), pady=5)
+        status_combo.grid(row=1, column=1, sticky=(tk.W, tk.E), padx=(0, 20), pady=5)
         
         # Colore
-        ttk.Label(input_frame, text="Colore:").grid(row=1, column=0, sticky=tk.W, padx=(0, 10), pady=5)
+        ttk.Label(input_frame, text="Colore:").grid(row=1, column=2, sticky=tk.W, padx=(0, 10), pady=5)
         color_frame = ttk.Frame(input_frame)
-        color_frame.grid(row=1, column=1, sticky=(tk.W, tk.E), padx=(0, 20), pady=5)
+        color_frame.grid(row=1, column=3, sticky=(tk.W, tk.E), pady=5)
         
         self.color_display = tk.Canvas(color_frame, width=30, height=25, bd=2, relief=tk.SUNKEN, 
                                       bg=self.room_color_var.get())
@@ -82,8 +87,8 @@ class RoomManagerWindow:
                   command=self.choose_color).pack(side=tk.LEFT)
         
         # Etichetta
-        ttk.Label(input_frame, text="Etichetta:").grid(row=1, column=2, sticky=tk.W, padx=(0, 10), pady=5)
-        ttk.Entry(input_frame, textvariable=self.room_label_var, width=30).grid(row=1, column=3, sticky=(tk.W, tk.E), pady=5)
+        ttk.Label(input_frame, text="Etichetta:").grid(row=2, column=0, sticky=tk.W, padx=(0, 10), pady=5)
+        ttk.Entry(input_frame, textvariable=self.room_label_var, width=30).grid(row=2, column=1, columnspan=3, sticky=(tk.W, tk.E), pady=5)
     
     def create_rooms_list_section(self, parent):
         """Crea la sezione per la lista delle camere"""
@@ -93,11 +98,11 @@ class RoomManagerWindow:
         list_frame.rowconfigure(0, weight=1)
         
         # Treeview per le camere
-        columns = ("ID", "Numero", "Stato", "Colore", "Etichetta", "Creata")
+        columns = ("ID", "Numero", "Interno", "Stato", "Colore", "Etichetta", "Creata")
         self.rooms_tree = ttk.Treeview(list_frame, columns=columns, show="headings", height=12)
         
         # Configurazione colonne
-        column_widths = {"ID": 50, "Numero": 100, "Stato": 100, "Colore": 80, "Etichetta": 200, "Creata": 120}
+        column_widths = {"ID": 50, "Numero": 100, "Interno": 80, "Stato": 100, "Colore": 80, "Etichetta": 200, "Creata": 120}
         
         for col in columns:
             self.rooms_tree.heading(col, text=col)
@@ -161,14 +166,15 @@ class RoomManagerWindow:
                 item_id = self.rooms_tree.insert("", "end", values=(
                     room[0],  # ID
                     room[1],  # Numero
-                    room[2],  # Stato
-                    room[3] if len(room) > 3 else "#FFFFFF",  # Colore
-                    room[4] if len(room) > 4 else "",  # Etichetta
+                    room[2] if len(room) > 2 else "",  # Interno telefonico
+                    room[3] if len(room) > 3 else "available",  # Stato
+                    room[4] if len(room) > 4 else "#FFFFFF",  # Colore
+                    room[5] if len(room) > 5 else "",  # Etichetta
                     created_date  # Data creazione
                 ))
                 
                 # Colora la riga in base allo status
-                status = room[2]
+                status = room[3] if len(room) > 3 else "available"
                 if status == "occupied":
                     self.rooms_tree.set(item_id, "Stato", "Occupata")
                 elif status == "maintenance":
@@ -188,9 +194,10 @@ class RoomManagerWindow:
             values = self.rooms_tree.item(selected_item, 'values')
             self.selected_room_id = values[0]
             self.room_number_var.set(values[1])
+            self.phone_extension_var.set(values[2])
             
             # Converte lo status visualizzato in quello del database
-            status_display = values[2]
+            status_display = values[3]
             if status_display == "Occupata":
                 self.room_status_var.set("occupied")
             elif status_display == "Manutenzione":
@@ -200,9 +207,9 @@ class RoomManagerWindow:
             else:
                 self.room_status_var.set("available")
             
-            self.room_color_var.set(values[3])
-            self.color_display.config(bg=values[3])
-            self.room_label_var.set(values[4])
+            self.room_color_var.set(values[4])
+            self.color_display.config(bg=values[4])
+            self.room_label_var.set(values[5])
         else:
             self.clear_fields()
     
@@ -213,6 +220,7 @@ class RoomManagerWindow:
     def add_room(self):
         """Aggiunge una nuova camera"""
         room_number = self.room_number_var.get().strip()
+        phone_extension = self.phone_extension_var.get().strip()
         status = self.room_status_var.get()
         color = self.room_color_var.get()
         label = self.room_label_var.get().strip()
@@ -220,6 +228,10 @@ class RoomManagerWindow:
         if not room_number:
             messagebox.showerror("Errore", "Il numero della camera è obbligatorio")
             return
+        
+        # Se non è specificato un interno, usa il numero camera
+        if not phone_extension:
+            phone_extension = room_number
         
         try:
             # Verifica se la camera esiste già
@@ -229,8 +241,8 @@ class RoomManagerWindow:
                 return
             
             # Aggiunge la camera
-            room_id = self.db.add_room(room_number, status, color, label)
-            messagebox.showinfo("Successo", f"Camera {room_number} aggiunta con successo")
+            room_id = self.db.add_room(room_number, phone_extension, status, color, label)
+            messagebox.showinfo("Successo", f"Camera {room_number} aggiunta con successo\nInterno: {phone_extension}")
             self.clear_fields()
             self.load_rooms()
             
@@ -248,6 +260,7 @@ class RoomManagerWindow:
             return
         
         room_number = self.room_number_var.get().strip()
+        phone_extension = self.phone_extension_var.get().strip()
         status = self.room_status_var.get()
         color = self.room_color_var.get()
         label = self.room_label_var.get().strip()
@@ -255,6 +268,10 @@ class RoomManagerWindow:
         if not room_number:
             messagebox.showerror("Errore", "Il numero della camera è obbligatorio")
             return
+        
+        # Se non è specificato un interno, usa il numero camera
+        if not phone_extension:
+            phone_extension = room_number
         
         try:
             # Verifica se il nuovo numero esiste già (se diverso)
@@ -264,8 +281,8 @@ class RoomManagerWindow:
                 return
             
             # Aggiorna la camera
-            self.db.update_room(self.selected_room_id, room_number, status, color, label)
-            messagebox.showinfo("Successo", f"Camera {room_number} modificata con successo")
+            self.db.update_room(self.selected_room_id, room_number, phone_extension, status, color, label)
+            messagebox.showinfo("Successo", f"Camera {room_number} modificata con successo\nInterno: {phone_extension}")
             self.clear_fields()
             self.load_rooms()
             
@@ -304,6 +321,7 @@ class RoomManagerWindow:
         """Pulisce i campi di input"""
         self.selected_room_id = None
         self.room_number_var.set("")
+        self.phone_extension_var.set("")
         self.room_status_var.set("available")
         self.room_color_var.set("#FFFFFF")
         self.color_display.config(bg="#FFFFFF")

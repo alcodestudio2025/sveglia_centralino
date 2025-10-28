@@ -20,6 +20,7 @@ class DatabaseManager:
             CREATE TABLE IF NOT EXISTS rooms (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 room_number TEXT UNIQUE NOT NULL,
+                phone_extension TEXT DEFAULT '',
                 status TEXT DEFAULT 'available',
                 color TEXT DEFAULT '#FFFFFF',
                 label TEXT DEFAULT '',
@@ -35,6 +36,8 @@ class DatabaseManager:
                 file_path TEXT NOT NULL,
                 duration REAL,
                 category TEXT DEFAULT 'standard',
+                language TEXT DEFAULT 'it',
+                action_type TEXT DEFAULT 'wake_up',
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             )
         ''')
@@ -70,8 +73,48 @@ class DatabaseManager:
         conn.commit()
         conn.close()
         
+        # Aggiorna il database se necessario
+        self.update_database_schema()
+        
         # Inserisci camere di default
         self.create_default_rooms()
+    
+    def update_database_schema(self):
+        """Aggiorna lo schema del database per nuove colonne"""
+        conn = sqlite3.connect(self.db_path)
+        cursor = conn.cursor()
+        
+        try:
+            # Verifica se la colonna phone_extension esiste
+            cursor.execute("PRAGMA table_info(rooms)")
+            columns = [column[1] for column in cursor.fetchall()]
+            
+            if 'phone_extension' not in columns:
+                # Aggiunge la colonna phone_extension
+                cursor.execute("ALTER TABLE rooms ADD COLUMN phone_extension TEXT DEFAULT ''")
+                conn.commit()
+                print("Aggiunta colonna phone_extension alla tabella rooms")
+            
+            # Verifica se la colonna language esiste nella tabella audio_messages
+            cursor.execute("PRAGMA table_info(audio_messages)")
+            audio_columns = [column[1] for column in cursor.fetchall()]
+            
+            if 'language' not in audio_columns:
+                # Aggiunge la colonna language
+                cursor.execute("ALTER TABLE audio_messages ADD COLUMN language TEXT DEFAULT 'it'")
+                conn.commit()
+                print("Aggiunta colonna language alla tabella audio_messages")
+            
+            if 'action_type' not in audio_columns:
+                # Aggiunge la colonna action_type
+                cursor.execute("ALTER TABLE audio_messages ADD COLUMN action_type TEXT DEFAULT 'wake_up'")
+                conn.commit()
+                print("Aggiunta colonna action_type alla tabella audio_messages")
+            
+        except Exception as e:
+            print(f"Errore nell'aggiornamento schema database: {e}")
+        finally:
+            conn.close()
     
     def create_default_rooms(self):
         """Crea le camere di default per l'hotel"""
@@ -135,26 +178,26 @@ class DatabaseManager:
         conn.commit()
         conn.close()
     
-    def add_room(self, room_number, status='available', color='#FFFFFF', label=''):
+    def add_room(self, room_number, phone_extension='', status='available', color='#FFFFFF', label=''):
         """Aggiunge una nuova camera"""
         conn = self.get_connection()
         cursor = conn.cursor()
         cursor.execute(
-            "INSERT INTO rooms (room_number, status, color, label) VALUES (?, ?, ?, ?)",
-            (room_number, status, color, label)
+            "INSERT INTO rooms (room_number, phone_extension, status, color, label) VALUES (?, ?, ?, ?, ?)",
+            (room_number, phone_extension, status, color, label)
         )
         conn.commit()
         room_id = cursor.lastrowid
         conn.close()
         return room_id
     
-    def update_room(self, room_id, room_number, status, color, label):
+    def update_room(self, room_id, room_number, phone_extension, status, color, label):
         """Aggiorna una camera esistente"""
         conn = self.get_connection()
         cursor = conn.cursor()
         cursor.execute(
-            "UPDATE rooms SET room_number = ?, status = ?, color = ?, label = ? WHERE id = ?",
-            (room_number, status, color, label, room_id)
+            "UPDATE rooms SET room_number = ?, phone_extension = ?, status = ?, color = ?, label = ? WHERE id = ?",
+            (room_number, phone_extension, status, color, label, room_id)
         )
         conn.commit()
         conn.close()
@@ -167,13 +210,13 @@ class DatabaseManager:
         conn.commit()
         conn.close()
     
-    def add_audio_message(self, name, file_path, duration=None, category='standard'):
+    def add_audio_message(self, name, file_path, duration=None, category='standard', language='it', action_type='wake_up'):
         """Aggiunge un messaggio audio"""
         conn = self.get_connection()
         cursor = conn.cursor()
         cursor.execute(
-            "INSERT INTO audio_messages (name, file_path, duration, category) VALUES (?, ?, ?, ?)",
-            (name, file_path, duration, category)
+            "INSERT INTO audio_messages (name, file_path, duration, category, language, action_type) VALUES (?, ?, ?, ?, ?, ?)",
+            (name, file_path, duration, category, language, action_type)
         )
         conn.commit()
         message_id = cursor.lastrowid
@@ -251,6 +294,37 @@ class DatabaseManager:
         )
         conn.commit()
         conn.close()
+    
+    def update_audio_message(self, message_id, name, file_path, duration=None, category='standard', language='it', action_type='wake_up'):
+        """Aggiorna un messaggio audio"""
+        conn = self.get_connection()
+        cursor = conn.cursor()
+        cursor.execute(
+            "UPDATE audio_messages SET name = ?, file_path = ?, duration = ?, category = ?, language = ?, action_type = ? WHERE id = ?",
+            (name, file_path, duration, category, language, action_type, message_id)
+        )
+        conn.commit()
+        conn.close()
+    
+    def delete_audio_message(self, message_id):
+        """Elimina un messaggio audio"""
+        conn = self.get_connection()
+        cursor = conn.cursor()
+        cursor.execute("DELETE FROM audio_messages WHERE id = ?", (message_id,))
+        conn.commit()
+        conn.close()
+    
+    def get_audio_message_by_action_and_language(self, action_type, language='it'):
+        """Ottiene un messaggio audio per tipo di azione e lingua"""
+        conn = self.get_connection()
+        cursor = conn.cursor()
+        cursor.execute(
+            "SELECT * FROM audio_messages WHERE action_type = ? AND language = ? LIMIT 1",
+            (action_type, language)
+        )
+        message = cursor.fetchone()
+        conn.close()
+        return message
 
 if __name__ == "__main__":
     # Test del database
