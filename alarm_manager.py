@@ -108,17 +108,23 @@ class AlarmManager:
             # Usa l'interno telefonico se specificato, altrimenti il numero camera
             phone_extension = room_data[2] if len(room_data) > 2 and room_data[2] else room_number
             
-            # Ottiene la lingua della camera (colonna 8: id, room_number, phone_extension, description, status, color, label, created_at, language)
-            room_language = room_data[8] if len(room_data) > 8 and room_data[8] else 'it'
-            
-            # Ottiene il file audio principale (wake_up)
+            # Ottiene il file audio principale (wake_up) E la sua lingua
             audio_file_path = None
+            room_language = 'it'  # Default
+            
             if audio_message_id:
                 audio_messages = self.db.get_audio_messages()
                 for msg in audio_messages:
                     if msg[0] == audio_message_id:
                         audio_file_path = msg[2]  # file_path
+                        # Recupera la lingua dall'audio wake_up selezionato
+                        room_language = msg[5] if len(msg) > 5 and msg[5] else 'it'
+                        self.logger.info(f"Audio wake_up: {msg[1]}, Lingua: {room_language}")
                         break
+            
+            # Se non c'è audio message, usa la lingua della camera come fallback
+            if not audio_message_id and len(room_data) > 8 and room_data[8]:
+                room_language = room_data[8]
             
             # Avvia la chiamata con DTMF per snooze
             success, dtmf_digit = self._execute_alarm_with_snooze(
