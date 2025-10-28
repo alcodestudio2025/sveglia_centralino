@@ -108,8 +108,8 @@ class AlarmManager:
             # Usa l'interno telefonico se specificato, altrimenti il numero camera
             phone_extension = room_data[2] if len(room_data) > 2 and room_data[2] else room_number
             
-            # Ottiene la lingua della camera (colonna 7, dopo phone_extension, description, status, color, label)
-            room_language = room_data[7] if len(room_data) > 7 and room_data[7] else 'it'
+            # Ottiene la lingua della camera (colonna 8: id, room_number, phone_extension, description, status, color, label, created_at, language)
+            room_language = room_data[8] if len(room_data) > 8 and room_data[8] else 'it'
             
             # Ottiene il file audio principale (wake_up)
             audio_file_path = None
@@ -299,12 +299,22 @@ class AlarmManager:
             self.logger.info(f"SVEGLIA CON SNOOZE - Camera {room_number} - Interno {phone_extension} - Lingua: {language.upper()}")
             self.logger.info("="*60)
             
-            # 1. Chiamata + riproduzione audio + DTMF in UN SOLO comando
-            # NON chiamare make_call separatamente!
-            self.logger.info(f"Avvio chiamata con audio e rilevamento DTMF...")
+            # 1. Ottieni audio di conferma PRIMA della chiamata
+            snooze_5_audio = self._get_audio_by_action('snooze_confirm', language, '5')
+            snooze_10_audio = self._get_audio_by_action('snooze_confirm', language, '10')
+            
+            if snooze_5_audio:
+                self.logger.info(f"Audio conferma 5min: {snooze_5_audio}")
+            if snooze_10_audio:
+                self.logger.info(f"Audio conferma 10min: {snooze_10_audio}")
+            
+            # 2. Chiamata + riproduzione audio + DTMF + conferma in UNA SOLA chiamata
+            self.logger.info(f"Avvio chiamata con audio, DTMF e conferma...")
             success, dtmf_digit = self.pbx.pbx.play_audio_with_dtmf(
                 phone_extension,
                 wake_audio_path,
+                snooze_5_audio=snooze_5_audio,
+                snooze_10_audio=snooze_10_audio,
                 timeout=30
             )
             
@@ -312,18 +322,16 @@ class AlarmManager:
                 self.logger.error("Errore nella riproduzione audio")
                 return False, None
             
-            # 3. Gestisce risposta DTMF
+            # 3. Gestisce risposta DTMF e riprogramma
             if dtmf_digit == '1':
                 # Snooze 5 minuti
-                self.logger.info(f"✓ DTMF '1' ricevuto - Snooze 5 minuti")
+                self.logger.info(f"✓ DTMF '1' ricevuto - Snooze 5 minuti (conferma già riprodotta)")
                 snooze_minutes = 5
-                confirm_audio = self._get_audio_by_action('snooze_confirm', language, '5')
                 
             elif dtmf_digit == '2':
                 # Snooze 10 minuti
-                self.logger.info(f"✓ DTMF '2' ricevuto - Snooze 10 minuti")
+                self.logger.info(f"✓ DTMF '2' ricevuto - Snooze 10 minuti (conferma già riprodotta)")
                 snooze_minutes = 10
-                confirm_audio = self._get_audio_by_action('snooze_confirm', language, '10')
                 
             else:
                 # Nessun snooze - cliente ha chiuso/non ha premuto nulla
@@ -331,24 +339,21 @@ class AlarmManager:
                 self.db.update_alarm_status(alarm_id, "completed")
                 return True, None
             
-            # 4. Riproduce messaggio conferma snooze
-            if confirm_audio:
-                self.logger.info(f"Riproduzione conferma snooze {snooze_minutes} minuti...")
-                self.pbx.pbx.play_audio(phone_extension, confirm_audio)
-                time.sleep(2)
-            
-            # 5. Riprogramma sveglia
+            # 4. Riprogramma sveglia
             new_alarm_time = datetime.now() + timedelta(minutes=snooze_minutes)
             self.logger.info(f"Riprogrammazione sveglia per {new_alarm_time.strftime('%H:%M')}")
             
             # Aggiorna sveglia esistente
             self.db.update_alarm_status(alarm_id, "snoozed")
             
-            # Crea nuova sveglia per snooze
+            # Crea nuova sveglia per snooze - USA LO STESSO AUDIO_MESSAGE_ID
+            alarm_data = self.db.get_alarm(alarm_id)
+            original_audio_id = alarm_data[3] if alarm_data and len(alarm_data) > 3 else None
+            
             self.db.add_alarm(
                 room_number,
                 new_alarm_time.isoformat(),
-                audio_message_id=None  # Usa stesso audio della sveglia originale
+                audio_message_id=original_audio_id  # Usa stesso audio della sveglia originale
             )
             
             self.logger.info(f"✓ Sveglia riprogrammata con successo")

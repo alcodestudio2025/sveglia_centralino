@@ -30,6 +30,15 @@ class DatabaseManager:
             )
         ''')
         
+        # Migrazione: aggiungi colonna language se non esiste
+        try:
+            cursor.execute("SELECT language FROM rooms LIMIT 1")
+        except sqlite3.OperationalError:
+            # La colonna non esiste, aggiungila
+            cursor.execute("ALTER TABLE rooms ADD COLUMN language TEXT DEFAULT 'it'")
+            conn.commit()
+            print("✓ Colonna 'language' aggiunta alla tabella rooms")
+        
         # Tabella messaggi audio
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS audio_messages (
@@ -293,6 +302,15 @@ class DatabaseManager:
         alarm_id = cursor.lastrowid
         conn.close()
         return alarm_id
+    
+    def get_alarm(self, alarm_id):
+        """Ottiene una singola sveglia per ID"""
+        conn = self.get_connection()
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM alarms WHERE id = ?", (alarm_id,))
+        alarm = cursor.fetchone()
+        conn.close()
+        return alarm
     
     def get_alarms(self, status=None, room_number=None):
         """Ottiene le sveglie"""

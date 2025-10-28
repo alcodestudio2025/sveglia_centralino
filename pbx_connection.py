@@ -4,6 +4,7 @@ Gestione connessione SSH al centralino PBX
 import paramiko
 import time
 import logging
+import os
 from datetime import datetime
 from config import PBX_CONFIG
 from logger import get_logger
@@ -157,12 +158,14 @@ class PBXConnection:
 [wakeup-service]
 ; Context per gestione sveglie con DTMF
 ; Chiamata: Local/130@from-internal extension <nome_file>@wakeup-service
+; Il CALL_ID identifica i file temporanei con i path degli audio di conferma
 
 ; Extension dinamica: riceve nome file come ${EXTEN}
 ; Il nome arriva con "-" al posto di "/" (es: custom-wakeup_didimos_asterisk_1)
 ; Pattern _. matcha QUALSIASI stringa (lettere, numeri, simboli)
 exten => _.,1,NoOp(=== SVEGLIA CON SNOOZE ===)
 exten => _.,n,NoOp(Audio extension: ${EXTEN})
+exten => _.,n,NoOp(Call ID: ${CALL_ID})
 exten => _.,n,Answer()
 exten => _.,n,Wait(1)
 exten => _.,n,Set(TIMEOUT(digit)=5)
@@ -175,18 +178,40 @@ exten => _.,n,WaitExten(30)
 exten => _.,n,NoOp(Nessun input DTMF - chiusura)
 exten => _.,n,Hangup()
 
-; DTMF 1 - Snooze 5 minuti
+; DTMF 1 - Snooze 5 minuti + Riproduce conferma
 exten => 1,1,NoOp(DTMF 1 ricevuto - Snooze 5 min)
 exten => 1,n,Set(SNOOZE_CHOICE=1)
 exten => 1,n,System(echo "1" > /tmp/asterisk_dtmf_${UNIQUEID}.txt)
-exten => 1,n,NoOp(File DTMF: /tmp/asterisk_dtmf_${UNIQUEID}.txt)
+exten => 1,n,NoOp(File DTMF creato: /tmp/asterisk_dtmf_${UNIQUEID}.txt)
+; Leggi path audio conferma dal file temporaneo
+exten => 1,n,Set(AUDIO_FILE_PATH=/tmp/snooze_5_audio_${CALL_ID}.txt)
+exten => 1,n,NoOp(Cerco file: ${AUDIO_FILE_PATH})
+exten => 1,n,Set(SNOOZE_AUDIO=${SHELL(cat ${AUDIO_FILE_PATH} 2>/dev/null | tr -d '\\n\\r')})
+exten => 1,n,NoOp(Audio letto: [${SNOOZE_AUDIO}])
+exten => 1,n,GotoIf($["${SNOOZE_AUDIO}" = ""]?noadio)
+exten => 1,n,NoOp(Riproduzione conferma: ${SNOOZE_AUDIO})
+exten => 1,n,Playback(${SNOOZE_AUDIO})
+exten => 1,n,Goto(fine)
+exten => 1,n(noadio),NoOp(Nessun audio conferma trovato)
+exten => 1,n(fine),Wait(0.5)
 exten => 1,n,Hangup()
 
-; DTMF 2 - Snooze 10 minuti
+; DTMF 2 - Snooze 10 minuti + Riproduce conferma
 exten => 2,1,NoOp(DTMF 2 ricevuto - Snooze 10 min)
 exten => 2,n,Set(SNOOZE_CHOICE=2)
 exten => 2,n,System(echo "2" > /tmp/asterisk_dtmf_${UNIQUEID}.txt)
-exten => 2,n,NoOp(File DTMF: /tmp/asterisk_dtmf_${UNIQUEID}.txt)
+exten => 2,n,NoOp(File DTMF creato: /tmp/asterisk_dtmf_${UNIQUEID}.txt)
+; Leggi path audio conferma dal file temporaneo
+exten => 2,n,Set(AUDIO_FILE_PATH=/tmp/snooze_10_audio_${CALL_ID}.txt)
+exten => 2,n,NoOp(Cerco file: ${AUDIO_FILE_PATH})
+exten => 2,n,Set(SNOOZE_AUDIO=${SHELL(cat ${AUDIO_FILE_PATH} 2>/dev/null | tr -d '\\n\\r')})
+exten => 2,n,NoOp(Audio letto: [${SNOOZE_AUDIO}])
+exten => 2,n,GotoIf($["${SNOOZE_AUDIO}" = ""]?noadio)
+exten => 2,n,NoOp(Riproduzione conferma: ${SNOOZE_AUDIO})
+exten => 2,n,Playback(${SNOOZE_AUDIO})
+exten => 2,n,Goto(fine)
+exten => 2,n(noadio),NoOp(Nessun audio conferma trovato)
+exten => 2,n(fine),Wait(0.5)
 exten => 2,n,Hangup()
 
 ; Timeout o altro input
@@ -284,18 +309,21 @@ exten => i,n,Hangup()
             self.logger.error(f"Errore upload audio: {e}")
             return False, str(e)
     
-    def play_audio_with_dtmf(self, phone_extension, audio_file_path, timeout=30):
+    def play_audio_with_dtmf(self, phone_extension, audio_file_path, snooze_5_audio=None, snooze_10_audio=None, timeout=30):
         """
         Chiama, riproduce audio e attende DTMF usando context wakeup-service
         
         STRATEGIA:
         1. Upload file audio su Asterisk
-        2. Usa context 'wakeup-service' che gestisce DTMF
-        3. Legge il risultato DTMF dal file temporaneo
+        2. Upload audio di conferma snooze (se presenti)
+        3. Usa context 'wakeup-service' che gestisce DTMF e riproduce conferma
+        4. Legge il risultato DTMF dal file temporaneo
         
         Args:
             phone_extension: Interno telefonico
             audio_file_path: File audio da riprodurre
+            snooze_5_audio: Path audio conferma 5 minuti (opzionale)
+            snooze_10_audio: Path audio conferma 10 minuti (opzionale)
             timeout: Secondi di attesa per input DTMF
             
         Returns:
@@ -307,8 +335,8 @@ exten => i,n,Hangup()
             wake_callerid = self.config.get('wake_callerid', 'Servizio Sveglie')
             context = self.config.get('context', 'from-internal')
             
-            # 1. Upload audio su Asterisk
-            self.logger.info(f"Upload audio su Asterisk: {audio_file_path}")
+            # 1. Upload audio sveglia su Asterisk
+            self.logger.info(f"Upload audio sveglia: {audio_file_path}")
             success, audio_path_or_error = self.upload_audio_to_asterisk(audio_file_path)
             
             if not success:
@@ -317,21 +345,66 @@ exten => i,n,Hangup()
             
             audio_name = audio_path_or_error  # Es: "custom/wakeup_didimos_asterisk_1"
             
-            # 2. Genera un ID univoco per questa chiamata
+            # 2. Upload audio conferma snooze (se presenti)
+            snooze_5_path = ""
+            snooze_10_path = ""
+            
+            if snooze_5_audio:
+                self.logger.info(f"Upload audio conferma 5min: {snooze_5_audio}")
+                success_5, path_5 = self.upload_audio_to_asterisk(snooze_5_audio)
+                if success_5:
+                    snooze_5_path = path_5
+                    self.logger.info(f"✓ Conferma 5min: {snooze_5_path}")
+            
+            if snooze_10_audio:
+                self.logger.info(f"Upload audio conferma 10min: {snooze_10_audio}")
+                success_10, path_10 = self.upload_audio_to_asterisk(snooze_10_audio)
+                if success_10:
+                    snooze_10_path = path_10
+                    self.logger.info(f"✓ Conferma 10min: {snooze_10_path}")
+            
+            # 3. Genera un ID univoco per questa chiamata
             import time
             call_id = f"{phone_extension}_{int(time.time())}"
             
-            # 3. Comando Originate verso il context wakeup-service
+            # 4. Scrivi i path degli audio in file temporanei per il dialplan
+            # Il dialplan leggerà questi file per sapere quali audio riprodurre
+            # NOTA: Usa echo -n per evitare newline finale
+            if snooze_5_path or snooze_10_path:
+                # Crea file temporanei sul server Asterisk
+                if snooze_5_path:
+                    cmd_5 = f"echo -n '{snooze_5_path}' > /tmp/snooze_5_audio_{call_id}.txt"
+                    output_5, error_5 = self.execute_command(cmd_5)
+                    self.logger.info(f"✓ File snooze 5min creato: /tmp/snooze_5_audio_{call_id}.txt")
+                    self.logger.info(f"  Contenuto: {snooze_5_path}")
+                    
+                    # Verifica che il file esista
+                    verify_cmd = f"cat /tmp/snooze_5_audio_{call_id}.txt"
+                    verify_out, _ = self.execute_command(verify_cmd)
+                    self.logger.info(f"  Verifica contenuto: [{verify_out}]")
+                
+                if snooze_10_path:
+                    cmd_10 = f"echo -n '{snooze_10_path}' > /tmp/snooze_10_audio_{call_id}.txt"
+                    output_10, error_10 = self.execute_command(cmd_10)
+                    self.logger.info(f"✓ File snooze 10min creato: /tmp/snooze_10_audio_{call_id}.txt")
+                    self.logger.info(f"  Contenuto: {snooze_10_path}")
+                    
+                    # Verifica che il file esista
+                    verify_cmd = f"cat /tmp/snooze_10_audio_{call_id}.txt"
+                    verify_out, _ = self.execute_command(verify_cmd)
+                    self.logger.info(f"  Verifica contenuto: [{verify_out}]")
+            
+            # 5. Comando Originate verso il context wakeup-service
             # Passa il nome file direttamente come extension
-            # Es: extension custom/wakeup@wakeup-service
-            # Il context riceverà "custom/wakeup" in ${EXTEN}
+            # Passa anche il call_id per identificare i file temporanei
             # NOTA: Sostituiamo "/" con "-" per compatibilità extension pattern
             audio_exten = audio_name.replace('/', '-')
             
             command = (
                 f"asterisk -rx \"channel originate Local/{phone_extension}@{context}/n "
                 f"extension {audio_exten}@wakeup-service "
-                f"callerid '{wake_callerid} <{wake_extension}>'\" "
+                f"callerid '{wake_callerid} <{wake_extension}>' "
+                f"variable CALL_ID={call_id}\" "
             )
             
             self.logger.info(f"Chiamata con DTMF a {phone_extension}: {audio_name}")
@@ -366,17 +439,81 @@ exten => i,n,Hangup()
                     dtmf_digit = dtmf_content.strip()
                     self.logger.info(f"✓ DTMF ricevuto: {dtmf_digit}")
                     
-                    # Pulisci il file
+                    # Pulisci i file temporanei
                     self.execute_command(f"rm -f {dtmf_file}")
+                    self.execute_command(f"rm -f /tmp/snooze_5_audio_{call_id}.txt")
+                    self.execute_command(f"rm -f /tmp/snooze_10_audio_{call_id}.txt")
                     
                     return True, dtmf_digit if dtmf_digit in ['1', '2'] else None
             
             self.logger.info("Nessun DTMF ricevuto (timeout o no input)")
+            # Pulisci comunque i file temporanei
+            self.execute_command(f"rm -f /tmp/snooze_5_audio_{call_id}.txt")
+            self.execute_command(f"rm -f /tmp/snooze_10_audio_{call_id}.txt")
             return True, None
             
         except Exception as e:
             self.logger.error(f"Errore riproduzione audio con DTMF: {e}")
+            # Pulisci i file temporanei anche in caso di errore
+            try:
+                self.execute_command(f"rm -f /tmp/snooze_5_audio_{call_id}.txt")
+                self.execute_command(f"rm -f /tmp/snooze_10_audio_{call_id}.txt")
+            except:
+                pass
             return False, None
+    
+    def play_audio_simple(self, phone_extension, audio_file_path):
+        """
+        Riproduce un audio senza attendere DTMF (per messaggi di conferma)
+        
+        Args:
+            phone_extension: Interno da chiamare
+            audio_file_path: Path locale del file audio
+        
+        Returns:
+            tuple: (success, message)
+        """
+        try:
+            # Upload audio su Asterisk
+            audio_filename = os.path.splitext(os.path.basename(audio_file_path))[0]
+            
+            self.logger.info(f"Upload audio conferma su Asterisk: {audio_file_path}")
+            success = self.upload_audio_to_asterisk(audio_file_path)
+            if not success:
+                return False, "Errore upload audio"
+            
+            # Prepara path audio per Asterisk (senza estensione)
+            asterisk_audio_path = f"custom/{audio_filename}"
+            
+            # Converti "/" in "-" per extension name
+            audio_exten = asterisk_audio_path.replace('/', '-')
+            
+            # Usa wakeup-service-simple context (senza DTMF)
+            context = self.config.get('context', 'from-internal')
+            wake_extension = self.config.get('wake_extension', '999')
+            wake_callerid = self.config.get('wake_callerid', 'Servizio Sveglie')
+            
+            self.logger.info(f"Riproduzione audio semplice a {phone_extension}: {asterisk_audio_path}")
+            
+            # Chiamata SENZA DTMF usando context dedicato
+            command = (
+                f"asterisk -rx \"channel originate Local/{phone_extension}@{context}/n "
+                f"extension {audio_exten}@wakeup-service-simple "
+                f"callerid '{wake_callerid} <{wake_extension}>'\" "
+            )
+            
+            output, error = self.execute_command(command)
+            
+            if error or "error" in output.lower():
+                self.logger.error(f"Errore chiamata: {output}")
+                return False, "Errore chiamata"
+            
+            self.logger.info(f"✓ Audio semplice riprodotto")
+            return True, "Audio riprodotto"
+            
+        except Exception as e:
+            self.logger.error(f"Errore riproduzione audio semplice: {e}")
+            return False, str(e)
     
     def _extract_dtmf_from_output(self, output):
         """Estrae il digit DTMF dall'output del comando Asterisk"""
