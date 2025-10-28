@@ -400,7 +400,7 @@ class RoomManagerWindow:
                 # Log primi 3 interni per debug
                 sample_keys = list(self.pbx_status_cache.keys())[:3]
                 for ext in sample_keys:
-                    self.logger.debug(f"  Cache[{ext}] = {self.pbx_status_cache[ext]}")
+                    self.logger.info(f"  Cache[{ext}] = {self.pbx_status_cache[ext]}")
                 
                 # Ricarica la lista per aggiornare i colori
                 self.load_rooms()
@@ -447,7 +447,7 @@ class RoomManagerWindow:
             if len(self.pbx_status_cache) > 0:
                 # Log primi 3 interni in cache
                 sample = list(self.pbx_status_cache.items())[:3]
-                self.logger.debug(f"  Campione cache: {sample}")
+                self.logger.info(f"  Campione cache: {sample}")
             
             rooms = self.db.get_rooms()
             for room in rooms:
@@ -481,11 +481,11 @@ class RoomManagerWindow:
                     
                     # Log solo primo match per vedere se funziona
                     if room_id == rooms[0][0]:
-                        self.logger.debug(f"  Primo interno: {phone_extension} -> {ext_status}")
+                        self.logger.info(f"  ✓ Primo interno: {phone_extension} -> {ext_status}")
                 elif phone_extension:
                     # Log solo primo mismatch
                     if room_id == rooms[0][0]:
-                        self.logger.warning(f"  Interno {phone_extension} NON trovato in cache!")
+                        self.logger.warning(f"  ✗ Interno {phone_extension} NON trovato in cache!")
                 
                 # Converte stato in italiano
                 status_it = {

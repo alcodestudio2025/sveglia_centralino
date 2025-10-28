@@ -252,9 +252,9 @@ class PBXConnection:
         lines = output.split('\n')
         
         self.logger.info(f"Parsing SIP output ({len(lines)} righe)...")
-        self.logger.debug("Prime 10 righe output SIP:")
-        for i, line in enumerate(lines[:10]):
-            self.logger.debug(f"  Riga {i}: {line[:100]}")
+        self.logger.info("Prime 5 righe output SIP:")
+        for i, line in enumerate(lines[:5]):
+            self.logger.info(f"  Riga {i}: {line[:80]}")
         
         for line in lines:
             # Formato tipico: 101/101    D  A  5060  OK (15 ms)
@@ -300,9 +300,9 @@ class PBXConnection:
                     }
                     peers.append(peer_data)
                     
-                    # Log solo primi 5 e ultimi 5 per non spammare
-                    if len(peers) <= 5 or len(peers) % 20 == 0:
-                        self.logger.debug(f"  Parsed: {peer_name} -> {status} (latency: {latency}ms)")
+                    # Log solo primi 3 per non spammare
+                    if len(peers) <= 3:
+                        self.logger.info(f"  Parsed: {peer_name} -> {status} (latency: {latency}ms)")
         
         # Summary dettagliato
         online_count = sum(1 for p in peers if p['status'] == 'online')
