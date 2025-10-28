@@ -162,7 +162,7 @@ class PBXConnection:
 
 ; Extension dinamica: riceve nome file come ${EXTEN}
 ; Formato: audio|callid (es: custom-wakeup|130_123)
-; Le variabili SNOOZE_*_AUDIO sono passate come variabili globali
+; I path degli audio snooze sono in file: /tmp/snooze_5_audio_CALLID.txt e /tmp/snooze_10_audio_CALLID.txt
 ; Pattern _. matcha QUALSIASI stringa (lettere, numeri, simboli)
 exten => _.,1,NoOp(=== SVEGLIA CON SNOOZE ===)
 exten => _.,n,NoOp(Extension: ${EXTEN})
@@ -171,6 +171,9 @@ exten => _.,n,Set(AUDIO_EXTEN=${CUT(EXTEN,|,1)})
 exten => _.,n,Set(CALL_ID=${CUT(EXTEN,|,2)})
 exten => _.,n,NoOp(Audio: ${AUDIO_EXTEN})
 exten => _.,n,NoOp(Call ID: ${CALL_ID})
+; Leggi i path degli audio snooze dai file temporanei
+exten => _.,n,Set(__SNOOZE_5_AUDIO=${FILE(/tmp/snooze_5_audio_${CALL_ID}.txt,0,9999)})
+exten => _.,n,Set(__SNOOZE_10_AUDIO=${FILE(/tmp/snooze_10_audio_${CALL_ID}.txt,0,9999)})
 exten => _.,n,NoOp(Snooze 5min: ${SNOOZE_5_AUDIO})
 exten => _.,n,NoOp(Snooze 10min: ${SNOOZE_10_AUDIO})
 exten => _.,n,Answer()
@@ -384,11 +387,24 @@ exten => i,n,Hangup()
             snooze_5_escaped = snooze_5_path.replace('/', '\\/') if snooze_5_path else ""
             snooze_10_escaped = snooze_10_path.replace('/', '\\/') if snooze_10_path else ""
             
+            # Torna ad usare file temporanei - è l'unico modo affidabile
+            # Crea file temporanei su Asterisk con i path degli audio
+            try:
+                if snooze_5_path:
+                    cmd_5 = f"echo -n '{snooze_5_path}' > /tmp/snooze_5_audio_{call_id}.txt"
+                    self.execute_command(cmd_5)
+                    self.logger.info(f"File snooze 5min creato: /tmp/snooze_5_audio_{call_id}.txt")
+                
+                if snooze_10_path:
+                    cmd_10 = f"echo -n '{snooze_10_path}' > /tmp/snooze_10_audio_{call_id}.txt"
+                    self.execute_command(cmd_10)
+                    self.logger.info(f"File snooze 10min creato: /tmp/snooze_10_audio_{call_id}.txt")
+            except Exception as e:
+                self.logger.error(f"Errore creazione file temporanei: {e}")
+            
             command = (
                 f"asterisk -rx \"channel originate Local/{phone_extension}@{context}/n "
                 f"extension {audio_exten_with_id}@wakeup-service "
-                f"variable __SNOOZE_5_AUDIO={snooze_5_escaped} "
-                f"variable __SNOOZE_10_AUDIO={snooze_10_escaped} "
                 f"callerid '{wake_callerid} <{wake_extension}>'\" "
             )
             
@@ -427,9 +443,18 @@ exten => i,n,Hangup()
                     # Pulisci il file DTMF
                     self.execute_command(f"rm -f {dtmf_file}")
                     
+                    # Pulisci file audio paths
+                    self.execute_command(f"rm -f /tmp/snooze_5_audio_{call_id}.txt")
+                    self.execute_command(f"rm -f /tmp/snooze_10_audio_{call_id}.txt")
+                    
                     return True, dtmf_digit if dtmf_digit in ['1', '2'] else None
             
             self.logger.info("Nessun DTMF ricevuto (timeout o no input)")
+            
+            # Pulisci file audio paths anche in caso di timeout
+            self.execute_command(f"rm -f /tmp/snooze_5_audio_{call_id}.txt")
+            self.execute_command(f"rm -f /tmp/snooze_10_audio_{call_id}.txt")
+            
             return True, None
             
         except Exception as e:
