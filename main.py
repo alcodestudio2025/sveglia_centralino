@@ -143,11 +143,16 @@ class SvegliaCentralinoApp:
         self.date_entry.grid(row=0, column=3, sticky=(tk.W, tk.E), padx=(0, 20))
         self.date_entry.insert(0, datetime.date.today().strftime("%Y-%m-%d"))
         
-        # Ora
+        # Ora (interattiva - si aggiorna all'ora attuale)
         ttk.Label(row1_frame, text="Ora:").grid(row=0, column=4, sticky=tk.W, padx=(0, 10))
         self.time_entry = ttk.Entry(row1_frame, width=8)
         self.time_entry.grid(row=0, column=5, sticky=tk.W)
-        self.time_entry.insert(0, "08:00")
+        # Imposta ora corrente + 1 ora come default
+        default_time = (datetime.datetime.now() + datetime.timedelta(hours=1)).strftime("%H:%M")
+        self.time_entry.insert(0, default_time)
+        
+        # Aggiungi binding per aggiornare l'ora quando si clicca sul campo
+        self.time_entry.bind('<FocusIn>', self.update_time_to_current)
         
         # Seconda riga: Messaggio audio e pulsanti
         row2_frame = ttk.Frame(alarm_frame)
@@ -189,12 +194,12 @@ class SvegliaCentralinoApp:
                   command=self.snooze_selected_alarm).pack(side=tk.LEFT, padx=(0, 10))
         
         # Lista sveglie con colonne estese
-        columns = ("ID", "Camera", "Data", "Ora", "Messaggio", "Status", "Rinvii")
+        columns = ("ID", "Camera", "Data", "Ora", "Messaggio", "Status", "Tipo")
         self.alarms_tree = ttk.Treeview(report_frame, columns=columns, show="headings", height=12)
         
         # Configurazione colonne
         column_widths = {"ID": 50, "Camera": 80, "Data": 100, "Ora": 80, 
-                        "Messaggio": 200, "Status": 100, "Rinvii": 60}
+                        "Messaggio": 200, "Status": 100, "Tipo": 80}
         
         for col in columns:
             self.alarms_tree.heading(col, text=col)
@@ -509,6 +514,9 @@ Funzionalità:
             status = alarm[4]
             snooze_count = alarm[5] if len(alarm) > 5 else 0
             
+            # Determina il tipo: Originale o Rinvio
+            tipo = "Originale" if snooze_count == 0 else f"Rinvio ({snooze_count})"
+            
             # Inserisci nella lista con ID visibile
             item_id = self.alarms_tree.insert("", "end", values=(
                 alarm[0],  # ID
@@ -517,7 +525,7 @@ Funzionalità:
                 time_str,  # Ora
                 audio_name,  # Messaggio
                 status,    # Status
-                snooze_count  # Rinvii
+                tipo       # Tipo (Originale/Rinvio)
             ))
             
             # Colora le righe in base allo status
@@ -529,6 +537,15 @@ Funzionalità:
                 self.alarms_tree.set(item_id, "Status", "Posticipata")
             else:
                 self.alarms_tree.set(item_id, "Status", "Programmata")
+    
+    def update_time_to_current(self, event=None):
+        """Aggiorna il campo ora all'ora corrente + 1 ora quando viene cliccato"""
+        current_time = (datetime.datetime.now() + datetime.timedelta(hours=1)).strftime("%H:%M")
+        self.time_entry.delete(0, tk.END)
+        self.time_entry.insert(0, current_time)
+        # Aggiorna anche la data se necessario
+        self.date_entry.delete(0, tk.END)
+        self.date_entry.insert(0, datetime.date.today().strftime("%Y-%m-%d"))
     
     def set_alarm(self):
         """Imposta una nuova sveglia"""
