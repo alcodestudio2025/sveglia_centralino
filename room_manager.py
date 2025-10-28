@@ -533,13 +533,16 @@ class RoomManagerWindow:
         selected_item = self.rooms_tree.focus()
         if selected_item:
             values = self.rooms_tree.item(selected_item, 'values')
-            self.selected_room_id = values[1]  # ID è nella colonna 1
-            self.room_number_var.set(values[2])
-            self.phone_extension_var.set(values[3])
-            self.description_var.set(values[4])
+            # Ordine colonne: ("Stato PBX", "ID", "Numero", "Interno", "Descrizione", "Stato", "Colore", "Etichetta", "Creata")
+            #                      0         1       2         3           4            5        6         7           8
+            
+            self.selected_room_id = values[1]  # ID
+            self.room_number_var.set(values[2])  # Numero
+            self.phone_extension_var.set(values[3])  # Interno
+            self.description_var.set(values[4])  # Descrizione
             
             # Converte lo status visualizzato in quello del database
-            status_display = values[5]
+            status_display = values[5]  # Stato
             status_map = {
                 "Disponibile": "available",
                 "Occupata": "occupied",
@@ -548,11 +551,21 @@ class RoomManagerWindow:
             }
             self.room_status_var.set(status_map.get(status_display, "available"))
             
-            # Color con fallback
-            color = values[6] if values[6] else "#FFFFFF"
+            # Color con fallback (colonna 6)
+            color = values[6] if values[6] and values[6] != '' else "#FFFFFF"
             self.room_color_var.set(color)
-            self.color_display.config(bg=color)
-            self.room_label_var.set(values[7])
+            
+            # Valida che sia un colore hex valido
+            try:
+                # Tenta di usare il colore
+                self.color_display.config(bg=color)
+            except tk.TclError:
+                # Se non è un colore valido, usa bianco
+                self.logger.warning(f"Colore non valido: {color}, uso #FFFFFF")
+                self.room_color_var.set("#FFFFFF")
+                self.color_display.config(bg="#FFFFFF")
+            
+            self.room_label_var.set(values[7])  # Etichetta
         else:
             self.clear_fields()
     
