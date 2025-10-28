@@ -82,6 +82,11 @@ class RoomManagerWindow:
         ttk.Button(toolbar_frame, text="📥 Importa da PBX", 
                   command=self.import_from_pbx).pack(side=tk.LEFT, padx=(0, 10))
         
+        # Pulsante PULISCI e reimporta
+        ttk.Button(toolbar_frame, text="🗑️ Pulisci e Reimporta", 
+                  command=self.clean_and_reimport_pbx, 
+                  style='Danger.TButton').pack(side=tk.LEFT, padx=(0, 10))
+        
         # Pulsante refresh stato
         ttk.Button(toolbar_frame, text="🔄 Aggiorna Stato", 
                   command=self.refresh_extensions_status).pack(side=tk.LEFT, padx=(0, 10))
@@ -200,6 +205,95 @@ class RoomManagerWindow:
         if color_code[1]:
             self.room_color_var.set(color_code[1])
             self.color_display.config(bg=color_code[1])
+    
+    def clean_and_reimport_pbx(self):
+        """Pulisce tutte le camere e reimporta dal PBX"""
+        # Conferma azione
+        result = messagebox.askyesno(
+            "Conferma Pulizia",
+            "⚠️ ATTENZIONE ⚠️\n\n"
+            "Questa operazione:\n"
+            "• Eliminerà TUTTE le camere esistenti\n"
+            "• Reimporterà tutti gli interni dal PBX\n\n"
+            "Vuoi continuare?",
+            icon='warning'
+        )
+        
+        if not result:
+            return
+        
+        def do_clean_import():
+            try:
+                self.status_label.config(text="Pulizia in corso...")
+                self.logger.info("Pulizia database camere...")
+                
+                # Elimina tutte le camere
+                conn = self.db.get_connection()
+                cursor = conn.cursor()
+                cursor.execute("DELETE FROM rooms")
+                conn.commit()
+                conn.close()
+                
+                self.logger.info("Tutte le camere eliminate")
+                self.status_label.config(text="Import da PBX in corso...")
+                
+                # Connessione al PBX
+                pbx = PBXConnection()
+                
+                # Ottiene la lista degli interni
+                peers, error = pbx.get_sip_peers()
+                
+                if error or not peers:
+                    messagebox.showerror("Errore Import", 
+                                       f"Impossibile importare interni dal PBX:\n{error or 'Nessun interno trovato'}")
+                    self.status_label.config(text="")
+                    return
+                
+                self.logger.info(f"Trovati {len(peers)} interni sul PBX")
+                
+                # Importa tutti gli interni
+                imported = 0
+                
+                for peer in peers:
+                    extension = peer['extension']
+                    ext_type = peer['type']
+                    
+                    # Crea nuova camera
+                    description = f"Interno {extension} ({ext_type})"
+                    self.db.add_room(
+                        room_number=extension,
+                        phone_extension=extension,
+                        description=description,
+                        status='available',
+                        color='#FFFFFF',
+                        label='Importato da PBX'
+                    )
+                    imported += 1
+                    
+                    if imported % 20 == 0:
+                        self.logger.info(f"Importati {imported}/{len(peers)}...")
+                
+                self.logger.info(f"Import completato: {imported} interni importati")
+                
+                # Aggiorna stato e lista
+                self.refresh_extensions_status()
+                
+                # Messaggio risultato
+                messagebox.showinfo("Pulizia e Import Completati", 
+                                  f"✅ Operazione completata!\n\n"
+                                  f"Camere vecchie: Eliminate\n"
+                                  f"Interni importati: {imported}\n"
+                                  f"Totale interni PBX: {len(peers)}")
+                
+                self.status_label.config(text=f"✓ {imported} interni importati e aggiornati")
+                
+            except Exception as e:
+                self.logger.error(f"Errore nella pulizia/import: {e}")
+                messagebox.showerror("Errore", f"Errore:\n{e}")
+                self.status_label.config(text="")
+        
+        # Esegue in thread separato
+        threading.Thread(target=do_clean_import, daemon=True).start()
     
     def import_from_pbx(self):
         """Importa gli interni configurati dal centralino PBX"""
