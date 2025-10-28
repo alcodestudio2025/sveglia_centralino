@@ -454,6 +454,11 @@ class RoomManagerWindow:
                 self.logger.info(f"  Campione cache: {sample}")
             
             rooms = self.db.get_rooms()
+            
+            # Log prima camera per debug
+            if len(rooms) > 0:
+                self.logger.info(f"  Prima camera dal DB (RAW): {rooms[0]}")
+            
             for room in rooms:
                 # Estrae i dati (ordine corretto dal database)
                 # 0=id, 1=room_number, 2=phone_extension, 3=description, 
@@ -466,6 +471,10 @@ class RoomManagerWindow:
                 color = room[5] if len(room) > 5 and room[5] else "#FFFFFF"
                 label = room[6] if len(room) > 6 and room[6] else ""
                 created_date = room[7].split(' ')[0] if len(room) > 7 and room[7] else "N/A"
+                
+                # Log prima camera per debug
+                if room_id == rooms[0][0]:
+                    self.logger.info(f"  Prima camera PARSED: num={room_number}, ext={phone_extension}, desc={description}")
                 
                 # Determina stato PBX
                 pbx_status_display = "?"
