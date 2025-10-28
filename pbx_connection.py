@@ -416,7 +416,7 @@ exten => i,n,Hangup()
             
             command = (
                 f"asterisk -rx \"channel originate Local/{phone_extension}@{context}/n "
-                f"extension '{audio_exten_with_id}'@wakeup-service "
+                f"extension {audio_exten_with_id}@wakeup-service "
                 f"callerid '{wake_callerid} <{wake_extension}>'\" "
             )
             
