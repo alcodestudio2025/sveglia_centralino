@@ -261,8 +261,16 @@ class AudioManagerWindow:
         try:
             messages = self.db.get_audio_messages()
             for msg in messages:
-                # Formatta la durata
-                duration = f"{msg[3]:.1f}s" if msg[3] else "N/A"
+                # Formatta la durata (gestisce sia stringhe "MM:SS" che numeri/None)
+                if msg[3]:
+                    if isinstance(msg[3], str):
+                        # Nuova durata già formattata come "MM:SS"
+                        duration = msg[3]
+                    else:
+                        # Vecchia durata numerica (secondi)
+                        duration = f"{msg[3]:.1f}s"
+                else:
+                    duration = "N/A"
                 
                 # Ottiene la lingua e l'azione
                 language = msg[5] if len(msg) > 5 else "it"
@@ -285,6 +293,7 @@ class AudioManagerWindow:
                 ))
         
         except Exception as e:
+            self.logger.error(f"Errore caricamento messaggi audio: {e}")
             messagebox.showerror("Errore", f"Errore nel caricamento dei messaggi audio: {e}")
     
     def on_audio_select(self, event):
