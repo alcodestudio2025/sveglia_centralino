@@ -20,3 +20,11 @@
 2025-10-28 11:05:09,364 - sveglia_centralino.main - INFO - test_connection:375 - Username: root
 2025-10-28 11:05:09,557 - sveglia_centralino.main - INFO - test_connection:381 - ✓ Connessione PBX all'avvio: SUCCESSO
 2025-10-28 11:05:09,557 - sveglia_centralino.main - INFO - test_connection:382 - ============================================================
+2025-10-28 11:10:42,550 - sveglia_centralino.main - INFO - __init__:56 - Gestore sveglie avviato
+2025-10-28 11:10:42,550 - sveglia_centralino.main - INFO - test_connection:371 - ============================================================
+2025-10-28 11:10:42,550 - sveglia_centralino.main - INFO - test_connection:372 - TEST CONNESSIONE PBX ALL'AVVIO
+2025-10-28 11:10:42,550 - sveglia_centralino.main - INFO - test_connection:373 - ============================================================
+2025-10-28 11:10:42,550 - sveglia_centralino.main - INFO - test_connection:374 - Host: 192.168.10.15:22
+2025-10-28 11:10:42,550 - sveglia_centralino.main - INFO - test_connection:375 - Username: root
+2025-10-28 11:10:42,733 - sveglia_centralino.main - INFO - test_connection:381 - ✓ Connessione PBX all'avvio: SUCCESSO
+2025-10-28 11:10:42,733 - sveglia_centralino.main - INFO - test_connection:382 - ============================================================

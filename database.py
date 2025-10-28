@@ -102,6 +102,18 @@ class DatabaseManager:
                 conn.commit()
                 print("Aggiunta colonna description alla tabella rooms")
             
+            if 'color' not in columns:
+                # Aggiunge la colonna color
+                cursor.execute("ALTER TABLE rooms ADD COLUMN color TEXT DEFAULT '#FFFFFF'")
+                conn.commit()
+                print("Aggiunta colonna color alla tabella rooms")
+            
+            if 'label' not in columns:
+                # Aggiunge la colonna label
+                cursor.execute("ALTER TABLE rooms ADD COLUMN label TEXT DEFAULT ''")
+                conn.commit()
+                print("Aggiunta colonna label alla tabella rooms")
+            
             # Verifica se la colonna language esiste nella tabella audio_messages
             cursor.execute("PRAGMA table_info(audio_messages)")
             audio_columns = [column[1] for column in cursor.fetchall()]

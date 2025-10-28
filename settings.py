@@ -140,101 +140,99 @@ class SettingsWindow:
         fields_frame.columnconfigure(1, weight=1)
     
     def create_rooms_tab(self, notebook):
-        """Crea il tab per la configurazione camere"""
+        """Tab Camere - Redirect a gestione camere completa"""
         rooms_frame = ttk.Frame(notebook)
         notebook.add(rooms_frame, text="Configurazione Camere")
         
-        # Titolo
-        ttk.Label(rooms_frame, text="Configurazione Camere Hotel", 
-                 font=("Arial", 12, "bold")).pack(pady=(0, 20))
+        # Contenitore centrale
+        center_frame = ttk.Frame(rooms_frame)
+        center_frame.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
         
-        # Frame principale
-        main_frame = ttk.Frame(rooms_frame)
-        main_frame.pack(fill=tk.BOTH, expand=True)
+        # Icona e titolo
+        ttk.Label(center_frame, text="🏨", font=("Arial", 72)).pack(pady=(0, 20))
+        ttk.Label(center_frame, text="Gestione Camere Hotel", 
+                 font=("Arial", 16, "bold")).pack(pady=(0, 10))
         
-        # Frame sinistro - Configurazione generale
-        left_frame = ttk.LabelFrame(main_frame, text="Configurazione Generale", padding="10")
-        left_frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=(0, 10))
+        # Descrizione
+        description = (
+            "Per gestire le camere dell'hotel usa la finestra dedicata\n"
+            "che include tutte le funzionalità avanzate:\n\n"
+            "• Import automatico interni da PBX\n"
+            "• Stato online/offline in tempo reale\n"
+            "• Descrizioni personalizzate\n"
+            "• Colori e etichette per organizzazione\n"
+            "• Gestione completa interno telefonico"
+        )
+        ttk.Label(center_frame, text=description, 
+                 font=("Arial", 10), justify=tk.CENTER).pack(pady=(0, 30))
         
-        # Nome hotel
-        ttk.Label(left_frame, text="Nome Hotel:").grid(row=0, column=0, sticky=tk.W, pady=5)
-        ttk.Entry(left_frame, textvariable=self.hotel_name, width=30).grid(row=0, column=1, sticky=(tk.W, tk.E), pady=5, padx=(10, 0))
+        # Pulsante grande per aprire gestione camere
+        open_btn = ttk.Button(center_frame, text="🚀 Apri Gestione Camere Completa", 
+                             command=self.open_room_manager)
+        open_btn.pack(pady=(0, 10))
         
-        # Numero totale camere
-        ttk.Label(left_frame, text="Numero Totale Camere:").grid(row=1, column=0, sticky=tk.W, pady=5)
-        ttk.Entry(left_frame, textvariable=self.total_rooms, width=10).grid(row=1, column=1, sticky=tk.W, pady=5, padx=(10, 0))
+        # Info aggiuntiva
+        ttk.Label(center_frame, text="(Oppure usa: Menu → Gestione → Gestisci Camere)", 
+                 font=("Arial", 9), foreground="gray").pack()
+    
+    def open_room_manager(self):
+        """Apre la finestra di gestione camere completa"""
+        from room_manager import RoomManagerWindow
+        from database import DatabaseManager
         
-        # Prefisso camere
-        ttk.Label(left_frame, text="Prefisso Camere:").grid(row=2, column=0, sticky=tk.W, pady=5)
-        ttk.Entry(left_frame, textvariable=self.room_prefix, width=10).grid(row=2, column=1, sticky=tk.W, pady=5, padx=(10, 0))
+        # Chiude la finestra settings
+        self.window.destroy()
         
-        # Numero di partenza
-        ttk.Label(left_frame, text="Numero di Partenza:").grid(row=3, column=0, sticky=tk.W, pady=5)
-        ttk.Entry(left_frame, textvariable=self.room_start_number, width=10).grid(row=3, column=1, sticky=tk.W, pady=5, padx=(10, 0))
-        
-        left_frame.columnconfigure(1, weight=1)
-        
-        # Frame destro - Gestione camere individuali
-        right_frame = ttk.LabelFrame(main_frame, text="Gestione Camere Individuali", padding="10")
-        right_frame.pack(side=tk.RIGHT, fill=tk.BOTH, expand=True)
-        
-        # Lista camere con colori e etichette
-        ttk.Label(right_frame, text="Lista Camere (colore = status):").pack(anchor=tk.W, pady=(0, 10))
-        
-        # Treeview per le camere
-        columns = ("Numero", "Status", "Etichetta", "Colore")
-        self.rooms_tree = ttk.Treeview(right_frame, columns=columns, show="headings", height=10)
-        
-        for col in columns:
-            self.rooms_tree.heading(col, text=col)
-            self.rooms_tree.column(col, width=100)
-        
-        # Scrollbar
-        rooms_scrollbar = ttk.Scrollbar(right_frame, orient=tk.VERTICAL, command=self.rooms_tree.yview)
-        self.rooms_tree.configure(yscrollcommand=rooms_scrollbar.set)
-        
-        self.rooms_tree.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
-        rooms_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
-        
-        # Pulsanti per gestione camere
-        rooms_buttons = ttk.Frame(right_frame)
-        rooms_buttons.pack(fill=tk.X, pady=(10, 0))
-        
-        ttk.Button(rooms_buttons, text="Aggiungi Camera", 
-                  command=self.add_room).pack(side=tk.LEFT, padx=(0, 5))
-        ttk.Button(rooms_buttons, text="Modifica Camera", 
-                  command=self.edit_room).pack(side=tk.LEFT, padx=(0, 5))
-        ttk.Button(rooms_buttons, text="Elimina Camera", 
-                  command=self.delete_room).pack(side=tk.LEFT, padx=(0, 5))
-        ttk.Button(rooms_buttons, text="Rigenera Camere", 
-                  command=self.regenerate_rooms).pack(side=tk.LEFT)
+        # Apre room manager
+        db = DatabaseManager()
+        RoomManagerWindow(self.parent, db)
     
     def create_audio_tab(self, notebook):
-        """Crea il tab per la configurazione audio"""
+        """Tab Audio - Redirect a gestione audio completa"""
         audio_frame = ttk.Frame(notebook)
         notebook.add(audio_frame, text="Messaggi Audio")
         
-        # Titolo
-        ttk.Label(audio_frame, text="Configurazione Messaggi Audio", 
-                 font=("Arial", 12, "bold")).pack(pady=(0, 20))
+        # Contenitore centrale
+        center_frame = ttk.Frame(audio_frame)
+        center_frame.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
         
-        # Frame per i campi
-        fields_frame = ttk.Frame(audio_frame)
-        fields_frame.pack(fill=tk.BOTH, expand=True)
+        # Icona e titolo
+        ttk.Label(center_frame, text="🔊", font=("Arial", 72)).pack(pady=(0, 20))
+        ttk.Label(center_frame, text="Gestione Messaggi Audio", 
+                 font=("Arial", 16, "bold")).pack(pady=(0, 10))
         
-        # Volume predefinito
-        ttk.Label(fields_frame, text="Volume Predefinito (0.0-1.0):").grid(row=0, column=0, sticky=tk.W, pady=5)
-        ttk.Entry(fields_frame, textvariable=self.audio_volume, width=10).grid(row=0, column=1, sticky=tk.W, pady=5, padx=(10, 0))
+        # Descrizione
+        description = (
+            "Per gestire i messaggi audio usa la finestra dedicata\n"
+            "che include tutte le funzionalità avanzate:\n\n"
+            "• Upload file MP3, WAV, OGG\n"
+            "• Preview e test audio\n"
+            "• Selezione lingua per messaggio\n"
+            "• Azioni associate (sveglia, conferma, saluto)\n"
+            "• Gestione categorie e durata"
+        )
+        ttk.Label(center_frame, text=description, 
+                 font=("Arial", 10), justify=tk.CENTER).pack(pady=(0, 30))
         
-        # Formati supportati
-        ttk.Label(fields_frame, text="Formati Supportati:").grid(row=1, column=0, sticky=tk.W, pady=5)
-        ttk.Entry(fields_frame, textvariable=self.audio_formats, width=50).grid(row=1, column=1, sticky=(tk.W, tk.E), pady=5, padx=(10, 0))
+        # Pulsante grande
+        ttk.Button(center_frame, text="🚀 Apri Gestione Audio Completa", 
+                  command=self.open_audio_manager).pack(pady=(0, 10))
         
-        # Cartella messaggi
-        ttk.Label(fields_frame, text="Cartella Messaggi:").grid(row=2, column=0, sticky=tk.W, pady=5)
-        ttk.Entry(fields_frame, textvariable=tk.StringVar(value="audio_messages"), width=50).grid(row=2, column=1, sticky=(tk.W, tk.E), pady=5, padx=(10, 0))
+        # Info aggiuntiva
+        ttk.Label(center_frame, text="(Oppure usa: Menu → Gestione → Gestisci Messaggi Audio)", 
+                 font=("Arial", 9), foreground="gray").pack()
+    
+    def open_audio_manager(self):
+        """Apre la finestra di gestione audio completa"""
+        from audio_manager import AudioManagerWindow
+        from database import DatabaseManager
         
-        fields_frame.columnconfigure(1, weight=1)
+        # Chiude la finestra settings
+        self.window.destroy()
+        
+        # Apre audio manager
+        db = DatabaseManager()
+        AudioManagerWindow(self.parent, db)
     
     def create_mail_tab(self, notebook):
         """Crea il tab per la configurazione mail"""
@@ -284,43 +282,66 @@ class SettingsWindow:
         fields_frame.columnconfigure(1, weight=1)
     
     def create_logs_tab(self, notebook):
-        """Crea il tab per la configurazione log"""
+        """Tab Log - Redirect a visualizzatore log completo"""
         logs_frame = ttk.Frame(notebook)
         notebook.add(logs_frame, text="Log e Monitoraggio")
         
-        # Titolo
-        ttk.Label(logs_frame, text="Configurazione Log e Monitoraggio", 
-                 font=("Arial", 12, "bold")).pack(pady=(0, 20))
+        # Contenitore centrale
+        center_frame = ttk.Frame(logs_frame)
+        center_frame.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
         
-        # Frame per i campi
-        fields_frame = ttk.Frame(logs_frame)
-        fields_frame.pack(fill=tk.BOTH, expand=True)
+        # Icona e titolo
+        ttk.Label(center_frame, text="📋", font=("Arial", 72)).pack(pady=(0, 20))
+        ttk.Label(center_frame, text="Visualizzatore Log e Monitoraggio", 
+                 font=("Arial", 16, "bold")).pack(pady=(0, 10))
         
-        # Livello log
-        ttk.Label(fields_frame, text="Livello Log:").grid(row=0, column=0, sticky=tk.W, pady=5)
-        log_level_combo = ttk.Combobox(fields_frame, textvariable=self.log_level, 
-                                      values=["DEBUG", "INFO", "WARNING", "ERROR"], 
-                                      state="readonly", width=15)
-        log_level_combo.grid(row=0, column=1, sticky=tk.W, pady=5, padx=(10, 0))
+        # Descrizione
+        description = (
+            "Per visualizzare i log usa la finestra dedicata\n"
+            "che include tutte le funzionalità avanzate:\n\n"
+            "• Visualizzazione log in tempo reale\n"
+            "• Filtri per livello (DEBUG, INFO, WARNING, ERROR)\n"
+            "• Ricerca nel testo dei log\n"
+            "• Export log in formato TXT\n"
+            "• Pulizia e gestione retention"
+        )
+        ttk.Label(center_frame, text=description, 
+                 font=("Arial", 10), justify=tk.CENTER).pack(pady=(0, 30))
         
-        # Giorni di retention
-        ttk.Label(fields_frame, text="Giorni di Retention:").grid(row=1, column=0, sticky=tk.W, pady=5)
-        ttk.Entry(fields_frame, textvariable=self.log_retention_days, width=10).grid(row=1, column=1, sticky=tk.W, pady=5, padx=(10, 0))
+        # Pulsanti
+        btn_frame = ttk.Frame(center_frame)
+        btn_frame.pack(pady=(0, 10))
         
-        # Auto cleanup
-        ttk.Checkbutton(fields_frame, text="Pulizia automatica log", 
-                       variable=self.log_auto_cleanup).grid(row=2, column=0, columnspan=2, sticky=tk.W, pady=10)
+        ttk.Button(btn_frame, text="📋 Visualizza Log", 
+                  command=self.open_log_viewer).pack(side=tk.LEFT, padx=(0, 10))
+        ttk.Button(btn_frame, text="📊 Monitor Sistema", 
+                  command=self.open_system_monitor_direct).pack(side=tk.LEFT)
         
-        # Pulsanti per gestione log
-        log_buttons = ttk.Frame(fields_frame)
-        log_buttons.grid(row=3, column=0, columnspan=2, pady=20)
+        # Info aggiuntiva
+        ttk.Label(center_frame, text="(Oppure usa: Menu → Gestione → Visualizza Log / Monitor di Sistema)", 
+                 font=("Arial", 9), foreground="gray").pack()
+    
+    def open_log_viewer(self):
+        """Apre il visualizzatore log"""
+        from log_viewer import LogViewerWindow
         
-        ttk.Button(log_buttons, text="Visualizza Log", 
-                  command=self.view_logs).pack(side=tk.LEFT, padx=(0, 10))
-        ttk.Button(log_buttons, text="Pulisci Log", 
-                  command=self.clean_logs).pack(side=tk.LEFT, padx=(0, 10))
-        ttk.Button(log_buttons, text="Esporta Log", 
-                  command=self.export_logs).pack(side=tk.LEFT)
+        # Chiude la finestra settings
+        self.window.destroy()
+        
+        # Apre log viewer
+        LogViewerWindow(self.parent)
+    
+    def open_system_monitor_direct(self):
+        """Apre il monitor di sistema"""
+        from system_monitor import SystemMonitorWindow
+        from database import DatabaseManager
+        
+        # Chiude la finestra settings
+        self.window.destroy()
+        
+        # Apre system monitor
+        db = DatabaseManager()
+        SystemMonitorWindow(self.parent, db)
     
     def create_alarms_tab(self, notebook):
         """Crea il tab per la configurazione sveglie"""
@@ -688,30 +709,8 @@ class SettingsWindow:
         """Testa l'invio di una mail"""
         messagebox.showinfo("Test Mail", "Funzione di test mail in implementazione")
     
-    def add_room(self):
-        """Aggiunge una nuova camera"""
-        messagebox.showinfo("Aggiungi Camera", "Funzione di aggiunta camera in implementazione")
-    
-    def edit_room(self):
-        """Modifica una camera esistente"""
-        messagebox.showinfo("Modifica Camera", "Funzione di modifica camera in implementazione")
-    
-    def delete_room(self):
-        """Elimina una camera"""
-        messagebox.showinfo("Elimina Camera", "Funzione di eliminazione camera in implementazione")
-    
-    def regenerate_rooms(self):
-        """Rigenera tutte le camere"""
-        messagebox.showinfo("Rigenera Camere", "Funzione di rigenerazione camere in implementazione")
-    
-    def view_logs(self):
-        """Visualizza i log"""
-        messagebox.showinfo("Visualizza Log", "Funzione di visualizzazione log in implementazione")
-    
-    def clean_logs(self):
-        """Pulisce i log"""
-        messagebox.showinfo("Pulisci Log", "Funzione di pulizia log in implementazione")
-    
-    def export_logs(self):
-        """Esporta i log"""
-        messagebox.showinfo("Esporta Log", "Funzione di esportazione log in implementazione")
+    # Metodi obsoleti rimossi - ora si usano finestre dedicate:
+    # - RoomManagerWindow per camere
+    # - AudioManagerWindow per audio
+    # - LogViewerWindow per log
+    # - SystemMonitorWindow per monitoraggio

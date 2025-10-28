@@ -407,8 +407,10 @@ class RoomManagerWindow:
             }
             self.room_status_var.set(status_map.get(status_display, "available"))
             
-            self.room_color_var.set(values[6])
-            self.color_display.config(bg=values[6])
+            # Color con fallback
+            color = values[6] if values[6] else "#FFFFFF"
+            self.room_color_var.set(color)
+            self.color_display.config(bg=color)
             self.room_label_var.set(values[7])
         else:
             self.clear_fields()
