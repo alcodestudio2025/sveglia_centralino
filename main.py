@@ -48,7 +48,6 @@ class SvegliaCentralinoApp:
         
         # Carica dati iniziali
         self.load_rooms()
-        self.load_audio_messages()
         self.load_alarms()
         
         # Avvia il gestore sveglie
@@ -221,7 +220,6 @@ class SvegliaCentralinoApp:
         self.status_var.set("Impostazioni aggiornate")
         # Ricarica i dati se necessario
         self.load_rooms()
-        self.load_audio_messages()
         self.load_alarms()
     
     def manage_rooms(self):
@@ -239,7 +237,7 @@ class SvegliaCentralinoApp:
     
     def on_audio_updated(self):
         """Callback quando i messaggi audio vengono aggiornati"""
-        self.load_audio_messages()
+        # I messaggi audio vengono caricati automaticamente quando serve
         self.status_var.set("Lista messaggi audio aggiornata")
     
     def view_logs(self):
