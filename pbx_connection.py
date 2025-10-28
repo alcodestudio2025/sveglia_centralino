@@ -317,12 +317,12 @@ exten => i,n,Hangup()
             
             # 3. Comando Originate verso il context wakeup-service
             # Passa l'audio tramite variabile di canale WAKEUP_AUDIO
-            # NOTA: Usa 'extension' (completo) non 'exten' (abbreviato)
+            # NOTA: Usa 'setvar' invece di 'variable' per compatibilità
             command = (
-                f"asterisk -rx 'channel originate Local/{phone_extension}@{context}/n "
+                f"asterisk -rx \"channel originate Local/{phone_extension}@{context}/n "
                 f"extension s@wakeup-service "
-                f"variable WAKEUP_AUDIO={audio_name} "
-                f"callerid \"{wake_callerid} <{wake_extension}>\"'"
+                f"setvar WAKEUP_AUDIO={audio_name} "
+                f"callerid '{wake_callerid} <{wake_extension}>'\" "
             )
             
             self.logger.info(f"Chiamata con DTMF a {phone_extension}: {audio_name}")
