@@ -572,11 +572,11 @@ class SettingsWindow:
                 logger.info(f"Tentativo connessione a {username}@{host}:{port}")
                 logger.info(f"Timeout: {timeout} secondi")
                 
-                success, message = pbx.connect()
+                success = pbx.connect()
                 
                 if not success:
-                    logger.error(f"Connessione SSH fallita: {message}")
-                    self.show_test_result(False, f"❌ Connessione Fallita\n\n{message}\n\nDettagli nel log.")
+                    logger.error(f"Connessione SSH fallita")
+                    self.show_test_result(False, f"❌ Connessione Fallita\n\nImpossibile connettersi a {host}:{port}\n\nVerifica:\n- IP e porta corretti\n- PBX raggiungibile\n- Credenziali corrette\n- SSH abilitato sul PBX\n\nDettagli nel log.")
                     return
                 
                 logger.info("✓ Connessione SSH stabilita con successo")
