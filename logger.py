@@ -52,6 +52,13 @@ class SystemLogger:
         
         # Logger specifici per moduli
         self.setup_module_loggers()
+        
+        # Log informazioni iniziali del produttore
+        self.logger.info("=" * 60)
+        self.logger.info("Sistema Gestione Sveglie per Hotel - Versione 1.0 Beta")
+        self.logger.info("Produttore: AL Code Studio 2025")
+        self.logger.info("Email: alcodestudio2025@gmail.com")
+        self.logger.info("=" * 60)
     
     def setup_module_loggers(self):
         """Configura logger specifici per i moduli"""

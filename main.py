@@ -180,8 +180,19 @@ class SvegliaCentralinoApp:
                               relief=tk.SUNKEN, anchor=tk.W)
         status_bar.grid(row=3, column=0, columnspan=2, sticky=(tk.W, tk.E), pady=(20, 0))
         
+        # Footer con informazioni produttore
+        footer_frame = ttk.Frame(main_frame)
+        footer_frame.grid(row=4, column=0, columnspan=2, sticky=(tk.W, tk.E), pady=(5, 0))
+        footer_frame.columnconfigure(0, weight=1)
+        
+        footer_label = ttk.Label(footer_frame, 
+                                text="© 2025 AL Code Studio - alcodestudio2025@gmail.com",
+                                font=("Arial", 8),
+                                foreground="gray")
+        footer_label.grid(row=0, column=0, sticky=tk.W, padx=(5, 0))
+        
         # Aggiungi logo in basso a destra
-        self.add_logo(main_frame, row=4, column=1)
+        self.add_logo(main_frame, row=5, column=1)
     
     def create_menu_bar(self):
         """Crea la barra del menu"""
