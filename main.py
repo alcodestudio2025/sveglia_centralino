@@ -7,6 +7,7 @@ from tkinter import ttk, messagebox, filedialog
 import datetime
 import threading
 import os
+import sys
 from PIL import Image, ImageTk
 from config import create_directories, PBX_CONFIG, AUDIO_CONFIG
 from database import DatabaseManager
@@ -26,17 +27,41 @@ class SvegliaCentralinoApp:
         self.root.title("Sistema Gestione Sveglie Hotel")
         self.root.geometry("1000x700")
         
-        # Imposta icona della finestra (app_icon_3 per taskbar e title bar)
+        # Imposta icona della finestra (app_icon_2 per taskbar e title bar)
         try:
-            if os.path.exists('assets/app_icon_2.ico'):
-                # Per .ico files, usiamo Image.open che gestisce anche .ico
-                icon_img = Image.open('assets/app_icon_2.ico')
-                # Seleziona la risoluzione più grande disponibile (solitamente 256x256 o 128x128)
-                icon_img = icon_img.resize((32, 32), Image.Resampling.LANCZOS)
-                icon_photo = ImageTk.PhotoImage(icon_img)
-                self.root.iconphoto(True, icon_photo)
+            # Gestione percorso icona per ambiente normale e exe (PyInstaller)
+            if getattr(sys, 'frozen', False):
+                # Ambiente exe (PyInstaller)
+                base_path = sys._MEIPASS
+            else:
+                # Ambiente normale (Python)
+                base_path = os.path.dirname(os.path.abspath(__file__))
+            
+            icon_path = os.path.join(base_path, 'assets', 'app_icon_2.ico')
+            
+            if os.path.exists(icon_path):
+                # Su Windows, iconbitmap() è più affidabile per .ico files
+                # Converte il path relativo in path assoluto
+                abs_icon_path = os.path.abspath(icon_path)
+                # Usa iconbitmap per Windows (supporta direttamente .ico)
+                self.root.iconbitmap(abs_icon_path)
+                # Fallback: usa anche iconphoto per compatibilità
+                try:
+                    icon_img = Image.open(icon_path)
+                    icon_img = icon_img.resize((32, 32), Image.Resampling.LANCZOS)
+                    icon_photo = ImageTk.PhotoImage(icon_img)
+                    self.root.iconphoto(True, icon_photo)
+                except:
+                    pass  # Se iconphoto fallisce, almeno iconbitmap dovrebbe funzionare
         except Exception as e:
-            print(f"Impossibile caricare icona finestra: {e}")
+            # Log errore solo se logger è disponibile
+            try:
+                if hasattr(self, 'logger'):
+                    self.logger.warning(f"Impossibile caricare icona finestra: {e}")
+                else:
+                    print(f"Impossibile caricare icona finestra: {e}")
+            except:
+                pass
         
         # Inizializza database
         self.db = DatabaseManager()
