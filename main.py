@@ -26,10 +26,13 @@ class SvegliaCentralinoApp:
         self.root.title("Sistema Gestione Sveglie Hotel")
         self.root.geometry("1000x700")
         
-        # Imposta icona della finestra (icona_2 per taskbar)
+        # Imposta icona della finestra (app_icon_3 per taskbar e title bar)
         try:
-            if os.path.exists('assets/icona_2.png'):
-                icon_img = Image.open('assets/icona_2.png')
+            if os.path.exists('assets/app_icon_3.ico'):
+                # Per .ico files, usiamo Image.open che gestisce anche .ico
+                icon_img = Image.open('assets/app_icon_3.ico')
+                # Seleziona la risoluzione più grande disponibile (solitamente 256x256 o 128x128)
+                icon_img = icon_img.resize((32, 32), Image.Resampling.LANCZOS)
                 icon_photo = ImageTk.PhotoImage(icon_img)
                 self.root.iconphoto(True, icon_photo)
         except Exception as e:
@@ -86,10 +89,10 @@ class SvegliaCentralinoApp:
         header_frame.grid(row=0, column=0, columnspan=2, pady=(0, 20), sticky=(tk.W, tk.E))
         header_frame.columnconfigure(1, weight=1)
         
-        # Icona principale (icona_1) in alto a sinistra
+        # Icona principale (logo_sveglia1) in alto a sinistra
         try:
-            if os.path.exists('assets/icona_1.png'):
-                icon1_img = Image.open('assets/icona_1.png')
+            if os.path.exists('assets/logo_sveglia1.png'):
+                icon1_img = Image.open('assets/logo_sveglia1.png')
                 # Ridimensiona l'icona a circa 50x50px
                 icon1_img = icon1_img.resize((50, 50), Image.Resampling.LANCZOS)
                 icon1_photo = ImageTk.PhotoImage(icon1_img)
