@@ -8,6 +8,8 @@ import datetime
 import threading
 import os
 import sys
+import tempfile
+import shutil
 from PIL import Image, ImageTk
 from config import create_directories, PBX_CONFIG, AUDIO_CONFIG
 from database import DatabaseManager
@@ -40,19 +42,31 @@ class SvegliaCentralinoApp:
             icon_path = os.path.join(base_path, 'assets', 'app_icon_2.ico')
             
             if os.path.exists(icon_path):
-                # Su Windows, iconbitmap() è più affidabile per .ico files
-                # Converte il path relativo in path assoluto
-                abs_icon_path = os.path.abspath(icon_path)
-                # Usa iconbitmap per Windows (supporta direttamente .ico)
-                self.root.iconbitmap(abs_icon_path)
-                # Fallback: usa anche iconphoto per compatibilità
+                # Su Windows, iconbitmap() a volte ha problemi con percorsi lunghi o spazi
+                # Estraiamo l'icona in un file temporaneo per garantire che funzioni
+                temp_dir = tempfile.gettempdir()
+                temp_icon_path = os.path.join(temp_dir, 'wakeup_manager_icon.ico')
+                
+                # Copia l'icona nella cartella temporanea
+                shutil.copy2(icon_path, temp_icon_path)
+                
+                # Usa iconbitmap con il percorso temporaneo (più affidabile su Windows)
                 try:
-                    icon_img = Image.open(icon_path)
-                    icon_img = icon_img.resize((32, 32), Image.Resampling.LANCZOS)
-                    icon_photo = ImageTk.PhotoImage(icon_img)
-                    self.root.iconphoto(True, icon_photo)
-                except:
-                    pass  # Se iconphoto fallisce, almeno iconbitmap dovrebbe funzionare
+                    self.root.iconbitmap(temp_icon_path)
+                except Exception as e1:
+                    # Fallback 1: prova con il percorso originale
+                    try:
+                        abs_icon_path = os.path.abspath(icon_path)
+                        self.root.iconbitmap(abs_icon_path)
+                    except Exception as e2:
+                        # Fallback 2: usa iconphoto con PIL
+                        try:
+                            icon_img = Image.open(icon_path)
+                            icon_img = icon_img.resize((32, 32), Image.Resampling.LANCZOS)
+                            icon_photo = ImageTk.PhotoImage(icon_img)
+                            self.root.iconphoto(True, icon_photo)
+                        except:
+                            pass
         except Exception as e:
             # Log errore solo se logger è disponibile
             try:
