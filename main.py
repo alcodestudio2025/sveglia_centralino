@@ -364,7 +364,11 @@ Funzionalità:
 - Gestione messaggi audio personalizzati
 - Sistema di rinvio automatico
 - Report e monitoraggio sveglie
-- Integrazione SSH con centralino PBX"""
+- Integrazione SSH con centralino PBX
+
+---
+Produttore: AL Code Studio 2025
+Email: alcodestudio2025@gmail.com"""
         
         messagebox.showinfo("Informazioni", about_text)
     
