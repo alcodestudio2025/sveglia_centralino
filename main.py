@@ -30,45 +30,66 @@ class SvegliaCentralinoApp:
         self.root.geometry("1000x700")
         
         # Imposta icona della finestra (app_icon_2 per taskbar e title bar)
+        # IMPORTANTE: Quando PyInstaller crea l'exe, l'icona specificata in build_exe.spec
+        # viene integrata nell'exe stesso. Usiamo il percorso dell'exe per l'icona.
+        icon_loaded = False
         try:
-            # Gestione percorso icona per ambiente normale e exe (PyInstaller)
             if getattr(sys, 'frozen', False):
-                # Ambiente exe (PyInstaller)
-                base_path = sys._MEIPASS
-            else:
-                # Ambiente normale (Python)
-                base_path = os.path.dirname(os.path.abspath(__file__))
-            
-            icon_path = os.path.join(base_path, 'assets', 'app_icon_2.ico')
-            
-            if os.path.exists(icon_path):
-                # Su Windows, iconbitmap() a volte ha problemi con percorsi lunghi o spazi
-                # Estraiamo l'icona in un file temporaneo per garantire che funzioni
-                temp_dir = tempfile.gettempdir()
-                temp_icon_path = os.path.join(temp_dir, 'wakeup_manager_icon.ico')
-                
-                # Copia l'icona nella cartella temporanea
-                shutil.copy2(icon_path, temp_icon_path)
-                
-                # Usa iconbitmap con il percorso temporaneo (più affidabile su Windows)
+                # Ambiente exe: prova prima con l'icona integrata nell'exe
+                exe_path = sys.executable
                 try:
-                    self.root.iconbitmap(temp_icon_path)
+                    # Metodo 1: usa direttamente il percorso dell'exe (l'icona è integrata)
+                    self.root.iconbitmap(exe_path)
+                    icon_loaded = True
                 except Exception as e1:
-                    # Fallback 1: prova con il percorso originale
+                    # Metodo 2: prova a caricare dall'assets incluso
                     try:
-                        abs_icon_path = os.path.abspath(icon_path)
-                        self.root.iconbitmap(abs_icon_path)
+                        base_path = sys._MEIPASS
+                        icon_path = os.path.join(base_path, 'assets', 'app_icon_2.ico')
+                        if os.path.exists(icon_path):
+                            # Estrai in temp per evitare problemi di percorso
+                            temp_dir = tempfile.gettempdir()
+                            temp_icon_path = os.path.join(temp_dir, 'wakeup_manager_icon.ico')
+                            shutil.copy2(icon_path, temp_icon_path)
+                            self.root.iconbitmap(temp_icon_path)
+                            icon_loaded = True
                     except Exception as e2:
-                        # Fallback 2: usa iconphoto con PIL
+                        # Metodo 3: usa iconphoto come ultima risorsa
+                        try:
+                            base_path = sys._MEIPASS
+                            icon_path = os.path.join(base_path, 'assets', 'app_icon_2.ico')
+                            if os.path.exists(icon_path):
+                                icon_img = Image.open(icon_path)
+                                # Converti in formato compatibile
+                                if icon_img.mode != 'RGBA':
+                                    icon_img = icon_img.convert('RGBA')
+                                icon_img = icon_img.resize((32, 32), Image.Resampling.LANCZOS)
+                                icon_photo = ImageTk.PhotoImage(icon_img)
+                                self.root.iconphoto(True, icon_photo)
+                                icon_loaded = True
+                        except:
+                            pass
+            else:
+                # Ambiente normale (Python): carica da assets
+                base_path = os.path.dirname(os.path.abspath(__file__))
+                icon_path = os.path.join(base_path, 'assets', 'app_icon_2.ico')
+                if os.path.exists(icon_path):
+                    try:
+                        self.root.iconbitmap(icon_path)
+                        icon_loaded = True
+                    except:
                         try:
                             icon_img = Image.open(icon_path)
+                            if icon_img.mode != 'RGBA':
+                                icon_img = icon_img.convert('RGBA')
                             icon_img = icon_img.resize((32, 32), Image.Resampling.LANCZOS)
                             icon_photo = ImageTk.PhotoImage(icon_img)
                             self.root.iconphoto(True, icon_photo)
+                            icon_loaded = True
                         except:
                             pass
         except Exception as e:
-            # Log errore solo se logger è disponibile
+            # Log errore
             try:
                 if hasattr(self, 'logger'):
                     self.logger.warning(f"Impossibile caricare icona finestra: {e}")
