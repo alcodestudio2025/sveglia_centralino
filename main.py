@@ -28,9 +28,9 @@ class SvegliaCentralinoApp:
         
         # Imposta icona della finestra (app_icon_3 per taskbar e title bar)
         try:
-            if os.path.exists('assets/app_icon_3.ico'):
+            if os.path.exists('assets/app_icon_2.ico'):
                 # Per .ico files, usiamo Image.open che gestisce anche .ico
-                icon_img = Image.open('assets/app_icon_3.ico')
+                icon_img = Image.open('assets/app_icon_2.ico')
                 # Seleziona la risoluzione più grande disponibile (solitamente 256x256 o 128x128)
                 icon_img = icon_img.resize((32, 32), Image.Resampling.LANCZOS)
                 icon_photo = ImageTk.PhotoImage(icon_img)
