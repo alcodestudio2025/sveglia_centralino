@@ -3885,3 +3885,86 @@
 2025-10-28 17:41:09,805 - sveglia_centralino.audio_player - INFO - cleanup:132 - Audio player chiuso
 2025-10-28 17:41:10,306 - sveglia_centralino.alarm_manager - INFO - stop:46 - Gestore sveglie fermato
 2025-10-28 17:41:10,306 - sveglia_centralino.main - INFO - on_closing:859 - Applicazione chiusa
+2025-10-29 10:09:12,452 - sveglia_centralino - INFO - setup_logging:57 - ============================================================
+2025-10-29 10:09:12,453 - sveglia_centralino - INFO - setup_logging:58 - Sistema Gestione Sveglie per Hotel - Versione 1.0 Beta
+2025-10-29 10:09:12,453 - sveglia_centralino - INFO - setup_logging:59 - Produttore: AL Code Studio 2025
+2025-10-29 10:09:12,453 - sveglia_centralino - INFO - setup_logging:60 - Email: alcodestudio2025@gmail.com
+2025-10-29 10:09:12,453 - sveglia_centralino - INFO - setup_logging:61 - ============================================================
+2025-10-29 10:09:12,621 - sveglia_centralino.alarm_manager - INFO - start:32 - Creazione thread alarm_loop...
+2025-10-29 10:09:12,621 - sveglia_centralino.alarm_manager - INFO - _alarm_loop:50 - Loop sveglie avviato - check_interval: 30s
+2025-10-29 10:09:12,722 - sveglia_centralino.alarm_manager - INFO - start:38 - Gestore sveglie avviato - Thread alive: True
+2025-10-29 10:09:12,722 - sveglia_centralino.main - INFO - __init__:128 - Gestore sveglie avviato
+2025-10-29 10:09:12,722 - sveglia_centralino.main - INFO - test_connection:589 - ============================================================
+2025-10-29 10:09:12,722 - sveglia_centralino.main - INFO - test_connection:590 - TEST CONNESSIONE PBX ALL'AVVIO
+2025-10-29 10:09:12,722 - sveglia_centralino.main - INFO - test_connection:591 - ============================================================
+2025-10-29 10:09:12,722 - sveglia_centralino.main - INFO - test_connection:592 - Host: 192.168.10.15:22
+2025-10-29 10:09:12,722 - sveglia_centralino.main - INFO - test_connection:593 - Username: root
+2025-10-29 10:09:12,785 - sveglia_centralino.pbx_connection - INFO - connect:39 - Connessione SSH stabilita con 192.168.10.15
+2025-10-29 10:09:12,898 - sveglia_centralino.pbx_connection - INFO - execute_command:89 - Comando eseguito: echo 'PBX Connection Test'
+2025-10-29 10:09:12,898 - sveglia_centralino.pbx_connection - INFO - test_connection:588 - Test connessione PBX completato con successo
+2025-10-29 10:09:12,898 - sveglia_centralino.pbx_connection - INFO - disconnect:57 - Connessione SSH chiusa
+2025-10-29 10:09:12,907 - sveglia_centralino.main - INFO - test_connection:599 - ✓ Connessione PBX all'avvio: SUCCESSO
+2025-10-29 10:09:12,907 - sveglia_centralino.main - INFO - test_connection:600 - ============================================================
+2025-10-29 10:09:29,339 - sveglia_centralino.room_manager - INFO - __init__:19 - ============================================================
+2025-10-29 10:09:29,339 - sveglia_centralino.room_manager - INFO - __init__:20 - APERTURA GESTIONE CAMERE HOTEL - INTEGRAZIONE PBX
+2025-10-29 10:09:29,339 - sveglia_centralino.room_manager - INFO - __init__:21 - ============================================================
+2025-10-29 10:09:29,567 - sveglia_centralino.room_manager - INFO - load_rooms:450 - Caricamento camere... Cache PBX: 0 interni
+2025-10-29 10:09:29,567 - sveglia_centralino.room_manager - INFO - load_rooms:460 -   Prima camera dal DB (RAW): (51, '103', '103', 'Interno 103', 'available', '#FFFFFF', 'Importato da PBX', '2025-10-28 11:12:02', 'it')
+2025-10-29 10:09:29,567 - sveglia_centralino.room_manager - INFO - load_rooms:477 -   Prima camera PARSED: num=103, ext=103, desc=Interno 103
+2025-10-29 10:09:29,567 - sveglia_centralino.room_manager - WARNING - load_rooms:501 -   ✗ Interno 103 NON trovato in cache!
+2025-10-29 10:09:31,581 - sveglia_centralino.room_manager - INFO - do_refresh:377 - Refresh stato interni PBX...
+2025-10-29 10:09:31,581 - sveglia_centralino.pbx_connection - INFO - get_sip_peers:629 - Lettura interni dal centralino...
+2025-10-29 10:09:31,639 - sveglia_centralino.pbx_connection - INFO - connect:39 - Connessione SSH stabilita con 192.168.10.15
+2025-10-29 10:09:31,704 - sveglia_centralino.pbx_connection - INFO - execute_command:89 - Comando eseguito: asterisk -rx 'sip show peers'
+2025-10-29 10:09:31,704 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:657 - Parsing SIP output (112 righe)...
+2025-10-29 10:09:31,704 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:658 - Prime 5 righe output SIP:
+2025-10-29 10:09:31,704 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:660 -   Riga 0: Name/username             Host                                    Dyn Forcerport
+2025-10-29 10:09:31,704 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:660 -   Riga 1: 103                       (Unspecified)                            D  Yes       
+2025-10-29 10:09:31,704 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:660 -   Riga 2: 111/111                   5.98.202.136                             D  Yes       
+2025-10-29 10:09:31,704 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:660 -   Riga 3: 114/114                   192.168.10.151                           D  Yes       
+2025-10-29 10:09:31,704 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:660 -   Riga 4: 115/115                   192.168.10.127                           D  Yes       
+2025-10-29 10:09:31,704 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:708 -   Parsed: 103 -> offline (latency: Nonems)
+2025-10-29 10:09:31,704 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:708 -   Parsed: 111 -> online (latency: 103ms)
+2025-10-29 10:09:31,704 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:708 -   Parsed: 114 -> online (latency: 4ms)
+2025-10-29 10:09:31,704 - sveglia_centralino.pbx_connection - INFO - _parse_sip_output:715 - Trovati 90 interni SIP: 24 online, 66 offline, 0 unmonitored
+2025-10-29 10:09:31,704 - sveglia_centralino.room_manager - INFO - do_refresh:402 - Cache popolata con 90 interni: 24 online, 66 offline
+2025-10-29 10:09:31,705 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[103] = {'status': 'offline', 'latency': None, 'type': 'SIP'}
+2025-10-29 10:09:31,705 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[111] = {'status': 'online', 'latency': 103, 'type': 'SIP'}
+2025-10-29 10:09:31,705 - sveglia_centralino.room_manager - INFO - do_refresh:407 -   Cache[114] = {'status': 'online', 'latency': 4, 'type': 'SIP'}
+2025-10-29 10:09:31,770 - sveglia_centralino.room_manager - INFO - load_rooms:450 - Caricamento camere... Cache PBX: 90 interni
+2025-10-29 10:09:31,770 - sveglia_centralino.room_manager - INFO - load_rooms:454 -   Campione cache: [('103', {'status': 'offline', 'latency': None, 'type': 'SIP'}), ('111', {'status': 'online', 'latency': 103, 'type': 'SIP'}), ('114', {'status': 'online', 'latency': 4, 'type': 'SIP'})]
+2025-10-29 10:09:31,771 - sveglia_centralino.room_manager - INFO - load_rooms:460 -   Prima camera dal DB (RAW): (51, '103', '103', 'Interno 103', 'available', '#FFFFFF', 'Importato da PBX', '2025-10-28 11:12:02', 'it')
+2025-10-29 10:09:31,771 - sveglia_centralino.room_manager - INFO - load_rooms:477 -   Prima camera PARSED: num=103, ext=103, desc=Interno 103
+2025-10-29 10:09:31,771 - sveglia_centralino.room_manager - INFO - load_rooms:497 -   ✓ Primo interno: 103 -> offline
+2025-10-29 10:10:40,023 - sveglia_centralino.main - INFO - on_closing:920 - Chiusura applicazione in corso...
+2025-10-29 10:10:40,151 - sveglia_centralino.audio_player - INFO - __init__:21 - Audio player inizializzato con successo
+2025-10-29 10:10:40,205 - sveglia_centralino.audio_player - INFO - cleanup:132 - Audio player chiuso
+2025-10-29 10:10:40,654 - sveglia_centralino.alarm_manager - INFO - _alarm_loop:73 - Loop sveglie terminato
+2025-10-29 10:10:40,654 - sveglia_centralino.alarm_manager - INFO - stop:46 - Gestore sveglie fermato
+2025-10-29 10:10:40,654 - sveglia_centralino.main - INFO - on_closing:937 - Applicazione chiusa
+2025-10-29 10:25:11,263 - sveglia_centralino - INFO - setup_logging:57 - ============================================================
+2025-10-29 10:25:11,263 - sveglia_centralino - INFO - setup_logging:58 - Sistema Gestione Sveglie per Hotel - Versione 1.0 Beta
+2025-10-29 10:25:11,263 - sveglia_centralino - INFO - setup_logging:59 - Produttore: AL Code Studio 2025
+2025-10-29 10:25:11,263 - sveglia_centralino - INFO - setup_logging:60 - Email: alcodestudio2025@gmail.com
+2025-10-29 10:25:11,263 - sveglia_centralino - INFO - setup_logging:61 - ============================================================
+2025-10-29 10:25:11,426 - sveglia_centralino.alarm_manager - INFO - start:32 - Creazione thread alarm_loop...
+2025-10-29 10:25:11,427 - sveglia_centralino.alarm_manager - INFO - _alarm_loop:50 - Loop sveglie avviato - check_interval: 30s
+2025-10-29 10:25:11,528 - sveglia_centralino.alarm_manager - INFO - start:38 - Gestore sveglie avviato - Thread alive: True
+2025-10-29 10:25:11,528 - sveglia_centralino.main - INFO - __init__:128 - Gestore sveglie avviato
+2025-10-29 10:25:11,528 - sveglia_centralino.main - INFO - test_connection:589 - ============================================================
+2025-10-29 10:25:11,529 - sveglia_centralino.main - INFO - test_connection:590 - TEST CONNESSIONE PBX ALL'AVVIO
+2025-10-29 10:25:11,529 - sveglia_centralino.main - INFO - test_connection:591 - ============================================================
+2025-10-29 10:25:11,529 - sveglia_centralino.main - INFO - test_connection:592 - Host: 192.168.10.15:22
+2025-10-29 10:25:11,529 - sveglia_centralino.main - INFO - test_connection:593 - Username: root
+2025-10-29 10:25:11,602 - sveglia_centralino.pbx_connection - INFO - connect:39 - Connessione SSH stabilita con 192.168.10.15
+2025-10-29 10:25:11,720 - sveglia_centralino.pbx_connection - INFO - execute_command:89 - Comando eseguito: echo 'PBX Connection Test'
+2025-10-29 10:25:11,721 - sveglia_centralino.pbx_connection - INFO - test_connection:588 - Test connessione PBX completato con successo
+2025-10-29 10:25:11,721 - sveglia_centralino.pbx_connection - INFO - disconnect:57 - Connessione SSH chiusa
+2025-10-29 10:25:11,729 - sveglia_centralino.main - INFO - test_connection:599 - ✓ Connessione PBX all'avvio: SUCCESSO
+2025-10-29 10:25:11,729 - sveglia_centralino.main - INFO - test_connection:600 - ============================================================
+2025-10-29 10:26:21,127 - sveglia_centralino.main - INFO - on_closing:920 - Chiusura applicazione in corso...
+2025-10-29 10:26:21,253 - sveglia_centralino.audio_player - INFO - __init__:21 - Audio player inizializzato con successo
+2025-10-29 10:26:21,282 - sveglia_centralino.audio_player - INFO - cleanup:132 - Audio player chiuso
+2025-10-29 10:26:21,461 - sveglia_centralino.alarm_manager - INFO - _alarm_loop:73 - Loop sveglie terminato
+2025-10-29 10:26:21,461 - sveglia_centralino.alarm_manager - INFO - stop:46 - Gestore sveglie fermato
+2025-10-29 10:26:21,461 - sveglia_centralino.main - INFO - on_closing:937 - Applicazione chiusa

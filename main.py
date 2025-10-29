@@ -26,7 +26,7 @@ from logger import get_logger
 class SvegliaCentralinoApp:
     def __init__(self, root):
         self.root = root
-        self.root.title("Sistema Gestione Sveglie Hotel")
+        self.root.title("Hotel Wakeup Manager")
         self.root.geometry("1000x700")
         
         # Imposta icona della finestra (app_icon_2 per taskbar e title bar)
@@ -151,8 +151,16 @@ class SvegliaCentralinoApp:
         
         # Icona principale (logo_sveglia1) in alto a sinistra
         try:
-            if os.path.exists('assets/logo_sveglia1.png'):
-                icon1_img = Image.open('assets/logo_sveglia1.png')
+            # Gestione percorso per ambiente normale e exe
+            if getattr(sys, 'frozen', False):
+                base_path = sys._MEIPASS
+            else:
+                base_path = os.path.dirname(os.path.abspath(__file__))
+            
+            logo_path = os.path.join(base_path, 'assets', 'logo_sveglia1.png')
+            
+            if os.path.exists(logo_path):
+                icon1_img = Image.open(logo_path)
                 # Ridimensiona l'icona a circa 50x50px
                 icon1_img = icon1_img.resize((50, 50), Image.Resampling.LANCZOS)
                 icon1_photo = ImageTk.PhotoImage(icon1_img)
@@ -160,10 +168,13 @@ class SvegliaCentralinoApp:
                 icon1_label.image = icon1_photo  # Mantieni riferimento
                 icon1_label.grid(row=0, column=0, padx=(0, 15), sticky=tk.W)
         except Exception as e:
-            print(f"Impossibile caricare icona principale: {e}")
+            if hasattr(self, 'logger'):
+                self.logger.warning(f"Impossibile caricare icona principale: {e}")
+            else:
+                print(f"Impossibile caricare icona principale: {e}")
         
         # Titolo
-        title_label = ttk.Label(header_frame, text="Sistema Gestione Sveglie Hotel", 
+        title_label = ttk.Label(header_frame, text="Hotel Wakeup Manager", 
                                font=("Arial", 16, "bold"))
         title_label.grid(row=0, column=1, sticky=tk.W)
         
@@ -364,7 +375,7 @@ class SvegliaCentralinoApp:
     
     def show_about(self):
         """Mostra informazioni sull'applicazione"""
-        about_text = """Sistema di Gestione Sveglie per Hotel
+        about_text = """Hotel Wakeup Manager
 Versione 1.0 Beta
 
 Sviluppato per la gestione centralizzata delle sveglie
@@ -883,20 +894,34 @@ Email: alcodestudio2025@gmail.com"""
     def add_logo(self, parent, row, column):
         """Aggiunge il logo AL CODE STUDIO in basso a destra"""
         try:
+            # Gestione percorso per ambiente normale e exe
+            if getattr(sys, 'frozen', False):
+                base_path = sys._MEIPASS
+            else:
+                base_path = os.path.dirname(os.path.abspath(__file__))
+            
             # Determina dimensione logo in base alla dimensione della finestra
             window_width = self.root.winfo_width()
             
             # Scegli dimensione logo appropriata
             if window_width < 800:
-                logo_file = 'assets/logo_small.png'
+                logo_file = os.path.join(base_path, 'assets', 'logo_small.png')
             elif window_width < 1200:
-                logo_file = 'assets/logo_medium.png'
+                logo_file = os.path.join(base_path, 'assets', 'logo_medium.png')
             else:
-                logo_file = 'assets/logo_large.png'
+                logo_file = os.path.join(base_path, 'assets', 'logo_large.png')
             
             # Carica logo
             if os.path.exists(logo_file):
                 logo_img = Image.open(logo_file)
+                
+                # Riduce la dimensione del logo del 60% (mantiene solo il 40% della dimensione originale)
+                original_width, original_height = logo_img.size
+                new_width = int(original_width * 0.4)  # 60% di riduzione = 40% della dimensione originale
+                new_height = int(original_height * 0.4)
+                
+                # Ridimensiona con antialiasing
+                logo_img = logo_img.resize((new_width, new_height), Image.Resampling.LANCZOS)
                 logo_photo = ImageTk.PhotoImage(logo_img)
                 
                 # Crea label per logo
@@ -905,7 +930,10 @@ Email: alcodestudio2025@gmail.com"""
                 logo_label.grid(row=row, column=column, sticky=tk.SE, pady=(10, 0), padx=(0, 10))
             
         except Exception as e:
-            self.logger.warning(f"Impossibile caricare logo: {e}")
+            if hasattr(self, 'logger'):
+                self.logger.warning(f"Impossibile caricare logo: {e}")
+            else:
+                print(f"Impossibile caricare logo: {e}")
 
 def main():
     """Funzione principale"""

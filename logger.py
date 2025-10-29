@@ -55,7 +55,7 @@ class SystemLogger:
         
         # Log informazioni iniziali del produttore
         self.logger.info("=" * 60)
-        self.logger.info("Sistema Gestione Sveglie per Hotel - Versione 1.0 Beta")
+        self.logger.info("Hotel Wakeup Manager - Versione 1.0 Beta")
         self.logger.info("Produttore: AL Code Studio 2025")
         self.logger.info("Email: alcodestudio2025@gmail.com")
         self.logger.info("=" * 60)
@@ -158,7 +158,7 @@ class SystemLogger:
         """Esporta i log in un file"""
         try:
             with open(output_file, 'w', encoding='utf-8') as f:
-                f.write("# Log Export - Sistema Gestione Sveglie Hotel\n")
+                f.write("# Log Export - Hotel Wakeup Manager\n")
                 f.write(f"# Esportato il: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
                 f.write("# " + "="*50 + "\n\n")
                 
